@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "custom_grid_env"
+version = "0.1.0"
+authors = [
+  { name="Jules", email="jules@example.com" },
+]
+description = "A custom grid environment with an agent and a ghost"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "gymnasium",
+    "numpy",
+    "pygame",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/user/custom_grid_env"
+
+[tool.setuptools.packages.find]
+where = ["src"]
