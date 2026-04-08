@@ -1,5 +1,3 @@
-import pytest
-import numpy as np
 from custom_grid_env.env import CustomGridEnv
 
 

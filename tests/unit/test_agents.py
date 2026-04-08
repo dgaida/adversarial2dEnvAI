@@ -1,4 +1,3 @@
-import pytest
 import gymnasium as gym
 from custom_grid_env.agents.chase_ghost_agent import ChaseGhostAgent
 from custom_grid_env.agents.random_ghost_agent import RandomGhostAgent
@@ -11,13 +10,13 @@ def test_chase_ghost_agent():
 
     # Mock observation: agent is below ghost
     obs = {
-        'agent_relative_pos': [2, 0],
-        'neighbors': {
-            'down': {'accessible': 1, 'colour': 0},
-            'up': {'accessible': 1, 'colour': 0},
-            'right': {'accessible': 1, 'colour': 0},
-            'left': {'accessible': 1, 'colour': 0}
-        }
+        "agent_relative_pos": [2, 0],
+        "neighbors": {
+            "down": {"accessible": 1, "colour": 0},
+            "up": {"accessible": 1, "colour": 0},
+            "right": {"accessible": 1, "colour": 0},
+            "left": {"accessible": 1, "colour": 0},
+        },
     }
     action = agent.get_action(obs)
     assert action == 1  # Should move DOWN

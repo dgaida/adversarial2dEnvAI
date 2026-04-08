@@ -1,4 +1,3 @@
-import pytest
 from custom_grid_env.interface import AgentInterface
 from custom_grid_env.agents.random_player_agent import RandomPlayerAgent
 

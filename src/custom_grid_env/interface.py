@@ -28,7 +28,13 @@ class AgentInterface:
         last_info (dict): Information from the last step.
     """
 
-    def __init__(self, render: bool = True, step_delay: int = 100, slip_probability: float = 0.2, ghost_agent_class: Optional[Type[Agent]] = None):
+    def __init__(
+        self,
+        render: bool = True,
+        step_delay: int = 100,
+        slip_probability: float = 0.2,
+        ghost_agent_class: Optional[Type[Agent]] = None,
+    ):
         """Initializes the AgentInterface.
 
         Args:
@@ -82,7 +88,9 @@ class AgentInterface:
             tuple: (observation, reward, done, info)
         """
         if self.terminated or self.truncated:
-            raise RuntimeError("Episode has ended. Call reset() to start a new episode.")
+            raise RuntimeError(
+                "Episode has ended. Call reset() to start a new episode."
+            )
 
         combined_info = {}
         total_step_reward = 0.0
@@ -113,14 +121,19 @@ class AgentInterface:
             self.env.render()
             pygame.time.wait(self.step_delay)
 
-        if info.get('caught_by_ghost'):
+        if info.get("caught_by_ghost"):
             total_step_reward += reward
 
         self.total_reward += total_step_reward
         self.episode_steps += 1
         self.last_info = combined_info
 
-        return obs, float(total_step_reward), self.terminated or self.truncated, combined_info
+        return (
+            obs,
+            float(total_step_reward),
+            self.terminated or self.truncated,
+            combined_info,
+        )
 
     def is_terminated(self) -> bool:
         """Checks if the current episode has ended.
