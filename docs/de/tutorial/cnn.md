@@ -11,6 +11,11 @@ Der Prozess besteht aus drei Hauptschritten:
 2. **Training**: Das neuronale Netz lehren, Muster zu erkennen.
 3. **Integration**: Nutzung des trainierten Modells in der Umgebung.
 
+### Interaktives Lernen
+
+Sie können dieses Tutorial interaktiv mit Google Colab verfolgen:
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/CNN_Training.ipynb)
+
 ## 1. Datengenerierung
 
 Bevor wir ein Modell trainieren können, benötigen wir Daten. Wir nutzen `src/custom_grid_env/cnn_tutorial/data_generation.py`, um prozedural Bilder mit einer Auflösung von 64x64 Pixeln zu erstellen.

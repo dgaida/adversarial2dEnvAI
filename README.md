@@ -59,6 +59,13 @@ The environment includes a Convolutional Neural Network (CNN) that automatically
 
 See the [CNN Tutorial](docs/en/tutorial/cnn.md) (or [German version](docs/de/tutorial/cnn.md)) for more details.
 
+### Interactive Notebooks
+
+You can try out the CNN training and the environment directly in your browser using Google Colab:
+
+- **CNN Training Tutorial**: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/CNN_Training.ipynb)
+- **Environment Demo**: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Environment_Demo.ipynb)
+
 ## Documentation
 
 Detailed documentation is available in the `docs/` directory or online at [dgaida.github.io/adversarial2dEnvAI](https://dgaida.github.io/adversarial2dEnvAI/).
