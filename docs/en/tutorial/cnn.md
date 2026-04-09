@@ -11,6 +11,11 @@ The process consists of three main steps:
 2. **Training**: Teaching the neural network to recognize the patterns.
 3. **Integration**: Using the trained model within the environment.
 
+### Interactive Learning
+
+You can follow this tutorial interactively using Google Colab:
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/CNN_Training.ipynb)
+
 ## 1. Data Generation
 
 Before we can train a model, we need data. We use `src/custom_grid_env/cnn_tutorial/data_generation.py` to procedurally generate 64x64 pixel images.
