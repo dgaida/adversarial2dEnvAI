@@ -16,9 +16,9 @@ Einige Zellen haben Hintergrundfarben, die der Agent wahrnehmen kann:
 ## Gegenstände
 
 In der Welt sind verschiedene Gegenstände verteilt:
-- **Hund (dog)**
-- **Blume (flower)**
-- **Notizen (notes)**
+- **Hund (dog)**: Wird von einem CNN klassifiziert, wenn der Agent das Feld betritt.
+- **Blume (flower)**: Wird von einem CNN klassifiziert, wenn der Agent das Feld betritt.
+- **Notizen (notes)**: Werden in der Beobachtung (Observation) angezeigt.
 
 ## Wände
 
