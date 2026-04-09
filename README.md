@@ -3,7 +3,7 @@
 [![Tests](https://github.com/user/custom_grid_env/actions/workflows/tests.yml/badge.svg)](https://github.com/user/custom_grid_env/actions/workflows/tests.yml)
 [![Version](https://github.com/user/custom_grid_env/actions/workflows/version.yml/badge.svg)](https://github.com/user/custom_grid_env/actions/workflows/version.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![Version](https://img.shields.io/badge/version-0.1.1-blue)
+[![Version](https://img.shields.io/github/v/tag/dgaida/adversarial2dEnvAI?label=version)](https://github.com/dgaida/adversarial2dEnvAI/tags)
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Code Quality](https://github.com/dgaida/adversarial2dEnvAI/actions/workflows/lint.yml/badge.svg)](https://github.com/dgaida/adversarial2dEnvAI/actions/workflows/lint.yml)
 [![Tests](https://github.com/dgaida/adversarial2dEnvAI/actions/workflows/tests.yml/badge.svg)](https://github.com/dgaida/adversarial2dEnvAI/actions/workflows/tests.yml)
