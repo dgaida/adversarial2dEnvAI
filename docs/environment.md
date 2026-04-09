@@ -20,7 +20,7 @@ Each cell contains:
 | `items` | list | Items present: `dog`, `flower`, `one_note`, `two_notes` |
 | `is_goal` | bool | Whether this cell is a goal |
 | `is_start` | bool | Whether this is the start position marker |
-| `text` | str | Display text for the cell (e.g., "Start", "Ziel") |
+| `text` | str | Display text for the cell (e.g., "Start", "Goal") |
 
 ## Cell Colours
 
@@ -82,7 +82,7 @@ When rendered, the environment displays:
 - **Coloured Cells**: Crosshatch patterns (red or green)
 - **Agent**: Gray robot with antenna and "GPS" label
 - **Ghost**: Cyan Pac-Man style ghost
-- **Goals**: Cells labeled "Ziel" (German for "Goal")
+- **Goals**: Cells labeled "Goal"
 - **Start**: Cell labeled "Start"
 - **Walls**: Black bars between cells
 - **Info Panel**: Bottom panel showing step count, positions, and current cell info
