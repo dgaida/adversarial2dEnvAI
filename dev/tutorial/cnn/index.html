@@ -12,35 +12,35 @@
         <meta name="author" content="Jules">
       
       
-        <link rel="canonical" href="https://dgaida.github.io/adversarial2dEnvAI/dev/development/">
+        <link rel="canonical" href="https://dgaida.github.io/adversarial2dEnvAI/dev/tutorial/cnn/">
       
       
-        <link rel="prev" href="../tutorial/cnn/">
+        <link rel="prev" href="../../architecture/">
       
       
-        <link rel="next" href="style-guide/">
+        <link rel="next" href="../../development/">
       
       
         
           <link rel="alternate" href="./" hreflang="de">
         
-          <link rel="alternate" href="../en/development/" hreflang="en">
+          <link rel="alternate" href="../../en/tutorial/cnn/" hreflang="en">
         
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>Guide - CustomGrid Environment</title>
+        <title>CNN Training - CustomGrid Environment</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -59,9 +59,9 @@
       
     
     
-      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -86,7 +86,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#entwicklung" class="md-skip">
+        <a href="#tutorial-training-eines-cnn-zur-objekterkennung" class="md-skip">
           Zum Inhalt
         </a>
       
@@ -100,7 +100,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Kopfzeile">
-    <a href=".." title="CustomGrid Environment" class="md-header__button md-logo" aria-label="CustomGrid Environment" data-md-component="logo">
+    <a href="../.." title="CustomGrid Environment" class="md-header__button md-logo" aria-label="CustomGrid Environment" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Guide
+              CNN Training
             
           </span>
         </div>
@@ -173,7 +173,7 @@
           </li>
         
           <li class="md-select__item">
-            <a href="../en/development/" hreflang="en" class="md-select__link">
+            <a href="../../en/tutorial/cnn/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
@@ -259,7 +259,7 @@
   
   
     <li class="md-tabs__item">
-      <a href=".." class="md-tabs__link">
+      <a href="../.." class="md-tabs__link">
         
   
   
@@ -278,7 +278,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../getting-started/" class="md-tabs__link">
+      <a href="../../getting-started/" class="md-tabs__link">
         
   
   
@@ -297,7 +297,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../installation/" class="md-tabs__link">
+      <a href="../../installation/" class="md-tabs__link">
         
   
   
@@ -316,7 +316,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../configuration/" class="md-tabs__link">
+      <a href="../../configuration/" class="md-tabs__link">
         
   
   
@@ -337,7 +337,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../usage/environment/" class="md-tabs__link">
+        <a href="../../usage/environment/" class="md-tabs__link">
           
   
   
@@ -357,7 +357,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../api/core/" class="md-tabs__link">
+        <a href="../../api/core/" class="md-tabs__link">
           
   
   
@@ -375,7 +375,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../architecture/" class="md-tabs__link">
+      <a href="../../architecture/" class="md-tabs__link">
         
   
   
@@ -385,26 +385,6 @@
 
       </a>
     </li>
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../tutorial/cnn/" class="md-tabs__link">
-          
-  
-  
-  Tutorials
-
-        </a>
-      </li>
-    
   
 
       
@@ -422,6 +402,26 @@
           
   
   
+  Tutorials
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../development/" class="md-tabs__link">
+          
+  
+  
   Development
 
         </a>
@@ -436,7 +436,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../troubleshooting/" class="md-tabs__link">
+      <a href="../../troubleshooting/" class="md-tabs__link">
         
   
   
@@ -455,7 +455,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../metrics/" class="md-tabs__link">
+      <a href="../../metrics/" class="md-tabs__link">
         
   
   
@@ -490,7 +490,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="CustomGrid Environment" class="md-nav__button md-logo" aria-label="CustomGrid Environment" data-md-component="logo">
+    <a href="../.." title="CustomGrid Environment" class="md-nav__button md-logo" aria-label="CustomGrid Environment" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -520,7 +520,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -547,7 +547,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting-started/" class="md-nav__link">
+      <a href="../../getting-started/" class="md-nav__link">
         
   
   
@@ -574,7 +574,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../installation/" class="md-nav__link">
+      <a href="../../installation/" class="md-nav__link">
         
   
   
@@ -601,7 +601,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../configuration/" class="md-nav__link">
+      <a href="../../configuration/" class="md-nav__link">
         
   
   
@@ -682,7 +682,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../usage/environment/" class="md-nav__link">
+      <a href="../../usage/environment/" class="md-nav__link">
         
   
   
@@ -710,7 +710,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../usage/gameplay/" class="md-nav__link">
+      <a href="../../usage/gameplay/" class="md-nav__link">
         
   
   
@@ -738,7 +738,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../usage/observations/" class="md-nav__link">
+      <a href="../../usage/observations/" class="md-nav__link">
         
   
   
@@ -766,7 +766,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../usage/rewards/" class="md-nav__link">
+      <a href="../../usage/rewards/" class="md-nav__link">
         
   
   
@@ -855,7 +855,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/core/" class="md-nav__link">
+      <a href="../../api/core/" class="md-nav__link">
         
   
   
@@ -883,7 +883,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/agents/" class="md-nav__link">
+      <a href="../../api/agents/" class="md-nav__link">
         
   
   
@@ -918,7 +918,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../architecture/" class="md-nav__link">
+      <a href="../../architecture/" class="md-nav__link">
         
   
   
@@ -934,95 +934,6 @@
   
 
       </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
-        
-          
-          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Tutorials
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_8">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Tutorials
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../tutorial/cnn/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    CNN Training
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -1052,17 +963,17 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
         
           
-          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
             
   
   
   <span class="md-ellipsis">
     
   
-    Development
+    Tutorials
   
 
     
@@ -1073,12 +984,12 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_9">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             
   
-    Development
+    Tutorials
   
 
           </label>
@@ -1107,7 +1018,7 @@
   <span class="md-ellipsis">
     
   
-    Guide
+    CNN Training
   
 
     
@@ -1125,7 +1036,7 @@
   <span class="md-ellipsis">
     
   
-    Guide
+    CNN Training
   
 
     
@@ -1151,10 +1062,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#mitwirken" class="md-nav__link">
+  <a href="#uberblick" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Mitwirken
+        Überblick
       
     </span>
   </a>
@@ -1162,13 +1073,108 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#release-prozess" class="md-nav__link">
+  <a href="#1-datengenerierung" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Release Prozess
+        1. Datengenerierung
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="1. Datengenerierung">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#funktionsweise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funktionsweise:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-training-des-neuronalen-netzes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Training des neuronalen Netzes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Training des neuronalen Netzes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#die-cnn-architektur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Die CNN-Architektur
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wichtige-konzepte-fur-studierende" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wichtige Konzepte für Studierende:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-bewertung-der-ergebnisse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Bewertung der Ergebnisse
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-integration-in-die-umgebung" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Integration in die Umgebung
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Integration in die Umgebung">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ubungen-fur-studierende" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Übungen für Studierende:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1181,6 +1187,67 @@
 
               
             
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Development
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
               
                 
   
@@ -1188,7 +1255,35 @@
   
   
     <li class="md-nav__item">
-      <a href="style-guide/" class="md-nav__link">
+      <a href="../../development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/style-guide/" class="md-nav__link">
         
   
   
@@ -1223,7 +1318,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../troubleshooting/" class="md-nav__link">
+      <a href="../../troubleshooting/" class="md-nav__link">
         
   
   
@@ -1250,7 +1345,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../metrics/" class="md-nav__link">
+      <a href="../../metrics/" class="md-nav__link">
         
   
   
@@ -1297,10 +1392,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#mitwirken" class="md-nav__link">
+  <a href="#uberblick" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Mitwirken
+        Überblick
       
     </span>
   </a>
@@ -1308,13 +1403,108 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#release-prozess" class="md-nav__link">
+  <a href="#1-datengenerierung" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Release Prozess
+        1. Datengenerierung
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="1. Datengenerierung">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#funktionsweise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funktionsweise:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-training-des-neuronalen-netzes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Training des neuronalen Netzes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Training des neuronalen Netzes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#die-cnn-architektur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Die CNN-Architektur
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wichtige-konzepte-fur-studierende" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wichtige Konzepte für Studierende:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-bewertung-der-ergebnisse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Bewertung der Ergebnisse
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-integration-in-die-umgebung" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Integration in die Umgebung
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Integration in die Umgebung">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ubungen-fur-studierende" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Übungen für Studierende:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1335,7 +1525,7 @@
 
 
   
-    <a href="https://github.com/dgaida/adversarial2dEnvAI/edit/main/docs/de/development/index.md" title="Seite editieren" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/dgaida/adversarial2dEnvAI/edit/main/docs/de/tutorial/cnn.md" title="Seite editieren" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -1344,26 +1534,64 @@
     
       
     
-    <a href="https://github.com/dgaida/adversarial2dEnvAI/raw/main/docs/de/development/index.md" title="Quellcode der Seite anzeigen" class="md-content__button md-icon">
+    <a href="https://github.com/dgaida/adversarial2dEnvAI/raw/main/docs/de/tutorial/cnn.md" title="Quellcode der Seite anzeigen" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
 
-<h1 id="entwicklung">Entwicklung<a class="headerlink" href="#entwicklung" title="Permanent link">&para;</a></h1>
-<h2 id="mitwirken">Mitwirken<a class="headerlink" href="#mitwirken" title="Permanent link">&para;</a></h2>
-<p>Beiträge sind willkommen! Bitte beachte folgende Standards:</p>
+<h1 id="tutorial-training-eines-cnn-zur-objekterkennung">Tutorial: Training eines CNN zur Objekterkennung<a class="headerlink" href="#tutorial-training-eines-cnn-zur-objekterkennung" title="Permanent link">&para;</a></h1>
+<p>Dieses Tutorial erklärt, wie man ein einfaches Convolutional Neural Network (CNN) trainiert, um Objekte in der CustomGrid-Umgebung zu klassifizieren. Dies ist ein idealer Einstieg für Studierende, um die Grundlagen von Computer Vision und deren Integration in Software-Systeme zu erlernen.</p>
+<h2 id="uberblick">Überblick<a class="headerlink" href="#uberblick" title="Permanent link">&para;</a></h2>
+<p>In unserer Umgebung kann der Agent auf "Hunde" (dogs) und "Blumen" (flowers) treffen. Während die Umgebung intern weiß, um welches Objekt es sich handelt, nutzen wir ein CNN, um die Objekte basierend auf ihrer visuellen Darstellung zu "sehen" und zu klassifizieren.</p>
+<p>Der Prozess besteht aus drei Hauptschritten:
+1. <strong>Datengenerierung</strong>: Erstellung eines Bilddatensatzes.
+2. <strong>Training</strong>: Das neuronale Netz lehren, Muster zu erkennen.
+3. <strong>Integration</strong>: Nutzung des trainierten Modells in der Umgebung.</p>
+<h2 id="1-datengenerierung">1. Datengenerierung<a class="headerlink" href="#1-datengenerierung" title="Permanent link">&para;</a></h2>
+<p>Bevor wir ein Modell trainieren können, benötigen wir Daten. Wir nutzen <code>src/custom_grid_env/cnn_tutorial/data_generation.py</code>, um prozedural Bilder mit einer Auflösung von 64x64 Pixeln zu erstellen.</p>
+<h3 id="funktionsweise">Funktionsweise:<a class="headerlink" href="#funktionsweise" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Docstrings</strong>: Google-Stil ist obligatorisch.</li>
-<li><strong>Tests</strong>: Neue Features müssen durch Tests in <code>tests/</code> abgedeckt werden.</li>
-<li><strong>API Abdeckung</strong>: Muss über 95% bleiben.</li>
+<li><strong>Verschiedene Hintergründe</strong>: Um das Modell robust zu machen, generieren wir die Objekte auf weißem, rot-schraffiertem und grün-schraffiertem Hintergrund.</li>
+<li><strong>Zufälligkeit</strong>: Wir fügen kleine zufällige Verschiebungen der Position des Hundes oder der Blume hinzu.</li>
+<li><strong>Ausgabe</strong>: Die Bilder werden in den Verzeichnissen <code>data/dog/</code> und <code>data/flower/</code> gespeichert.</li>
 </ul>
-<h2 id="release-prozess">Release Prozess<a class="headerlink" href="#release-prozess" title="Permanent link">&para;</a></h2>
+<p>Um die Daten zu generieren, führen Sie folgenden Befehl aus:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python<span class="w"> </span>src/custom_grid_env/cnn_tutorial/data_generation.py
+</code></pre></div></p>
+<h2 id="2-training-des-neuronalen-netzes">2. Training des neuronalen Netzes<a class="headerlink" href="#2-training-des-neuronalen-netzes" title="Permanent link">&para;</a></h2>
+<p>Die Trainingslogik befindet sich in <code>src/custom_grid_env/cnn_tutorial/train.py</code>. Wir verwenden <strong>TensorFlow</strong> und <strong>Keras</strong>, um unser Modell aufzubauen und zu trainieren.</p>
+<h3 id="die-cnn-architektur">Die CNN-Architektur<a class="headerlink" href="#die-cnn-architektur" title="Permanent link">&para;</a></h3>
+<p>Ein CNN ist speziell für die Verarbeitung von Pixeldaten konzipiert. Unser einfaches Modell nutzt folgende Schichten:
+- <strong>Conv2D</strong>: Diese Schicht "schiebt" Filter über das Bild, um Merkmale wie Kanten oder Formen zu erkennen.
+- <strong>MaxPooling2D</strong>: Dies reduziert die räumliche Größe der Darstellung, was das Modell schneller und robuster gegenüber kleinen Verschiebungen macht.
+- <strong>Flatten</strong>: Wandelt die 2D-Feature-Maps in einen 1D-Vektor um.
+- <strong>Dense</strong>: Vollständig vernetzte Schichten für die endgültige Klassifizierung. Am Ende nutzen wir eine 'softmax'-Aktivierung, um Wahrscheinlichkeiten für jede Klasse (Hund oder Blume) zu erhalten.</p>
+<h3 id="wichtige-konzepte-fur-studierende">Wichtige Konzepte für Studierende:<a class="headerlink" href="#wichtige-konzepte-fur-studierende" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Normalisierung</strong>: Wir teilen die Pixelwerte (0-255) durch 255, um sie auf den Bereich [0, 1] zu skalieren. Dies hilft dem neuronalen Netz, schneller zu lernen.</li>
+<li><strong>Train/Validation Split</strong>: Wir behalten 20% der Daten zurück, um das Modell mit Bildern zu testen, die es während des Trainings nicht gesehen hat. Dies zeigt uns, ob das Modell "überfittet" (auswendig lernt) oder tatsächlich verallgemeinert.</li>
+</ul>
+<p>Um das Training zu starten, führen Sie aus:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python<span class="w"> </span>src/custom_grid_env/cnn_tutorial/train.py
+</code></pre></div></p>
+<h2 id="3-bewertung-der-ergebnisse">3. Bewertung der Ergebnisse<a class="headerlink" href="#3-bewertung-der-ergebnisse" title="Permanent link">&para;</a></h2>
+<p>Nach dem Training speichert das Skript zwei Diagramme im Verzeichnis <code>results/</code>:
+- <strong>training_metrics.png</strong>: Zeigt, wie sich Genauigkeit (Accuracy) und Fehlerwert (Loss) über die Zeit verändert haben. Idealerweise sollte die Genauigkeit steigen und der Fehler sinken.
+- <strong>confusion_matrix.png</strong>: Zeigt, wo das Modell Fehler gemacht hat (z. B. wie viele Blumen fälschlicherweise als Hunde klassifiziert wurden).</p>
+<h2 id="4-integration-in-die-umgebung">4. Integration in die Umgebung<a class="headerlink" href="#4-integration-in-die-umgebung" title="Permanent link">&para;</a></h2>
+<p>Das trainierte Modell wird als <code>model.keras</code> gespeichert. Der <code>PygameRenderer</code> in <code>src/custom_grid_env/renderer.py</code> sucht automatisch nach dieser Datei.</p>
+<p>Wenn der Agent auf einem Feld mit einem Hund oder einer Blume steht:
+1. Erstellt der Renderer einen 64x64 Pixel "Schnappschuss" des Feldes.
+2. Übergibt diesen an das CNN.
+3. Zeigt die Vorhersage und die Konfidenz (Wahrscheinlichkeit) im Info-Panel an.</p>
+<hr />
+<h3 id="ubungen-fur-studierende">Übungen für Studierende:<a class="headerlink" href="#ubungen-fur-studierende" title="Permanent link">&para;</a></h3>
 <ol>
-<li>Version in <code>pyproject.toml</code> erhöhen.</li>
-<li>Changelog via <code>git-cliff</code> generieren.</li>
-<li>Dokumentation via GitHub Actions deployen.</li>
+<li><strong>Daten anpassen</strong>: Ändern Sie <code>line_spacing</code> in <code>data_generation.py</code> und beobachten Sie die Auswirkungen auf das Training.</li>
+<li><strong>Modell experimentieren</strong>: Füge eine weitere <code>Conv2D</code>-Schicht in <code>train.py</code> hinzu und vergleiche die Genauigkeit.</li>
+<li><strong>Hyperparameter</strong>: Ändern Sie die Anzahl der <code>epochs</code> oder die <code>batch_size</code> und analysieren Sie die Trainingskurven.</li>
 </ol>
 
 
@@ -1420,10 +1648,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit", "content.action.view"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "In Zwischenablage kopiert", "clipboard.copy": "In Zwischenablage kopieren", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.placeholder": "Suchbegriff eingeben", "search.result.term.missing": "Es fehlt", "select.version": "Version ausw\u00e4hlen"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit", "content.action.view"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "In Zwischenablage kopiert", "clipboard.copy": "In Zwischenablage kopieren", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.placeholder": "Suchbegriff eingeben", "search.result.term.missing": "Es fehlt", "select.version": "Version ausw\u00e4hlen"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>
