@@ -105,6 +105,11 @@ def train_model(epochs=10, batch_size=32):
     plt.savefig("results/confusion_matrix.png")
     print("Saved confusion matrix to results/confusion_matrix.png")
 
+    # Save the model
+    model_path = os.path.join(os.path.dirname(__file__), "model.keras")
+    model.save(model_path)
+    print(f"Saved model to {model_path}")
+
     return model
 
 

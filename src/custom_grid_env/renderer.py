@@ -1,6 +1,13 @@
+import os
 import pygame
 import numpy as np
 from typing import Optional, Tuple, Dict, Any, List
+
+# Try to import tensorflow for CNN predictions
+try:
+    import tensorflow as tf
+except ImportError:
+    tf = None
 
 
 class PygameRenderer:
@@ -13,6 +20,20 @@ class PygameRenderer:
         self.cols = cols
         self.render_mode = render_mode
         self.render_fps = render_fps
+
+        # Load CNN model if available
+        self.model = None
+        self.class_names = ["dog", "flower"]
+        if tf is not None:
+            model_path = os.path.join(
+                os.path.dirname(__file__), "cnn_tutorial", "model.keras"
+            )
+            if os.path.exists(model_path):
+                try:
+                    self.model = tf.keras.models.load_model(model_path)
+                    print(f"CNN model loaded from {model_path}")
+                except Exception as e:
+                    print(f"Error loading CNN model: {e}")
 
         # Pygame setup constants
         self.cell_size = 100
@@ -78,14 +99,32 @@ class PygameRenderer:
             if start_x > end_x:
                 pygame.draw.line(surface, color, (start_x, start_y), (end_x, end_y), 2)
 
-    def _draw_cell(self, row: int, col: int, cell: Dict[str, Any]):
+    def _draw_cell(
+        self,
+        row: int,
+        col: int,
+        cell: Dict[str, Any],
+        surface: Optional[pygame.Surface] = None,
+    ):
         """Draws a single cell with its contents."""
-        x = col * self.cell_size
-        y = row * self.cell_size
+        if surface is None:
+            surface = self.screen
+
+        # If drawing on a custom surface (e.g. for CNN), we might want to center it
+        # but for now we keep the same logic as before.
+        # However, for CNN we need exactly 64x64.
+        # Let's adjust x, y if surface is small.
+        surf_w, surf_h = surface.get_size()
+        if surf_w == self.cell_size and surf_h == self.cell_size:
+            x, y = 0, 0
+        else:
+            x = col * self.cell_size
+            y = row * self.cell_size
+
         margin = 4
 
         pygame.draw.rect(
-            self.screen,
+            surface,
             self.colors["white"],
             (
                 x + margin,
@@ -97,7 +136,7 @@ class PygameRenderer:
 
         if cell["colour"] == 1:
             self._draw_crosshatch(
-                self.screen,
+                surface,
                 (
                     x + margin,
                     y + margin,
@@ -108,7 +147,7 @@ class PygameRenderer:
             )
         elif cell["colour"] == 2:
             self._draw_crosshatch(
-                self.screen,
+                surface,
                 (
                     x + margin,
                     y + margin,
@@ -123,7 +162,7 @@ class PygameRenderer:
             text_rect = text.get_rect(
                 center=(x + self.cell_size // 2, y + self.cell_size // 2)
             )
-            self.screen.blit(text, text_rect)
+            surface.blit(text, text_rect)
 
         if cell["items"] and not cell["is_goal"] and not cell["is_start"]:
             item_y_offset = 0
@@ -131,92 +170,110 @@ class PygameRenderer:
             for item in cell["items"]:
                 if "dog" in item:
                     self._draw_dog(
-                        x + self.cell_size // 2, y + self.cell_size // 2 + item_y_offset
+                        x + self.cell_size // 2,
+                        y + self.cell_size // 2 + item_y_offset,
+                        surface=surface,
                     )
                     item_y_offset += 20
                 elif "flower" in item:
                     self._draw_flower(
-                        x + self.cell_size // 2, y + self.cell_size // 2 + item_y_offset
+                        x + self.cell_size // 2,
+                        y + self.cell_size // 2 + item_y_offset,
+                        surface=surface,
                     )
                     item_y_offset += 20
                 elif "one_note" in item:
                     self._draw_note(
-                        x + self.cell_size - 20, y + 20 + note_offset, single=True
+                        x + self.cell_size - 20,
+                        y + 20 + note_offset,
+                        single=True,
+                        surface=surface,
                     )
                     note_offset += 25
                 elif "two_notes" in item:
                     self._draw_note(
-                        x + self.cell_size - 25, y + 20 + note_offset, single=False
+                        x + self.cell_size - 25,
+                        y + 20 + note_offset,
+                        single=False,
+                        surface=surface,
                     )
                     note_offset += 25
 
-    def _draw_dog(self, cx: int, cy: int):
+    def _draw_dog(self, cx: int, cy: int, surface: Optional[pygame.Surface] = None):
         """Draws a simple dog icon."""
+        if surface is None:
+            surface = self.screen
         pygame.draw.ellipse(
-            self.screen, self.colors["dark_gray"], (cx - 20, cy - 10, 40, 25)
+            surface, self.colors["dark_gray"], (cx - 20, cy - 10, 40, 25)
         )
-        pygame.draw.circle(
-            self.screen, self.colors["dark_gray"], (cx - 15, cy - 15), 12
+        pygame.draw.circle(surface, self.colors["dark_gray"], (cx - 15, cy - 15), 12)
+        pygame.draw.ellipse(
+            surface, self.colors["dark_gray"], (cx - 28, cy - 25, 10, 15)
         )
         pygame.draw.ellipse(
-            self.screen, self.colors["dark_gray"], (cx - 28, cy - 25, 10, 15)
+            surface, self.colors["dark_gray"], (cx - 12, cy - 25, 10, 15)
         )
-        pygame.draw.ellipse(
-            self.screen, self.colors["dark_gray"], (cx - 12, cy - 25, 10, 15)
-        )
-        pygame.draw.circle(self.screen, self.colors["white"], (cx - 18, cy - 17), 3)
-        pygame.draw.circle(self.screen, self.colors["white"], (cx - 12, cy - 17), 3)
+        pygame.draw.circle(surface, self.colors["white"], (cx - 18, cy - 17), 3)
+        pygame.draw.circle(surface, self.colors["white"], (cx - 12, cy - 17), 3)
         pygame.draw.arc(
-            self.screen, self.colors["dark_gray"], (cx + 10, cy - 20, 20, 25), 0, 2, 3
+            surface, self.colors["dark_gray"], (cx + 10, cy - 20, 20, 25), 0, 2, 3
         )
 
-    def _draw_flower(self, cx: int, cy: int):
+    def _draw_flower(self, cx: int, cy: int, surface: Optional[pygame.Surface] = None):
         """Draws a simple flower icon."""
+        if surface is None:
+            surface = self.screen
         petal_color = self.colors["white"]
         for angle in range(0, 360, 60):
             rad = np.radians(angle)
             px = cx + int(15 * np.cos(rad))
             py = cy + int(15 * np.sin(rad))
-            pygame.draw.circle(self.screen, petal_color, (px, py), 10)
-            pygame.draw.circle(self.screen, self.colors["dark_gray"], (px, py), 10, 1)
-        pygame.draw.circle(self.screen, self.colors["yellow"], (cx, cy), 8)
-        pygame.draw.circle(self.screen, self.colors["orange"], (cx, cy), 8, 2)
+            pygame.draw.circle(surface, petal_color, (px, py), 10)
+            pygame.draw.circle(surface, self.colors["dark_gray"], (px, py), 10, 1)
+        pygame.draw.circle(surface, self.colors["yellow"], (cx, cy), 8)
+        pygame.draw.circle(surface, self.colors["orange"], (cx, cy), 8, 2)
 
-    def _draw_note(self, cx: int, cy: int, single: bool = True):
+    def _draw_note(
+        self,
+        cx: int,
+        cy: int,
+        single: bool = True,
+        surface: Optional[pygame.Surface] = None,
+    ):
         """Draws musical note(s)."""
+        if surface is None:
+            surface = self.screen
         if single:
-            pygame.draw.ellipse(self.screen, self.colors["black"], (cx - 8, cy, 12, 10))
+            pygame.draw.ellipse(surface, self.colors["black"], (cx - 8, cy, 12, 10))
             pygame.draw.line(
-                self.screen,
+                surface,
                 self.colors["black"],
                 (cx + 3, cy + 5),
                 (cx + 3, cy - 25),
                 3,
             )
             pygame.draw.arc(
-                self.screen, self.colors["black"], (cx, cy - 30, 15, 15), 3.5, 6, 3
+                surface, self.colors["black"], (cx, cy - 30, 15, 15), 3.5, 6, 3
             )
         else:
-            pygame.draw.ellipse(
-                self.screen, self.colors["black"], (cx - 18, cy, 12, 10)
-            )
-            pygame.draw.ellipse(self.screen, self.colors["black"], (cx + 2, cy, 12, 10))
+            pygame.draw.ellipse(surface, self.colors["black"], (cx - 18, cy, 12, 10))
+            pygame.draw.ellipse(surface, self.colors["black"], (cx + 2, cy, 12, 10))
             pygame.draw.line(
-                self.screen,
+                surface,
                 self.colors["black"],
                 (cx - 7, cy + 5),
                 (cx - 7, cy - 20),
                 3,
             )
             pygame.draw.line(
-                self.screen,
+                surface,
                 self.colors["black"],
                 (cx + 13, cy + 5),
                 (cx + 13, cy - 20),
                 3,
             )
             pygame.draw.line(
-                self.screen,
+                surface,
                 self.colors["black"],
                 (cx - 7, cy - 20),
                 (cx + 13, cy - 20),
@@ -387,6 +444,17 @@ class PygameRenderer:
         )
         self.screen.blit(actual_action, (200, panel_y + 120))
 
+        # CNN Prediction info
+        prediction = info.get("cnn_prediction")
+        if prediction:
+            class_name, prob = prediction
+            pred_text = self.small_font.render(
+                f"CNN Prediction: {class_name} ({prob*100:.1f}%)",
+                True,
+                self.colors["orange"],
+            )
+            self.screen.blit(pred_text, (400, panel_y + 10))
+
     def render(
         self,
         agent_pos: List[int],
@@ -420,6 +488,13 @@ class PygameRenderer:
             pygame.draw.circle(self.screen, self.colors["red"], (x, y), 45, 5)
             bang_text = self.font.render("!", True, self.colors["red"])
             self.screen.blit(bang_text, (x - 5, y - 15))
+        # Check if agent is on a dog or flower for CNN prediction
+        current_cell = grid[agent_pos[0], agent_pos[1]]
+        if any(item in current_cell["items"] for item in ["dog", "flower"]):
+            prediction = self._get_cnn_prediction(current_cell)
+            if prediction:
+                info["cnn_prediction"] = prediction
+
         self._draw_info_panel(
             agent_pos, ghost_pos, step_count, current_turn, grid, info
         )
@@ -437,6 +512,35 @@ class PygameRenderer:
                 np.array(pygame.surfarray.pixels3d(self.screen)), axes=(1, 0, 2)
             )
         return None
+
+    def _get_cnn_prediction(self, cell: Dict[str, Any]) -> Optional[Tuple[str, float]]:
+        """Returns the CNN prediction for a given cell."""
+        if self.model is None:
+            return None
+
+        # Create a 64x64 surface to draw the cell content
+        temp_surface = pygame.Surface((64, 64))
+        # Temporarily change cell_size to 64 for drawing on this surface
+        original_cell_size = self.cell_size
+        self.cell_size = 64
+        self._draw_cell(0, 0, cell, surface=temp_surface)
+        self.cell_size = original_cell_size
+
+        # Convert surface to numpy array (RGB)
+        img_array = pygame.surfarray.array3d(temp_surface)
+        # Transpose from (W, H, C) to (H, W, C)
+        img_array = np.transpose(img_array, (1, 0, 2))
+        # Normalize
+        img_array = img_array.astype(np.float32) / 255.0
+        # Add batch dimension
+        img_array = np.expand_dims(img_array, axis=0)
+
+        # Predict
+        predictions = self.model.predict(img_array, verbose=0)
+        class_idx = np.argmax(predictions[0])
+        probability = float(predictions[0][class_idx])
+
+        return self.class_names[class_idx], probability
 
     def close(self):
         """Cleans up resources."""
