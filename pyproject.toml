@@ -20,6 +20,9 @@ dependencies = [
     "gymnasium",
     "numpy",
     "pygame",
+    "tensorflow",
+    "matplotlib",
+    "scikit-learn",
 ]
 
 [project.urls]

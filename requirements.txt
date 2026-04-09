@@ -1,3 +1,6 @@
 gymnasium
 numpy
 pygame
+tensorflow
+matplotlib
+scikit-learn
