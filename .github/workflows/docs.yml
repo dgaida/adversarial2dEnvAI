@@ -38,7 +38,7 @@ jobs:
       - name: Update Metrics
         run: |
           # Extract coverage percentage from coverage.json and update metrics.md
-          COVERAGE=$(python -c "import json; print(int(json.load(open('coverage.json'))['totals']['percent_covered']))")
+          COVERAGE=$(python -c "import json; print(int(json.load(open('coverage.json'))['summary']['percent_covered']))")
           sed -i "s/Test_Coverage-[0-9]\+%/Test_Coverage-${COVERAGE}%/" docs/de/metrics.md
           sed -i "s/Test_Coverage-[0-9]\+%/Test_Coverage-${COVERAGE}%/" docs/en/metrics.md
 
