@@ -49,14 +49,19 @@ print(f"Total reward: {stats['total_reward']}")
 interface.close()
 ```
 
+## CNN-based Item Classification
+
+The environment includes a Convolutional Neural Network (CNN) that automatically classifies items (dogs and flowers) when the agent stands on them. This feature demonstrates how neural networks can be integrated into reinforcement learning environments for perception tasks.
+
+- **Data Generation**: Images are procedurally generated with different backgrounds.
+- **Model**: A simple CNN built with TensorFlow/Keras.
+- **Integration**: The `PygameRenderer` uses the trained model to provide real-time predictions in the info panel.
+
+See the [CNN Tutorial](docs/en/tutorial/cnn.md) (or [German version](docs/de/tutorial/cnn.md)) for more details.
+
 ## Documentation
 
-See the [docs](docs/README.md) directory for detailed information:
-- [Environment](docs/environment.md)
-- [Gameplay](docs/gameplay.md)
-- [Observations](docs/observations.md)
-- [Rewards](docs/rewards.md)
-- [API Reference](docs/api.md)
+Detailed documentation is available in the `docs/` directory or online at [dgaida.github.io/adversarial2dEnvAI](https://dgaida.github.io/adversarial2dEnvAI/).
 
 ## Requirements
 

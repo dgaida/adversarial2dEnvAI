@@ -16,9 +16,9 @@ Some cells have background colours that the agent can perceive:
 ## Items
 
 Various items are distributed throughout the world:
-- **Dog**
-- **Flower**
-- **Notes**
+- **Dog**: Classified by a CNN when the agent enters the cell.
+- **Flower**: Classified by a CNN when the agent enters the cell.
+- **Notes**: Displayed in the observations.
 
 ## Walls
 

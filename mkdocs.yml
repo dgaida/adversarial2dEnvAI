@@ -1,7 +1,8 @@
 site_name: CustomGrid Environment
 site_description: Eine Gymnasium-basierte Gitterumgebung mit einem Agenten und einem Geist.
 site_author: Jules
-repo_url: https://github.com/user/custom_grid_env
+site_url: https://dgaida.github.io/adversarial2dEnvAI/
+repo_url: https://github.com/dgaida/adversarial2dEnvAI
 edit_uri: edit/main/docs/
 
 theme:
@@ -87,6 +88,8 @@ nav:
       - Core API: api/core.md
       - Agents: api/agents.md
   - Architecture: architecture/index.md
+  - Tutorials:
+      - CNN Training: tutorial/cnn.md
   - Development:
       - Guide: development/index.md
       - Style Guide: development/style-guide.md
