@@ -32,6 +32,7 @@ class AgentInterface:
     def __init__(
         self,
         render: bool = True,
+        render_mode: Optional[str] = None,
         step_delay: int = 100,
         slip_probability: float = 0.2,
         ghost_agent_class: Optional[Type[Agent]] = None,
@@ -40,11 +41,18 @@ class AgentInterface:
 
         Args:
             render (bool): Whether to render the graphical display. Defaults to True.
+            render_mode (str, optional): The mode to render with ("human" or "rgb_array").
+                Defaults to "rgb_array" if render is True and no mode is provided.
             step_delay (int): Milliseconds to wait between steps when rendering. Defaults to 100.
             slip_probability (float): Probability of slipping. Defaults to 0.2.
             ghost_agent_class (type, optional): Class for ghost agent. Defaults to ChaseGhostAgent.
         """
-        self.env = CustomGridEnv(slip_probability=slip_probability)
+        if render_mode is None:
+            render_mode = "rgb_array" if render else None
+
+        self.env = CustomGridEnv(
+            render_mode=render_mode, slip_probability=slip_probability
+        )
         self.render_enabled = render
         self.step_delay = step_delay
         self.total_reward = 0.0
