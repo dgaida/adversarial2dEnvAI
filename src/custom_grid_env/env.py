@@ -103,7 +103,7 @@ class CustomGridEnv(gym.Env):
                 rows=self.rows,
                 cols=self.cols,
                 render_mode=self.render_mode,
-                render_fps=self.metadata["render_fps"]
+                render_fps=self.metadata["render_fps"],
             )
 
     def _setup_grid(self):
@@ -635,7 +635,6 @@ class CustomGridEnv(gym.Env):
             "ghost_relative_pos": ghost_relative,
         }
 
-
     def render(self) -> Optional[np.ndarray]:
         """Renders the environment.
 
@@ -651,7 +650,7 @@ class CustomGridEnv(gym.Env):
                 walls_vertical=self.walls_vertical,
                 step_count=self.step_count,
                 current_turn=self.current_turn,
-                info=self.info
+                info=self.info,
             )
         return None
 
@@ -659,5 +658,3 @@ class CustomGridEnv(gym.Env):
         """Cleans up resources."""
         if self.renderer:
             self.renderer.close()
-
-

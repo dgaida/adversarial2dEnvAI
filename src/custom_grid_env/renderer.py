@@ -1,13 +1,14 @@
 import pygame
 import numpy as np
-import sys
 from typing import Optional, Tuple, Dict, Any, List
 
 
 class PygameRenderer:
     """Renderer for the CustomGrid environment using Pygame."""
 
-    def __init__(self, rows: int, cols: int, render_mode: str = "human", render_fps: int = 4):
+    def __init__(
+        self, rows: int, cols: int, render_mode: str = "human", render_fps: int = 4
+    ):
         self.rows = rows
         self.cols = cols
         self.render_mode = render_mode
@@ -313,16 +314,21 @@ class PygameRenderer:
             y = row * self.cell_size
             pygame.draw.line(self.screen, line_color, (0, y), (self.window_width, y), 1)
 
-    def _draw_info_panel(self, agent_pos: List[int], ghost_pos: List[int], step_count: int,
-                         current_turn: int, grid: np.ndarray, info: Dict[str, Any]):
+    def _draw_info_panel(
+        self,
+        agent_pos: List[int],
+        ghost_pos: List[int],
+        step_count: int,
+        current_turn: int,
+        grid: np.ndarray,
+        info: Dict[str, Any],
+    ):
         """Draws the information panel at the bottom."""
         panel_y = self.rows * self.cell_size
         pygame.draw.rect(
             self.screen, self.colors["dark_gray"], (0, panel_y, self.window_width, 145)
         )
-        step_text = self.font.render(
-            f"Step: {step_count}", True, self.colors["white"]
-        )
+        step_text = self.font.render(f"Step: {step_count}", True, self.colors["white"])
         self.screen.blit(step_text, (10, panel_y + 10))
         pos_text = self.small_font.render(
             f"Agent: ({agent_pos[0]}, {agent_pos[1]})",
@@ -336,17 +342,13 @@ class PygameRenderer:
             self.colors["cyan"],
         )
         self.screen.blit(ghost_text, (10, panel_y + 70))
-        distance = abs(agent_pos[0] - ghost_pos[0]) + abs(
-            agent_pos[1] - ghost_pos[1]
-        )
+        distance = abs(agent_pos[0] - ghost_pos[0]) + abs(agent_pos[1] - ghost_pos[1])
         dist_text = self.small_font.render(
             f"Distance: {distance}", True, self.colors["yellow"]
         )
         self.screen.blit(dist_text, (10, panel_y + 95))
         turn_name = "Agent's Turn" if current_turn == 0 else "Ghost's Turn"
-        turn_color = (
-            self.colors["yellow"] if current_turn == 0 else self.colors["cyan"]
-        )
+        turn_color = self.colors["yellow"] if current_turn == 0 else self.colors["cyan"]
         turn_text = self.font.render(turn_name, True, turn_color)
         self.screen.blit(turn_text, (200, panel_y + 10))
         current_cell = grid[agent_pos[0], agent_pos[1]]
@@ -385,9 +387,17 @@ class PygameRenderer:
         )
         self.screen.blit(actual_action, (200, panel_y + 120))
 
-    def render(self, agent_pos: List[int], ghost_pos: List[int], grid: np.ndarray,
-               walls_horizontal: np.ndarray, walls_vertical: np.ndarray, step_count: int,
-               current_turn: int, info: Dict[str, Any]) -> Optional[np.ndarray]:
+    def render(
+        self,
+        agent_pos: List[int],
+        ghost_pos: List[int],
+        grid: np.ndarray,
+        walls_horizontal: np.ndarray,
+        walls_vertical: np.ndarray,
+        step_count: int,
+        current_turn: int,
+        info: Dict[str, Any],
+    ) -> Optional[np.ndarray]:
         """Renders the environment state."""
         self._init_pygame()
         for event in pygame.event.get():
@@ -410,7 +420,9 @@ class PygameRenderer:
             pygame.draw.circle(self.screen, self.colors["red"], (x, y), 45, 5)
             bang_text = self.font.render("!", True, self.colors["red"])
             self.screen.blit(bang_text, (x - 5, y - 15))
-        self._draw_info_panel(agent_pos, ghost_pos, step_count, current_turn, grid, info)
+        self._draw_info_panel(
+            agent_pos, ghost_pos, step_count, current_turn, grid, info
+        )
         pygame.draw.rect(
             self.screen,
             self.colors["black"],
