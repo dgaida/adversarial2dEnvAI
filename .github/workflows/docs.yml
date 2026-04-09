@@ -38,7 +38,7 @@ jobs:
       - name: Update Metrics
         run: |
           # Extract coverage percentage from coverage.json and update metrics.md
-          COVERAGE=$(python -c "import json; print(int(json.load(open('coverage.json'))['summary']['percent_covered']))")
+          COVERAGE=$(python -c "import json; print(int(json.load(open('coverage.json'))['totals']['percent_covered']))")
           sed -i "s/Test_Coverage-[0-9]\+%/Test_Coverage-${COVERAGE}%/" docs/de/metrics.md
           sed -i "s/Test_Coverage-[0-9]\+%/Test_Coverage-${COVERAGE}%/" docs/en/metrics.md
 
@@ -51,7 +51,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Deploy Versioned Docs
-        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/'))
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/'))
         run: |
           if [[ $GITHUB_REF == refs/tags/* ]]; then
             TAG=${GITHUB_REF#refs/tags/}
