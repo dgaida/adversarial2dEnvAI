@@ -15,7 +15,7 @@ The observation is a nested dictionary containing information about:
         "colour": int,          # 0=none, 1=red, 2=green
         "has_item": np.array,   # [dog, flower, notes] - binary array
         "is_goal": int,         # 0 or 1
-        "text": str,            # Cell text label (e.g., "Start", "Ziel")
+        "text": str,            # Cell text label (e.g., "Start", "Goal")
     },
     "neighbors": {
         "up": {
@@ -39,7 +39,7 @@ The observation is a nested dictionary containing information about:
 | `colour` | int | 0, 1, 2 | 0=none (white), 1=red, 2=green |
 | `has_item` | np.array(3) | [0,1] each | Binary flags: [has_dog, has_flower, has_notes] |
 | `is_goal` | int | 0, 1 | Whether this cell is a goal cell |
-| `text` | str | max 10 chars | Cell text label (e.g., "Start", "Ziel", "") |
+| `text` | str | max 10 chars | Cell text label (e.g., "Start", "Goal", "") |
 
 ### Neighbors
 

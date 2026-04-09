@@ -7,7 +7,8 @@ The main interface for interacting with the environment. Handles the agent-ghost
 ### Constructor
 
 ```python
-AgentInterface(render=True, step_delay=100, slip_probability=0.2, ghost_agent_class=None)
+from custom_grid_env import AgentInterface
+interface = AgentInterface(render=True, step_delay=100, slip_probability=0.2, ghost_agent_class=None)
 ```
 
 | Parameter | Type | Default | Description |
@@ -151,6 +152,7 @@ The environment is registered as `CustomGrid-v0`:
 
 ```python
 import gymnasium as gym
+import custom_grid_env
 env = gym.make("CustomGrid-v0")
 ```
 
@@ -159,7 +161,7 @@ env = gym.make("CustomGrid-v0")
 For advanced use cases requiring direct environment access:
 
 ```python
-from src.Environment import CustomGridEnv
+from custom_grid_env import CustomGridEnv
 
 env = CustomGridEnv(render_mode="human", slip_probability=0.2)
 obs, info = env.reset()
@@ -167,6 +169,7 @@ obs, info = env.reset()
 # Manual turn handling
 agent_obs, reward, terminated, truncated, info = env.step(agent_action)
 ghost_obs = env._get_ghost_obs()
+# ... apply ghost logic ...
 ghost_obs, reward, terminated, truncated, info = env.step(ghost_action)
 
 env.render()
@@ -180,7 +183,9 @@ env.close()
 ### Creating a Custom Agent
 
 ```python
-class MyAgent:
+from custom_grid_env import Agent
+
+class MyAgent(Agent):
     def __init__(self, action_space):
         self.action_space = action_space
     
@@ -202,14 +207,14 @@ class MyAgent:
 
 ### Built-in Agents
 
-#### RandomAgent
+#### RandomPlayerAgent
 
 Chooses random actions.
 
 ```python
-from src.Environment import RandomAgent
+from custom_grid_env import RandomPlayerAgent
 
-agent = RandomAgent(interface.get_action_space())
+agent = RandomPlayerAgent(interface.get_action_space())
 action = agent.get_action(obs)
 ```
 
@@ -218,7 +223,7 @@ action = agent.get_action(obs)
 Ghost agent that chases the player (default ghost behavior).
 
 ```python
-from src.Environment import ChaseGhostAgent
+from custom_grid_env import ChaseGhostAgent
 
 ghost = ChaseGhostAgent(env.action_space)
 ghost_action = ghost.get_action(ghost_obs)
@@ -229,43 +234,20 @@ ghost_action = ghost.get_action(ghost_obs)
 Ghost agent that moves randomly.
 
 ```python
-from src.Environment import RandomGhostAgent
+from custom_grid_env import RandomGhostAgent
 
 interface = AgentInterface(ghost_agent_class=RandomGhostAgent)
 ```
 
 ---
 
-## Utility Functions
-
-### run_with_agent
-
-Run multiple episodes with specified agents.
-
-```python
-from src.Environment import run_with_agent, RandomAgent
-
-stats = run_with_agent(
-    agent_class=None,           # Your agent class (None = RandomAgent)
-    ghost_agent_class=None,     # Ghost class (None = ChaseGhostAgent)
-    num_episodes=10,            # Number of episodes
-    render=True,                # Show graphics
-    step_delay=100,             # Ms between steps
-    slip_probability=0.2        # Slip probability
-)
-```
-
-**Returns:** List of episode statistics dictionaries
-
----
-
 ## Complete Example
 
 ```python
-from src.Environment import AgentInterface
+from custom_grid_env import AgentInterface, Agent
 
 
-class SmartAgent:
+class SmartAgent(Agent):
     """Agent that avoids ghost and finds goal."""
     
     def __init__(self, action_space):

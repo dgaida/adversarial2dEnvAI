@@ -1,4 +1,5 @@
 import pygame
+import gymnasium as gym
 from typing import Optional, Tuple, Dict, Any, Type
 from .env import CustomGridEnv
 from .agents.base_agent import Agent
@@ -158,7 +159,7 @@ class AgentInterface:
             "caught_by_ghost": self.last_info.get("caught_by_ghost", False),
         }
 
-    def get_action_space(self):
+    def get_action_space(self) -> gym.spaces.Space:
         """Gets the action space.
 
         Returns:
@@ -166,7 +167,7 @@ class AgentInterface:
         """
         return self.env.action_space
 
-    def get_observation_space(self):
+    def get_observation_space(self) -> gym.spaces.Space:
         """Gets the observation space.
 
         Returns:
