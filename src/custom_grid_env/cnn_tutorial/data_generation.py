@@ -6,6 +6,7 @@ from pathlib import Path
 # Set dummy video driver for headless environments
 os.environ["SDL_VIDEODRIVER"] = "dummy"
 
+
 def draw_crosshatch(surface, color, line_spacing=8):
     """Draws a crosshatch pattern on the surface."""
     w, h = surface.get_size()
@@ -25,6 +26,7 @@ def draw_crosshatch(surface, color, line_spacing=8):
         if start_x > end_x:
             pygame.draw.line(surface, color, (start_x, start_y), (end_x, end_y), 2)
 
+
 def draw_dog(surface, cx, cy):
     """Draws a simple dog icon."""
     dark_gray = (80, 80, 80)
@@ -43,6 +45,7 @@ def draw_dog(surface, cx, cy):
     # Tail
     pygame.draw.arc(surface, dark_gray, (cx + 10, cy - 20, 20, 25), 0, 2, 3)
 
+
 def draw_flower(surface, cx, cy):
     """Draws a simple flower icon."""
     white = (255, 255, 255)
@@ -60,6 +63,7 @@ def draw_flower(surface, cx, cy):
     pygame.draw.circle(surface, yellow, (cx, cy), 8)
     pygame.draw.circle(surface, orange, (cx, cy), 8, 2)
 
+
 def generate_data(output_dir="data", num_samples_per_class=100):
     """Generates images of dogs and flowers with different backgrounds."""
     pygame.init()
@@ -68,8 +72,8 @@ def generate_data(output_dir="data", num_samples_per_class=100):
     # Define backgrounds
     backgrounds = [
         ("white", (255, 255, 255), None),
-        ("red", (255, 255, 255), (255, 100, 100)), # white base, red crosshatch
-        ("green", (255, 255, 255), (100, 200, 100)) # white base, green crosshatch
+        ("red", (255, 255, 255), (255, 100, 100)),  # white base, red crosshatch
+        ("green", (255, 255, 255), (100, 200, 100)),  # white base, green crosshatch
     ]
 
     classes = [("dog", draw_dog), ("flower", draw_flower)]
@@ -102,6 +106,7 @@ def generate_data(output_dir="data", num_samples_per_class=100):
 
     pygame.quit()
     print(f"Data generation complete. Images saved to {output_dir}")
+
 
 if __name__ == "__main__":
     generate_data(num_samples_per_class=300)
