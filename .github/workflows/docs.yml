@@ -1,0 +1,62 @@
+name: Documentation
+
+on:
+  push:
+    branches: [ main, master ]
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install .
+          pip install mkdocs-material mkdocstrings[python] mkdocs-mermaid2-plugin mike mkdocs-static-i18n interrogate pytest pytest-cov git-cliff
+
+      - name: Run API coverage check
+        run: interrogate src/custom_grid_env
+
+      - name: Run Tests with Coverage
+        run: |
+          PYTHONPATH=src pytest --cov=src/custom_grid_env --cov-report=json:coverage.json
+
+      - name: Update Metrics
+        run: |
+          # Extract coverage percentage from coverage.json and update metrics.md
+          COVERAGE=$(python -c "import json; print(int(json.load(open('coverage.json'))['summary']['percent_covered']))")
+          sed -i "s/Test_Coverage-[0-9]\+%/Test_Coverage-${COVERAGE}%/" docs/de/metrics.md
+          sed -i "s/Test_Coverage-[0-9]\+%/Test_Coverage-${COVERAGE}%/" docs/en/metrics.md
+
+      - name: Generate Changelog
+        run: git-cliff --output CHANGELOG.md
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Deploy Versioned Docs
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/'))
+        run: |
+          if [[ $GITHUB_REF == refs/tags/* ]]; then
+            TAG=${GITHUB_REF#refs/tags/}
+            mike deploy --push --update-aliases $TAG latest
+          else
+            mike deploy --push --update-aliases dev
+          fi
+          mike set-default --push latest || true
