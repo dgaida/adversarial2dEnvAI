@@ -50,7 +50,9 @@ class AgentInterface:
         if render_mode is None:
             render_mode = "rgb_array" if render else None
 
-        self.env = CustomGridEnv(render_mode=render_mode, slip_probability=slip_probability)
+        self.env = CustomGridEnv(
+            render_mode=render_mode, slip_probability=slip_probability
+        )
         self.render_enabled = render
         self.step_delay = step_delay
         self.total_reward = 0.0
