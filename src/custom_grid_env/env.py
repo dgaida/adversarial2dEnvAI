@@ -2,6 +2,9 @@ import gymnasium as gym
 import numpy as np
 from typing import Optional, Tuple, Dict, Any, List
 from .renderer import PygameRenderer
+from .logger import get_logger
+
+logger = get_logger(__name__)
 
 
 class CustomGridEnv(gym.Env):
@@ -468,8 +471,21 @@ class CustomGridEnv(gym.Env):
         Returns:
             tuple: (observation, reward, terminated, truncated, info)
         """
+        logger.debug(f"step(action={action}) called. current_turn={self.current_turn}")
+
+        # Preserve certain keys across info.clear() if needed
+        # Actually, if the user calls render() manually, cnn_prediction might be in self.info.
+        # But step() usually clears it for the new step.
         info = self.info
+        logger.debug(f"info before clear: {info}")
+
+        preserved_info = {}
+        if "cnn_prediction" in info:
+            preserved_info["cnn_prediction"] = info["cnn_prediction"]
+
         info.clear()
+        info.update(preserved_info)
+
         reward = 0.0
         terminated = False
         action_names = {0: "left", 1: "down", 2: "right", 3: "up"}
@@ -629,6 +645,7 @@ class CustomGridEnv(gym.Env):
             np.ndarray, optional: RGB array if render_mode is "rgb_array".
         """
         if self.renderer:
+            logger.debug(f"Calling renderer.render with info: {self.info}")
             return self.renderer.render(
                 agent_pos=self.agent_pos,
                 ghost_pos=self.ghost_pos,
