@@ -285,8 +285,8 @@ class CustomGridEnv(gym.Env):
         self.ghost_pos = list(self.ghost_start_pos)
         self.step_count = 0
         self.current_turn = 0
-        self.info = {}
-        return self._get_obs(), {"current_turn": "agent"}
+        self.info = {"current_turn": "agent"}
+        return self._get_obs(), self.info
 
     def _move_entity(self, current_pos: List[int], action: int) -> List[int]:
         """Helper function to move an entity with wall checking.
@@ -521,6 +521,7 @@ class CustomGridEnv(gym.Env):
             info["current_turn"] = "agent"
             info["mover"] = "ghost"
 
+        self.info = info
         return self._get_obs(), float(reward), terminated, False, info
 
     def get_current_turn(self) -> str:
