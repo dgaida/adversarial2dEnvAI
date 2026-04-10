@@ -11,10 +11,13 @@ def load_data(data_dir="data"):
     """Loads images and labels from the data directory."""
     images = []
     labels = []
-    class_names = ["dog", "flower"]
+    class_names = ["dog", "flower", "background"]
 
     for label, class_name in enumerate(class_names):
         class_dir = os.path.join(data_dir, class_name)
+        if not os.path.exists(class_dir):
+            print(f"Warning: Directory {class_dir} not found. Skipping class {class_name}.")
+            continue
         for img_name in os.listdir(class_dir):
             if img_name.endswith(".png"):
                 img_path = os.path.join(class_dir, img_name)
@@ -33,6 +36,10 @@ def train_model(epochs=10, batch_size=32):
     print("Loading data...")
     X, y, class_names = load_data()
 
+    if len(X) == 0:
+        print("Error: No data loaded. Check data generation.")
+        return None
+
     # Split into train and validation sets
     X_train, X_val, y_train, y_val = train_test_split(
         X, y, test_size=0.2, random_state=42
@@ -45,9 +52,11 @@ def train_model(epochs=10, batch_size=32):
             # Small CNN to keep it simple and allow for some errors
             layers.Conv2D(8, (3, 3), activation="relu"),
             layers.MaxPooling2D((2, 2)),
+            layers.Conv2D(16, (3, 3), activation="relu"),
+            layers.MaxPooling2D((2, 2)),
             layers.Flatten(),
-            layers.Dense(16, activation="relu"),
-            layers.Dense(2, activation="softmax"),  # 2 classes: dog and flower
+            layers.Dense(32, activation="relu"),
+            layers.Dense(3, activation="softmax"),  # 3 classes: dog, flower, background
         ]
     )
 
@@ -99,7 +108,7 @@ def train_model(epochs=10, batch_size=32):
     cm = confusion_matrix(y_val, y_pred_classes)
     disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=class_names)
 
-    plt.figure(figsize=(6, 6))
+    plt.figure(figsize=(8, 8))
     disp.plot(cmap=plt.cm.Blues)
     plt.title("Confusion Matrix")
     plt.savefig("results/confusion_matrix.png")

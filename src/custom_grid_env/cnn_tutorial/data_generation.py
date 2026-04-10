@@ -64,9 +64,38 @@ def draw_flower(surface, cx, cy):
     pygame.draw.circle(surface, orange, (cx, cy), 8, 2)
 
 
-def generate_data(output_dir="data", num_samples_per_class=100):
-    """Generates images of dogs and flowers with different backgrounds."""
+def draw_note(surface, cx, cy, single=True):
+    """Draws musical note(s)."""
+    black = (0, 0, 0)
+    if single:
+        pygame.draw.ellipse(surface, black, (cx - 5, cy + 5, 8, 6))
+        pygame.draw.line(surface, black, (cx + 2, cy + 8), (cx + 2, cy - 12), 2)
+        pygame.draw.arc(surface, black, (cx, cy - 15, 10, 10), 3.5, 6, 2)
+    else:
+        pygame.draw.ellipse(surface, black, (cx - 12, cy + 5, 8, 6))
+        pygame.draw.ellipse(surface, black, (cx + 2, cy + 5, 8, 6))
+        pygame.draw.line(surface, black, (cx - 5, cy + 8), (cx - 5, cy - 10), 2)
+        pygame.draw.line(surface, black, (cx + 9, cy + 8), (cx + 9, cy - 10), 2)
+        pygame.draw.line(surface, black, (cx - 5, cy - 10), (cx + 9, cy - 10), 2)
+
+
+def draw_text(surface, text, cx, cy, font_size=20):
+    """Draws text on the surface."""
+    black = (0, 0, 0)
+    try:
+        font = pygame.font.SysFont(None, font_size)
+        text_surf = font.render(text, True, black)
+        text_rect = text_surf.get_rect(center=(cx, cy))
+        surface.blit(text_surf, text_rect)
+    except:
+        # Fallback if font fails: draw a simple box/line to represent text
+        pygame.draw.rect(surface, black, (cx - 15, cy - 5, 30, 10), 1)
+
+
+def generate_data(output_dir="data", num_samples_per_class=300):
+    """Generates images for dog, flower, and background classes."""
     pygame.init()
+    pygame.font.init()
     img_size = 64
 
     # Define backgrounds
@@ -76,12 +105,15 @@ def generate_data(output_dir="data", num_samples_per_class=100):
         ("green", (255, 255, 255), (100, 200, 100)),  # white base, green crosshatch
     ]
 
-    classes = [("dog", draw_dog), ("flower", draw_flower)]
+    # Define classes
+    # Background class will be handled specially
+    other_classes = [("dog", draw_dog), ("flower", draw_flower)]
 
     output_path = Path(output_dir)
     output_path.mkdir(exist_ok=True)
 
-    for class_name, draw_func in classes:
+    # Generate dog and flower images
+    for class_name, draw_func in other_classes:
         class_dir = output_path / class_name
         class_dir.mkdir(exist_ok=True)
         print(f"Generating {num_samples_per_class} images for class: {class_name}")
@@ -95,6 +127,12 @@ def generate_data(output_dir="data", num_samples_per_class=100):
             if hatch_color:
                 draw_crosshatch(surface, hatch_color)
 
+            # Randomly add notes or text to some dog/flower images (to match environment variety)
+            if np.random.random() < 0.2:
+                draw_note(surface, 50, 15, single=np.random.random() > 0.5)
+            if np.random.random() < 0.1:
+                draw_text(surface, "Start", 32, 32)
+
             # Add some slight variation in position
             offset_x = np.random.randint(-2, 3)
             offset_y = np.random.randint(-2, 3)
@@ -103,6 +141,39 @@ def generate_data(output_dir="data", num_samples_per_class=100):
 
             img_path = class_dir / f"{class_name}_{bg_name}_{i}.png"
             pygame.image.save(surface, str(img_path))
+
+    # Generate background images
+    class_name = "background"
+    class_dir = output_path / class_name
+    class_dir.mkdir(exist_ok=True)
+    print(f"Generating {num_samples_per_class} images for class: {class_name}")
+
+    for i in range(num_samples_per_class):
+        bg_name, bg_color, hatch_color = backgrounds[i % len(backgrounds)]
+
+        surface = pygame.Surface((img_size, img_size))
+        surface.fill(bg_color)
+
+        if hatch_color:
+            draw_crosshatch(surface, hatch_color)
+
+        # Background can be empty, or have notes, or have text
+        rand_val = np.random.random()
+        if rand_val < 0.3:
+            # Just background, do nothing more
+            pass
+        elif rand_val < 0.6:
+            # Background with notes
+            draw_note(surface, 50, 15, single=np.random.random() > 0.5)
+            if np.random.random() < 0.3: # sometimes two notes
+                 draw_note(surface, 50, 40, single=np.random.random() > 0.5)
+        else:
+            # Background with text
+            text = "Start" if np.random.random() > 0.5 else "Goal"
+            draw_text(surface, text, 32, 32)
+
+        img_path = class_dir / f"{class_name}_{bg_name}_{i}.png"
+        pygame.image.save(surface, str(img_path))
 
     pygame.quit()
     print(f"Data generation complete. Images saved to {output_dir}")
