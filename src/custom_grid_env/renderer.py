@@ -2,6 +2,9 @@ import os
 import pygame
 import numpy as np
 from typing import Optional, Tuple, Dict, Any, List
+from .logger import get_logger
+
+logger = get_logger(__name__)
 
 # Try to import tensorflow for CNN predictions
 try:
@@ -31,9 +34,15 @@ class PygameRenderer:
             if os.path.exists(model_path):
                 try:
                     self.model = tf.keras.models.load_model(model_path)
-                    print(f"CNN model loaded from {model_path}")
+                    logger.info(f"CNN model successfully loaded from {model_path}")
                 except Exception as e:
-                    print(f"Error loading CNN model: {e}")
+                    logger.error(f"Error loading CNN model from {model_path}: {e}")
+            else:
+                logger.warning(
+                    f"CNN model file not found at {model_path}. Predictions will be disabled."
+                )
+        else:
+            logger.warning("TensorFlow not found. CNN predictions will be disabled.")
 
         # Pygame setup constants
         self.cell_size = 100
@@ -491,9 +500,15 @@ class PygameRenderer:
         # Check if agent is on a dog or flower for CNN prediction
         current_cell = grid[agent_pos[0], agent_pos[1]]
         if any(item in current_cell["items"] for item in ["dog", "flower"]):
+            logger.debug(
+                f"Agent is on a cell with items: {current_cell['items']}. Getting CNN prediction."
+            )
             prediction = self._get_cnn_prediction(current_cell)
             if prediction:
+                logger.debug(f"CNN prediction: {prediction}")
                 info["cnn_prediction"] = prediction
+            else:
+                logger.debug("CNN prediction failed or returned None.")
 
         self._draw_info_panel(
             agent_pos, ghost_pos, step_count, current_turn, grid, info

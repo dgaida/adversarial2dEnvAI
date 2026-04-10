@@ -4,6 +4,9 @@ from typing import Optional, Tuple, Dict, Any, Type
 from .env import CustomGridEnv
 from .agents.base_agent import Agent
 from .agents.chase_ghost_agent import ChaseGhostAgent
+from .logger import get_logger
+
+logger = get_logger(__name__)
 
 
 class AgentInterface:
@@ -105,13 +108,18 @@ class AgentInterface:
         total_step_reward = 0.0
 
         # Agent's turn
+        logger.debug(f"Agent's turn. action={action}")
         obs, reward, self.terminated, self.truncated, info = self.env.step(action)
         total_step_reward += reward
 
         if self.render_enabled:
+            logger.debug("Rendering after agent's turn.")
             self.env.render()
             pygame.time.wait(self.step_delay)
 
+        logger.debug(
+            f"env.info after agent's turn and potential render: {self.env.info}"
+        )
         combined_info.update(self.env.info)
 
         if self.terminated:
@@ -121,15 +129,20 @@ class AgentInterface:
             return obs, float(total_step_reward), True, combined_info
 
         # Ghost's turn
+        logger.debug("Ghost's turn.")
         ghost_obs = self.env._get_ghost_obs()
         ghost_action = self._ghost_agent.get_action(ghost_obs)
 
         obs, reward, self.terminated, self.truncated, info = self.env.step(ghost_action)
 
         if self.render_enabled:
+            logger.debug("Rendering after ghost's turn.")
             self.env.render()
             pygame.time.wait(self.step_delay)
 
+        logger.debug(
+            f"env.info after ghost's turn and potential render: {self.env.info}"
+        )
         combined_info.update(self.env.info)
 
         if info.get("caught_by_ghost"):
