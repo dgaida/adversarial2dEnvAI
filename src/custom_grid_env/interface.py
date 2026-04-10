@@ -112,7 +112,7 @@ class AgentInterface:
             self.env.render()
             pygame.time.wait(self.step_delay)
 
-        combined_info.update(info)
+        combined_info.update(self.env.info)
 
         if self.terminated:
             self.total_reward += total_step_reward
@@ -130,7 +130,7 @@ class AgentInterface:
             self.env.render()
             pygame.time.wait(self.step_delay)
 
-        combined_info.update(info)
+        combined_info.update(self.env.info)
 
         if info.get("caught_by_ghost"):
             total_step_reward += reward
