@@ -285,8 +285,8 @@ class CustomGridEnv(gym.Env):
         self.ghost_pos = list(self.ghost_start_pos)
         self.step_count = 0
         self.current_turn = 0
-        self.info = {}
-        return self._get_obs(), {"current_turn": "agent"}
+        self.info = {"current_turn": "agent"}
+        return self._get_obs(), self.info
 
     def _move_entity(self, current_pos: List[int], action: int) -> List[int]:
         """Helper function to move an entity with wall checking.
@@ -316,18 +316,7 @@ class CustomGridEnv(gym.Env):
             move_valid = False
 
         if move_valid:
-            if action == 0:
-                if col > 0 and self.walls_vertical[new_row, new_col]:
-                    move_valid = False
-            elif action == 1:
-                if row < self.rows and self.walls_horizontal[new_row - 1, new_col]:
-                    move_valid = False
-            elif action == 2:
-                if col < self.cols and self.walls_vertical[new_row, new_col - 1]:
-                    move_valid = False
-            elif action == 3:
-                if row > 0 and self.walls_horizontal[new_row, new_col]:
-                    move_valid = False
+            move_valid = self._is_move_valid(current_pos, [new_row, new_col])
 
         if move_valid:
             return [new_row, new_col]
@@ -479,7 +468,8 @@ class CustomGridEnv(gym.Env):
         Returns:
             tuple: (observation, reward, terminated, truncated, info)
         """
-        info = {}
+        info = self.info
+        info.clear()
         reward = 0.0
         terminated = False
         action_names = {0: "left", 1: "down", 2: "right", 3: "up"}
@@ -521,6 +511,7 @@ class CustomGridEnv(gym.Env):
             info["current_turn"] = "agent"
             info["mover"] = "ghost"
 
+        self.info = info
         return self._get_obs(), float(reward), terminated, False, info
 
     def get_current_turn(self) -> str:
@@ -562,17 +553,13 @@ class CustomGridEnv(gym.Env):
             return False
 
         if to_row < from_row:
-            return not (from_row > 0 and self.walls_horizontal[from_row - 1, from_col])
+            return not self.walls_horizontal[from_row - 1, from_col]
         elif to_row > from_row:
-            return not (
-                from_row < self.rows and self.walls_horizontal[from_row, from_col]
-            )
+            return not self.walls_horizontal[from_row, from_col]
         elif to_col < from_col:
-            return not (from_col > 0 and self.walls_vertical[from_row, from_col - 1])
+            return not self.walls_vertical[from_row, from_col - 1]
         elif to_col > from_col:
-            return not (
-                from_col < self.cols and self.walls_vertical[from_row, from_col]
-            )
+            return not self.walls_vertical[from_row, from_col]
 
         return True
 
