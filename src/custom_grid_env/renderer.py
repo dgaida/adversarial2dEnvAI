@@ -499,7 +499,9 @@ class PygameRenderer:
             self.screen.blit(bang_text, (x - 5, y - 15))
         # Get CNN prediction for current cell
         current_cell = grid[agent_pos[0], agent_pos[1]]
-        logger.debug(f"Agent is on cell ({agent_pos[0]}, {agent_pos[1]}). Getting CNN prediction.")
+        logger.debug(
+            f"Agent is on cell ({agent_pos[0]}, {agent_pos[1]}). Getting CNN prediction."
+        )
         prediction = self._get_cnn_prediction(current_cell)
         if prediction:
             logger.debug(f"CNN prediction: {prediction}")

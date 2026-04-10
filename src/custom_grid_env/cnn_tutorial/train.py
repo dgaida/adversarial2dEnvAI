@@ -16,7 +16,9 @@ def load_data(data_dir="data"):
     for label, class_name in enumerate(class_names):
         class_dir = os.path.join(data_dir, class_name)
         if not os.path.exists(class_dir):
-            print(f"Warning: Directory {class_dir} not found. Skipping class {class_name}.")
+            print(
+                f"Warning: Directory {class_dir} not found. Skipping class {class_name}."
+            )
             continue
         for img_name in os.listdir(class_dir):
             if img_name.endswith(".png"):

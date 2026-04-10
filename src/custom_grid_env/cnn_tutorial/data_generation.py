@@ -87,7 +87,7 @@ def draw_text(surface, text, cx, cy, font_size=20):
         text_surf = font.render(text, True, black)
         text_rect = text_surf.get_rect(center=(cx, cy))
         surface.blit(text_surf, text_rect)
-    except:
+    except Exception:
         # Fallback if font fails: draw a simple box/line to represent text
         pygame.draw.rect(surface, black, (cx - 15, cy - 5, 30, 10), 1)
 
@@ -165,8 +165,8 @@ def generate_data(output_dir="data", num_samples_per_class=300):
         elif rand_val < 0.6:
             # Background with notes
             draw_note(surface, 50, 15, single=np.random.random() > 0.5)
-            if np.random.random() < 0.3: # sometimes two notes
-                 draw_note(surface, 50, 40, single=np.random.random() > 0.5)
+            if np.random.random() < 0.3:  # sometimes two notes
+                draw_note(surface, 50, 40, single=np.random.random() > 0.5)
         else:
             # Background with text
             text = "Start" if np.random.random() > 0.5 else "Goal"
