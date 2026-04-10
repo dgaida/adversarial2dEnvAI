@@ -107,11 +107,12 @@ class AgentInterface:
         # Agent's turn
         obs, reward, self.terminated, self.truncated, info = self.env.step(action)
         total_step_reward += reward
-        combined_info.update(info)
 
         if self.render_enabled:
             self.env.render()
             pygame.time.wait(self.step_delay)
+
+        combined_info.update(info)
 
         if self.terminated:
             self.total_reward += total_step_reward
@@ -124,11 +125,12 @@ class AgentInterface:
         ghost_action = self._ghost_agent.get_action(ghost_obs)
 
         obs, reward, self.terminated, self.truncated, info = self.env.step(ghost_action)
-        combined_info.update(info)
 
         if self.render_enabled:
             self.env.render()
             pygame.time.wait(self.step_delay)
+
+        combined_info.update(info)
 
         if info.get("caught_by_ghost"):
             total_step_reward += reward
