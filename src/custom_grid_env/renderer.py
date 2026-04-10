@@ -38,7 +38,9 @@ class PygameRenderer:
                 except Exception as e:
                     logger.error(f"Error loading CNN model from {model_path}: {e}")
             else:
-                logger.warning(f"CNN model file not found at {model_path}. Predictions will be disabled.")
+                logger.warning(
+                    f"CNN model file not found at {model_path}. Predictions will be disabled."
+                )
         else:
             logger.warning("TensorFlow not found. CNN predictions will be disabled.")
 
@@ -498,7 +500,9 @@ class PygameRenderer:
         # Check if agent is on a dog or flower for CNN prediction
         current_cell = grid[agent_pos[0], agent_pos[1]]
         if any(item in current_cell["items"] for item in ["dog", "flower"]):
-            logger.debug(f"Agent is on a cell with items: {current_cell['items']}. Getting CNN prediction.")
+            logger.debug(
+                f"Agent is on a cell with items: {current_cell['items']}. Getting CNN prediction."
+            )
             prediction = self._get_cnn_prediction(current_cell)
             if prediction:
                 logger.debug(f"CNN prediction: {prediction}")

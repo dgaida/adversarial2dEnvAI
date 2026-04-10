@@ -117,7 +117,9 @@ class AgentInterface:
             self.env.render()
             pygame.time.wait(self.step_delay)
 
-        logger.debug(f"env.info after agent's turn and potential render: {self.env.info}")
+        logger.debug(
+            f"env.info after agent's turn and potential render: {self.env.info}"
+        )
         combined_info.update(self.env.info)
 
         if self.terminated:
@@ -138,7 +140,9 @@ class AgentInterface:
             self.env.render()
             pygame.time.wait(self.step_delay)
 
-        logger.debug(f"env.info after ghost's turn and potential render: {self.env.info}")
+        logger.debug(
+            f"env.info after ghost's turn and potential render: {self.env.info}"
+        )
         combined_info.update(self.env.info)
 
         if info.get("caught_by_ghost"):
