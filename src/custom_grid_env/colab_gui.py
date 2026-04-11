@@ -1,9 +1,8 @@
 import os
-import numpy as np
 import matplotlib.pyplot as plt
 import ipywidgets as widgets
 from IPython.display import display, clear_output
-from typing import Optional, Type
+from typing import Type
 from .interface import AgentInterface
 from .agents.base_agent import Agent
 from .agents.random_player_agent import RandomPlayerAgent
