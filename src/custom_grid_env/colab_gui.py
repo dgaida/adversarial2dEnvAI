@@ -1,4 +1,5 @@
 import os
+import numpy as np
 import matplotlib.pyplot as plt
 import ipywidgets as widgets
 from IPython.display import display, clear_output
@@ -80,6 +81,7 @@ class ColabGUI:
         self.slip_type_dropdown.observe(self._on_slip_type_change, names="value")
 
     def _on_next_click(self, b):
+        """Callback for the 'Next Step' button."""
         if self.interface.is_terminated():
             return
 
@@ -88,27 +90,86 @@ class ColabGUI:
         self._update_display()
 
     def _on_reset_click(self, b):
+        """Callback for the 'Reset Episode' button."""
         self.obs = self.interface.reset()
         self._update_display()
 
     def _on_pf_toggle_change(self, change):
+        """Callback for the particle filter toggle."""
         self.interface.show_particles = change["new"]
         self._update_display()
 
     def _on_sensor_change(self, change):
+        """Callback for the sensor selection dropdown."""
         self.interface.pf_sensor_mode = change["new"]
 
     def _on_slip_type_change(self, change):
+        """Callback for the slip type dropdown."""
         self.interface.env.slip_type = change["new"]
 
     def _update_display(self):
+        """Updates the display with the latest environment state and plots."""
         with self.output:
             clear_output(wait=True)
             img = self.interface.env.render()
+
             if img is not None:
-                plt.figure(figsize=(10, 8))
-                plt.imshow(img)
-                plt.axis("off")
+                # Create a figure with two subplots: Grid and Probability Distribution
+                fig, (ax1, ax2) = plt.subplots(
+                    2, 1, figsize=(10, 14), gridspec_kw={"height_ratios": [1.5, 1]}
+                )
+
+                # Plot 1: Environment Grid
+                ax1.imshow(img)
+                ax1.axis("off")
+                ax1.set_title("Environment Grid")
+
+                # Plot 2: Multimodal Probability Distribution
+                if self.interface.pf:
+                    rows, cols = self.interface.env.rows, self.interface.env.cols
+                    # Create a 2D histogram of particles to represent the distribution
+                    particles = np.array(self.interface.pf.get_particles())
+                    weights = self.interface.pf.weights
+
+                    # We want a smooth representation, so we use a 2D histogram
+                    # then potentially smooth it or use it as a heatmap.
+                    hist, xedges, yedges = np.histogram2d(
+                        particles[:, 1],
+                        particles[:, 0],
+                        bins=[cols, rows],
+                        range=[[0, cols], [0, rows]],
+                        weights=weights,
+                    )
+
+                    # Plotting the heatmap
+                    im = ax2.imshow(
+                        hist.T,
+                        origin="upper",
+                        extent=[0, cols, rows, 0],
+                        cmap="viridis",
+                        interpolation="gaussian",
+                    )
+                    ax2.set_title(
+                        "Estimated Probability Distribution (Particle Filter)"
+                    )
+                    ax2.set_xlabel("Column")
+                    ax2.set_ylabel("Row")
+                    fig.colorbar(im, ax2, label="Probability Density")
+
+                    # Draw estimated position as a small filled circle
+                    est_pos = self.interface.pf.get_estimated_position()
+                    float_pos = est_pos["float_pos"]  # [row, col]
+                    ax2.scatter(
+                        float_pos[1],
+                        float_pos[0],
+                        color="red",
+                        s=100,
+                        edgecolors="white",
+                        label="Estimated Position",
+                    )
+                    ax2.legend()
+
+                plt.tight_layout()
                 plt.show()
 
             stats = self.interface.get_episode_stats()

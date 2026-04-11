@@ -1,3 +1,5 @@
+"""Ghost agent that moves randomly."""
+
 from .base_agent import Agent
 
 

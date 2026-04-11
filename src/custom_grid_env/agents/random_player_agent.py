@@ -1,3 +1,5 @@
+"""Example player agent that moves randomly."""
+
 from .base_agent import Agent
 
 

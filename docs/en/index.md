@@ -1,10 +1,10 @@
 # CustomGrid Environment
 
-A Gymnasium-based grid environment featuring an agent navigating a 4x5 grid to reach goal cells while avoiding a chasing ghost.
+A Gymnasium-based grid environment where an agent navigates a 4x5 grid to reach goal cells while avoiding a chasing ghost.
 
 ## Interactive Notebooks
 
-You can try out the CNN training and the environment directly in your browser using Google Colab:
+You can try the CNN training and the environment directly in your browser using Google Colab:
 
 - **CNN Training Tutorial**: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/CNN_Training.ipynb)
 - **Environment Demo**: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Environment_Demo.ipynb)
@@ -15,11 +15,29 @@ You can try out the CNN training and the environment directly in your browser us
 ## Overview
 
 CustomGrid is a turn-based environment where:
-- An **agent** (robot with GPS) tries to reach one of the goal cells.
-- A **ghost** chases the agent each turn.
+- An **agent** (robot with GPS) attempts to reach one of the target cells.
+- A **ghost** chases the agent in every round.
 - **Walls** block movement between certain cells.
-- **Slip probability** adds stochasticity – the agent may slip perpendicular to the intended direction.
-- **Coloured cells** provide visual information (red and green patterns).
+- **Slip probability** provides stochasticity – the agent can slip perpendicular to the intended direction.
+- **Colored cells** provide visual information (red and green patterns).
+
+## Goal of the Environment
+
+The primary goal of the environment is to develop a mobile agent that visits various locations (which can only be detected visually or acoustically) in minimal time and returns to the starting location without colliding with other road users (similar to the Traveling Salesman Problem).
+
+### Given Resources
+- **Agent**: Equipped with sensors, a chassis, and a small computer.
+- **Sensors**: Camera, microphone, color sensor.
+- **Map**: Information about which fields can perceive which optical and acoustic stimuli.
+
+### Example Task
+At the beginning, the agent receives an instruction like:
+"Visit the following three fields in optimal order and return to the starting location:
+- the field where you hear piano music,
+- the field where you see the picture of the dog and hear rock music,
+- the field with the text 'Goal'."
+
+**Important**: The agent does not know its position at time $t=0$ and must estimate it using its sensors (localization).
 
 ## Quick Start
 
@@ -43,7 +61,7 @@ while not interface.is_terminated():
 
 # Get results
 stats = interface.get_episode_stats()
-print(f"Total reward: {stats['total_reward']}")
+print(f"Total Reward: {stats['total_reward']}")
 
 interface.close()
 ```

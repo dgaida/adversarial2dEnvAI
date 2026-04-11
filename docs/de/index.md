@@ -21,6 +21,24 @@ CustomGrid ist eine rundenbasierte Umgebung, in der:
 - **Rutschwahrscheinlichkeit** für Stochastik sorgt – der Agent kann senkrecht zur beabsichtigten Richtung rutschen.
 - **Farbige Zellen** visuelle Informationen liefern (rote und grüne Muster).
 
+## Ziel der Umgebung
+
+Das Hauptziel der Umgebung ist die Entwicklung eines mobilen Agenten, der verschiedene Orte (die nur visuell oder akustisch detektiert werden können) in minimaler Zeit besuchen und zum Ausgangsort zurückkehren soll, ohne dabei mit anderen Verkehrsteilnehmern zu kollidieren (ähnlich dem Problem des Handlungsreisenden).
+
+### Gegebene Ressourcen
+- **Agent**: Ausgestattet mit Sensoren, einem Fahrwerk und einem kleinen Rechner.
+- **Sensoren**: Kamera, Mikrofon, Farbsensor.
+- **Karte**: Information darüber, in welchen Feldern welche optischen und akustischen Reize wahrgenommen werden können.
+
+### Beispielaufgabe
+Zu Beginn erhält der Agent eine Anweisung wie:
+„Besuche in optimaler Reihenfolge die folgenden drei Felder und kehre zum Ausgangsort zurück:
+- das Feld in dem man Klaviermusik hört,
+- das Feld wo man das Bild des Hundes sieht und Rockmusik hört,
+- das Feld mit dem Schriftzug ‚Ziel‘.“
+
+**Wichtig**: Der Agent kennt zum Zeitpunkt $t=0$ seine Position nicht und muss diese mithilfe seiner Sensoren schätzen (Lokalisierung).
+
 ## Schnellstart
 
 ```python
