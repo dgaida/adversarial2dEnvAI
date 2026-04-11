@@ -85,6 +85,13 @@
         <xhtml:link rel="alternate" hreflang="en" href="https://dgaida.github.io/adversarial2dEnvAI/deven/tutorial/cnn/"/>
     </url>
     <url>
+        <loc>https://dgaida.github.io/adversarial2dEnvAI/dev/tutorial/particle_filter/</loc>
+        <lastmod>2026-04-11</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="de" href="https://dgaida.github.io/adversarial2dEnvAI/dev/tutorial/particle_filter/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://dgaida.github.io/adversarial2dEnvAI/deven/tutorial/particle_filter/"/>
+    </url>
+    <url>
         <loc>https://dgaida.github.io/adversarial2dEnvAI/dev/usage/environment/</loc>
         <lastmod>2026-04-11</lastmod>
         <changefreq>daily</changefreq>
@@ -97,6 +104,13 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="de" href="https://dgaida.github.io/adversarial2dEnvAI/dev/usage/gameplay/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dgaida.github.io/adversarial2dEnvAI/deven/usage/gameplay/"/>
+    </url>
+    <url>
+        <loc>https://dgaida.github.io/adversarial2dEnvAI/dev/usage/localization/</loc>
+        <lastmod>2026-04-11</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="de" href="https://dgaida.github.io/adversarial2dEnvAI/dev/usage/localization/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://dgaida.github.io/adversarial2dEnvAI/deven/usage/localization/"/>
     </url>
     <url>
         <loc>https://dgaida.github.io/adversarial2dEnvAI/dev/usage/observations/</loc>
@@ -197,6 +211,13 @@
         <xhtml:link rel="alternate" hreflang="de" href="https://dgaida.github.io/adversarial2dEnvAI/devtutorial/cnn/"/>
     </url>
     <url>
+        <loc>https://dgaida.github.io/adversarial2dEnvAI/dev/en/tutorial/particle_filter/</loc>
+        <lastmod>2026-04-11</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://dgaida.github.io/adversarial2dEnvAI/dev/en/tutorial/particle_filter/"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://dgaida.github.io/adversarial2dEnvAI/devtutorial/particle_filter/"/>
+    </url>
+    <url>
         <loc>https://dgaida.github.io/adversarial2dEnvAI/dev/en/usage/environment/</loc>
         <lastmod>2026-04-11</lastmod>
         <changefreq>daily</changefreq>
@@ -209,6 +230,13 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dgaida.github.io/adversarial2dEnvAI/dev/en/usage/gameplay/"/>
         <xhtml:link rel="alternate" hreflang="de" href="https://dgaida.github.io/adversarial2dEnvAI/devusage/gameplay/"/>
+    </url>
+    <url>
+        <loc>https://dgaida.github.io/adversarial2dEnvAI/dev/en/usage/localization/</loc>
+        <lastmod>2026-04-11</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://dgaida.github.io/adversarial2dEnvAI/dev/en/usage/localization/"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://dgaida.github.io/adversarial2dEnvAI/devusage/localization/"/>
     </url>
     <url>
         <loc>https://dgaida.github.io/adversarial2dEnvAI/dev/en/usage/observations/</loc>

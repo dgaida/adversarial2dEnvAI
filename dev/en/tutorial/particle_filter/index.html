@@ -1,6 +1,6 @@
 
 <!doctype html>
-<html lang="de" class="no-js">
+<html lang="en" class="no-js">
   <head>
     
       <meta charset="utf-8">
@@ -12,35 +12,35 @@
         <meta name="author" content="Jules">
       
       
-        <link rel="canonical" href="https://dgaida.github.io/adversarial2dEnvAI/dev/configuration/">
+        <link rel="canonical" href="https://dgaida.github.io/adversarial2dEnvAI/dev/en/tutorial/particle_filter/">
       
       
-        <link rel="prev" href="../installation/">
+        <link rel="prev" href="../cnn/">
       
       
-        <link rel="next" href="../usage/environment/">
+        <link rel="next" href="../../development/">
       
       
         
-          <link rel="alternate" href="./" hreflang="de">
+          <link rel="alternate" href="../../../tutorial/particle_filter/" hreflang="de">
         
-          <link rel="alternate" href="../en/configuration/" hreflang="en">
+          <link rel="alternate" href="./" hreflang="en">
         
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>Configuration - CustomGrid Environment</title>
+        <title>Particle Filter - CustomGrid Environment</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -59,9 +59,11 @@
       
     
     
-      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -86,8 +88,8 @@
     <div data-md-component="skip">
       
         
-        <a href="#konfiguration" class="md-skip">
-          Zum Inhalt
+        <a href="#tutorial-particle-filter-and-sensor-fusion" class="md-skip">
+          Skip to content
         </a>
       
     </div>
@@ -99,8 +101,8 @@
       
 
 <header class="md-header" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Kopfzeile">
-    <a href=".." title="CustomGrid Environment" class="md-header__button md-logo" aria-label="CustomGrid Environment" data-md-component="logo">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../" title="CustomGrid Environment" class="md-header__button md-logo" aria-label="CustomGrid Environment" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -120,7 +122,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Configuration
+              Particle Filter
             
           </span>
         </div>
@@ -160,20 +162,20 @@
       <div class="md-header__option">
   <div class="md-select">
     
-    <button class="md-header__button md-icon" aria-label="Sprache wechseln">
+    <button class="md-header__button md-icon" aria-label="Select language">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
     </button>
     <div class="md-select__inner">
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="./" hreflang="de" class="md-select__link">
+            <a href="../../../tutorial/particle_filter/" hreflang="de" class="md-select__link">
               Deutsch
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../en/configuration/" hreflang="en" class="md-select__link">
+            <a href="./" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
@@ -194,16 +196,16 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Suche" placeholder="Suche" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
-      <nav class="md-search__options" aria-label="Suche">
+      <nav class="md-search__options" aria-label="Search">
         
-        <button type="reset" class="md-search__icon md-icon" title="Zurücksetzen" aria-label="Zurücksetzen" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
@@ -216,7 +218,7 @@
       <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
-            Suche wird initialisiert
+            Initializing search
           </div>
           <ol class="md-search-result__list" role="presentation"></ol>
         </div>
@@ -228,7 +230,7 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/dgaida/adversarial2dEnvAI" title="Zum Repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/dgaida/adversarial2dEnvAI" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
@@ -249,7 +251,7 @@
         
           
             
-<nav class="md-tabs" aria-label="Hauptnavigation" data-md-component="tabs">
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
       
@@ -259,7 +261,7 @@
   
   
     <li class="md-tabs__item">
-      <a href=".." class="md-tabs__link">
+      <a href="../../" class="md-tabs__link">
         
   
   
@@ -278,7 +280,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../getting-started/" class="md-tabs__link">
+      <a href="../../getting-started/" class="md-tabs__link">
         
   
   
@@ -297,7 +299,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../installation/" class="md-tabs__link">
+      <a href="../../installation/" class="md-tabs__link">
         
   
   
@@ -314,11 +316,9 @@
   
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="./" class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href="../../configuration/" class="md-tabs__link">
         
   
   
@@ -339,7 +339,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../usage/environment/" class="md-tabs__link">
+        <a href="../../usage/environment/" class="md-tabs__link">
           
   
   
@@ -359,7 +359,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../api/core/" class="md-tabs__link">
+        <a href="../../api/core/" class="md-tabs__link">
           
   
   
@@ -377,7 +377,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../architecture/" class="md-tabs__link">
+      <a href="../../architecture/" class="md-tabs__link">
         
   
   
@@ -394,11 +394,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../tutorial/cnn/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../cnn/" class="md-tabs__link">
           
   
   
@@ -418,7 +420,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../development/" class="md-tabs__link">
+        <a href="../../development/" class="md-tabs__link">
           
   
   
@@ -436,7 +438,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../troubleshooting/" class="md-tabs__link">
+      <a href="../../troubleshooting/" class="md-tabs__link">
         
   
   
@@ -455,7 +457,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../metrics/" class="md-tabs__link">
+      <a href="../../metrics/" class="md-tabs__link">
         
   
   
@@ -490,7 +492,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="CustomGrid Environment" class="md-nav__button md-logo" aria-label="CustomGrid Environment" data-md-component="logo">
+    <a href="../../" title="CustomGrid Environment" class="md-nav__button md-logo" aria-label="CustomGrid Environment" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -500,7 +502,7 @@
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/dgaida/adversarial2dEnvAI" title="Zum Repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/dgaida/adversarial2dEnvAI" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
@@ -520,7 +522,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../../" class="md-nav__link">
         
   
   
@@ -547,7 +549,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting-started/" class="md-nav__link">
+      <a href="../../getting-started/" class="md-nav__link">
         
   
   
@@ -574,7 +576,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../installation/" class="md-nav__link">
+      <a href="../../installation/" class="md-nav__link">
         
   
   
@@ -598,37 +600,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Configuration
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../configuration/" class="md-nav__link">
         
   
   
@@ -644,37 +619,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Inhaltsverzeichnis
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#agentinterface-parameter" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        AgentInterface Parameter
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -740,7 +684,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../usage/environment/" class="md-nav__link">
+      <a href="../../usage/environment/" class="md-nav__link">
         
   
   
@@ -768,7 +712,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../usage/gameplay/" class="md-nav__link">
+      <a href="../../usage/gameplay/" class="md-nav__link">
         
   
   
@@ -796,7 +740,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../usage/observations/" class="md-nav__link">
+      <a href="../../usage/observations/" class="md-nav__link">
         
   
   
@@ -824,7 +768,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../usage/rewards/" class="md-nav__link">
+      <a href="../../usage/rewards/" class="md-nav__link">
         
   
   
@@ -852,7 +796,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../usage/localization/" class="md-nav__link">
+      <a href="../../usage/localization/" class="md-nav__link">
         
   
   
@@ -941,7 +885,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/core/" class="md-nav__link">
+      <a href="../../api/core/" class="md-nav__link">
         
   
   
@@ -969,7 +913,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/agents/" class="md-nav__link">
+      <a href="../../api/agents/" class="md-nav__link">
         
   
   
@@ -1004,7 +948,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../architecture/" class="md-nav__link">
+      <a href="../../architecture/" class="md-nav__link">
         
   
   
@@ -1028,28 +972,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
-        
-          
-          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
             
   
   
@@ -1067,7 +1014,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1085,7 +1032,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tutorial/cnn/" class="md-nav__link">
+      <a href="../cnn/" class="md-nav__link">
         
   
   
@@ -1110,10 +1057,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../tutorial/particle_filter/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Particle Filter
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1129,6 +1103,109 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem-where-am-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Problem: Where am I?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-the-particle-filter-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How the Particle Filter Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sensor-fusion-in-customgrid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sensor Fusion in CustomGrid
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sensor Fusion in CustomGrid">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-the-color-sensor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. The Color Sensor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-the-cnn-visual-recognition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. The CNN (Visual Recognition)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mathematical-combination" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mathematical Combination
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-for-students" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise for Students
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1202,7 +1279,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../development/" class="md-nav__link">
+      <a href="../../development/" class="md-nav__link">
         
   
   
@@ -1230,7 +1307,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../development/style-guide/" class="md-nav__link">
+      <a href="../../development/style-guide/" class="md-nav__link">
         
   
   
@@ -1265,7 +1342,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../troubleshooting/" class="md-nav__link">
+      <a href="../../troubleshooting/" class="md-nav__link">
         
   
   
@@ -1292,7 +1369,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../metrics/" class="md-nav__link">
+      <a href="../../metrics/" class="md-nav__link">
         
   
   
@@ -1325,7 +1402,7 @@
                   <div class="md-sidebar__inner">
                     
 
-<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
   
@@ -1334,15 +1411,87 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Inhaltsverzeichnis
+      Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#agentinterface-parameter" class="md-nav__link">
+  <a href="#the-problem-where-am-i" class="md-nav__link">
     <span class="md-ellipsis">
       
-        AgentInterface Parameter
+        The Problem: Where am I?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-the-particle-filter-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How the Particle Filter Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sensor-fusion-in-customgrid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sensor Fusion in CustomGrid
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sensor Fusion in CustomGrid">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-the-color-sensor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. The Color Sensor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-the-cnn-visual-recognition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. The CNN (Visual Recognition)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mathematical-combination" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mathematical Combination
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-for-students" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise for Students
       
     </span>
   </a>
@@ -1366,7 +1515,7 @@
 
 
   
-    <a href="https://github.com/dgaida/adversarial2dEnvAI/edit/main/docs/de/configuration.md" title="Seite editieren" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/dgaida/adversarial2dEnvAI/edit/main/docs/en/tutorial/particle_filter.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -1375,53 +1524,46 @@
     
       
     
-    <a href="https://github.com/dgaida/adversarial2dEnvAI/raw/main/docs/de/configuration.md" title="Quellcode der Seite anzeigen" class="md-content__button md-icon">
+    <a href="https://github.com/dgaida/adversarial2dEnvAI/raw/main/docs/en/tutorial/particle_filter.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
 
-<h1 id="konfiguration">Konfiguration<a class="headerlink" href="#konfiguration" title="Permanent link">&para;</a></h1>
-<p>Die <code>custom_grid_env</code> kann über verschiedene Parameter angepasst werden, hauptsächlich über das <code>AgentInterface</code>.</p>
-<h2 id="agentinterface-parameter">AgentInterface Parameter<a class="headerlink" href="#agentinterface-parameter" title="Permanent link">&para;</a></h2>
-<p>Beim Initialisieren des <code>AgentInterface</code> können folgende Parameter übergeben werden:</p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typ</th>
-<th>Standard</th>
-<th>Beschreibung</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>render</code></td>
-<td>bool</td>
-<td><code>True</code></td>
-<td>Aktiviert die grafische Anzeige via Pygame.</td>
-</tr>
-<tr>
-<td><code>step_delay</code></td>
-<td>int</td>
-<td><code>100</code></td>
-<td>Verzögerung in Millisekunden zwischen den Schritten bei der Anzeige.</td>
-</tr>
-<tr>
-<td><code>slip_probability</code></td>
-<td>float</td>
-<td><code>0.2</code></td>
-<td>Wahrscheinlichkeit (0.0 bis 1.0), dass der Agent rutscht.</td>
-</tr>
-<tr>
-<td><code>ghost_agent_class</code></td>
-<td>Type</td>
-<td><code>ChaseGhostAgent</code></td>
-<td>Klasse, die das Verhalten des Geistes steuert.</td>
-</tr>
-</tbody>
-</table>
+<h1 id="tutorial-particle-filter-and-sensor-fusion">Tutorial: Particle Filter and Sensor Fusion<a class="headerlink" href="#tutorial-particle-filter-and-sensor-fusion" title="Permanent link">&para;</a></h1>
+<p>This tutorial explains how the particle filter is used in the <code>CustomGrid</code> environment for agent localization. It is aimed at computer science students at the bachelor level.</p>
+<h2 id="the-problem-where-am-i">The Problem: Where am I?<a class="headerlink" href="#the-problem-where-am-i" title="Permanent link">&para;</a></h2>
+<p>In a realistic robotics application, the robot often does not know its exact position. It knows which action it has performed (e.g., "take one step forward"), but due to uncertainties (slipping on the floor), the result is stochastic.</p>
+<p>The <strong>particle filter</strong> is an algorithm that uses a set of hypotheses (particles) to represent the likely position of the agent.</p>
+<h2 id="how-the-particle-filter-works">How the Particle Filter Works<a class="headerlink" href="#how-the-particle-filter-works" title="Permanent link">&para;</a></h2>
+<p>A particle filter works in a cycle of three steps:</p>
+<ol>
+<li><strong>Prediction</strong>: Each particle is moved according to the agent's action. The motion model (including slip probability) is simulated.</li>
+<li><strong>Correction (Update)</strong>: Based on the sensor measurements, each particle is evaluated. Particles whose position matches the measurements well receive a higher weight.</li>
+<li><strong>Resampling</strong>: Particles with low weight are removed, while particles with high weight are multiplied. This way, the "cloud" concentrates on the most likely locations.</li>
+</ol>
+<h2 id="sensor-fusion-in-customgrid">Sensor Fusion in CustomGrid<a class="headerlink" href="#sensor-fusion-in-customgrid" title="Permanent link">&para;</a></h2>
+<p>The particle filter in this environment combines two different sensor types (<strong>sensor fusion</strong>) to estimate the position:</p>
+<h3 id="1-the-color-sensor">1. The Color Sensor<a class="headerlink" href="#1-the-color-sensor" title="Permanent link">&para;</a></h3>
+<p>The agent has a sensor that measures the ground color (white, red, green). This sensor has an accuracy of <strong>80%</strong>.
+- If a particle is on a red cell and the sensor reports "red", the probability for this particle increases.
+- If the sensor reports "green" even though the particle is on a red cell, the probability decreases.</p>
+<h3 id="2-the-cnn-visual-recognition">2. The CNN (Visual Recognition)<a class="headerlink" href="#2-the-cnn-visual-recognition" title="Permanent link">&para;</a></h3>
+<p>The trained Convolutional Neural Network provides probabilities for the classes <code>dog</code>, <code>flower</code>, and <code>background</code>.
+The particle filter uses these predictions as measurements:
+- Each particle "looks" at the map: Which object is at my (hypothetical) position?
+- The likelihood of a particle is calculated from the probability that the CNN outputted for exactly this object.</p>
+<h2 id="mathematical-combination">Mathematical Combination<a class="headerlink" href="#mathematical-combination" title="Permanent link">&para;</a></h2>
+<p>We assume that the sensors are conditionally independent. The total probability $P$ for a particle results from the product of the individual probabilities:</p>
+<p>$$P_{total} = P_{color} \cdot P_{cnn}$$</p>
+<p>Through this combination, the agent can determine its position even if a single sensor is very noisy. For example, if the CNN is uncertain, the color sensor can often help to narrow down the position on the grid.</p>
+<h2 id="exercise-for-students">Exercise for Students<a class="headerlink" href="#exercise-for-students" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Influence of Sensors</strong>: Test the particle filter in the <code>Colab_GUI_Demo</code> with only the color sensor, only the CNN, and with both. Observe how quickly the particle cloud converges.</li>
+<li><strong>Slip Models</strong>: Compare "perpendicular" slipping with "longitudinal" slipping. Which model makes localization more difficult?</li>
+<li><strong>Number of Particles</strong>: Reduce the number of particles in the <code>AgentInterface</code>. At what number does the estimate become unstable?</li>
+</ol>
 
 
 
@@ -1445,7 +1587,7 @@
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  Zurück zum Seitenanfang
+  Back to top
 </button>
         
       </main>
@@ -1477,10 +1619,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit", "content.action.view"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "In Zwischenablage kopiert", "clipboard.copy": "In Zwischenablage kopieren", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.placeholder": "Suchbegriff eingeben", "search.result.term.missing": "Es fehlt", "select.version": "Version ausw\u00e4hlen"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit", "content.action.view"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

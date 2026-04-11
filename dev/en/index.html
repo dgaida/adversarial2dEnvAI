@@ -580,6 +580,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#interactive-notebooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interactive Notebooks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -587,6 +598,45 @@
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-of-the-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal of the Environment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Goal of the Environment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#given-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Given Resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Task
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -867,6 +917,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="usage/localization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Localization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1100,6 +1178,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorial/particle_filter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Particle Filter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1305,6 +1411,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#interactive-notebooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interactive Notebooks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1312,6 +1429,45 @@
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-of-the-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal of the Environment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Goal of the Environment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#given-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Given Resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Task
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1371,15 +1527,37 @@
 
 
 <h1 id="customgrid-environment">CustomGrid Environment<a class="headerlink" href="#customgrid-environment" title="Permanent link">&para;</a></h1>
-<p>A Gymnasium-based grid environment featuring an agent navigating a 4x5 grid to reach goal cells while avoiding a chasing ghost.</p>
+<p>A Gymnasium-based grid environment where an agent navigates a 4x5 grid to reach goal cells while avoiding a chasing ghost.</p>
+<h2 id="interactive-notebooks">Interactive Notebooks<a class="headerlink" href="#interactive-notebooks" title="Permanent link">&para;</a></h2>
+<p>You can try the CNN training and the environment directly in your browser using Google Colab:</p>
+<ul>
+<li><strong>CNN Training Tutorial</strong>: <a href="https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/CNN_Training.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></li>
+<li><strong>Environment Demo</strong>: <a href="https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Environment_Demo.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></li>
+<li><strong>Interactive GUI</strong>: <a href="https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Colab_GUI_Demo.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></li>
+</ul>
 <p><img alt="Environment Preview" src="../Umgebung.png" /></p>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>CustomGrid is a turn-based environment where:
-- An <strong>agent</strong> (robot with GPS) tries to reach one of the goal cells.
-- A <strong>ghost</strong> chases the agent each turn.
+- An <strong>agent</strong> (robot with GPS) attempts to reach one of the target cells.
+- A <strong>ghost</strong> chases the agent in every round.
 - <strong>Walls</strong> block movement between certain cells.
-- <strong>Slip probability</strong> adds stochasticity – the agent may slip perpendicular to the intended direction.
-- <strong>Coloured cells</strong> provide visual information (red and green patterns).</p>
+- <strong>Slip probability</strong> provides stochasticity – the agent can slip perpendicular to the intended direction.
+- <strong>Colored cells</strong> provide visual information (red and green patterns).</p>
+<h2 id="goal-of-the-environment">Goal of the Environment<a class="headerlink" href="#goal-of-the-environment" title="Permanent link">&para;</a></h2>
+<p>The primary goal of the environment is to develop a mobile agent that visits various locations (which can only be detected visually or acoustically) in minimal time and returns to the starting location without colliding with other road users (similar to the Traveling Salesman Problem).</p>
+<h3 id="given-resources">Given Resources<a class="headerlink" href="#given-resources" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Agent</strong>: Equipped with sensors, a chassis, and a small computer.</li>
+<li><strong>Sensors</strong>: Camera, microphone, color sensor.</li>
+<li><strong>Map</strong>: Information about which fields can perceive which optical and acoustic stimuli.</li>
+</ul>
+<h3 id="example-task">Example Task<a class="headerlink" href="#example-task" title="Permanent link">&para;</a></h3>
+<p>At the beginning, the agent receives an instruction like:
+"Visit the following three fields in optimal order and return to the starting location:
+- the field where you hear piano music,
+- the field where you see the picture of the dog and hear rock music,
+- the field with the text 'Goal'."</p>
+<p><strong>Important</strong>: The agent does not know its position at time $t=0$ and must estimate it using its sensors (localization).</p>
 <h2 id="quick-start">Quick Start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">custom_grid_env.interface</span><span class="w"> </span><span class="kn">import</span> <span class="n">AgentInterface</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">custom_grid_env.agents.random_player_agent</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomPlayerAgent</span>
@@ -1400,7 +1578,7 @@
 <a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
 <a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="c1"># Get results</span>
 <a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="n">stats</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">get_episode_stats</span><span class="p">()</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total reward: </span><span class="si">{</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;total_reward&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total Reward: </span><span class="si">{</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;total_reward&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>
 <a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="n">interface</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </code></pre></div>

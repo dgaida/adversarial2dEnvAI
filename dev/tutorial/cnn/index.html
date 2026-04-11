@@ -18,7 +18,7 @@
         <link rel="prev" href="../../architecture/">
       
       
-        <link rel="next" href="../../development/">
+        <link rel="next" href="../particle_filter/">
       
       
         
@@ -787,6 +787,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/localization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Localization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1204,6 +1232,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../particle_filter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Particle Filter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1604,7 +1660,7 @@
 - <strong>Conv2D</strong>: Diese Schicht "schiebt" Filter über das Bild, um Merkmale wie Kanten oder Formen zu erkennen.
 - <strong>MaxPooling2D</strong>: Dies reduziert die räumliche Größe der Darstellung, was das Modell schneller und robuster gegenüber kleinen Verschiebungen macht.
 - <strong>Flatten</strong>: Wandelt die 2D-Feature-Maps in einen 1D-Vektor um.
-- <strong>Dense</strong>: Vollständig vernetzte Schichten für die endgültige Klassifizierung. Am Ende nutzen wir eine 'softmax'-Aktivierung, um Wahrscheinlichkeiten für jede Klasse (Hund oder Blume) zu erhalten.</p>
+Am Ende nutzen wir eine 'softmax'-Aktivierung, um Wahrscheinlichkeiten für jede Klasse (Hund, Blume oder Hintergrund) zu erhalten.</p>
 <h3 id="wichtige-konzepte-fur-studierende">Wichtige Konzepte für Studierende:<a class="headerlink" href="#wichtige-konzepte-fur-studierende" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Normalisierung</strong>: Wir teilen die Pixelwerte (0-255) durch 255, um sie auf den Bereich [0, 1] zu skalieren. Dies hilft dem neuronalen Netz, schneller zu lernen.</li>
@@ -1619,10 +1675,11 @@
 - <strong>confusion_matrix.png</strong>: Zeigt, wo das Modell Fehler gemacht hat (z. B. wie viele Blumen fälschlicherweise als Hunde klassifiziert wurden).</p>
 <h2 id="4-integration-in-die-umgebung">4. Integration in die Umgebung<a class="headerlink" href="#4-integration-in-die-umgebung" title="Permanent link">&para;</a></h2>
 <p>Das trainierte Modell wird als <code>model.keras</code> gespeichert. Der <code>PygameRenderer</code> in <code>src/custom_grid_env/renderer.py</code> sucht automatisch nach dieser Datei.</p>
-<p>Wenn der Agent auf einem Feld mit einem Hund oder einer Blume steht:
-1. Erstellt der Renderer einen 64x64 Pixel "Schnappschuss" des Feldes.
+<p>Der Renderer führt die Vorhersage in jedem Schritt aus:
+1. Erstellt einen 64x64 Pixel "Schnappschuss" des aktuellen Feldes.
 2. Übergibt diesen an das CNN.
-3. Zeigt die Vorhersage und die Konfidenz (Wahrscheinlichkeit) im Info-Panel an.</p>
+3. Das CNN liefert Wahrscheinlichkeiten für alle drei Klassen (<code>dog</code>, <code>flower</code>, <code>background</code>).
+4. Die Klasse mit der höchsten Wahrscheinlichkeit wird als Vorhersage im Info-Panel angezeigt.</p>
 <hr />
 <h3 id="ubungen-fur-studierende">Übungen für Studierende:<a class="headerlink" href="#ubungen-fur-studierende" title="Permanent link">&para;</a></h3>
 <ol>

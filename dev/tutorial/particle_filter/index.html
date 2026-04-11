@@ -12,35 +12,35 @@
         <meta name="author" content="Jules">
       
       
-        <link rel="canonical" href="https://dgaida.github.io/adversarial2dEnvAI/dev/configuration/">
+        <link rel="canonical" href="https://dgaida.github.io/adversarial2dEnvAI/dev/tutorial/particle_filter/">
       
       
-        <link rel="prev" href="../installation/">
+        <link rel="prev" href="../cnn/">
       
       
-        <link rel="next" href="../usage/environment/">
+        <link rel="next" href="../../development/">
       
       
         
           <link rel="alternate" href="./" hreflang="de">
         
-          <link rel="alternate" href="../en/configuration/" hreflang="en">
+          <link rel="alternate" href="../../en/tutorial/particle_filter/" hreflang="en">
         
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>Configuration - CustomGrid Environment</title>
+        <title>Particle Filter - CustomGrid Environment</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -59,9 +59,9 @@
       
     
     
-      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -86,7 +86,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#konfiguration" class="md-skip">
+        <a href="#tutorial-partikelfilter-und-sensorfusion" class="md-skip">
           Zum Inhalt
         </a>
       
@@ -100,7 +100,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Kopfzeile">
-    <a href=".." title="CustomGrid Environment" class="md-header__button md-logo" aria-label="CustomGrid Environment" data-md-component="logo">
+    <a href="../.." title="CustomGrid Environment" class="md-header__button md-logo" aria-label="CustomGrid Environment" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Configuration
+              Particle Filter
             
           </span>
         </div>
@@ -173,7 +173,7 @@
           </li>
         
           <li class="md-select__item">
-            <a href="../en/configuration/" hreflang="en" class="md-select__link">
+            <a href="../../en/tutorial/particle_filter/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
@@ -259,7 +259,7 @@
   
   
     <li class="md-tabs__item">
-      <a href=".." class="md-tabs__link">
+      <a href="../.." class="md-tabs__link">
         
   
   
@@ -278,7 +278,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../getting-started/" class="md-tabs__link">
+      <a href="../../getting-started/" class="md-tabs__link">
         
   
   
@@ -297,7 +297,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../installation/" class="md-tabs__link">
+      <a href="../../installation/" class="md-tabs__link">
         
   
   
@@ -314,11 +314,9 @@
   
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="./" class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href="../../configuration/" class="md-tabs__link">
         
   
   
@@ -339,7 +337,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../usage/environment/" class="md-tabs__link">
+        <a href="../../usage/environment/" class="md-tabs__link">
           
   
   
@@ -359,7 +357,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../api/core/" class="md-tabs__link">
+        <a href="../../api/core/" class="md-tabs__link">
           
   
   
@@ -377,7 +375,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../architecture/" class="md-tabs__link">
+      <a href="../../architecture/" class="md-tabs__link">
         
   
   
@@ -394,11 +392,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../tutorial/cnn/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../cnn/" class="md-tabs__link">
           
   
   
@@ -418,7 +418,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../development/" class="md-tabs__link">
+        <a href="../../development/" class="md-tabs__link">
           
   
   
@@ -436,7 +436,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../troubleshooting/" class="md-tabs__link">
+      <a href="../../troubleshooting/" class="md-tabs__link">
         
   
   
@@ -455,7 +455,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../metrics/" class="md-tabs__link">
+      <a href="../../metrics/" class="md-tabs__link">
         
   
   
@@ -490,7 +490,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="CustomGrid Environment" class="md-nav__button md-logo" aria-label="CustomGrid Environment" data-md-component="logo">
+    <a href="../.." title="CustomGrid Environment" class="md-nav__button md-logo" aria-label="CustomGrid Environment" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -520,7 +520,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -547,7 +547,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting-started/" class="md-nav__link">
+      <a href="../../getting-started/" class="md-nav__link">
         
   
   
@@ -574,7 +574,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../installation/" class="md-nav__link">
+      <a href="../../installation/" class="md-nav__link">
         
   
   
@@ -598,37 +598,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Configuration
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../configuration/" class="md-nav__link">
         
   
   
@@ -644,37 +617,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Inhaltsverzeichnis
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#agentinterface-parameter" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        AgentInterface Parameter
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -740,7 +682,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../usage/environment/" class="md-nav__link">
+      <a href="../../usage/environment/" class="md-nav__link">
         
   
   
@@ -768,7 +710,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../usage/gameplay/" class="md-nav__link">
+      <a href="../../usage/gameplay/" class="md-nav__link">
         
   
   
@@ -796,7 +738,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../usage/observations/" class="md-nav__link">
+      <a href="../../usage/observations/" class="md-nav__link">
         
   
   
@@ -824,7 +766,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../usage/rewards/" class="md-nav__link">
+      <a href="../../usage/rewards/" class="md-nav__link">
         
   
   
@@ -852,7 +794,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../usage/localization/" class="md-nav__link">
+      <a href="../../usage/localization/" class="md-nav__link">
         
   
   
@@ -941,7 +883,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/core/" class="md-nav__link">
+      <a href="../../api/core/" class="md-nav__link">
         
   
   
@@ -969,7 +911,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/agents/" class="md-nav__link">
+      <a href="../../api/agents/" class="md-nav__link">
         
   
   
@@ -1004,7 +946,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../architecture/" class="md-nav__link">
+      <a href="../../architecture/" class="md-nav__link">
         
   
   
@@ -1028,28 +970,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
-        
-          
-          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
             
   
   
@@ -1067,7 +1012,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1085,7 +1030,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tutorial/cnn/" class="md-nav__link">
+      <a href="../cnn/" class="md-nav__link">
         
   
   
@@ -1110,10 +1055,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../tutorial/particle_filter/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Particle Filter
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1129,6 +1101,109 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#das-problem-wo-bin-ich" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Das Problem: Wo bin ich?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funktionsweise-des-partikelfilters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funktionsweise des Partikelfilters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sensorfusion-in-customgrid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sensorfusion in CustomGrid
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sensorfusion in CustomGrid">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-der-farbsensor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Der Farbsensor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-das-cnn-visuelle-erkennung" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Das CNN (Visuelle Erkennung)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mathematische-kombination" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mathematische Kombination
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ubung-fur-studierende" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Übung für Studierende
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1202,7 +1277,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../development/" class="md-nav__link">
+      <a href="../../development/" class="md-nav__link">
         
   
   
@@ -1230,7 +1305,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../development/style-guide/" class="md-nav__link">
+      <a href="../../development/style-guide/" class="md-nav__link">
         
   
   
@@ -1265,7 +1340,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../troubleshooting/" class="md-nav__link">
+      <a href="../../troubleshooting/" class="md-nav__link">
         
   
   
@@ -1292,7 +1367,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../metrics/" class="md-nav__link">
+      <a href="../../metrics/" class="md-nav__link">
         
   
   
@@ -1339,10 +1414,82 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#agentinterface-parameter" class="md-nav__link">
+  <a href="#das-problem-wo-bin-ich" class="md-nav__link">
     <span class="md-ellipsis">
       
-        AgentInterface Parameter
+        Das Problem: Wo bin ich?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funktionsweise-des-partikelfilters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funktionsweise des Partikelfilters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sensorfusion-in-customgrid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sensorfusion in CustomGrid
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sensorfusion in CustomGrid">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-der-farbsensor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Der Farbsensor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-das-cnn-visuelle-erkennung" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Das CNN (Visuelle Erkennung)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mathematische-kombination" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mathematische Kombination
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ubung-fur-studierende" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Übung für Studierende
       
     </span>
   </a>
@@ -1366,7 +1513,7 @@
 
 
   
-    <a href="https://github.com/dgaida/adversarial2dEnvAI/edit/main/docs/de/configuration.md" title="Seite editieren" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/dgaida/adversarial2dEnvAI/edit/main/docs/de/tutorial/particle_filter.md" title="Seite editieren" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -1375,53 +1522,46 @@
     
       
     
-    <a href="https://github.com/dgaida/adversarial2dEnvAI/raw/main/docs/de/configuration.md" title="Quellcode der Seite anzeigen" class="md-content__button md-icon">
+    <a href="https://github.com/dgaida/adversarial2dEnvAI/raw/main/docs/de/tutorial/particle_filter.md" title="Quellcode der Seite anzeigen" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
 
-<h1 id="konfiguration">Konfiguration<a class="headerlink" href="#konfiguration" title="Permanent link">&para;</a></h1>
-<p>Die <code>custom_grid_env</code> kann über verschiedene Parameter angepasst werden, hauptsächlich über das <code>AgentInterface</code>.</p>
-<h2 id="agentinterface-parameter">AgentInterface Parameter<a class="headerlink" href="#agentinterface-parameter" title="Permanent link">&para;</a></h2>
-<p>Beim Initialisieren des <code>AgentInterface</code> können folgende Parameter übergeben werden:</p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Typ</th>
-<th>Standard</th>
-<th>Beschreibung</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>render</code></td>
-<td>bool</td>
-<td><code>True</code></td>
-<td>Aktiviert die grafische Anzeige via Pygame.</td>
-</tr>
-<tr>
-<td><code>step_delay</code></td>
-<td>int</td>
-<td><code>100</code></td>
-<td>Verzögerung in Millisekunden zwischen den Schritten bei der Anzeige.</td>
-</tr>
-<tr>
-<td><code>slip_probability</code></td>
-<td>float</td>
-<td><code>0.2</code></td>
-<td>Wahrscheinlichkeit (0.0 bis 1.0), dass der Agent rutscht.</td>
-</tr>
-<tr>
-<td><code>ghost_agent_class</code></td>
-<td>Type</td>
-<td><code>ChaseGhostAgent</code></td>
-<td>Klasse, die das Verhalten des Geistes steuert.</td>
-</tr>
-</tbody>
-</table>
+<h1 id="tutorial-partikelfilter-und-sensorfusion">Tutorial: Partikelfilter und Sensorfusion<a class="headerlink" href="#tutorial-partikelfilter-und-sensorfusion" title="Permanent link">&para;</a></h1>
+<p>Dieses Tutorial erklärt, wie der Partikelfilter in der <code>CustomGrid</code>-Umgebung zur Lokalisierung des Agenten eingesetzt wird. Es richtet sich an Studierende der Informatik auf Bachelorniveau.</p>
+<h2 id="das-problem-wo-bin-ich">Das Problem: Wo bin ich?<a class="headerlink" href="#das-problem-wo-bin-ich" title="Permanent link">&para;</a></h2>
+<p>In einer realistischen Robotik-Anwendung kennt der Roboter seine exakte Position oft nicht. Er weiß zwar, welche Aktion er ausgeführt hat (z. B. "gehe einen Schritt vorwärts"), aber aufgrund von Unsicherheiten (Rutschen auf dem Boden) ist das Ergebnis stochastisch.</p>
+<p>Der <strong>Partikelfilter</strong> ist ein Algorithmus, der eine Menge von Hypothesen (Partikeln) nutzt, um die wahrscheinliche Position des Agenten darzustellen.</p>
+<h2 id="funktionsweise-des-partikelfilters">Funktionsweise des Partikelfilters<a class="headerlink" href="#funktionsweise-des-partikelfilters" title="Permanent link">&para;</a></h2>
+<p>Ein Partikelfilter arbeitet in einem Zyklus aus drei Schritten:</p>
+<ol>
+<li><strong>Vorhersage (Prediction)</strong>: Jedes Partikel wird entsprechend der Aktion des Agenten bewegt. Dabei wird das Bewegungsmodell (inklusive Rutschwahrscheinlichkeit) simuliert.</li>
+<li><strong>Korrektur (Update/Correction)</strong>: Basierend auf den Sensormessungen wird jedes Partikel bewertet. Partikel, deren Position gut zu den Messungen passt, erhalten ein höheres Gewicht.</li>
+<li><strong>Resampling</strong>: Partikel mit geringem Gewicht werden entfernt, während Partikel mit hohem Gewicht vervielfältigt werden. So konzentriert sich die "Cloud" auf die wahrscheinlichsten Orte.</li>
+</ol>
+<h2 id="sensorfusion-in-customgrid">Sensorfusion in CustomGrid<a class="headerlink" href="#sensorfusion-in-customgrid" title="Permanent link">&para;</a></h2>
+<p>Der Partikelfilter in dieser Umgebung kombiniert zwei verschiedene Sensortypen (<strong>Sensorfusion</strong>), um die Position zu schätzen:</p>
+<h3 id="1-der-farbsensor">1. Der Farbsensor<a class="headerlink" href="#1-der-farbsensor" title="Permanent link">&para;</a></h3>
+<p>Der Agent hat einen Sensor, der die Bodenfarbe (Weiß, Rot, Grün) misst. Dieser Sensor hat eine Genauigkeit von <strong>80%</strong>.
+- Wenn ein Partikel auf einer roten Zelle liegt und der Sensor "Rot" meldet, steigt die Wahrscheinlichkeit für dieses Partikel.
+- Meldet der Sensor "Grün", obwohl das Partikel auf einer roten Zelle liegt, sinkt die Wahrscheinlichkeit.</p>
+<h3 id="2-das-cnn-visuelle-erkennung">2. Das CNN (Visuelle Erkennung)<a class="headerlink" href="#2-das-cnn-visuelle-erkennung" title="Permanent link">&para;</a></h3>
+<p>Das trainierte Convolutional Neural Network liefert Wahrscheinlichkeiten für die Klassen <code>dog</code>, <code>flower</code> und <code>background</code>.
+Der Partikelfilter nutzt diese Vorhersagen als Messwerte:
+- Jedes Partikel "schaut" in die Karte: Welches Objekt befindet sich an meiner (hypothetischen) Position?
+- Die Likelihood eines Partikels berechnet sich aus der Wahrscheinlichkeit, die das CNN für genau dieses Objekt ausgegeben hat.</p>
+<h2 id="mathematische-kombination">Mathematische Kombination<a class="headerlink" href="#mathematische-kombination" title="Permanent link">&para;</a></h2>
+<p>Wir nehmen an, dass die Sensoren bedingt unabhängig sind. Die Gesamtwahrscheinlichkeit $P$ für ein Partikel ergibt sich aus dem Produkt der Einzelwahrscheinlichkeiten:</p>
+<p>$$P_{total} = P_{color} \cdot P_{cnn}$$</p>
+<p>Durch diese Kombination kann der Agent seine Position auch dann bestimmen, wenn ein einzelner Sensor sehr verrauscht ist. Wenn z.B. das CNN unsicher ist, kann der Farbsensor oft helfen, die Position auf dem Gitter einzugrenzen.</p>
+<h2 id="ubung-fur-studierende">Übung für Studierende<a class="headerlink" href="#ubung-fur-studierende" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Einfluss der Sensoren</strong>: Teste in der <code>Colab_GUI_Demo</code> den Partikelfilter nur mit dem Farbsensor, nur mit dem CNN und mit beiden. Beobachte, wie schnell die Partikelwolke konvergiert.</li>
+<li><strong>Rutschmodelle</strong>: Vergleiche das "perpendicular" Rutschen mit dem "longitudinal" Rutschen. Welches Modell macht die Lokalisierung schwieriger?</li>
+<li><strong>Partikelanzahl</strong>: Reduziere die Anzahl der Partikel im <code>AgentInterface</code>. Ab welcher Anzahl wird die Schätzung instabil?</li>
+</ol>
 
 
 
@@ -1477,10 +1617,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit", "content.action.view"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "In Zwischenablage kopiert", "clipboard.copy": "In Zwischenablage kopieren", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.placeholder": "Suchbegriff eingeben", "search.result.term.missing": "Es fehlt", "select.version": "Version ausw\u00e4hlen"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit", "content.action.view"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "In Zwischenablage kopiert", "clipboard.copy": "In Zwischenablage kopieren", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.placeholder": "Suchbegriff eingeben", "search.result.term.missing": "Es fehlt", "select.version": "Version ausw\u00e4hlen"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

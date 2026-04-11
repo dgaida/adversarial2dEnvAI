@@ -18,7 +18,7 @@
         <link rel="prev" href="../../architecture/">
       
       
-        <link rel="next" href="../../development/">
+        <link rel="next" href="../particle_filter/">
       
       
         
@@ -789,6 +789,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/localization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Localization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1206,6 +1234,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../particle_filter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Particle Filter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1606,7 +1662,7 @@
 - <strong>Conv2D</strong>: This layer "slides" filters over the image to detect features like edges or shapes.
 - <strong>MaxPooling2D</strong>: This reduces the spatial size of the representation, making the model faster and more robust to small translations.
 - <strong>Flatten</strong>: This turns the 2D feature maps into a 1D vector.
-- <strong>Dense</strong>: Fully connected layers that perform the final classification. We use a 'softmax' activation at the end to get probabilities for each class (dog or flower).</p>
+We use a 'softmax' activation at the end to get probabilities for each class (dog, flower, or background).</p>
 <h3 id="key-concepts-for-students">Key Concepts for Students:<a class="headerlink" href="#key-concepts-for-students" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Normalization</strong>: We divide pixel values (0-255) by 255 to scale them to the range [0, 1]. This helps the neural network learn faster.</li>
@@ -1621,10 +1677,11 @@
 - <strong>confusion_matrix.png</strong>: Shows where the model made mistakes (e.g., how many flowers were misclassified as dogs).</p>
 <h2 id="4-integration-in-the-environment">4. Integration in the Environment<a class="headerlink" href="#4-integration-in-the-environment" title="Permanent link">&para;</a></h2>
 <p>The trained model is saved as <code>model.keras</code>. The <code>PygameRenderer</code> in <code>src/custom_grid_env/renderer.py</code> automatically looks for this file.</p>
-<p>When the agent stands on a cell containing a dog or flower, the renderer:
-1. Captures a 64x64 "snapshot" of the cell.
+<p>The renderer performs the prediction at each step:
+1. Captures a 64x64 pixel "snapshot" of the current cell.
 2. Passes it to the CNN.
-3. Displays the prediction and confidence score in the info panel.</p>
+3. The CNN provides probabilities for all three classes (<code>dog</code>, <code>flower</code>, <code>background</code>).
+4. The class with the highest probability is displayed as the prediction in the info panel.</p>
 <hr />
 <h3 id="exercises-for-students">Exercises for Students:<a class="headerlink" href="#exercises-for-students" title="Permanent link">&para;</a></h3>
 <ol>

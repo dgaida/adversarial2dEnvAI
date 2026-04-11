@@ -872,6 +872,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../localization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Localization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1092,6 +1120,34 @@
     
   
     CNN Training
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/particle_filter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Particle Filter
   
 
     
@@ -1414,6 +1470,7 @@
 <p>In addition to the observations, the environment returns an <code>info</code> dictionary that may contain the following additional information:</p>
 <ul>
 <li><code>cnn_prediction</code>: A tuple <code>(class_name, probability)</code> if the agent is on a cell with a dog or flower and a trained model is loaded.</li>
+<li><code>color_measurement</code>: A noisy measurement of the ground color (0=white, 1=red, 2=green). The sensor is 80% accurate.</li>
 <li><code>intended_action</code>: The action intended by the agent.</li>
 <li><code>actual_action</code>: The action actually performed (may differ if slipping occurs).</li>
 </ul>

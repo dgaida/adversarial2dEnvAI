@@ -872,6 +872,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../localization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Localization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1092,6 +1120,34 @@
     
   
     CNN Training
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/particle_filter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Particle Filter
   
 
     
@@ -1417,7 +1473,11 @@
 </tbody>
 </table>
 <h2 id="slip-probability">Slip Probability<a class="headerlink" href="#slip-probability" title="Permanent link">&para;</a></h2>
-<p>The environment includes stochastic slip mechanics for the agent. With a configured probability, the agent moves in a <strong>perpendicular direction</strong> instead.</p>
+<p>The environment includes stochastic slip mechanics for the agent. With a configured probability $P_{\text{slip}}$, the agent moves differently than intended:</p>
+<ul>
+<li><strong>Perpendicular Slipping</strong>: The agent moves in a perpendicular direction (split equally between the two perpendicular directions).</li>
+<li><strong>Longitudinal Slipping</strong>: The agent moves in the same direction but either stays in place or moves twice.</li>
+</ul>
 
 
 
