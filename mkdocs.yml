@@ -84,6 +84,7 @@ nav:
       - Gameplay: usage/gameplay.md
       - Observations: usage/observations.md
       - Rewards: usage/rewards.md
+      - Localization: usage/localization.md
   - API Reference:
       - Core API: api/core.md
       - Agents: api/agents.md
