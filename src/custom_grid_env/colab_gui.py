@@ -175,11 +175,11 @@ class ColabGUI:
                     im = ax2.contourf(X, Y, hist.T, levels=levels, cmap="viridis")
                     ax2.set_aspect("equal")
                     ax2.set_xlim(0, cols)
-                    ax2.set_ylim(rows, 0)  # Inverted for grid coordinates (row 0 at top)
+                    ax2.set_ylim(
+                        rows, 0
+                    )  # Inverted for grid coordinates (row 0 at top)
 
-                    ax2.set_title(
-                        "Estimated Probability Distribution (Contour Plot)"
-                    )
+                    ax2.set_title("Estimated Probability Distribution (Contour Plot)")
                     ax2.set_xlabel("Column")
                     ax2.set_ylabel("Row")
                     fig.colorbar(im, ax2, label="Probability Density")
