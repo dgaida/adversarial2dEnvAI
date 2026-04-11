@@ -1,4 +1,5 @@
 import os
+import numpy as np
 import matplotlib.pyplot as plt
 import ipywidgets as widgets
 from IPython.display import display, clear_output
