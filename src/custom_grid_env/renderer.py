@@ -453,6 +453,17 @@ class PygameRenderer:
         )
         self.screen.blit(actual_action, (200, panel_y + 120))
 
+        # Color Sensor info
+        color_measurement = info.get("color_measurement")
+        if color_measurement is not None:
+            color_names = ["White", "Red", "Green"]
+            color_text = self.small_font.render(
+                f"Color Sensor: {color_names[color_measurement]}",
+                True,
+                self.colors["white"],
+            )
+            self.screen.blit(color_text, (400, panel_y + 45))
+
         # CNN Prediction info
         prediction = info.get("cnn_prediction")
         if prediction:
@@ -502,12 +513,17 @@ class PygameRenderer:
         logger.debug(
             f"Agent is on cell ({agent_pos[0]}, {agent_pos[1]}). Getting CNN prediction."
         )
-        prediction = self._get_cnn_prediction(current_cell)
-        if prediction:
-            logger.debug(f"CNN prediction: {prediction}")
-            info["cnn_prediction"] = prediction
+        prediction_info = self._get_cnn_prediction(current_cell)
+        if prediction_info:
+            logger.debug(f"CNN prediction: {prediction_info['prediction']}")
+            info["cnn_prediction"] = prediction_info["prediction"]
+            info["cnn_probs"] = prediction_info["probs"]
         else:
             logger.debug("CNN prediction failed or returned None.")
+
+        # Draw particles if available
+        if "particles" in info and info.get("show_particles", True):
+            self._draw_particles(info["particles"])
 
         self._draw_info_panel(
             agent_pos, ghost_pos, step_count, current_turn, grid, info
@@ -527,8 +543,12 @@ class PygameRenderer:
             )
         return None
 
-    def _get_cnn_prediction(self, cell: Dict[str, Any]) -> Optional[Tuple[str, float]]:
-        """Returns the CNN prediction for a given cell."""
+    def _get_cnn_prediction(self, cell: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+        """Returns the CNN prediction for a given cell.
+
+        Returns:
+            dict, optional: Dictionary containing 'prediction' (class, prob) and 'probs' (list of floats).
+        """
         if self.model is None:
             return None
 
@@ -551,10 +571,28 @@ class PygameRenderer:
 
         # Predict
         predictions = self.model.predict(img_array, verbose=0)
+        probs = predictions[0].tolist()
         class_idx = np.argmax(predictions[0])
         probability = float(predictions[0][class_idx])
 
-        return self.class_names[class_idx], probability
+        return {
+            "prediction": (self.class_names[class_idx], probability),
+            "probs": probs,
+        }
+
+    def _draw_particles(self, particles: List[List[int]]):
+        """Draws particles as tiny dots on the grid.
+
+        Args:
+            particles (list): List of [row, col] positions.
+        """
+        for row, col in particles:
+            # Add some jitter to distribute particles within the cell
+            jitter_x = np.random.randint(-40, 40)
+            jitter_y = np.random.randint(-40, 40)
+            x = col * self.cell_size + self.cell_size // 2 + jitter_x
+            y = row * self.cell_size + self.cell_size // 2 + jitter_y
+            pygame.draw.circle(self.screen, self.colors["black"], (x, y), 2)
 
     def close(self):
         """Cleans up resources."""
