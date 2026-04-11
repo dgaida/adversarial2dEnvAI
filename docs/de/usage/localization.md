@@ -46,9 +46,11 @@ Der Filter verfügt über **perfektes Wissen über die Karte**. Er kennt:
 - Die Standorte aller Objekte (Hunde und Blumen).
 
 ### Bewegungsunsicherheit (Movement Uncertainty)
-Der Filter geht von einem **stochastischen Bewegungsmodell** aus, das der Rutschwahrscheinlichkeit der Umgebung entspricht:
-- **Beabsichtigte Bewegung**: Der Agent bewegt sich mit einer Wahrscheinlichkeit von $1 - P_{\text{slip}}$ in die beabsichtigte Richtung.
-- **Rutschen (Slipping)**: Der Agent bewegt sich mit einer Wahrscheinlichkeit von $P_{\text{slip}}$ in eine senkrechte Richtung (gleichmäßig auf die beiden senkrechten Richtungen verteilt).
+Der Filter geht von einem **stochastischen Bewegungsmodell** aus, das der Rutschwahrscheinlichkeit der Umgebung entspricht. Es gibt zwei Arten des Rutschens:
+
+- **Senkrechtes Rutschen (Perpendicular Slipping)**: Der Agent bewegt sich mit einer Wahrscheinlichkeit von $P_{\text{slip}}$ in eine senkrechte Richtung (gleichmäßig auf die beiden senkrechten Richtungen verteilt).
+- **Längsrutschen (Longitudinal Slipping)**: Der Agent bewegt sich in die gleiche Richtung, bleibt aber entweder stehen (0 Schritte) oder bewegt sich doppelt so weit (2 Schritte), jeweils mit einer Wahrscheinlichkeit von $P_{\text{slip}} / 2$.
+- **Beabsichtigte Bewegung**: Der Agent bewegt sich mit einer Wahrscheinlichkeit von $1 - P_{\text{slip}}$ genau einen Schritt in die beabsichtigte Richtung.
 - **Wände**: Wenn eine Bewegung gegen eine Wand oder aus dem Gitter heraus führen würde, bleibt der Agent (und damit auch die Partikel) in der aktuellen Zelle.
 
 ### Messunsicherheit (Measurement Uncertainty)

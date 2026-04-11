@@ -46,9 +46,11 @@ The filter has **perfect knowledge of the map**. It knows:
 - The locations of all items (Dogs and Flowers).
 
 ### Movement Uncertainty
-The filter assumes a **stochastic motion model** matching the environment's slip probability:
-- **Intended Movement**: The agent moves in the intended direction with probability $1 - P_{\text{slip}}$.
-- **Slipping**: The agent moves in a perpendicular direction with probability $P_{\text{slip}}$ (split equally between the two perpendicular directions).
+The filter assumes a **stochastic motion model** matching the environment's slip probability. There are two types of slipping:
+
+- **Perpendicular Slipping**: The agent moves in a perpendicular direction with probability $P_{\text{slip}}$ (split equally between the two perpendicular directions).
+- **Longitudinal Slipping**: The agent moves in the same direction but either stays in place (moves 0 steps) or moves twice (moves 2 steps), each with probability $P_{\text{slip}} / 2$.
+- **Intended Movement**: The agent moves exactly one step in the intended direction with probability $1 - P_{\text{slip}}$.
 - **Walls**: If a move would lead into a wall or out of bounds, the agent (and thus the particles) remains in the current cell.
 
 ### Measurement Uncertainty
