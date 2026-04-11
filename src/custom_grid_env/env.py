@@ -288,7 +288,10 @@ class CustomGridEnv(gym.Env):
         self.ghost_pos = list(self.ghost_start_pos)
         self.step_count = 0
         self.current_turn = 0
-        self.info = {"current_turn": "agent"}
+        self.info = {
+            "current_turn": "agent",
+            "color_measurement": self._get_color_sensor_measurement(self.agent_pos),
+        }
         return self._get_obs(), self.info
 
     def _move_entity(self, current_pos: List[int], action: int) -> List[int]:
@@ -435,6 +438,30 @@ class CustomGridEnv(gym.Env):
 
         return float(reward), terminated, {}
 
+    def _get_color_sensor_measurement(self, pos: List[int]) -> int:
+        """Measures the color of the ground at the given position with noise.
+
+        The sensor measures the correct color with 80% probability and a wrong
+        color with 10% probability for each of the other two colors.
+
+        Args:
+            pos (list): [row, col] position to measure.
+
+        Returns:
+            int: Measured color (0=white, 1=red, 2=green).
+        """
+        actual_color = self.grid[pos[0], pos[1]]["colour"]
+        prob = self.np_random.random()
+
+        if prob < 0.8:
+            return actual_color
+        elif prob < 0.9:
+            # First wrong color
+            return (actual_color + 1) % 3
+        else:
+            # Second wrong color
+            return (actual_color + 2) % 3
+
     def _apply_slip(self, intended_action: int) -> Tuple[int, bool]:
         """Applies slip probability to potentially change the action.
 
@@ -482,6 +509,8 @@ class CustomGridEnv(gym.Env):
         preserved_info = {}
         if "cnn_prediction" in info:
             preserved_info["cnn_prediction"] = info["cnn_prediction"]
+        if "cnn_probs" in info:
+            preserved_info["cnn_probs"] = info["cnn_probs"]
 
         info.clear()
         info.update(preserved_info)
@@ -498,6 +527,9 @@ class CustomGridEnv(gym.Env):
             info["slipped"] = slipped
             info["intended_action"] = action_names[action]
             info["actual_action"] = action_names[actual_action]
+            info["color_measurement"] = self._get_color_sensor_measurement(
+                self.agent_pos
+            )
 
             current_cell = self.grid[self.agent_pos[0], self.agent_pos[1]]
             if self.agent_pos == self.ghost_pos:
