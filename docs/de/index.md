@@ -2,6 +2,14 @@
 
 Eine Gymnasium-basierte Gitterumgebung, in der ein Agent durch ein 4x5-Gitter navigiert, um Zielzellen zu erreichen, während er einem jagenden Geist ausweicht.
 
+## Interaktive Notebooks
+
+Sie können das CNN-Training und die Umgebung direkt in Ihrem Browser mit Google Colab ausprobieren:
+
+- **CNN-Trainings-Tutorial**: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/CNN_Training.ipynb)
+- **Umgebungs-Demo**: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Environment_Demo.ipynb)
+- **Interaktive GUI**: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Colab_GUI_Demo.ipynb)
+
 ![Umgebungs-Vorschau](../Umgebung.png)
 
 ## Überblick
