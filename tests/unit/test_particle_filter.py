@@ -16,7 +16,12 @@ def test_particle_filter_predict():
     # Start all particles at [0, 2]
     pf.particles = [[0, 2]] * 100
     # Move right
-    pf.predict(action=2, slip_prob=0.0, env_is_move_valid_fn=env._is_move_valid)
+    pf.predict(
+        action=2,
+        slip_prob=0.0,
+        slip_type="perpendicular",
+        env_is_move_valid_fn=env._is_move_valid,
+    )
     for p in pf.particles:
         assert p == [0, 3]
 

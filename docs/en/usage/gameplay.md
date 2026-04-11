@@ -22,4 +22,7 @@ Both the agent and ghost use the same action space:
 
 ## Slip Probability
 
-The environment includes stochastic slip mechanics for the agent. With a configured probability, the agent moves in a **perpendicular direction** instead.
+The environment includes stochastic slip mechanics for the agent. With a configured probability $P_{\text{slip}}$, the agent moves differently than intended:
+
+- **Perpendicular Slipping**: The agent moves in a perpendicular direction (split equally between the two perpendicular directions).
+- **Longitudinal Slipping**: The agent moves in the same direction but either stays in place or moves twice.

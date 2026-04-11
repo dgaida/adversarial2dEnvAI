@@ -21,5 +21,6 @@ The observation is a nested dictionary:
 In addition to the observations, the environment returns an `info` dictionary that may contain the following additional information:
 
 - `cnn_prediction`: A tuple `(class_name, probability)` if the agent is on a cell with a dog or flower and a trained model is loaded.
+- `color_measurement`: A noisy measurement of the ground color (0=white, 1=red, 2=green). The sensor is 80% accurate.
 - `intended_action`: The action intended by the agent.
 - `actual_action`: The action actually performed (may differ if slipping occurs).

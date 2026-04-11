@@ -22,4 +22,7 @@ Sowohl der Agent als auch der Geist nutzen denselben Aktionsraum:
 
 ## Rutschwahrscheinlichkeit (Slip)
 
-Die Umgebung enthält eine stochastische Rutschmechanik für den Agenten. Bei einer konfigurierten Wahrscheinlichkeit bewegt sich der Agent stattdessen in eine **senkrechte Richtung**.
+Die Umgebung enthält eine stochastische Rutschmechanik für den Agenten. Bei einer konfigurierten Wahrscheinlichkeit $P_{\text{slip}}$ bewegt sich der Agent anders als beabsichtigt:
+
+- **Senkrechtes Rutschen (Perpendicular Slipping)**: Der Agent bewegt sich in eine senkrechte Richtung (gleichmäßig auf die beiden senkrechten Richtungen verteilt).
+- **Längsrutschen (Longitudinal Slipping)**: Der Agent bewegt sich in die gleiche Richtung, bleibt aber entweder stehen oder bewegt sich doppelt so weit.

@@ -39,6 +39,7 @@ class AgentInterface:
         render_mode: Optional[str] = None,
         step_delay: int = 100,
         slip_probability: float = 0.2,
+        slip_type: str = "perpendicular",
         ghost_agent_class: Optional[Type[Agent]] = None,
         use_particle_filter: bool = True,
         pf_num_particles: int = 200,
@@ -59,7 +60,9 @@ class AgentInterface:
             render_mode = "rgb_array" if render else None
 
         self.env = CustomGridEnv(
-            render_mode=render_mode, slip_probability=slip_probability
+            render_mode=render_mode,
+            slip_probability=slip_probability,
+            slip_type=slip_type,
         )
         self.render_enabled = render
         self.step_delay = step_delay
@@ -178,7 +181,12 @@ class AgentInterface:
         logger.debug(f"Agent's turn. action={action}")
 
         if self.pf:
-            self.pf.predict(action, self.env.slip_probability, self.env._is_move_valid)
+            self.pf.predict(
+                action,
+                self.env.slip_probability,
+                self.env.slip_type,
+                self.env._is_move_valid,
+            )
 
         obs, reward, self.terminated, self.truncated, info = self.env.step(action)
         total_step_reward += reward
