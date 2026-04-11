@@ -552,6 +552,8 @@ class PygameRenderer:
         if self.model is None:
             return None
 
+        self._init_pygame()
+
         # Create a 64x64 surface to draw the cell content
         temp_surface = pygame.Surface((64, 64))
         # Temporarily change cell_size to 64 for drawing on this surface
