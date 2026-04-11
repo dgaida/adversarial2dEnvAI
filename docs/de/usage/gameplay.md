@@ -5,9 +5,16 @@
 Das Spiel verwendet ein **abwechselndes Rundensystem**:
 
 1. **Agentenzug**: Der Agent wählt eine Aktion aus und führt sie aus.
-2. **Geisterzug**: Der Geist bewegt sich automatisch in Richtung des Agenten.
+2. **Geisterzug**: Der Geist bewegt sich automatisch gemäß seiner konfigurierten Strategie.
 
 Jeder Aufruf von `interface.step(action)` verarbeitet beide Züge und gibt den resultierenden Zustand zurück.
+
+## Geisterverhalten
+
+Das Verhalten des Gespensts kann über den `AgentInterface` oder die GUI angepasst werden. Folgende Implementierungen stehen zur Verfügung:
+
+- **ChaseGhostAgent (Standard)**: Der Geist berechnet den kürzesten Pfad zum Agenten (unter Berücksichtigung von Wänden) und bewegt sich einen Schritt in diese Richtung.
+- **RandomGhostAgent**: Der Geist wählt in jedem Zug zufällig eine der vier möglichen Aktionen aus.
 
 ## Aktionen
 

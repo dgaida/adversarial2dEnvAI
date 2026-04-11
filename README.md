@@ -1,89 +1,103 @@
-# CustomGrid Environment
+# CustomGrid Environment 🤖👻
 
-[![Tests](https://github.com/user/custom_grid_env/actions/workflows/tests.yml/badge.svg)](https://github.com/user/custom_grid_env/actions/workflows/tests.yml)
-[![Version](https://github.com/user/custom_grid_env/actions/workflows/version.yml/badge.svg)](https://github.com/user/custom_grid_env/actions/workflows/version.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/github/v/tag/dgaida/adversarial2dEnvAI?label=version)](https://github.com/dgaida/adversarial2dEnvAI/tags)
+[![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://dgaida.github.io/adversarial2dEnvAI/)
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Code Quality](https://github.com/dgaida/adversarial2dEnvAI/actions/workflows/lint.yml/badge.svg)](https://github.com/dgaida/adversarial2dEnvAI/actions/workflows/lint.yml)
 [![Tests](https://github.com/dgaida/adversarial2dEnvAI/actions/workflows/tests.yml/badge.svg)](https://github.com/dgaida/adversarial2dEnvAI/actions/workflows/tests.yml)
-[![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://dgaida.github.io/adversarial2dEnvAI/)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/dgaida/adversarial2dEnvAI/graphs/commit-activity)
-![Last commit](https://img.shields.io/github/last-commit/dgaida/adversarial2dEnvAI)
 
-A Gymnasium-based grid environment featuring an agent navigating a 4x5 grid to reach goal cells while avoiding a chasing ghost.
+An advanced Gymnasium-based grid environment for Reinforcement Learning and Robotics tutorials. CustomGrid features an agent navigating a stochastic environment with imperfect sensors, adversarial elements, and complex state estimation.
 
-## Overview
+---
 
-CustomGrid is a turn-based environment where:
-- An **agent** (robot with GPS) tries to reach one of the goal cells
-- A **ghost** chases the agent each turn
-- **Walls** block movement between certain cells
-- **Slip probability** adds stochasticity - the agent may slip perpendicular to intended direction
-- **Coloured cells** provide visual information (red and green patterns)
+## 🌟 Key Features
 
-## Quick Start
+*   **Turn-Based Adversarial Gameplay**: An agent competes against a ghost in a 4x5 grid.
+*   **Stochastic Movement**: Support for *Perpendicular* and *Longitudinal* slipping probabilities.
+*   **Imperfect Perception**:
+    *   **Noisy Color Sensor**: Ground color detection with 80% accuracy.
+    *   **CNN-Based Vision**: Real-time item classification (dogs, flowers, background) using a trained Convolutional Neural Network.
+*   **State Estimation**: Integrated **Particle Filter** for Bayesian localization, combining vision and color sensor data.
+*   **Interactive Visualization**:
+    *   Rich Pygame-based renderer.
+    *   Interactive Google Colab GUI with real-time 2D probability distribution (contour plots).
+*   **Customizable Ghost AI**: Switch between shortest-path chasing and random movement.
+
+---
+
+## 🚀 Quick Start
+
+### Installation
+
+```bash
+pip install git+https://github.com/dgaida/adversarial2dEnvAI.git
+```
+
+### Basic Usage
 
 ```python
 from custom_grid_env.interface import AgentInterface
 from custom_grid_env.agents.random_player_agent import RandomPlayerAgent
 
-# Create the interface
+# Initialize the interface with Particle Filter and rendering
 interface = AgentInterface(render=True, slip_probability=0.2)
-
-# Reset and get initial observation
 obs = interface.reset()
 
-# Create your agent
 agent = RandomPlayerAgent(interface.get_action_space())
 
-# Run an episode
 while not interface.is_terminated():
     action = agent.get_action(obs)
     obs, reward, done, info = interface.step(action)
 
-# Get results
-stats = interface.get_episode_stats()
-print(f"Total reward: {stats['total_reward']}")
+    # Access estimated position from Particle Filter
+    est_pos = info['estimated_pos']['cell_pos']
+    print(f"Estimated Position: {est_pos}")
 
 interface.close()
 ```
 
-## CNN-based Item Classification
+---
 
-The environment includes a Convolutional Neural Network (CNN) that automatically classifies items (dogs and flowers) when the agent stands on them. This feature demonstrates how neural networks can be integrated into reinforcement learning environments for perception tasks.
+## 📓 Interactive Notebooks
 
-- **Data Generation**: Images are procedurally generated with different backgrounds.
-- **Model**: A simple CNN built with TensorFlow/Keras.
-- **Integration**: The `PygameRenderer` uses the trained model to provide real-time predictions in the info panel.
+Experience the environment directly in your browser:
 
-See the [CNN Tutorial](docs/en/tutorial/cnn.md) (or [German version](docs/de/tutorial/cnn.md)) for more details.
+| Notebook | Description | Link |
+| :--- | :--- | :--- |
+| **Interactive GUI** | Full dashboard with sensors, PF visualization, and manual control. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Colab_GUI_Demo.ipynb) |
+| **Environment Demo** | Basic programmatic interaction and API walkthrough. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Environment_Demo.ipynb) |
+| **CNN Training** | Step-by-step tutorial on training the vision model. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/CNN_Training.ipynb) |
 
-### Interactive Notebooks
+---
 
-You can try out the CNN training and the environment directly in your browser using Google Colab:
+## 📖 Documentation
 
-- **CNN Training Tutorial**: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/CNN_Training.ipynb)
-- **Environment Demo**: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Environment_Demo.ipynb)
-- **Interactive GUI**: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Colab_GUI_Demo.ipynb)
+For detailed guides on localization, rewards, and environment configuration, visit our [Documentation Site](https://dgaida.github.io/adversarial2dEnvAI/).
 
-## Documentation
+Available in:
+*   🇩🇪 [Deutsch](https://dgaida.github.io/adversarial2dEnvAI/de/)
+*   🇺🇸 [English](https://dgaida.github.io/adversarial2dEnvAI/en/)
 
-Detailed documentation is available in the `docs/` directory or online at [dgaida.github.io/adversarial2dEnvAI](https://dgaida.github.io/adversarial2dEnvAI/).
+---
 
-## Requirements
+## 🛠 Development
 
-- Python 3.8+
-- gymnasium
-- numpy
-- pygame
-
-## Installation
+### Setup
 
 ```bash
-pip install .
+git clone https://github.com/dgaida/adversarial2dEnvAI.git
+cd adversarial2dEnvAI
+pip install -e .
 ```
 
-## Running the Demo
+### Running Tests
 
-You can now use the package as shown in the Quick Start.
+```bash
+PYTHONPATH=src python3 -m pytest
+```
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

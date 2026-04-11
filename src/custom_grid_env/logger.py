@@ -17,10 +17,11 @@ def get_logger(name: str) -> logging.Logger:
 
     # Always set level to DEBUG to ensure all messages can be captured by handlers
     logger.setLevel(logging.DEBUG)
+    # Prevent propagation to root logger to avoid duplicate/unwanted logging in notebooks
+    logger.propagate = False
 
     # Only add handler if it doesn't have one to avoid duplicate logs
     if not logger.handlers:
-        print(f"Adding handlers to logger: {name}")
         # Console handler (INFO and above)
         console_handler = logging.StreamHandler(sys.stdout)
         console_handler.setLevel(logging.INFO)

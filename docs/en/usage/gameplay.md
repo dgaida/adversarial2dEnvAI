@@ -5,9 +5,16 @@
 The game uses an **alternating turn system**:
 
 1. **Agent's Turn**: The agent chooses and executes an action.
-2. **Ghost's Turn**: The ghost automatically moves toward the agent.
+2. **Ghost's Turn**: The ghost automatically moves according to its configured strategy.
 
 Each call to `interface.step(action)` processes both turns and returns the resulting state.
+
+## Ghost Behavior
+
+The behavior of the ghost can be customized via the `AgentInterface` or the GUI. The following implementations are available:
+
+- **ChaseGhostAgent (Default)**: The ghost calculates the shortest path to the agent (considering walls) and moves one step in that direction.
+- **RandomGhostAgent**: The ghost randomly chooses one of the four possible actions each turn.
 
 ## Actions
 
