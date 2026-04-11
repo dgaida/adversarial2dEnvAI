@@ -148,7 +148,9 @@ class ColabGUI:
                         cmap="viridis",
                         interpolation="gaussian",
                     )
-                    ax2.set_title("Estimated Probability Distribution (Particle Filter)")
+                    ax2.set_title(
+                        "Estimated Probability Distribution (Particle Filter)"
+                    )
                     ax2.set_xlabel("Column")
                     ax2.set_ylabel("Row")
                     fig.colorbar(im, ax2, label="Probability Density")
