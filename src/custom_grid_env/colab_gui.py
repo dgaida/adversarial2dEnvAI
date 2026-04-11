@@ -52,6 +52,14 @@ class ColabGUI:
             value="both",
             description="PF Sensors:",
         )
+        self.slip_type_dropdown = widgets.Dropdown(
+            options=[
+                ("Perpendicular", "perpendicular"),
+                ("Longitudinal", "longitudinal"),
+            ],
+            value="perpendicular",
+            description="Slip Type:",
+        )
         self.stats_label = widgets.Label(value="Steps: 0 | Total Reward: 0.0")
 
         # Layout
@@ -59,6 +67,7 @@ class ColabGUI:
             [
                 widgets.HBox([self.next_button, self.reset_button]),
                 widgets.HBox([self.pf_toggle, self.sensor_dropdown]),
+                self.slip_type_dropdown,
                 self.stats_label,
             ]
         )
@@ -68,6 +77,7 @@ class ColabGUI:
         self.reset_button.on_click(self._on_reset_click)
         self.pf_toggle.observe(self._on_pf_toggle_change, names="value")
         self.sensor_dropdown.observe(self._on_sensor_change, names="value")
+        self.slip_type_dropdown.observe(self._on_slip_type_change, names="value")
 
     def _on_next_click(self, b):
         if self.interface.is_terminated():
@@ -87,6 +97,9 @@ class ColabGUI:
 
     def _on_sensor_change(self, change):
         self.interface.pf_sensor_mode = change["new"]
+
+    def _on_slip_type_change(self, change):
+        self.interface.env.slip_type = change["new"]
 
     def _update_display(self):
         with self.output:

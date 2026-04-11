@@ -24,9 +24,15 @@ Der Farbsensor misst die Farbe des Bodens direkt unter dem Agenten.
 - **Farben**: Weiß (0), Rot (1), Grün (2).
 
 ### CNN-Klassifikator
-Befindet sich der Agent auf einem Feld, das ein Objekt (Hund oder Blume) enthält, liefert das CNN eine Wahrscheinlichkeitsverteilung über die möglichen Klassen.
+Der CNN-Klassifikator wird bei jedem Schritt ausgeführt, unabhängig davon, ob ein Objekt vorhanden ist. Wenn kein Objekt vorhanden ist, wird die Klasse "Hintergrund" vorhergesagt.
 - **Klassen**: Hund, Blume, Hintergrund.
 - **Verwendung**: Die vom CNN zugewiesene Wahrscheinlichkeit für die Klasse, die sich tatsächlich in der Zelle eines Partikels befindet, wird als Likelihood für dieses Partikel verwendet.
+
+## Sensor-Fusion
+
+Bei Verwendung beider Sensoren (`sensor_mode='both'`) kombiniert der Filter die Messungen unter der Annahme, dass sie bei gegebenem Zustand bedingt unabhängig sind. Die Verbundwahrscheinlichkeit (Joint Likelihood) ist das Produkt der einzelnen Likelihoods:
+
+$$p(z_{\text{color}}, z_{\text{cnn}} | s) = p(z_{\text{color}} | s) \cdot p(z_{\text{cnn}} | s)$$
 
 ## Annahmen
 

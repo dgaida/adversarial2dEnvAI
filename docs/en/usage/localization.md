@@ -24,9 +24,15 @@ The color sensor measures the color of the ground directly beneath the agent.
 - **Colors**: White (0), Red (1), Green (2).
 
 ### CNN Classifier
-If the agent is on a cell containing an item (Dog or Flower), the CNN provides a probability distribution over the possible classes.
+The CNN classifier runs at every step, regardless of whether an item is present. If no item is present, it predicts the "background" class.
 - **Classes**: Dog, Flower, Background.
 - **Usage**: The probability assigned by the CNN to the class actually present in a particle's cell is used as the likelihood for that particle.
+
+## Sensor Fusion
+
+When using both sensors (`sensor_mode='both'`), the filter combines the measurements by assuming they are conditionally independent given the state. The joint likelihood is the product of the individual likelihoods:
+
+$$p(z_{\text{color}}, z_{\text{cnn}} | s) = p(z_{\text{color}} | s) \cdot p(z_{\text{cnn}} | s)$$
 
 ## Assumptions
 

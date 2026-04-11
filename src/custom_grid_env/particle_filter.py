@@ -25,12 +25,15 @@ class ParticleFilter:
             c = np.random.randint(0, cols)
             self.particles.append([r, c])
 
-    def predict(self, action: int, slip_prob: float, env_is_move_valid_fn):
+    def predict(
+        self, action: int, slip_prob: float, slip_type: str, env_is_move_valid_fn
+    ):
         """Moves particles based on the agent's action and slip probability.
 
         Args:
             action (int): The intended action.
             slip_prob (float): Probability of slipping.
+            slip_type (str): Type of slipping ("perpendicular" or "longitudinal").
             env_is_move_valid_fn (callable): Function to check if a move is valid.
         """
         perpendicular = {
@@ -42,26 +45,38 @@ class ParticleFilter:
 
         new_particles = []
         for r, c in self.particles:
-            # Determine actual action for this particle
+            # Determine actual actions for this particle
+            actual_actions = []
             if np.random.random() < slip_prob:
-                actual_action = np.random.choice(perpendicular[action])
+                if slip_type == "longitudinal":
+                    if np.random.random() < 0.5:
+                        # Stay in place (0 steps)
+                        actual_actions = []
+                    else:
+                        # Move twice (2 steps)
+                        actual_actions = [action, action]
+                else:
+                    # Perpendicular
+                    actual_actions = [np.random.choice(perpendicular[action])]
             else:
-                actual_action = action
+                actual_actions = [action]
 
-            new_r, new_c = r, c
-            if actual_action == 0:
-                new_c = c - 1
-            elif actual_action == 1:
-                new_r = r + 1
-            elif actual_action == 2:
-                new_c = c + 1
-            elif actual_action == 3:
-                new_r = r - 1
+            curr_r, curr_c = r, c
+            for act in actual_actions:
+                new_r, new_c = curr_r, curr_c
+                if act == 0:
+                    new_c = curr_c - 1
+                elif act == 1:
+                    new_r = curr_r + 1
+                elif act == 2:
+                    new_c = curr_c + 1
+                elif act == 3:
+                    new_r = curr_r - 1
 
-            if env_is_move_valid_fn([r, c], [new_r, new_c]):
-                new_particles.append([new_r, new_c])
-            else:
-                new_particles.append([r, c])
+                if env_is_move_valid_fn([curr_r, curr_c], [new_r, new_c]):
+                    curr_r, curr_c = new_r, new_c
+
+            new_particles.append([curr_r, curr_c])
 
         self.particles = new_particles
 

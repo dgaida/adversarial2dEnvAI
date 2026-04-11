@@ -30,16 +30,24 @@ class CustomGridEnv(gym.Env):
 
     metadata = {"render_modes": ["human", "rgb_array"], "render_fps": 4}
 
-    def __init__(self, render_mode: str = "human", slip_probability: float = 0.2):
+    def __init__(
+        self,
+        render_mode: str = "human",
+        slip_probability: float = 0.2,
+        slip_type: str = "perpendicular",
+    ):
         """Initializes the CustomGridEnv.
 
         Args:
             render_mode (str): The mode to render with. Defaults to "human".
             slip_probability (float): Chance to move perpendicular to intended direction. Defaults to 0.2.
+            slip_type (str): Type of slipping ("perpendicular" or "longitudinal").
+                Defaults to "perpendicular".
         """
         super().__init__()
         self.render_mode = render_mode
         self.slip_probability = slip_probability
+        self.slip_type = slip_type
         self.rows = 4
         self.cols = 5
         self.observation_space = gym.spaces.Dict(
@@ -83,6 +91,7 @@ class CustomGridEnv(gym.Env):
                 "ghost_relative_pos": gym.spaces.Box(
                     low=-4, high=4, shape=(2,), dtype=np.int32
                 ),
+                "ghost_distance": gym.spaces.Discrete(21),  # Max distance in 4x5 grid
             }
         )
 
@@ -385,6 +394,9 @@ class CustomGridEnv(gym.Env):
             "current_cell": current_obs,
             "neighbors": neighbors_obs,
             "agent_relative_pos": agent_relative,
+            "agent_distance": self._calculate_shortest_path_distance(
+                self.ghost_pos, self.agent_pos
+            ),
         }
 
     def move_ghost(self, ghost_action: int):
@@ -462,30 +474,44 @@ class CustomGridEnv(gym.Env):
             # Second wrong color
             return (actual_color + 2) % 3
 
-    def _apply_slip(self, intended_action: int) -> Tuple[int, bool]:
-        """Applies slip probability to potentially change the action.
+    def _apply_slip(self, intended_action: int) -> Tuple[List[int], bool]:
+        """Applies slip probability to potentially change the action or multiple actions.
 
         Args:
             intended_action (int): The action the agent intended to take.
 
         Returns:
-            tuple: (actual_action, slipped)
+            tuple: (list of actual_actions, slipped)
         """
         if self.slip_probability <= 0:
-            return intended_action, False
+            return [intended_action], False
 
-        perpendicular = {
-            0: [1, 3],
-            1: [0, 2],
-            2: [1, 3],
-            3: [0, 2],
-        }
+        if self.slip_type == "longitudinal":
+            prob = self.np_random.random()
+            if prob < self.slip_probability / 2:
+                # Stay in place (0 steps)
+                return [], True
+            elif prob < self.slip_probability:
+                # Move twice (2 steps)
+                return [intended_action, intended_action], True
+            else:
+                return [intended_action], False
+        else:
+            # Default to perpendicular
+            perpendicular = {
+                0: [1, 3],
+                1: [0, 2],
+                2: [1, 3],
+                3: [0, 2],
+            }
 
-        if self.np_random.random() < self.slip_probability:
-            actual_action = int(self.np_random.choice(perpendicular[intended_action]))
-            return actual_action, True
+            if self.np_random.random() < self.slip_probability:
+                actual_action = int(
+                    self.np_random.choice(perpendicular[intended_action])
+                )
+                return [actual_action], True
 
-        return intended_action, False
+            return [intended_action], False
 
     def step(
         self, action: int
@@ -521,12 +547,17 @@ class CustomGridEnv(gym.Env):
 
         if self.current_turn == 0:
             self.step_count += 1
-            actual_action, slipped = self._apply_slip(action)
-            self.agent_pos = self._move_entity(self.agent_pos, actual_action)
+            actual_actions, slipped = self._apply_slip(action)
+            for act in actual_actions:
+                self.agent_pos = self._move_entity(self.agent_pos, act)
 
             info["slipped"] = slipped
             info["intended_action"] = action_names[action]
-            info["actual_action"] = action_names[actual_action]
+            info["actual_action"] = (
+                ", ".join([action_names[a] for a in actual_actions])
+                if actual_actions
+                else "stay"
+            )
             info["color_measurement"] = self._get_color_sensor_measurement(
                 self.agent_pos
             )
@@ -668,7 +699,45 @@ class CustomGridEnv(gym.Env):
             "current_cell": current_obs,
             "neighbors": neighbors_obs,
             "ghost_relative_pos": ghost_relative,
+            "ghost_distance": self._calculate_shortest_path_distance(
+                self.agent_pos, self.ghost_pos
+            ),
         }
+
+    def _calculate_shortest_path_distance(
+        self, start_pos: List[int], end_pos: List[int]
+    ) -> int:
+        """Calculates the shortest path distance between two positions using BFS.
+
+        Args:
+            start_pos (list): Starting [row, col].
+            end_pos (list): Target [row, col].
+
+        Returns:
+            int: The shortest path distance.
+        """
+        if start_pos == end_pos:
+            return 0
+
+        from collections import deque
+
+        queue = deque([(tuple(start_pos), 0)])
+        visited = {tuple(start_pos)}
+
+        while queue:
+            (r, c), dist = queue.popleft()
+
+            for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+                nr, nc = r + dr, c + dc
+                if 0 <= nr < self.rows and 0 <= nc < self.cols:
+                    if self._is_move_valid([r, c], [nr, nc]):
+                        if (nr, nc) == tuple(end_pos):
+                            return dist + 1
+                        if (nr, nc) not in visited:
+                            visited.add((nr, nc))
+                            queue.append(((nr, nc), dist + 1))
+
+        return -1  # Should not happen in this grid
 
     def render(self) -> Optional[np.ndarray]:
         """Renders the environment.
