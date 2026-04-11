@@ -178,9 +178,7 @@ class AgentInterface:
         logger.debug(f"Agent's turn. action={action}")
 
         if self.pf:
-            self.pf.predict(
-                action, self.env.slip_probability, self.env._is_move_valid
-            )
+            self.pf.predict(action, self.env.slip_probability, self.env._is_move_valid)
 
         obs, reward, self.terminated, self.truncated, info = self.env.step(action)
         total_step_reward += reward

@@ -37,11 +37,19 @@ class ColabGUI:
 
         # Widgets
         self.output = widgets.Output()
-        self.next_button = widgets.Button(description="Next Step", button_style="primary")
-        self.reset_button = widgets.Button(description="Reset Episode", button_style="warning")
+        self.next_button = widgets.Button(
+            description="Next Step", button_style="primary"
+        )
+        self.reset_button = widgets.Button(
+            description="Reset Episode", button_style="warning"
+        )
         self.pf_toggle = widgets.Checkbox(value=True, description="Show Particles")
         self.sensor_dropdown = widgets.Dropdown(
-            options=[("Neural Net", "cnn"), ("Color Sensor", "color"), ("Both", "both")],
+            options=[
+                ("Neural Net", "cnn"),
+                ("Color Sensor", "color"),
+                ("Both", "both"),
+            ],
             value="both",
             description="PF Sensors:",
         )
