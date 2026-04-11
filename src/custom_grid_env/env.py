@@ -1,3 +1,5 @@
+"""Gymnasium environment for the CustomGrid task."""
+
 import gymnasium as gym
 import numpy as np
 from typing import Optional, Tuple, Dict, Any, List

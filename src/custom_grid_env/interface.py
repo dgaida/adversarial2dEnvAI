@@ -1,3 +1,5 @@
+"""High-level interface for agents to interact with the CustomGrid environment."""
+
 import pygame
 import gymnasium as gym
 from typing import Optional, Tuple, Dict, Any, Type
@@ -121,6 +123,16 @@ class AgentInterface:
         """Updates the particle filter with the latest measurements."""
         if not self.pf:
             return
+
+        # Log all particle positions to the logger (DEBUG level -> file)
+        logger.debug(f"Particle positions: {self.pf.get_particles()}")
+
+        # Get and log estimated position
+        est_pos = self.pf.get_estimated_position()
+        cell_pos = est_pos["cell_pos"]
+        cell_num = cell_pos[0] * self.env.cols + cell_pos[1]
+        logger.info(f"Estimated Agent Position (Cell): {cell_num}")
+        info["estimated_pos"] = est_pos
 
         # Trigger CNN prediction if missing but required and renderer is available
         cnn_probs = info.get("cnn_probs")

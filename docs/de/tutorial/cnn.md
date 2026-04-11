@@ -39,7 +39,7 @@ Ein CNN ist speziell für die Verarbeitung von Pixeldaten konzipiert. Unser einf
 - **Conv2D**: Diese Schicht "schiebt" Filter über das Bild, um Merkmale wie Kanten oder Formen zu erkennen.
 - **MaxPooling2D**: Dies reduziert die räumliche Größe der Darstellung, was das Modell schneller und robuster gegenüber kleinen Verschiebungen macht.
 - **Flatten**: Wandelt die 2D-Feature-Maps in einen 1D-Vektor um.
-- **Dense**: Vollständig vernetzte Schichten für die endgültige Klassifizierung. Am Ende nutzen wir eine 'softmax'-Aktivierung, um Wahrscheinlichkeiten für jede Klasse (Hund oder Blume) zu erhalten.
+Am Ende nutzen wir eine 'softmax'-Aktivierung, um Wahrscheinlichkeiten für jede Klasse (Hund, Blume oder Hintergrund) zu erhalten.
 
 ### Wichtige Konzepte für Studierende:
 - **Normalisierung**: Wir teilen die Pixelwerte (0-255) durch 255, um sie auf den Bereich [0, 1] zu skalieren. Dies hilft dem neuronalen Netz, schneller zu lernen.
@@ -60,10 +60,11 @@ Nach dem Training speichert das Skript zwei Diagramme im Verzeichnis `results/`:
 
 Das trainierte Modell wird als `model.keras` gespeichert. Der `PygameRenderer` in `src/custom_grid_env/renderer.py` sucht automatisch nach dieser Datei.
 
-Wenn der Agent auf einem Feld mit einem Hund oder einer Blume steht:
-1. Erstellt der Renderer einen 64x64 Pixel "Schnappschuss" des Feldes.
+Der Renderer führt die Vorhersage in jedem Schritt aus:
+1. Erstellt einen 64x64 Pixel "Schnappschuss" des aktuellen Feldes.
 2. Übergibt diesen an das CNN.
-3. Zeigt die Vorhersage und die Konfidenz (Wahrscheinlichkeit) im Info-Panel an.
+3. Das CNN liefert Wahrscheinlichkeiten für alle drei Klassen (`dog`, `flower`, `background`).
+4. Die Klasse mit der höchsten Wahrscheinlichkeit wird als Vorhersage im Info-Panel angezeigt.
 
 ---
 

@@ -39,7 +39,7 @@ A CNN is designed to process pixel data. Our simple model uses the following lay
 - **Conv2D**: This layer "slides" filters over the image to detect features like edges or shapes.
 - **MaxPooling2D**: This reduces the spatial size of the representation, making the model faster and more robust to small translations.
 - **Flatten**: This turns the 2D feature maps into a 1D vector.
-- **Dense**: Fully connected layers that perform the final classification. We use a 'softmax' activation at the end to get probabilities for each class (dog or flower).
+We use a 'softmax' activation at the end to get probabilities for each class (dog, flower, or background).
 
 ### Key Concepts for Students:
 - **Normalization**: We divide pixel values (0-255) by 255 to scale them to the range [0, 1]. This helps the neural network learn faster.
@@ -60,10 +60,11 @@ After training, the script saves two plots in the `results/` directory:
 
 The trained model is saved as `model.keras`. The `PygameRenderer` in `src/custom_grid_env/renderer.py` automatically looks for this file.
 
-When the agent stands on a cell containing a dog or flower, the renderer:
-1. Captures a 64x64 "snapshot" of the cell.
+The renderer performs the prediction at each step:
+1. Captures a 64x64 pixel "snapshot" of the current cell.
 2. Passes it to the CNN.
-3. Displays the prediction and confidence score in the info panel.
+3. The CNN provides probabilities for all three classes (`dog`, `flower`, `background`).
+4. The class with the highest probability is displayed as the prediction in the info panel.
 
 ---
 

@@ -1,7 +1,50 @@
 # Getting Started
 
-To get started with `custom_grid_env`, follow these steps:
+Welcome to `custom_grid_env`! This page will help you get familiar with the environment quickly.
 
-1. **Installation**: Install the package via `pip install .`.
-2. **Create Interface**: Use `AgentInterface` for easy interaction.
-3. **Implement Agent**: Create your own agent inheriting from the `Agent` base class.
+## Concepts
+
+The environment simulates a grid where an agent must navigate. The following components play a central role:
+
+1.  **AgentInterface**: The primary interface for your AI agents. It encapsulates the environment, the ghost, and the particle filter.
+2.  **Particle Filter**: A mechanism for estimating the agent's position if it is not exactly known (localization).
+3.  **CNN Classification**: A neural network that processes images of grid cells to recognize objects like dogs or flowers.
+
+## First Experiments
+
+The best way to start is with our interactive Jupyter Notebooks:
+
+- **Environment Demo**: Learn the basics of control.
+- **Interactive GUI**: Experiment with different sensors and the particle filter directly in Colab.
+- **CNN Training**: Learn how to train the neural network that the agent uses for object recognition.
+
+## A Simple Example
+
+Here is a minimal script to start an agent with random movements:
+
+```python
+from custom_grid_env.interface import AgentInterface
+from custom_grid_env.agents.random_player_agent import RandomPlayerAgent
+
+# Initialize interface
+interface = AgentInterface(render=True)
+obs = interface.reset()
+
+# Create agent
+agent = RandomPlayerAgent(interface.get_action_space())
+
+# Run episode
+for _ in range(100):
+    action = agent.get_action(obs)
+    obs, reward, done, info = interface.step(action)
+    if done:
+        break
+
+interface.close()
+```
+
+## Further Tutorials
+
+Check out our detailed tutorials:
+- [CNN Training Tutorial](tutorial/cnn.md)
+- [Particle Filter Tutorial](tutorial/particle_filter.md)

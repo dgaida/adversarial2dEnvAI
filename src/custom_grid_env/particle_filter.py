@@ -1,3 +1,5 @@
+"""A particle filter for agent localization in the CustomGrid environment."""
+
 import numpy as np
 from typing import List, Dict, Any
 
@@ -142,7 +144,7 @@ class ParticleFilter:
             self.weights = np.ones(self.num_particles) / self.num_particles
 
     def resample(self):
-        """Resamples particles based on their weights."""
+        """Resamples particles based on their weights using importance sampling."""
         indices = np.random.choice(
             range(self.num_particles), size=self.num_particles, p=self.weights
         )
@@ -152,3 +154,24 @@ class ParticleFilter:
     def get_particles(self) -> List[List[int]]:
         """Returns the list of particles."""
         return self.particles
+
+    def get_estimated_position(self) -> Dict[str, Any]:
+        """Calculates the estimated position of the agent.
+
+        Returns:
+            dict: Containing 'float_pos' (weighted average [row, col])
+                  and 'cell_pos' (most likely [row, col] as integers).
+        """
+        # Weighted average for float position
+        particles_array = np.array(self.particles)
+        float_pos = np.average(particles_array, axis=0, weights=self.weights)
+
+        # For cell position, we can take the weighted average and round,
+        # or find the cell with the highest probability density.
+        # Here we use the rounded weighted average for simplicity.
+        cell_pos = np.round(float_pos).astype(int).tolist()
+
+        return {
+            "float_pos": float_pos.tolist(),
+            "cell_pos": cell_pos,
+        }

@@ -91,6 +91,7 @@ nav:
   - Architecture: architecture/index.md
   - Tutorials:
       - CNN Training: tutorial/cnn.md
+      - Particle Filter: tutorial/particle_filter.md
   - Development:
       - Guide: development/index.md
       - Style Guide: development/style-guide.md

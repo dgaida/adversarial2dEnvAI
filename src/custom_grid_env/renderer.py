@@ -1,3 +1,5 @@
+"""Pygame-based renderer for the CustomGrid environment."""
+
 import os
 import pygame
 import numpy as np
@@ -19,6 +21,14 @@ class PygameRenderer:
     def __init__(
         self, rows: int, cols: int, render_mode: str = "human", render_fps: int = 4
     ):
+        """Initializes the PygameRenderer.
+
+        Args:
+            rows (int): Number of rows in the grid.
+            cols (int): Number of columns in the grid.
+            render_mode (str): Rendering mode ("human" or "rgb_array").
+            render_fps (int): Frames per second for rendering.
+        """
         self.rows = rows
         self.cols = cols
         self.render_mode = render_mode

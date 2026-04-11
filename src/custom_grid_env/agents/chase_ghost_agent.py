@@ -1,3 +1,5 @@
+"""Ghost agent that chases the player."""
+
 from .base_agent import Agent
 
 
