@@ -93,6 +93,19 @@ cd adversarial2dEnvAI
 pip install -e .
 ```
 
+### Anaconda Environment
+
+You can also use Anaconda to manage your environment:
+
+```bash
+# Create and activate a new conda environment
+conda create -n custom_grid python=3.10
+conda activate custom_grid
+
+# Install the package in editable mode
+pip install -e .
+```
+
 ### Running Tests
 
 ```bash

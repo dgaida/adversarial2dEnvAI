@@ -1,17 +1,13 @@
 """Ghost agent that chases the player."""
 
-import gymnasium as gym
-from .base_agent import Agent
+from .base_agent import BaseAgent
 
 
-class ChaseGhostAgent(Agent):
+class ChaseGhostAgent(BaseAgent):
     """Ghost agent that chases the player using simple pathfinding.
 
     This replicates the original built-in ghost behavior.
     """
-
-    def __init__(self, action_space: gym.spaces.Space):
-        self.action_space = action_space
 
     def get_action(self, observation: dict) -> int:
         """Choose action to move toward the agent.

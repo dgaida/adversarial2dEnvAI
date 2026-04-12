@@ -24,3 +24,19 @@ class Agent(Protocol):
             int: The action to take.
         """
         ...
+
+
+class BaseAgent:
+    """Base class for all agents to provide a default constructor.
+
+    Agents can inherit from this class to satisfy the Agent protocol without
+    re-implementing the constructor.
+    """
+
+    def __init__(self, action_space: gym.spaces.Space):
+        """Initializes the agent with the given action space.
+
+        Args:
+            action_space (gym.spaces.Space): The action space of the environment.
+        """
+        self.action_space = action_space
