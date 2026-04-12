@@ -1,24 +1,20 @@
-from abc import ABC, abstractmethod
+from typing import Protocol, runtime_checkable, Any, Dict
 import gymnasium as gym
 
 
-class Agent(ABC):
-    """Base class for all agents in the custom grid environment.
+@runtime_checkable
+class Agent(Protocol):
+    """Protocol for all agents in the custom grid environment.
 
-    Attributes:
-        action_space (gym.spaces.Space): The action space of the environment.
+    Any class that implements a 'get_action' method with the correct signature
+    is considered an Agent.
     """
 
     def __init__(self, action_space: gym.spaces.Space):
-        """Initializes the agent with the given action space.
+        """Initializes the agent with the given action space."""
+        ...
 
-        Args:
-            action_space (gym.spaces.Space): The action space of the environment.
-        """
-        self.action_space = action_space
-
-    @abstractmethod
-    def get_action(self, observation: dict) -> int:
+    def get_action(self, observation: Dict[str, Any]) -> int:
         """Returns an action based on the given observation.
 
         Args:
@@ -27,4 +23,4 @@ class Agent(ABC):
         Returns:
             int: The action to take.
         """
-        pass
+        ...

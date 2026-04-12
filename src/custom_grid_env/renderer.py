@@ -1,18 +1,11 @@
 """Pygame-based renderer for the CustomGrid environment."""
 
-import os
 import pygame
 import numpy as np
 from typing import Optional, Tuple, Dict, Any, List
 from .logger import get_logger
 
 logger = get_logger(__name__)
-
-# Try to import tensorflow for CNN predictions
-try:
-    import tensorflow as tf
-except ImportError:
-    tf = None
 
 
 class PygameRenderer:
@@ -35,24 +28,6 @@ class PygameRenderer:
         self.render_fps = render_fps
 
         # Load CNN model if available
-        self.model = None
-        self.class_names = ["dog", "flower", "background"]
-        if tf is not None:
-            model_path = os.path.join(
-                os.path.dirname(__file__), "cnn_tutorial", "model.keras"
-            )
-            if os.path.exists(model_path):
-                try:
-                    self.model = tf.keras.models.load_model(model_path)
-                    logger.info(f"CNN model successfully loaded from {model_path}")
-                except Exception as e:
-                    logger.error(f"Error loading CNN model from {model_path}: {e}")
-            else:
-                logger.warning(
-                    f"CNN model file not found at {model_path}. Predictions will be disabled."
-                )
-        else:
-            logger.warning("TensorFlow not found. CNN predictions will be disabled.")
 
         # Pygame setup constants
         self.cell_size = 100
@@ -529,19 +504,6 @@ class PygameRenderer:
             pygame.draw.circle(self.screen, self.colors["red"], (x, y), 45, 5)
             bang_text = self.font.render("!", True, self.colors["red"])
             self.screen.blit(bang_text, (x - 5, y - 15))
-        # Get CNN prediction for current cell
-        current_cell = grid[agent_pos[0], agent_pos[1]]
-        logger.debug(
-            f"Agent is on cell ({agent_pos[0]}, {agent_pos[1]}). Getting CNN prediction."
-        )
-        prediction_info = self._get_cnn_prediction(current_cell)
-        if prediction_info:
-            logger.debug(f"CNN prediction: {prediction_info['prediction']}")
-            info["cnn_prediction"] = prediction_info["prediction"]
-            info["cnn_probs"] = prediction_info["probs"]
-        else:
-            logger.debug("CNN prediction failed or returned None.")
-
         # Draw particles if available
         if "particles" in info and info.get("show_particles", True):
             self._draw_particles(info["particles"])
@@ -563,45 +525,6 @@ class PygameRenderer:
                 np.array(pygame.surfarray.pixels3d(self.screen)), axes=(1, 0, 2)
             )
         return None
-
-    def _get_cnn_prediction(self, cell: Dict[str, Any]) -> Optional[Dict[str, Any]]:
-        """Returns the CNN prediction for a given cell.
-
-        Returns:
-            dict, optional: Dictionary containing 'prediction' (class, prob) and 'probs' (list of floats).
-        """
-        if self.model is None:
-            return None
-
-        self._init_pygame()
-
-        # Create a 64x64 surface to draw the cell content
-        temp_surface = pygame.Surface((64, 64))
-        # Temporarily change cell_size to 64 for drawing on this surface
-        original_cell_size = self.cell_size
-        self.cell_size = 64
-        self._draw_cell(0, 0, cell, surface=temp_surface)
-        self.cell_size = original_cell_size
-
-        # Convert surface to numpy array (RGB)
-        img_array = pygame.surfarray.array3d(temp_surface)
-        # Transpose from (W, H, C) to (H, W, C)
-        img_array = np.transpose(img_array, (1, 0, 2))
-        # Normalize
-        img_array = img_array.astype(np.float32) / 255.0
-        # Add batch dimension
-        img_array = np.expand_dims(img_array, axis=0)
-
-        # Predict
-        predictions = self.model.predict(img_array, verbose=0)
-        probs = predictions[0].tolist()
-        class_idx = np.argmax(predictions[0])
-        probability = float(predictions[0][class_idx])
-
-        return {
-            "prediction": (self.class_names[class_idx], probability),
-            "probs": probs,
-        }
 
     def _draw_particles(self, particles: List[List[int]]):
         """Draws particles as tiny dots on the grid.

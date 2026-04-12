@@ -25,8 +25,21 @@ dependencies = [
     "scikit-learn",
 ]
 
+[project.optional-dependencies]
+colab = [
+    "ipywidgets",
+    "IPython",
+]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "black",
+    "flake8",
+    "interrogate",
+]
+
 [project.urls]
-"Homepage" = "https://github.com/user/custom_grid_env"
+"Homepage" = "https://github.com/dgaida/adversarial2dEnvAI"
 
 [tool.setuptools.packages.find]
 where = ["src"]

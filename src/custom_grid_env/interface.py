@@ -5,6 +5,7 @@ import gymnasium as gym
 from typing import Optional, Tuple, Dict, Any, Type
 from .env import CustomGridEnv
 from .agents.base_agent import Agent
+from .sensors import VisionSensor
 from .agents.chase_ghost_agent import ChaseGhostAgent
 from .particle_filter import ParticleFilter
 from .logger import get_logger
@@ -78,6 +79,7 @@ class AgentInterface:
             self._ghost_agent = ChaseGhostAgent(self.env.action_space)
         else:
             self._ghost_agent = ghost_agent_class(self.env.action_space)
+        self.vision_sensor = VisionSensor()
 
         self.use_particle_filter = use_particle_filter
         self.pf_sensor_mode = pf_sensor_mode
@@ -135,29 +137,19 @@ class AgentInterface:
         )
         info["estimated_pos"] = est_pos
 
-        # Trigger CNN prediction if missing but required and renderer is available
+        # Trigger CNN prediction
+        current_cell = self.env.grid[self.env.agent_pos[0], self.env.agent_pos[1]]
+        prediction_info = self.vision_sensor.predict(current_cell)
+        if prediction_info:
+            info["cnn_probs"] = prediction_info["probs"]
+            info["cnn_prediction"] = prediction_info["prediction"]
         cnn_probs = info.get("cnn_probs")
-        if (
-            cnn_probs is None
-            and self.pf_sensor_mode in ["cnn", "both"]
-            and self.env.renderer
-        ):
-            current_cell = self.env.grid[self.env.agent_pos[0], self.env.agent_pos[1]]
-            prediction_info = self.env.renderer._get_cnn_prediction(current_cell)
-            if prediction_info:
-                cnn_probs = prediction_info["probs"]
-                info["cnn_probs"] = cnn_probs
-                info["cnn_prediction"] = prediction_info["prediction"]
 
         measurements = {
             "color_measurement": info.get("color_measurement"),
             "cnn_probs": cnn_probs,
         }
-        cnn_class_names = (
-            self.env.renderer.class_names
-            if self.env.renderer
-            else ["dog", "flower", "background"]
-        )
+        cnn_class_names = self.vision_sensor.class_names
         self.pf.update(
             measurements,
             self.pf_sensor_mode,
