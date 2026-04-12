@@ -160,16 +160,20 @@ class ParticleFilter:
 
         Returns:
             dict: Containing 'float_pos' (weighted average [row, col])
-                  and 'cell_pos' (most likely [row, col] as integers).
+                  and 'cell_pos' (the cell with the highest probability density [row, col]).
         """
         # Weighted average for float position
         particles_array = np.array(self.particles)
         float_pos = np.average(particles_array, axis=0, weights=self.weights)
 
-        # For cell position, we can take the weighted average and round,
-        # or find the cell with the highest probability density.
-        # Here we use the rounded weighted average for simplicity.
-        cell_pos = np.round(float_pos).astype(int).tolist()
+        # For cell position, we find the cell with the highest probability density
+        # by summing the weights of particles in each cell.
+        cell_probs = np.zeros((self.rows, self.cols))
+        for i, (r, c) in enumerate(self.particles):
+            cell_probs[r, c] += self.weights[i]
+
+        max_idx = np.argmax(cell_probs)
+        cell_pos = [int(max_idx // self.cols), int(max_idx % self.cols)]
 
         return {
             "float_pos": float_pos.tolist(),

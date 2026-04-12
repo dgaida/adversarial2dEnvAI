@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import ipywidgets as widgets
 from IPython.display import display, clear_output
+from sklearn.neighbors import KernelDensity
 from typing import Type
 from .interface import AgentInterface
 from .agents.base_agent import Agent
@@ -134,7 +135,7 @@ class ColabGUI:
             if img is not None:
                 # Create a figure with two subplots: Grid and Probability Distribution
                 fig, (ax1, ax2) = plt.subplots(
-                    2, 1, figsize=(10, 14), gridspec_kw={"height_ratios": [1.5, 1]}
+                    1, 2, figsize=(15, 8), gridspec_kw={"width_ratios": [1.2, 1]}
                 )
 
                 # Plot 1: Environment Grid
@@ -142,44 +143,38 @@ class ColabGUI:
                 ax1.axis("off")
                 ax1.set_title("Environment Grid")
 
-                # Plot 2: Multimodal Probability Distribution
+                # Plot 2: Multimodal Probability Distribution (KDE)
                 if self.interface.pf:
                     rows, cols = self.interface.env.rows, self.interface.env.cols
-                    # Create a 2D histogram of particles to represent the distribution
                     particles = np.array(self.interface.pf.get_particles())
                     weights = self.interface.pf.weights
 
-                    # We want a smooth representation, so we use a 2D histogram
-                    # then potentially smooth it or use it as a heatmap.
-                    hist, xedges, yedges = np.histogram2d(
-                        particles[:, 1],
-                        particles[:, 0],
-                        bins=[cols, rows],
-                        range=[[0, cols], [0, rows]],
-                        weights=weights,
+                    # Fit KDE to particles
+                    # Use a small bandwidth for localized distribution
+                    kde = KernelDensity(kernel="gaussian", bandwidth=0.3).fit(
+                        particles, sample_weight=weights
                     )
 
-                    # Plotting the contour plot (Höhendiagramm)
-                    x = np.linspace(0.5, cols - 0.5, cols)
-                    y = np.linspace(0.5, rows - 0.5, rows)
-                    X, Y = np.meshgrid(x, y)
+                    # Create a fine grid for KDE evaluation
+                    res = 100
+                    x_lin = np.linspace(0, rows, res)
+                    y_lin = np.linspace(0, cols, res)
+                    Y_grid, X_grid = np.meshgrid(y_lin, x_lin)
+                    grid_coords = np.vstack([X_grid.ravel(), Y_grid.ravel()]).T
 
-                    # Ensure at least some levels exist even if hist is all zeros
-                    max_val = np.max(hist)
-                    levels = (
-                        np.linspace(0, max_val, 20)
-                        if max_val > 0
-                        else np.linspace(0, 1, 20)
-                    )
+                    # Evaluate log-density
+                    log_dens = kde.score_samples(grid_coords)
+                    dens = np.exp(log_dens).reshape(X_grid.shape)
 
-                    im = ax2.contourf(X, Y, hist.T, levels=levels, cmap="viridis")
+                    # Plotting the contour plot
+                    im = ax2.contourf(Y_grid, X_grid, dens, levels=20, cmap="viridis")
                     ax2.set_aspect("equal")
                     ax2.set_xlim(0, cols)
                     ax2.set_ylim(
                         rows, 0
                     )  # Inverted for grid coordinates (row 0 at top)
 
-                    ax2.set_title("Estimated Probability Distribution (Contour Plot)")
+                    ax2.set_title("Estimated Probability Distribution (KDE)")
                     ax2.set_xlabel("Column")
                     ax2.set_ylabel("Row")
                     fig.colorbar(im, ax2, label="Probability Density")
