@@ -7,6 +7,8 @@ from typing import Type
 from .interface import AgentInterface
 from .agents.base_agent import Agent
 from .agents.random_player_agent import RandomPlayerAgent
+from .agents.chase_ghost_agent import ChaseGhostAgent
+from .agents.random_ghost_agent import RandomGhostAgent
 
 # Set dummy video driver for headless environment (Colab)
 os.environ["SDL_VIDEODRIVER"] = "dummy"
@@ -61,6 +63,14 @@ class ColabGUI:
             value="perpendicular",
             description="Slip Type:",
         )
+        self.ghost_dropdown = widgets.Dropdown(
+            options=[
+                ("Chase Agent", "chase"),
+                ("Random", "random"),
+            ],
+            value="chase",
+            description="Ghost Type:",
+        )
         self.stats_label = widgets.Label(value="Steps: 0 | Total Reward: 0.0")
 
         # Layout
@@ -68,7 +78,7 @@ class ColabGUI:
             [
                 widgets.HBox([self.next_button, self.reset_button]),
                 widgets.HBox([self.pf_toggle, self.sensor_dropdown]),
-                self.slip_type_dropdown,
+                widgets.HBox([self.slip_type_dropdown, self.ghost_dropdown]),
                 self.stats_label,
             ]
         )
@@ -79,6 +89,7 @@ class ColabGUI:
         self.pf_toggle.observe(self._on_pf_toggle_change, names="value")
         self.sensor_dropdown.observe(self._on_sensor_change, names="value")
         self.slip_type_dropdown.observe(self._on_slip_type_change, names="value")
+        self.ghost_dropdown.observe(self._on_ghost_change, names="value")
 
     def _on_next_click(self, b):
         """Callback for the 'Next Step' button."""
@@ -106,6 +117,13 @@ class ColabGUI:
     def _on_slip_type_change(self, change):
         """Callback for the slip type dropdown."""
         self.interface.env.slip_type = change["new"]
+
+    def _on_ghost_change(self, change):
+        """Callback for the ghost behavior dropdown."""
+        if change["new"] == "chase":
+            self.interface.set_ghost_agent(ChaseGhostAgent)
+        else:
+            self.interface.set_ghost_agent(RandomGhostAgent)
 
     def _update_display(self):
         """Updates the display with the latest environment state and plots."""
@@ -141,17 +159,27 @@ class ColabGUI:
                         weights=weights,
                     )
 
-                    # Plotting the heatmap
-                    im = ax2.imshow(
-                        hist.T,
-                        origin="upper",
-                        extent=[0, cols, rows, 0],
-                        cmap="viridis",
-                        interpolation="gaussian",
+                    # Plotting the contour plot (Höhendiagramm)
+                    x = np.linspace(0.5, cols - 0.5, cols)
+                    y = np.linspace(0.5, rows - 0.5, rows)
+                    X, Y = np.meshgrid(x, y)
+
+                    # Ensure at least some levels exist even if hist is all zeros
+                    max_val = np.max(hist)
+                    levels = (
+                        np.linspace(0, max_val, 20)
+                        if max_val > 0
+                        else np.linspace(0, 1, 20)
                     )
-                    ax2.set_title(
-                        "Estimated Probability Distribution (Particle Filter)"
-                    )
+
+                    im = ax2.contourf(X, Y, hist.T, levels=levels, cmap="viridis")
+                    ax2.set_aspect("equal")
+                    ax2.set_xlim(0, cols)
+                    ax2.set_ylim(
+                        rows, 0
+                    )  # Inverted for grid coordinates (row 0 at top)
+
+                    ax2.set_title("Estimated Probability Distribution (Contour Plot)")
                     ax2.set_xlabel("Column")
                     ax2.set_ylabel("Row")
                     fig.colorbar(im, ax2, label="Probability Density")

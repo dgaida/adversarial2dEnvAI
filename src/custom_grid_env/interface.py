@@ -130,8 +130,9 @@ class AgentInterface:
         # Get and log estimated position
         est_pos = self.pf.get_estimated_position()
         cell_pos = est_pos["cell_pos"]
-        cell_num = cell_pos[0] * self.env.cols + cell_pos[1]
-        logger.info(f"Estimated Agent Position (Cell): {cell_num}")
+        logger.info(
+            f"Estimated Agent Position (row, col): ({cell_pos[0]}, {cell_pos[1]})"
+        )
         info["estimated_pos"] = est_pos
 
         # Trigger CNN prediction if missing but required and renderer is available
@@ -291,6 +292,14 @@ class AgentInterface:
             gym.spaces.Space: The observation space.
         """
         return self.env.observation_space
+
+    def set_ghost_agent(self, agent_class: Type[Agent]):
+        """Sets the ghost agent.
+
+        Args:
+            agent_class (Type[Agent]): The class of the new ghost agent.
+        """
+        self._ghost_agent = agent_class(self.env.action_space)
 
     def get_reward_structure(self) -> Dict[str, Any]:
         """Gets the reward structure for the environment.
