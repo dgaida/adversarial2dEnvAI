@@ -786,6 +786,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#ghost-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ghost Behavior
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#actions" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1377,6 +1388,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#ghost-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ghost Behavior
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#actions" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1436,9 +1458,15 @@
 <p>The game uses an <strong>alternating turn system</strong>:</p>
 <ol>
 <li><strong>Agent's Turn</strong>: The agent chooses and executes an action.</li>
-<li><strong>Ghost's Turn</strong>: The ghost automatically moves toward the agent.</li>
+<li><strong>Ghost's Turn</strong>: The ghost automatically moves according to its configured strategy.</li>
 </ol>
 <p>Each call to <code>interface.step(action)</code> processes both turns and returns the resulting state.</p>
+<h2 id="ghost-behavior">Ghost Behavior<a class="headerlink" href="#ghost-behavior" title="Permanent link">&para;</a></h2>
+<p>The behavior of the ghost can be customized via the <code>AgentInterface</code> or the GUI. The following implementations are available:</p>
+<ul>
+<li><strong>ChaseGhostAgent (Default)</strong>: The ghost calculates the shortest path to the agent (considering walls) and moves one step in that direction.</li>
+<li><strong>RandomGhostAgent</strong>: The ghost randomly chooses one of the four possible actions each turn.</li>
+</ul>
 <h2 id="actions">Actions<a class="headerlink" href="#actions" title="Permanent link">&para;</a></h2>
 <p>Both the agent and ghost use the same action space:</p>
 <table>

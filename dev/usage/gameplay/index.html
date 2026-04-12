@@ -784,6 +784,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#geisterverhalten" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Geisterverhalten
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#aktionen" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1375,6 +1386,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#geisterverhalten" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Geisterverhalten
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#aktionen" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1434,9 +1456,15 @@
 <p>Das Spiel verwendet ein <strong>abwechselndes Rundensystem</strong>:</p>
 <ol>
 <li><strong>Agentenzug</strong>: Der Agent wählt eine Aktion aus und führt sie aus.</li>
-<li><strong>Geisterzug</strong>: Der Geist bewegt sich automatisch in Richtung des Agenten.</li>
+<li><strong>Geisterzug</strong>: Der Geist bewegt sich automatisch gemäß seiner konfigurierten Strategie.</li>
 </ol>
 <p>Jeder Aufruf von <code>interface.step(action)</code> verarbeitet beide Züge und gibt den resultierenden Zustand zurück.</p>
+<h2 id="geisterverhalten">Geisterverhalten<a class="headerlink" href="#geisterverhalten" title="Permanent link">&para;</a></h2>
+<p>Das Verhalten des Gespensts kann über den <code>AgentInterface</code> oder die GUI angepasst werden. Folgende Implementierungen stehen zur Verfügung:</p>
+<ul>
+<li><strong>ChaseGhostAgent (Standard)</strong>: Der Geist berechnet den kürzesten Pfad zum Agenten (unter Berücksichtigung von Wänden) und bewegt sich einen Schritt in diese Richtung.</li>
+<li><strong>RandomGhostAgent</strong>: Der Geist wählt in jedem Zug zufällig eine der vier möglichen Aktionen aus.</li>
+</ul>
 <h2 id="aktionen">Aktionen<a class="headerlink" href="#aktionen" title="Permanent link">&para;</a></h2>
 <p>Sowohl der Agent als auch der Geist nutzen denselben Aktionsraum:</p>
 <table>
