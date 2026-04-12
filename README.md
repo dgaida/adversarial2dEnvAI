@@ -5,6 +5,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Code Quality](https://github.com/dgaida/adversarial2dEnvAI/actions/workflows/lint.yml/badge.svg)](https://github.com/dgaida/adversarial2dEnvAI/actions/workflows/lint.yml)
 [![Tests](https://github.com/dgaida/adversarial2dEnvAI/actions/workflows/tests.yml/badge.svg)](https://github.com/dgaida/adversarial2dEnvAI/actions/workflows/tests.yml)
+[![Version](https://img.shields.io/github/v/tag/dgaida/adversarial2dEnvAI?label=version)](https://github.com/dgaida/adversarial2dEnvAI/tags)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/dgaida/adversarial2dEnvAI/graphs/commit-activity)
+![Last commit](https://img.shields.io/github/last-commit/dgaida/adversarial2dEnvAI)
 
 An advanced Gymnasium-based grid environment for Reinforcement Learning and Robotics tutorials. CustomGrid features an agent navigating a stochastic environment with imperfect sensors, adversarial elements, and complex state estimation.
 
