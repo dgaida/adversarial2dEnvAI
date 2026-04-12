@@ -104,3 +104,9 @@ PYTHONPATH=src python3 -m pytest
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🙏 Acknowledgment
+
+This repository is a fork of [Praxisprojekt](https://github.com/Malte-18/Praxisprojekt) by M.B., Praxisprojekt, TH Köln, 2026.

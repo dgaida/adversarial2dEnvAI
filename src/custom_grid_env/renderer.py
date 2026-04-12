@@ -58,7 +58,7 @@ class PygameRenderer:
         self.cell_size = 100
         self.wall_thickness = 6
         self.window_width = self.cols * self.cell_size
-        self.window_height = self.rows * self.cell_size + 145
+        self.window_height = self.rows * self.cell_size + 185
 
         self.screen = None
         self.clock = None
@@ -402,7 +402,7 @@ class PygameRenderer:
         """Draws the information panel at the bottom."""
         panel_y = self.rows * self.cell_size
         pygame.draw.rect(
-            self.screen, self.colors["dark_gray"], (0, panel_y, self.window_width, 145)
+            self.screen, self.colors["dark_gray"], (0, panel_y, self.window_width, 185)
         )
         step_text = self.font.render(f"Step: {step_count}", True, self.colors["white"])
         self.screen.blit(step_text, (10, panel_y + 10))
@@ -450,18 +450,29 @@ class PygameRenderer:
             self.colors["yellow"] if current_cell["is_goal"] else self.colors["white"],
         )
         self.screen.blit(goal_text, (200, panel_y + 95))
+
+        # Estimated Position
+        est_pos = info.get("estimated_pos", {}).get("cell_pos")
+        if est_pos is not None:
+            est_text = self.small_font.render(
+                f"Est. Pos: ({est_pos[0]}, {est_pos[1]})",
+                True,
+                self.colors["orange"],
+            )
+            self.screen.blit(est_text, (10, panel_y + 120))
+
         intended_action = self.small_font.render(
             f"Intended Action: {info.get('intended_action', '')}",
             True,
             self.colors["white"],
         )
-        self.screen.blit(intended_action, (10, panel_y + 120))
+        self.screen.blit(intended_action, (10, panel_y + 150))
         actual_action = self.small_font.render(
             f"Actual Action: {info.get('actual_action', '')}",
             True,
             self.colors["white"],
         )
-        self.screen.blit(actual_action, (200, panel_y + 120))
+        self.screen.blit(actual_action, (200, panel_y + 150))
 
         # Color Sensor info
         color_measurement = info.get("color_measurement")
