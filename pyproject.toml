@@ -36,6 +36,12 @@ dev = [
     "black",
     "flake8",
     "interrogate",
+    "git-cliff",
+    "mkdocs-material",
+    "mkdocstrings[python]",
+    "mkdocs-static-i18n",
+    "mkdocs-mermaid2-plugin",
+    "mike",
 ]
 
 [project.urls]
@@ -46,3 +52,10 @@ where = ["src"]
 
 [tool.setuptools.package-data]
 "custom_grid_env.cnn_tutorial" = ["*.keras"]
+
+[tool.interrogate]
+ignore-init-method = true
+ignore-init-module = false
+ignore-magic = true
+fail-under = 95
+verbose = 1

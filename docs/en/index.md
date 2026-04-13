@@ -1,74 +1,62 @@
-# CustomGrid Environment
+# CustomGrid Environment 🤖👻
 
-A Gymnasium-based grid environment where an agent navigates a 4x5 grid to reach goal cells while avoiding a chasing ghost.
+[![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://dgaida.github.io/adversarial2dEnvAI/)
+[![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![interrogate](assets/interrogate.svg)](metrics.md)
 
-## Interactive Notebooks
+An advanced Gymnasium-based grid environment for Reinforcement Learning and Robotics tutorials. CustomGrid features an agent navigating a stochastic environment with imperfect sensors, adversarial elements, and complex state estimation.
 
-You can try the CNN training and the environment directly in your browser using Google Colab:
+## 🌟 Key Features
 
-- **CNN Training Tutorial**: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/CNN_Training.ipynb)
-- **Environment Demo**: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Environment_Demo.ipynb)
-- **Interactive GUI**: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Colab_GUI_Demo.ipynb)
+*   **Turn-Based Adversarial Gameplay**: An agent competes against a ghost in a 4x5 grid.
+*   **Stochastic Movement**: Support for *Perpendicular* and *Longitudinal* slipping probabilities.
+*   **Imperfect Perception**:
+    *   **Noisy Color Sensor**: Ground color detection with 80% accuracy.
+    *   **CNN-Based Vision**: Real-time item classification (dogs, flowers, background) using a trained Convolutional Neural Network.
+*   **State Estimation**: Integrated **Particle Filter** for Bayesian localization, combining vision and color sensor data.
+*   **Interactive Visualization**:
+    *   Rich Pygame-based renderer.
+    *   Interactive Google Colab GUI with real-time 2D probability distribution (contour plots).
+*   **Customizable Ghost AI**: Switch between shortest-path chasing, random movement, and minimax.
 
-![Environment Preview](../Umgebung.png)
+## 📓 Interactive Notebooks
 
-## Overview
+Experience the environment directly in your browser:
 
-CustomGrid is a turn-based environment where:
-- An **agent** (robot with GPS) attempts to reach one of the target cells.
-- A **ghost** chases the agent in every round.
-- **Walls** block movement between certain cells.
-- **Slip probability** provides stochasticity – the agent can slip perpendicular to the intended direction.
-- **Colored cells** provide visual information (red and green patterns).
+| Notebook | Description | Link |
+| :--- | :--- | :--- |
+| **Interactive GUI** | Full dashboard with sensors, PF visualization, and manual control. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Colab_GUI_Demo.ipynb) |
+| **Environment Demo** | Basic programmatic interaction and API walkthrough. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Environment_Demo.ipynb) |
+| **CNN Training** | Step-by-step tutorial on training the vision model. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/CNN_Training.ipynb) |
 
-## Goal of the Environment
+## 🚀 Quick Start
 
-The primary goal of the environment is to develop a mobile agent that visits various locations (which can only be detected visually or acoustically) in minimal time and returns to the starting location without colliding with other road users (similar to the Traveling Salesman Problem).
+### Installation
 
-### Given Resources
-- **Agent**: Equipped with sensors, a chassis, and a small computer.
-- **Sensors**: Camera, microphone, color sensor.
-- **Map**: Information about which fields can perceive which optical and acoustic stimuli.
+```bash
+pip install git+https://github.com/dgaida/adversarial2dEnvAI.git
+```
 
-### Example Task
-At the beginning, the agent receives an instruction like:
-"Visit the following three fields in optimal order and return to the starting location:
-- the field where you hear piano music,
-- the field where you see the picture of the dog and hear rock music,
-- the field with the text 'Goal'."
-
-**Important**: The agent does not know its position at time $t=0$ and must estimate it using its sensors (localization).
-
-## Quick Start
+### Basic Usage
 
 ```python
 from custom_grid_env.interface import AgentInterface
 from custom_grid_env.agents.random_player_agent import RandomPlayerAgent
 
-# Create the interface
+# Initialize the interface with Particle Filter and rendering
 interface = AgentInterface(render=True, slip_probability=0.2)
-
-# Reset and get initial observation
 obs = interface.reset()
 
-# Create your agent
 agent = RandomPlayerAgent(interface.get_action_space())
 
-# Run an episode
 while not interface.is_terminated():
     action = agent.get_action(obs)
     obs, reward, done, info = interface.step(action)
 
-# Get results
-stats = interface.get_episode_stats()
-print(f"Total Reward: {stats['total_reward']}")
+    # Access estimated position from Particle Filter
+    est_pos = info['estimated_pos']['cell_pos']
+    print(f"Estimated Position: {est_pos}")
 
 interface.close()
 ```
-
-## Requirements
-
-- Python 3.8+
-- gymnasium
-- numpy
-- pygame

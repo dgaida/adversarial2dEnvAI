@@ -1,14 +1,25 @@
+"""Data generation script for training the CNN vision sensor."""
+
 import os
 import pygame
 import numpy as np
 from pathlib import Path
+from typing import Tuple, Callable, Optional
 
 # Set dummy video driver for headless environments
 os.environ["SDL_VIDEODRIVER"] = "dummy"
 
 
-def draw_crosshatch(surface, color, line_spacing=8):
-    """Draws a crosshatch pattern on the surface."""
+def draw_crosshatch(
+    surface: pygame.Surface, color: Tuple[int, int, int], line_spacing: int = 8
+):
+    """Draws a crosshatch pattern on the surface.
+
+    Args:
+        surface (pygame.Surface): The surface to draw on.
+        color (Tuple[int, int, int]): The RGB color of the lines.
+        line_spacing (int): The distance between lines. Defaults to 8.
+    """
     w, h = surface.get_size()
     for i in range(-h, w, line_spacing):
         start_x = max(0, i)
@@ -27,8 +38,14 @@ def draw_crosshatch(surface, color, line_spacing=8):
             pygame.draw.line(surface, color, (start_x, start_y), (end_x, end_y), 2)
 
 
-def draw_dog(surface, cx, cy):
-    """Draws a simple dog icon."""
+def draw_dog(surface: pygame.Surface, cx: int, cy: int):
+    """Draws a simple dog icon.
+
+    Args:
+        surface (pygame.Surface): The surface to draw on.
+        cx (int): X-coordinate of the center.
+        cy (int): Y-coordinate of the center.
+    """
     dark_gray = (80, 80, 80)
     white = (255, 255, 255)
 
@@ -46,8 +63,14 @@ def draw_dog(surface, cx, cy):
     pygame.draw.arc(surface, dark_gray, (cx + 10, cy - 20, 20, 25), 0, 2, 3)
 
 
-def draw_flower(surface, cx, cy):
-    """Draws a simple flower icon."""
+def draw_flower(surface: pygame.Surface, cx: int, cy: int):
+    """Draws a simple flower icon.
+
+    Args:
+        surface (pygame.Surface): The surface to draw on.
+        cx (int): X-coordinate of the center.
+        cy (int): Y-coordinate of the center.
+    """
     white = (255, 255, 255)
     dark_gray = (80, 80, 80)
     yellow = (255, 220, 100)
@@ -64,8 +87,15 @@ def draw_flower(surface, cx, cy):
     pygame.draw.circle(surface, orange, (cx, cy), 8, 2)
 
 
-def draw_note(surface, cx, cy, single=True):
-    """Draws musical note(s)."""
+def draw_note(surface: pygame.Surface, cx: int, cy: int, single: bool = True):
+    """Draws musical note(s).
+
+    Args:
+        surface (pygame.Surface): The surface to draw on.
+        cx (int): X-coordinate of the center.
+        cy (int): Y-coordinate of the center.
+        single (bool): Whether to draw a single note or double notes. Defaults to True.
+    """
     black = (0, 0, 0)
     if single:
         pygame.draw.ellipse(surface, black, (cx - 5, cy + 5, 8, 6))
@@ -79,8 +109,18 @@ def draw_note(surface, cx, cy, single=True):
         pygame.draw.line(surface, black, (cx - 5, cy - 10), (cx + 9, cy - 10), 2)
 
 
-def draw_text(surface, text, cx, cy, font_size=20):
-    """Draws text on the surface."""
+def draw_text(
+    surface: pygame.Surface, text: str, cx: int, cy: int, font_size: int = 20
+):
+    """Draws text on the surface.
+
+    Args:
+        surface (pygame.Surface): The surface to draw on.
+        text (str): The text to render.
+        cx (int): X-coordinate of the center.
+        cy (int): Y-coordinate of the center.
+        font_size (int): Size of the font. Defaults to 20.
+    """
     black = (0, 0, 0)
     try:
         font = pygame.font.SysFont(None, font_size)
@@ -92,8 +132,13 @@ def draw_text(surface, text, cx, cy, font_size=20):
         pygame.draw.rect(surface, black, (cx - 15, cy - 5, 30, 10), 1)
 
 
-def generate_data(output_dir="data", num_samples_per_class=300):
-    """Generates images for dog, flower, and background classes."""
+def generate_data(output_dir: str = "data", num_samples_per_class: int = 300):
+    """Generates images for dog, flower, and background classes.
+
+    Args:
+        output_dir (str): Directory to save the generated images. Defaults to "data".
+        num_samples_per_class (int): Number of images per class. Defaults to 300.
+    """
     pygame.init()
     pygame.font.init()
     img_size = 64

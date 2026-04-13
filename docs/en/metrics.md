@@ -1,9 +1,13 @@
-# Metrics
+# Documentation Metrics
 
-## Documentation Coverage (API)
+This page visualizes the quality and status of our documentation.
 
-![API Coverage](https://img.shields.io/badge/API_Coverage-100%25-brightgreen)
+| Metric | Status | Source |
+|---|---|---|
+| API Doc Coverage | ![interrogate](assets/interrogate.svg) | `interrogate` |
+| Build Status | ![Tests](https://github.com/dgaida/adversarial2dEnvAI/actions/workflows/tests.yml/badge.svg) | GitHub Actions |
 
-## Test Coverage
-
-![Test Coverage](https://img.shields.io/badge/Test_Coverage-60%25-orange)
+## Quality Assurance
+- **Docstring Coverage**: Must be above 95%.
+- **Link Check**: All internal and external links are checked on every PR.
+- **Linting**: Markdown files are checked for formatting errors.
