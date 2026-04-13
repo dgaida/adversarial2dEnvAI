@@ -10,6 +10,7 @@ from .agents.base_agent import Agent
 from .agents.random_player_agent import RandomPlayerAgent
 from .agents.chase_ghost_agent import ChaseGhostAgent
 from .agents.random_ghost_agent import RandomGhostAgent
+from .agents.adversarial_agents import MinimaxAgent, ExpectimaxAgent
 
 # Set dummy video driver for headless environment (Colab)
 os.environ["SDL_VIDEODRIVER"] = "dummy"
@@ -35,7 +36,9 @@ class ColabGUI:
             slip_probability=slip_probability,
             use_particle_filter=True,
         )
-        self.agent = agent_class(self.interface.get_action_space())
+        self.agent = agent_class(
+            self.interface.get_action_space(), env=self.interface.env
+        )
         self.obs = self.interface.reset()
 
         # Widgets
@@ -64,10 +67,24 @@ class ColabGUI:
             value="longitudinal",
             description="Slip Type:",
         )
+        self.agent_dropdown = widgets.Dropdown(
+            options=[
+                ("Minimax", "minimax"),
+                ("Expectimax", "expectimax"),
+                ("Random", "random"),
+            ],
+            value=(
+                "random"
+                if agent_class == RandomPlayerAgent
+                else ("minimax" if agent_class == MinimaxAgent else "expectimax")
+            ),
+            description="Agent Type:",
+        )
         self.ghost_dropdown = widgets.Dropdown(
             options=[
                 ("Chase Agent", "chase"),
                 ("Random", "random"),
+                ("Minimax", "minimax"),
             ],
             value="chase",
             description="Ghost Type:",
@@ -79,7 +96,8 @@ class ColabGUI:
             [
                 widgets.HBox([self.next_button, self.reset_button]),
                 widgets.HBox([self.pf_toggle, self.sensor_dropdown]),
-                widgets.HBox([self.slip_type_dropdown, self.ghost_dropdown]),
+                widgets.HBox([self.agent_dropdown, self.ghost_dropdown]),
+                widgets.HBox([self.slip_type_dropdown]),
                 self.stats_label,
             ]
         )
@@ -91,6 +109,7 @@ class ColabGUI:
         self.sensor_dropdown.observe(self._on_sensor_change, names="value")
         self.slip_type_dropdown.observe(self._on_slip_type_change, names="value")
         self.ghost_dropdown.observe(self._on_ghost_change, names="value")
+        self.agent_dropdown.observe(self._on_agent_change, names="value")
 
     def _on_next_click(self, b):
         """Callback for the 'Next Step' button."""
@@ -119,10 +138,27 @@ class ColabGUI:
         """Callback for the slip type dropdown."""
         self.interface.env.slip_type = change["new"]
 
+    def _on_agent_change(self, change):
+        """Callback for the agent behavior dropdown."""
+        if change["new"] == "minimax":
+            self.agent = MinimaxAgent(
+                self.interface.get_action_space(), env=self.interface.env
+            )
+        elif change["new"] == "expectimax":
+            self.agent = ExpectimaxAgent(
+                self.interface.get_action_space(), env=self.interface.env
+            )
+        else:
+            self.agent = RandomPlayerAgent(
+                self.interface.get_action_space(), env=self.interface.env
+            )
+
     def _on_ghost_change(self, change):
         """Callback for the ghost behavior dropdown."""
         if change["new"] == "chase":
             self.interface.set_ghost_agent(ChaseGhostAgent)
+        elif change["new"] == "minimax":
+            self.interface.set_ghost_agent(MinimaxAgent)
         else:
             self.interface.set_ghost_agent(RandomGhostAgent)
 
