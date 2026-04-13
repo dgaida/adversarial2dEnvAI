@@ -291,7 +291,7 @@ class AgentInterface:
         Args:
             agent_class (Type[Agent]): The class of the new ghost agent.
         """
-        self._ghost_agent = agent_class(self.env.action_space)
+        self._ghost_agent = agent_class(self.env.action_space, env=self.env)
 
     def get_reward_structure(self) -> Dict[str, Any]:
         """Gets the reward structure for the environment.

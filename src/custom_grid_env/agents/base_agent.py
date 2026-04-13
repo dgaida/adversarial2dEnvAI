@@ -10,7 +10,7 @@ class Agent(Protocol):
     is considered an Agent.
     """
 
-    def __init__(self, action_space: gym.spaces.Space):
+    def __init__(self, action_space: gym.spaces.Space, **kwargs):
         """Initializes the agent with the given action space."""
         ...
 
@@ -33,10 +33,11 @@ class BaseAgent:
     re-implementing the constructor.
     """
 
-    def __init__(self, action_space: gym.spaces.Space):
+    def __init__(self, action_space: gym.spaces.Space, **kwargs):
         """Initializes the agent with the given action space.
 
         Args:
             action_space (gym.spaces.Space): The action space of the environment.
         """
         self.action_space = action_space
+        self.env = kwargs.get("env")
