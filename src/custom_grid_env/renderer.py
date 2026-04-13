@@ -454,7 +454,9 @@ class PygameRenderer:
         self.screen.blit(items_text, (col2_x, panel_y + 70))
 
         est_pos_data = info.get("estimated_pos", {})
-        est_pos = est_pos_data.get("cell_pos") if isinstance(est_pos_data, dict) else None
+        est_pos = (
+            est_pos_data.get("cell_pos") if isinstance(est_pos_data, dict) else None
+        )
         if est_pos is not None:
             est_text = self.small_font.render(
                 f"Est. Pos: ({est_pos[0]}, {est_pos[1]})",
@@ -485,7 +487,7 @@ class PygameRenderer:
         )
         self.screen.blit(intended_action, (col1_x, panel_y + 125))
 
-        actual_action_str = info.get('actual_action', '')
+        actual_action_str = info.get("actual_action", "")
         actual_action = self.small_font.render(
             f"Actual: {actual_action_str}",
             True,
