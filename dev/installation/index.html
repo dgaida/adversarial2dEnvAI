@@ -656,6 +656,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#installation-mit-anaconda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation mit Anaconda
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#verifizierung" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1383,6 +1394,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#installation-mit-anaconda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation mit Anaconda
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#verifizierung" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1445,10 +1467,19 @@
 </li>
 </ol>
 <p>Dies installiert alle notwendigen Abhängigkeiten wie <code>gymnasium</code>, <code>numpy</code>, <code>pygame</code>, <code>tensorflow</code>, <code>matplotlib</code> und <code>scikit-learn</code>.</p>
+<h2 id="installation-mit-anaconda">Installation mit Anaconda<a class="headerlink" href="#installation-mit-anaconda" title="Permanent link">&para;</a></h2>
+<p>Wenn du Anaconda oder Miniconda verwendest, kannst du die Umgebung direkt aus der <code>environment.yml</code> Datei erstellen:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Erstelle und aktiviere die Umgebung</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>environment.yml
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>conda<span class="w"> </span>activate<span class="w"> </span>custom_grid_env
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1"># Installiere das Paket im editierbaren Modus</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</code></pre></div>
 <h2 id="verifizierung">Verifizierung<a class="headerlink" href="#verifizierung" title="Permanent link">&para;</a></h2>
 <p>Du kannst die Installation überprüfen, indem du versuchst, das Paket in Python zu importieren:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">custom_grid_env</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">custom_grid_env</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">custom_grid_env</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">custom_grid_env</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 </code></pre></div>
 
 
