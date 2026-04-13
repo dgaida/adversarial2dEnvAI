@@ -1,9 +1,9 @@
 """Example player agent that moves randomly."""
 
-from .base_agent import Agent
+from .base_agent import BaseAgent
 
 
-class RandomPlayerAgent(Agent):
+class RandomPlayerAgent(BaseAgent):
     """Example random agent for demonstration."""
 
     def get_action(self, observation: dict) -> int:

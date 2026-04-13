@@ -6,6 +6,9 @@ dependencies:
   - python>=3.8
   - numpy
   - pygame
+  - tensorflow
+  - matplotlib
+  - scikit-learn
   - pip
   - pip:
     - gymnasium

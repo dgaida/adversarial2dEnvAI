@@ -1,9 +1,9 @@
 """Ghost agent that chases the player."""
 
-from .base_agent import Agent
+from .base_agent import BaseAgent
 
 
-class ChaseGhostAgent(Agent):
+class ChaseGhostAgent(BaseAgent):
     """Ghost agent that chases the player using simple pathfinding.
 
     This replicates the original built-in ghost behavior.

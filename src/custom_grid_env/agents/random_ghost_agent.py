@@ -1,9 +1,9 @@
 """Ghost agent that moves randomly."""
 
-from .base_agent import Agent
+from .base_agent import BaseAgent
 
 
-class RandomGhostAgent(Agent):
+class RandomGhostAgent(BaseAgent):
     """Ghost agent that moves randomly."""
 
     def get_action(self, observation: dict) -> int:
