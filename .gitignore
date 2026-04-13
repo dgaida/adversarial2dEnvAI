@@ -15,3 +15,5 @@ ENV/
 data/
 results/
 *.log
+site/
+*.log

@@ -12,12 +12,12 @@ class Agent(Protocol):
     is considered an Agent.
     """
 
-    def __init__(self, action_space: gym.spaces.Space, **kwargs):
+    def __init__(self, action_space: gym.spaces.Space, **kwargs: Any):
         """Initializes the agent with the given action space.
 
         Args:
             action_space (gym.spaces.Space): The action space of the environment.
-            **kwargs: Additional keyword arguments for agent configuration.
+            **kwargs (Any): Additional keyword arguments for agent configuration.
         """
         ...
 
@@ -46,12 +46,12 @@ class BaseAgent:
         perceived_ghost_pos (Optional[List[int]]): Agent's belief of the ghost's position.
     """
 
-    def __init__(self, action_space: gym.spaces.Space, **kwargs):
+    def __init__(self, action_space: gym.spaces.Space, **kwargs: Any):
         """Initializes the agent with the given action space.
 
         Args:
             action_space (gym.spaces.Space): The action space of the environment.
-            **kwargs: Additional keyword arguments, such as 'env'.
+            **kwargs (Any): Additional keyword arguments, such as 'env'.
         """
         self.action_space = action_space
         self.env = kwargs.get("env")

@@ -61,6 +61,11 @@ plugins:
   - mike:
       alias_type: symlink
 
+validation:
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn
+
 markdown_extensions:
   - admonition
   - pymdownx.details
