@@ -21,6 +21,19 @@ Make sure you have Python 3.8 or newer installed. It is recommended to use a vir
 
 This will install all necessary dependencies such as `gymnasium`, `numpy`, `pygame`, `tensorflow`, `matplotlib`, and `scikit-learn`.
 
+## Installation with Anaconda
+
+If you use Anaconda or Miniconda, you can create the environment directly from the `environment.yml` file:
+
+```bash
+# Create and activate the environment
+conda env create -f environment.yml
+conda activate custom_grid_env
+
+# Install the package in editable mode
+pip install -e .
+```
+
 ## Verification
 
 You can verify the installation by trying to import the package in Python:

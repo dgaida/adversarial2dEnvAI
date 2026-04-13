@@ -6,7 +6,8 @@ Welcome! This file contains specific instructions and tips for working with the 
 
 *   **`src/custom_grid_env/env.py`**: The core Gymnasium environment. Handles grid logic, movement, and collision.
 *   **`src/custom_grid_env/interface.py`**: A high-level wrapper (`AgentInterface`) that manages turns (agent then ghost) and integrates the Particle Filter. **This is the primary entry point for users.**
-*   **`src/custom_grid_env/renderer.py`**: Decoupled Pygame-based rendering. Also handles CNN inference for item classification.
+*   **`src/custom_grid_env/renderer.py`**: Decoupled Pygame-based rendering.
+*   **`src/custom_grid_env/sensors.py`**: Standalone CNN-based vision for item classification.
 *   **`src/custom_grid_env/particle_filter.py`**: Implementation of the Particle Filter for localization.
 *   **`src/custom_grid_env/colab_gui.py`**: Ipywidgets-based GUI specifically designed for Google Colab.
 
@@ -31,5 +32,5 @@ Welcome! This file contains specific instructions and tips for working with the 
 
 ## 🤖 Ghost Behaviors
 
-*   New ghost behaviors should be implemented as classes inheriting from `custom_grid_env.agents.base_agent.Agent`.
+*   New ghost behaviors should be implemented as classes inheriting from `custom_grid_env.agents.base_agent.BaseAgent`.
 *   They can be swapped at runtime via `AgentInterface.set_ghost_agent(agent_class)`.
