@@ -42,7 +42,7 @@ class AgentInterface:
         render_mode: Optional[str] = None,
         step_delay: int = 100,
         slip_probability: float = 0.2,
-        slip_type: str = "perpendicular",
+        slip_type: str = "longitudinal",
         ghost_agent_class: Optional[Type[Agent]] = None,
         use_particle_filter: bool = True,
         pf_num_particles: int = 200,

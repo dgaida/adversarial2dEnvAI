@@ -61,7 +61,7 @@ class ColabGUI:
                 ("Perpendicular", "perpendicular"),
                 ("Longitudinal", "longitudinal"),
             ],
-            value="perpendicular",
+            value="longitudinal",
             description="Slip Type:",
         )
         self.ghost_dropdown = widgets.Dropdown(
