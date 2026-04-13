@@ -126,17 +126,6 @@ class AgentInterface:
         if not self.pf:
             return
 
-        # Log all particle positions to the logger (DEBUG level -> file)
-        logger.debug(f"Particle positions: {self.pf.get_particles()}")
-
-        # Get and log estimated position
-        est_pos = self.pf.get_estimated_position()
-        cell_pos = est_pos["cell_pos"]
-        logger.info(
-            f"Estimated Agent Position (row, col): ({cell_pos[0]}, {cell_pos[1]})"
-        )
-        info["estimated_pos"] = est_pos
-
         # Trigger CNN prediction
         current_cell = self.env.grid[self.env.agent_pos[0], self.env.agent_pos[1]]
         prediction_info = self.vision_sensor.predict(current_cell)
@@ -157,6 +146,17 @@ class AgentInterface:
             cnn_class_names,
         )
         self.pf.resample()
+
+        # Log all particle positions to the logger (DEBUG level -> file)
+        logger.debug(f"Particle positions: {self.pf.get_particles()}")
+
+        # Get and log estimated position AFTER update and resample
+        est_pos = self.pf.get_estimated_position()
+        cell_pos = est_pos["cell_pos"]
+        logger.info(
+            f"Estimated Agent Position (row, col): ({cell_pos[0]}, {cell_pos[1]})"
+        )
+        info["estimated_pos"] = est_pos
 
     def _render_with_pf(self):
         """Renders the environment including PF data if enabled."""
