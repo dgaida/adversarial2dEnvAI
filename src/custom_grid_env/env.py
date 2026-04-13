@@ -535,10 +535,19 @@ class CustomGridEnv(gym.Env):
         logger.debug(f"info before clear: {info}")
 
         preserved_info = {}
-        if "cnn_prediction" in info:
-            preserved_info["cnn_prediction"] = info["cnn_prediction"]
-        if "cnn_probs" in info:
-            preserved_info["cnn_probs"] = info["cnn_probs"]
+        keys_to_preserve = [
+            "cnn_prediction",
+            "cnn_probs",
+            "estimated_pos",
+            "color_measurement",
+            "intended_action",
+            "actual_action",
+            "slipped",
+            "particles",
+        ]
+        for key in keys_to_preserve:
+            if key in info:
+                preserved_info[key] = info[key]
 
         info.clear()
         info.update(preserved_info)
