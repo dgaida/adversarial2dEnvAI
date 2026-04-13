@@ -1,3 +1,5 @@
+"""GUI for the CustomGrid environment in Google Colab."""
+
 import os
 import numpy as np
 import matplotlib.pyplot as plt
@@ -132,8 +134,14 @@ class ColabGUI:
             # We assume the agent knows where the ghost is relative to its estimate.
             actual_agent_pos = self.interface.env.agent_pos
             actual_ghost_pos = self.interface.env.ghost_pos
-            rel_ghost = [actual_ghost_pos[0] - actual_agent_pos[0], actual_ghost_pos[1] - actual_agent_pos[1]]
-            self.agent.perceived_ghost_pos = [est_pos[0] + rel_ghost[0], est_pos[1] + rel_ghost[1]]
+            rel_ghost = [
+                actual_ghost_pos[0] - actual_agent_pos[0],
+                actual_ghost_pos[1] - actual_agent_pos[1],
+            ]
+            self.agent.perceived_ghost_pos = [
+                est_pos[0] + rel_ghost[0],
+                est_pos[1] + rel_ghost[1],
+            ]
         else:
             self.agent.perceived_agent_pos = None
             self.agent.perceived_ghost_pos = None
