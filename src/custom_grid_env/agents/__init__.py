@@ -5,3 +5,5 @@ players and chasing ghosts.
 """
 
 from .adversarial_agents import MinimaxAgent, ExpectimaxAgent
+
+__all__ = ["MinimaxAgent", "ExpectimaxAgent"]
