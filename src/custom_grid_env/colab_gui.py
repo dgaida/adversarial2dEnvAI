@@ -36,7 +36,9 @@ class ColabGUI:
             slip_probability=slip_probability,
             use_particle_filter=True,
         )
-        self.agent = agent_class(self.interface.get_action_space(), env=self.interface.env)
+        self.agent = agent_class(
+            self.interface.get_action_space(), env=self.interface.env
+        )
         self.obs = self.interface.reset()
 
         # Widgets

@@ -1,13 +1,14 @@
-import numpy as np
 import gymnasium as gym
-from typing import Dict, Any, List, Tuple, Union
+from typing import Dict, Any, List, Tuple
 from .base_agent import BaseAgent
+
 
 class AdversarialAgent(BaseAgent):
     """Base class for minimax and expectimax agents.
 
     Provides shared heuristic and state-transition logic.
     """
+
     def __init__(self, action_space: gym.spaces.Space, depth_limit: int = 4, **kwargs):
         """Initializes the adversarial agent.
 
@@ -33,9 +34,15 @@ class AdversarialAgent(BaseAgent):
             for c in range(self.env.cols):
                 if self.env.grid[r, c]["is_goal"]:
                     return [r, c]
-        return [0, 2] # Default start pos in README
+        return [0, 2]  # Default start pos in README
 
-    def _heuristic(self, agent_pos: List[int], ghost_pos: List[int], terminated: bool, info: Dict[str, Any]) -> float:
+    def _heuristic(
+        self,
+        agent_pos: List[int],
+        ghost_pos: List[int],
+        terminated: bool,
+        info: Dict[str, Any],
+    ) -> float:
         """Heuristic function to evaluate a state.
 
         Args:
@@ -57,8 +64,10 @@ class AdversarialAgent(BaseAgent):
         dist_to_goal = self.env._calculate_shortest_path_distance(agent_pos, goal_pos)
         dist_to_ghost = self.env._calculate_shortest_path_distance(agent_pos, ghost_pos)
 
-        if dist_to_goal == -1: dist_to_goal = self.env.rows * self.env.cols
-        if dist_to_ghost == -1: dist_to_ghost = self.env.rows * self.env.cols
+        if dist_to_goal == -1:
+            dist_to_goal = self.env.rows * self.env.cols
+        if dist_to_ghost == -1:
+            dist_to_ghost = self.env.rows * self.env.cols
 
         # Maximize distance to ghost and minimize distance to goal
         score = -dist_to_goal * 10
@@ -70,7 +79,9 @@ class AdversarialAgent(BaseAgent):
 
         return float(score)
 
-    def _get_next_state(self, agent_pos: List[int], ghost_pos: List[int], turn: int, action: int) -> Tuple[List[int], List[int], bool, Dict[str, Any]]:
+    def _get_next_state(
+        self, agent_pos: List[int], ghost_pos: List[int], turn: int, action: int
+    ) -> Tuple[List[int], List[int], bool, Dict[str, Any]]:
         """Simulates a state transition.
 
         Args:
@@ -101,7 +112,9 @@ class AdversarialAgent(BaseAgent):
 
         return new_agent_pos, new_ghost_pos, terminated, info
 
-    def _get_agent_outcomes(self, agent_pos: List[int], action: int) -> List[Tuple[List[int], float]]:
+    def _get_agent_outcomes(
+        self, agent_pos: List[int], action: int
+    ) -> List[Tuple[List[int], float]]:
         """Returns possible agent positions after action and their probabilities."""
         prob = self.env.slip_probability
         slip_type = self.env.slip_type
@@ -109,27 +122,29 @@ class AdversarialAgent(BaseAgent):
         outcomes = []
         if slip_type == "longitudinal":
             # Stay: prob/2
-            outcomes.append((self.env._move_entity(agent_pos, -1), prob/2.0))
+            outcomes.append((self.env._move_entity(agent_pos, -1), prob / 2.0))
             # Move 1: 1 - prob
             outcomes.append((self.env._move_entity(agent_pos, action), 1.0 - prob))
             # Move 2: prob/2
             pos2 = self.env._move_entity(agent_pos, action)
             pos2 = self.env._move_entity(pos2, action)
-            outcomes.append((pos2, prob/2.0))
+            outcomes.append((pos2, prob / 2.0))
         elif slip_type == "perpendicular":
             perpendicular = {0: [1, 3], 1: [0, 2], 2: [1, 3], 3: [0, 2]}
             # Intended: 1 - prob
             outcomes.append((self.env._move_entity(agent_pos, action), 1.0 - prob))
             # Sides: prob/2 each
             for side in perpendicular[action]:
-                outcomes.append((self.env._move_entity(agent_pos, side), prob/2.0))
+                outcomes.append((self.env._move_entity(agent_pos, side), prob / 2.0))
         else:
             outcomes.append((self.env._move_entity(agent_pos, action), 1.0))
 
         return outcomes
 
+
 class MinimaxAgent(AdversarialAgent):
     """Agent that uses Minimax with Alpha-Beta pruning."""
+
     def get_action(self, observation: Dict[str, Any]) -> int:
         """Returns the best action using minimax.
 
@@ -145,26 +160,30 @@ class MinimaxAgent(AdversarialAgent):
         # Check if we are acting as the ghost
         is_ghost = "agent_relative_pos" in observation
 
-        alpha = -float('inf')
-        beta = float('inf')
+        alpha = -float("inf")
+        beta = float("inf")
 
         actions = [0, 1, 2, 3]
 
         if not is_ghost:
-            best_score = -float('inf')
+            best_score = -float("inf")
             best_action = 0
             for action in actions:
-                new_ap, new_gp, term, info = self._get_next_state(agent_pos, ghost_pos, 0, action)
+                new_ap, new_gp, term, info = self._get_next_state(
+                    agent_pos, ghost_pos, 0, action
+                )
                 score = self._min_value(new_ap, new_gp, 1, term, info, alpha, beta)
                 if score > best_score:
                     best_score = score
                     best_action = action
                 alpha = max(alpha, best_score)
         else:
-            best_score = float('inf')
+            best_score = float("inf")
             best_action = 0
             for action in actions:
-                new_ap, new_gp, term, info = self._get_next_state(agent_pos, ghost_pos, 1, action)
+                new_ap, new_gp, term, info = self._get_next_state(
+                    agent_pos, ghost_pos, 1, action
+                )
                 score = self._max_value(new_ap, new_gp, 1, term, info, alpha, beta)
                 if score < best_score:
                     best_score = score
@@ -177,11 +196,19 @@ class MinimaxAgent(AdversarialAgent):
         if terminated or depth >= self.depth_limit:
             return self._heuristic(agent_pos, ghost_pos, terminated, info)
 
-        v = -float('inf')
+        v = -float("inf")
         for action in [0, 1, 2, 3]:
-            new_ap, new_gp, term, info_next = self._get_next_state(agent_pos, ghost_pos, 0, action)
-            v = max(v, self._min_value(new_ap, new_gp, depth + 1, term, info_next, alpha, beta))
-            if v >= beta: return v
+            new_ap, new_gp, term, info_next = self._get_next_state(
+                agent_pos, ghost_pos, 0, action
+            )
+            v = max(
+                v,
+                self._min_value(
+                    new_ap, new_gp, depth + 1, term, info_next, alpha, beta
+                ),
+            )
+            if v >= beta:
+                return v
             alpha = max(alpha, v)
         return v
 
@@ -189,16 +216,26 @@ class MinimaxAgent(AdversarialAgent):
         if terminated or depth >= self.depth_limit:
             return self._heuristic(agent_pos, ghost_pos, terminated, info)
 
-        v = float('inf')
+        v = float("inf")
         for action in [0, 1, 2, 3]:
-            new_ap, new_gp, term, info_next = self._get_next_state(agent_pos, ghost_pos, 1, action)
-            v = min(v, self._max_value(new_ap, new_gp, depth + 1, term, info_next, alpha, beta))
-            if v <= alpha: return v
+            new_ap, new_gp, term, info_next = self._get_next_state(
+                agent_pos, ghost_pos, 1, action
+            )
+            v = min(
+                v,
+                self._max_value(
+                    new_ap, new_gp, depth + 1, term, info_next, alpha, beta
+                ),
+            )
+            if v <= alpha:
+                return v
             beta = min(beta, v)
         return v
 
+
 class ExpectimaxAgent(AdversarialAgent):
     """Agent that uses Expectimax algorithm."""
+
     def get_action(self, observation: Dict[str, Any]) -> int:
         """Returns the best action using expectimax.
 
@@ -216,7 +253,7 @@ class ExpectimaxAgent(AdversarialAgent):
         actions = [0, 1, 2, 3]
 
         if not is_ghost:
-            best_score = -float('inf')
+            best_score = -float("inf")
             best_action = 0
             for action in actions:
                 outcomes = self._get_agent_outcomes(agent_pos, action)
@@ -231,16 +268,20 @@ class ExpectimaxAgent(AdversarialAgent):
                         term = True
                         info["reached_goal"] = True
 
-                    score += prob * self._expect_value(next_ap, ghost_pos, 1, term, info)
+                    score += prob * self._expect_value(
+                        next_ap, ghost_pos, 1, term, info
+                    )
 
                 if score > best_score:
                     best_score = score
                     best_action = action
         else:
-            best_score = float('inf')
+            best_score = float("inf")
             best_action = 0
             for action in actions:
-                new_ap, new_gp, term, info = self._get_next_state(agent_pos, ghost_pos, 1, action)
+                new_ap, new_gp, term, info = self._get_next_state(
+                    agent_pos, ghost_pos, 1, action
+                )
                 score = self._max_value(new_ap, new_gp, 1, term, info)
                 if score < best_score:
                     best_score = score
@@ -251,7 +292,7 @@ class ExpectimaxAgent(AdversarialAgent):
         if terminated or depth >= self.depth_limit:
             return self._heuristic(agent_pos, ghost_pos, terminated, info)
 
-        v = -float('inf')
+        v = -float("inf")
         for action in [0, 1, 2, 3]:
             outcomes = self._get_agent_outcomes(agent_pos, action)
             score = 0
@@ -264,7 +305,9 @@ class ExpectimaxAgent(AdversarialAgent):
                 elif self.env.grid[next_ap[0], next_ap[1]]["is_goal"]:
                     term = True
                     info_next["reached_goal"] = True
-                score += prob * self._expect_value(next_ap, ghost_pos, depth + 1, term, info_next)
+                score += prob * self._expect_value(
+                    next_ap, ghost_pos, depth + 1, term, info_next
+                )
             v = max(v, score)
         return v
 
@@ -275,6 +318,8 @@ class ExpectimaxAgent(AdversarialAgent):
         v = 0
         actions = [0, 1, 2, 3]
         for action in actions:
-            new_ap, new_gp, term, info_next = self._get_next_state(agent_pos, ghost_pos, 1, action)
+            new_ap, new_gp, term, info_next = self._get_next_state(
+                agent_pos, ghost_pos, 1, action
+            )
             v += self._max_value(new_ap, new_gp, depth + 1, term, info_next)
         return v / len(actions)
