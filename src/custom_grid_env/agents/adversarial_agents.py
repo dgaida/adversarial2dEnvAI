@@ -1,3 +1,5 @@
+"""Adversarial agents for the CustomGrid environment."""
+
 import gymnasium as gym
 from typing import Dict, Any, List, Tuple
 from .base_agent import BaseAgent
@@ -22,10 +24,14 @@ class AdversarialAgent(BaseAgent):
 
     def _get_agent_pos(self) -> List[int]:
         """Gets the current agent position from the environment."""
+        if self.perceived_agent_pos is not None:
+            return list(self.perceived_agent_pos)
         return list(self.env.agent_pos)
 
     def _get_ghost_pos(self) -> List[int]:
         """Gets the current ghost position from the environment."""
+        if self.perceived_ghost_pos is not None:
+            return list(self.perceived_ghost_pos)
         return list(self.env.ghost_pos)
 
     def _get_goal_pos(self) -> List[int]:
@@ -193,6 +199,7 @@ class MinimaxAgent(AdversarialAgent):
         return best_action
 
     def _max_value(self, agent_pos, ghost_pos, depth, terminated, info, alpha, beta):
+        """Calculates the maximum value for the minimax algorithm."""
         if terminated or depth >= self.depth_limit:
             return self._heuristic(agent_pos, ghost_pos, terminated, info)
 
@@ -213,6 +220,7 @@ class MinimaxAgent(AdversarialAgent):
         return v
 
     def _min_value(self, agent_pos, ghost_pos, depth, terminated, info, alpha, beta):
+        """Calculates the minimum value for the minimax algorithm."""
         if terminated or depth >= self.depth_limit:
             return self._heuristic(agent_pos, ghost_pos, terminated, info)
 
@@ -289,6 +297,7 @@ class ExpectimaxAgent(AdversarialAgent):
         return best_action
 
     def _max_value(self, agent_pos, ghost_pos, depth, terminated, info):
+        """Calculates the maximum value for the expectimax algorithm."""
         if terminated or depth >= self.depth_limit:
             return self._heuristic(agent_pos, ghost_pos, terminated, info)
 
@@ -312,6 +321,7 @@ class ExpectimaxAgent(AdversarialAgent):
         return v
 
     def _expect_value(self, agent_pos, ghost_pos, depth, terminated, info):
+        """Calculates the expected value for the expectimax algorithm."""
         if terminated or depth >= self.depth_limit:
             return self._heuristic(agent_pos, ghost_pos, terminated, info)
 

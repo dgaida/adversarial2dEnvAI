@@ -41,3 +41,5 @@ class BaseAgent:
         """
         self.action_space = action_space
         self.env = kwargs.get("env")
+        self.perceived_agent_pos = None
+        self.perceived_ghost_pos = None
