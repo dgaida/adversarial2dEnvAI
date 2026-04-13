@@ -447,7 +447,10 @@ class PygameRenderer:
         self.screen.blit(items_text, (col2_x, panel_y + 70))
 
         # Row 4: Distance, Goal, Sensor
-        distance = info.get("ghost_distance", abs(agent_pos[0] - ghost_pos[0]) + abs(agent_pos[1] - ghost_pos[1]))
+        distance = info.get(
+            "ghost_distance",
+            abs(agent_pos[0] - ghost_pos[0]) + abs(agent_pos[1] - ghost_pos[1]),
+        )
         dist_text = self.small_font.render(
             f"Dist: {distance}", True, self.colors["yellow"]
         )
