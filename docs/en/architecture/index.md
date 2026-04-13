@@ -1,6 +1,6 @@
 # Architecture
 
-This document describes the internal architecture of the CustomGrid environment.
+This document describes the internal architecture of the CustomGrid environment and the complete task fulfillment workflow.
 
 ## System Overview
 
@@ -25,9 +25,62 @@ graph TD
     PF -.-> Interface
 ```
 
-## Data Flow
+## Complete Task Fulfillment Workflow
 
-The data flow during a step (`step`) follows a strict turn-based protocol.
+The following diagram shows the complete workflow of how various modules work together to translate a user task (e.g., via speech) into agent actions. This includes planned future modules like **Speech2Text** and the **Task Planner**.
+
+```mermaid
+graph TD
+    %% Input Modules
+    User([User]) -- "Voice Command / Text" --> Input{Input Interface}
+
+    subgraph "Task Understanding & Planning"
+        S2T[Speech2Text Module *] -- "Transcript" --> NLP[NLP / LLM Parser *]
+        NLP -- "Target List" --> Planner[Task Planner / TSP Solver *]
+    end
+
+    Input -- "Audio" --> S2T
+    Input -- "Text" --> NLP
+
+    subgraph "Agent Control (AgentInterface)"
+        AI[AgentInterface]
+        PF[Particle Filter]
+        Vision[Vision Sensor]
+        Audio[Audio Sensor *]
+    end
+
+    Planner -- "Next Sub-goal" --> Agent[AI Agent / Controller]
+
+    Agent -- "Action" --> AI
+    AI -- "Raw Data" --> Vision
+    AI -- "Raw Data" --> Audio
+    AI -- "Color Measurement" --> PF
+
+    Vision -- "Classification" --> PF
+    Audio -- "Audio ID" --> PF
+
+    PF -- "Estimated Position" --> Agent
+    Agent -- "State Feedback" --> Planner
+
+    subgraph "Simulation Core"
+        Env[CustomGridEnv]
+        Renderer[Renderer]
+    end
+
+    AI -- "Execute Action" --> Env
+    Env -- "Update" --> Renderer
+    Renderer -- "Visualization" --> User
+
+    classDef future fill:#f9f,stroke:#333,stroke-dasharray: 5 5;
+    class S2T,NLP,Planner,Audio future;
+
+    linkStyle default stroke:#333,stroke-width:2px;
+```
+*\* These modules are part of the extended architectural concept for students.*
+
+## Data Flow (Step Level)
+
+The data flow during a single simulation step (`step`):
 
 ```mermaid
 sequenceDiagram

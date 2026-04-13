@@ -6,7 +6,15 @@
 [![interrogate](docs/assets/interrogate.svg)](https://dgaida.github.io/adversarial2dEnvAI/metrics/)
 [![Tests](https://github.com/dgaida/adversarial2dEnvAI/actions/workflows/tests.yml/badge.svg)](https://github.com/dgaida/adversarial2dEnvAI/actions/workflows/tests.yml)
 
-An advanced Gymnasium-based grid environment for Reinforcement Learning and Robotics tutorials. CustomGrid features an agent navigating a stochastic environment with imperfect sensors, adversarial elements, and complex state estimation.
+An advanced Gymnasium-based grid environment for Reinforcement Learning and Robotics tutorials, used in the **AI lecture at TH Köln**. CustomGrid features an agent navigating a stochastic environment with imperfect sensors, adversarial elements, and complex state estimation.
+
+---
+
+## 🎯 Goal of the Environment
+
+The primary goal of this environment is to teach students how to develop an autonomous agent capable of achieving complex tasks defined by a user. These tasks may include visiting specific cells identified by visual or acoustic stimuli in an optimal order and returning to the starting position, often beginning from an unknown location.
+
+A key challenge is the integration of multiple modules—such as **Speech-to-Text** for task understanding, **Vision/Acoustic sensors** for identification, and **Bayesian filters** for localization—to allow the agent to solve high-level goals (e.g., "Visit the dog, then the goal").
 
 ---
 
@@ -21,7 +29,7 @@ An advanced Gymnasium-based grid environment for Reinforcement Learning and Robo
 *   **State Estimation**: Integrated **Particle Filter** for Bayesian localization.
 *   **Interactive Visualization**:
     *   Rich Pygame-based renderer.
-    *   Interactive Google Colab GUI with real-time 2D probability distribution (contour plots).
+    *   Interactive Google Colab GUI with real-time 2D probability distribution.
 *   **Customizable Ghost AI**: Switch between shortest-path chasing, random movement, and minimax.
 
 ---
@@ -32,6 +40,19 @@ An advanced Gymnasium-based grid environment for Reinforcement Learning and Robo
 
 ```bash
 pip install git+https://github.com/dgaida/adversarial2dEnvAI.git
+```
+
+### Anaconda Environment
+
+You can also use Anaconda to manage your environment:
+
+```bash
+# Create and activate the environment from the provided file
+conda env create -f environment.yml
+conda activate custom_grid_env
+
+# Install the package in editable mode
+pip install -e .
 ```
 
 ### Basic Usage

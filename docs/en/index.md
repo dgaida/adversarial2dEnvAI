@@ -5,19 +5,26 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![interrogate](assets/interrogate.svg)](metrics.md)
 
-An advanced Gymnasium-based grid environment for Reinforcement Learning and Robotics tutorials. CustomGrid features an agent navigating a stochastic environment with imperfect sensors, adversarial elements, and complex state estimation.
+An advanced Gymnasium-based grid environment for Reinforcement Learning and Robotics tutorials, used in the **AI lecture at TH Köln**. CustomGrid features an agent navigating a stochastic environment with imperfect sensors, adversarial elements, and complex state estimation.
+
+## 🎯 Goal of the Environment
+
+The primary goal of this environment is to teach students how to develop an autonomous agent capable of achieving complex tasks defined by a user. These tasks may include visiting specific cells identified by visual or acoustic stimuli in an optimal order and returning to the starting position, often beginning from an unknown location.
+
+A key challenge is the integration of multiple modules—such as **Speech-to-Text** for task understanding, **Vision/Acoustic sensors** for identification, and **Bayesian filters** for localization—to allow the agent to solve high-level goals (e.g., "Visit the dog, then the goal").
 
 ## 🌟 Key Features
 
-*   **Turn-Based Adversarial Gameplay**: An agent competes against a ghost in a 4x5 grid.
-*   **Stochastic Movement**: Support for *Perpendicular* and *Longitudinal* slipping probabilities.
+*   **Turn-Based Adversarial Gameplay**: Compete against a ghost in a 4x5 grid.
+*   **Adversarial Search**: Integrated **Minimax** and **Expectimax** agents for strategic planning.
+*   **Stochastic Movement**: Realistic physics with *Perpendicular* and *Longitudinal* slipping.
 *   **Imperfect Perception**:
     *   **Noisy Color Sensor**: Ground color detection with 80% accuracy.
-    *   **CNN-Based Vision**: Real-time item classification (dogs, flowers, background) using a trained Convolutional Neural Network.
-*   **State Estimation**: Integrated **Particle Filter** for Bayesian localization, combining vision and color sensor data.
+    *   **CNN-Based Vision**: Real-time item classification using a trained CNN.
+*   **State Estimation**: Integrated **Particle Filter** for Bayesian localization.
 *   **Interactive Visualization**:
     *   Rich Pygame-based renderer.
-    *   Interactive Google Colab GUI with real-time 2D probability distribution (contour plots).
+    *   Interactive Google Colab GUI with real-time 2D probability distribution.
 *   **Customizable Ghost AI**: Switch between shortest-path chasing, random movement, and minimax.
 
 ## 📓 Interactive Notebooks
@@ -26,9 +33,9 @@ Experience the environment directly in your browser:
 
 | Notebook | Description | Link |
 | :--- | :--- | :--- |
-| **Interactive GUI** | Full dashboard with sensors, PF visualization, and manual control. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Colab_GUI_Demo.ipynb) |
+| **Interactive GUI** | Full dashboard with sensors and PF visualization. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Colab_GUI_Demo.ipynb) |
 | **Environment Demo** | Basic programmatic interaction and API walkthrough. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Environment_Demo.ipynb) |
-| **CNN Training** | Step-by-step tutorial on training the vision model. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/CNN_Training.ipynb) |
+| **CNN Training** | Tutorial on training the vision model. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/CNN_Training.ipynb) |
 
 ## 🚀 Quick Start
 
@@ -42,13 +49,13 @@ pip install git+https://github.com/dgaida/adversarial2dEnvAI.git
 
 ```python
 from custom_grid_env.interface import AgentInterface
-from custom_grid_env.agents.random_player_agent import RandomPlayerAgent
+from custom_grid_env.agents.adversarial_agents import MinimaxAgent
 
 # Initialize the interface with Particle Filter and rendering
 interface = AgentInterface(render=True, slip_probability=0.2)
 obs = interface.reset()
 
-agent = RandomPlayerAgent(interface.get_action_space())
+agent = MinimaxAgent(interface.get_action_space(), env=interface.env, depth_limit=4)
 
 while not interface.is_terminated():
     action = agent.get_action(obs)

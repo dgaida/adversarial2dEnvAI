@@ -3,7 +3,7 @@ site_description: An advanced Gymnasium-based grid environment for Reinforcement
 site_author: Jules
 site_url: https://dgaida.github.io/adversarial2dEnvAI/
 repo_url: https://github.com/dgaida/adversarial2dEnvAI
-edit_uri: edit/main/docs/
+edit_uri: edit/master/docs/
 
 theme:
   name: material
