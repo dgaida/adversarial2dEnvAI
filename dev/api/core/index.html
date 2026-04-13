@@ -2559,7 +2559,7 @@ interface.close()</p>
 <a id="__codelineno-0-291" name="__codelineno-0-291"></a><span class="sd">        Args:</span>
 <a id="__codelineno-0-292" name="__codelineno-0-292"></a><span class="sd">            agent_class (Type[Agent]): The class of the new ghost agent.</span>
 <a id="__codelineno-0-293" name="__codelineno-0-293"></a><span class="sd">        &quot;&quot;&quot;</span>
-<a id="__codelineno-0-294" name="__codelineno-0-294"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_ghost_agent</span> <span class="o">=</span> <span class="n">agent_class</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="p">)</span>
+<a id="__codelineno-0-294" name="__codelineno-0-294"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_ghost_agent</span> <span class="o">=</span> <span class="n">agent_class</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="p">)</span>
 <a id="__codelineno-0-295" name="__codelineno-0-295"></a>
 <a id="__codelineno-0-296" name="__codelineno-0-296"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_reward_structure</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <a id="__codelineno-0-297" name="__codelineno-0-297"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets the reward structure for the environment.</span>
@@ -3336,7 +3336,7 @@ Defaults to "rgb_array" if render is True and no mode is provided.</p>
 <a id="__codelineno-0-291" name="__codelineno-0-291"></a><span class="sd">    Args:</span>
 <a id="__codelineno-0-292" name="__codelineno-0-292"></a><span class="sd">        agent_class (Type[Agent]): The class of the new ghost agent.</span>
 <a id="__codelineno-0-293" name="__codelineno-0-293"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-294" name="__codelineno-0-294"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_ghost_agent</span> <span class="o">=</span> <span class="n">agent_class</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="p">)</span>
+<a id="__codelineno-0-294" name="__codelineno-0-294"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_ghost_agent</span> <span class="o">=</span> <span class="n">agent_class</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
