@@ -31,6 +31,9 @@ jobs:
         run: |
           PYTHONPATH=src python3 -m pytest
 
+      - name: Create assets directory
+        run: mkdir -p docs/assets
+
       - name: Check API doc coverage
         run: |
           interrogate src/ --fail-under 95 --generate-badge docs/assets/interrogate.svg
