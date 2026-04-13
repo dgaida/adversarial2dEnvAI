@@ -89,6 +89,14 @@ class ColabGUI:
             value="chase",
             description="Ghost Type:",
         )
+        self.knowledge_dropdown = widgets.Dropdown(
+            options=[
+                ("Actual State", "actual"),
+                ("Estimated State", "estimated"),
+            ],
+            value="actual",
+            description="Agent Knowledge:",
+        )
         self.stats_label = widgets.Label(value="Steps: 0 | Total Reward: 0.0")
 
         # Layout
@@ -97,7 +105,7 @@ class ColabGUI:
                 widgets.HBox([self.next_button, self.reset_button]),
                 widgets.HBox([self.pf_toggle, self.sensor_dropdown]),
                 widgets.HBox([self.agent_dropdown, self.ghost_dropdown]),
-                widgets.HBox([self.slip_type_dropdown]),
+                widgets.HBox([self.slip_type_dropdown, self.knowledge_dropdown]),
                 self.stats_label,
             ]
         )
@@ -115,6 +123,20 @@ class ColabGUI:
         """Callback for the 'Next Step' button."""
         if self.interface.is_terminated():
             return
+
+        if self.knowledge_dropdown.value == "estimated" and self.interface.pf:
+            est_pos = self.interface.pf.get_estimated_position()["cell_pos"]
+            self.agent.perceived_agent_pos = est_pos
+            # Ghost position is also relative to estimated agent position in observation
+            # but for adversarial agents we need the absolute ghost position.
+            # We assume the agent knows where the ghost is relative to its estimate.
+            actual_agent_pos = self.interface.env.agent_pos
+            actual_ghost_pos = self.interface.env.ghost_pos
+            rel_ghost = [actual_ghost_pos[0] - actual_agent_pos[0], actual_ghost_pos[1] - actual_agent_pos[1]]
+            self.agent.perceived_ghost_pos = [est_pos[0] + rel_ghost[0], est_pos[1] + rel_ghost[1]]
+        else:
+            self.agent.perceived_agent_pos = None
+            self.agent.perceived_ghost_pos = None
 
         action = self.agent.get_action(self.obs)
         self.obs, reward, done, info = self.interface.step(action)

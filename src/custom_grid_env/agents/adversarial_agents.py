@@ -22,10 +22,12 @@ class AdversarialAgent(BaseAgent):
 
     def _get_agent_pos(self) -> List[int]:
         """Gets the current agent position from the environment."""
+        if self.perceived_agent_pos is not None: return list(self.perceived_agent_pos)
         return list(self.env.agent_pos)
 
     def _get_ghost_pos(self) -> List[int]:
         """Gets the current ghost position from the environment."""
+        if self.perceived_ghost_pos is not None: return list(self.perceived_ghost_pos)
         return list(self.env.ghost_pos)
 
     def _get_goal_pos(self) -> List[int]:
