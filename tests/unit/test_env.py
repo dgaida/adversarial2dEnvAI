@@ -36,9 +36,9 @@ def test_env_step_ghost():
     env.reset()
     # Agent moves first
     env.step(3)
-    # Ghost's turn. Initial ghost pos [0,3]. Action 0 is LEFT.
+    # Ghost's turn. Initial ghost pos [3,4]. Action 0 is LEFT.
     obs, reward, terminated, truncated, info = env.step(0)
-    assert env.ghost_pos == [0, 2]
+    assert env.ghost_pos == [3, 3]
     assert env.current_turn == 0  # Now agent's turn
     assert info["mover"] == "ghost"
     env.close()

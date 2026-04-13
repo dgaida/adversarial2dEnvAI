@@ -36,7 +36,7 @@ class CustomGridEnv(gym.Env):
         self,
         render_mode: str = "human",
         slip_probability: float = 0.2,
-        slip_type: str = "perpendicular",
+        slip_type: str = "longitudinal",
     ):
         """Initializes the CustomGridEnv.
 
@@ -44,7 +44,7 @@ class CustomGridEnv(gym.Env):
             render_mode (str): The mode to render with. Defaults to "human".
             slip_probability (float): Chance to move perpendicular to intended direction. Defaults to 0.2.
             slip_type (str): Type of slipping ("perpendicular" or "longitudinal").
-                Defaults to "perpendicular".
+                Defaults to "longitudinal".
         """
         super().__init__()
         self.render_mode = render_mode
@@ -104,8 +104,8 @@ class CustomGridEnv(gym.Env):
         self._setup_walls()
         self.agent_pos = [0, 2]
         self.start_pos = [0, 2]
-        self.ghost_pos = [0, 3]
-        self.ghost_start_pos = [0, 3]
+        self.ghost_pos = [3, 4]
+        self.ghost_start_pos = [3, 4]
         self.step_count = 0
         self.current_turn = 0
         self.info = {}
@@ -302,6 +302,9 @@ class CustomGridEnv(gym.Env):
         self.info = {
             "current_turn": "agent",
             "color_measurement": self._get_color_sensor_measurement(self.agent_pos),
+            "ghost_distance": self._calculate_shortest_path_distance(
+                self.agent_pos, self.ghost_pos
+            ),
         }
         return self._get_obs(), self.info
 
@@ -588,6 +591,9 @@ class CustomGridEnv(gym.Env):
             self.current_turn = 1
             info["current_turn"] = "ghost"
             info["mover"] = "agent"
+            info["ghost_distance"] = self._calculate_shortest_path_distance(
+                self.agent_pos, self.ghost_pos
+            )
             self.info = info
 
         else:
@@ -600,6 +606,9 @@ class CustomGridEnv(gym.Env):
             self.current_turn = 0
             info["current_turn"] = "agent"
             info["mover"] = "ghost"
+            info["ghost_distance"] = self._calculate_shortest_path_distance(
+                self.agent_pos, self.ghost_pos
+            )
 
         self.info = info
         return self._get_obs(), float(reward), terminated, False, info

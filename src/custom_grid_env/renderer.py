@@ -394,18 +394,21 @@ class PygameRenderer:
         turn_text = self.font.render(turn_name, True, turn_color)
         self.screen.blit(turn_text, (col2_x, panel_y + 10))
 
-        # CNN Prediction (Row 1, Col 3)
+        # CNN Prediction (Moved to Col 3, Row 2/3)
+        cnn_label = self.small_font.render("CNN:", True, self.colors["orange"])
+        self.screen.blit(cnn_label, (col3_x, panel_y + 45))
+
         prediction = info.get("cnn_prediction")
         if prediction:
             class_name, prob = prediction
             pred_text = self.small_font.render(
-                f"CNN: {class_name} ({prob*100:.1f}%)",
+                f"{class_name} ({prob*100:.1f}%)",
                 True,
                 self.colors["orange"],
             )
-            self.screen.blit(pred_text, (col3_x, panel_y + 10))
+            self.screen.blit(pred_text, (col3_x, panel_y + 70))
 
-        # Row 2: Agent Pos, Cell Info, Color Sensor
+        # Row 2: Agent Pos, Cell Info
         pos_text = self.small_font.render(
             f"Agent: ({agent_pos[0]}, {agent_pos[1]})",
             True,
@@ -424,17 +427,7 @@ class PygameRenderer:
         )
         self.screen.blit(cell_text, (col2_x, panel_y + 45))
 
-        color_measurement = info.get("color_measurement")
-        if color_measurement is not None:
-            color_names = ["White", "Red", "Green"]
-            color_text = self.small_font.render(
-                f"Sensor: {color_names[color_measurement]}",
-                True,
-                self.colors["white"],
-            )
-            self.screen.blit(color_text, (col3_x, panel_y + 45))
-
-        # Row 3: Ghost Pos, Items, Est. Pos
+        # Row 3: Ghost Pos, Items
         ghost_text = self.small_font.render(
             f"Ghost: ({ghost_pos[0]}, {ghost_pos[1]})",
             True,
@@ -453,20 +446,11 @@ class PygameRenderer:
         )
         self.screen.blit(items_text, (col2_x, panel_y + 70))
 
-        est_pos_data = info.get("estimated_pos", {})
-        est_pos = (
-            est_pos_data.get("cell_pos") if isinstance(est_pos_data, dict) else None
+        # Row 4: Distance, Goal, Sensor
+        distance = info.get(
+            "ghost_distance",
+            abs(agent_pos[0] - ghost_pos[0]) + abs(agent_pos[1] - ghost_pos[1]),
         )
-        if est_pos is not None:
-            est_text = self.small_font.render(
-                f"Est. Pos: ({est_pos[0]}, {est_pos[1]})",
-                True,
-                self.colors["orange"],
-            )
-            self.screen.blit(est_text, (col3_x, panel_y + 70))
-
-        # Row 4: Distance, Goal
-        distance = abs(agent_pos[0] - ghost_pos[0]) + abs(agent_pos[1] - ghost_pos[1])
         dist_text = self.small_font.render(
             f"Dist: {distance}", True, self.colors["yellow"]
         )
@@ -478,6 +462,29 @@ class PygameRenderer:
             self.colors["yellow"] if current_cell["is_goal"] else self.colors["white"],
         )
         self.screen.blit(goal_text, (col2_x, panel_y + 95))
+
+        color_measurement = info.get("color_measurement")
+        if color_measurement is not None:
+            color_names = ["White", "Red", "Green"]
+            color_text = self.small_font.render(
+                f"Sensor: {color_names[color_measurement]}",
+                True,
+                self.colors["white"],
+            )
+            self.screen.blit(color_text, (col3_x, panel_y + 95))
+
+        # Row 5 & 6: Actions and Est. Pos
+        est_pos_data = info.get("estimated_pos", {})
+        est_pos = (
+            est_pos_data.get("cell_pos") if isinstance(est_pos_data, dict) else None
+        )
+        if est_pos is not None:
+            est_text = self.small_font.render(
+                f"Est. Pos: ({est_pos[0]}, {est_pos[1]})",
+                True,
+                self.colors["orange"],
+            )
+            self.screen.blit(est_text, (col3_x, panel_y + 125))
 
         # Row 5 & 6: Actions (Occupies bottom)
         intended_action = self.small_font.render(
