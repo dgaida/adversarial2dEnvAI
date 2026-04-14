@@ -12,35 +12,35 @@
         <meta name="author" content="Jules">
       
       
-        <link rel="canonical" href="https://dgaida.github.io/adversarial2dEnvAI/dev/en/development/">
+        <link rel="canonical" href="https://dgaida.github.io/adversarial2dEnvAI/dev/en/tutorial/adversarial_search/">
       
       
-        <link rel="prev" href="../tutorial/adversarial_search/">
+        <link rel="prev" href="../particle_filter/">
       
       
-        <link rel="next" href="docstring-guide/">
+        <link rel="next" href="../../development/">
       
       
         
-          <link rel="alternate" href="../../development/" hreflang="de">
+          <link rel="alternate" href="../../../tutorial/adversarial_search/" hreflang="de">
         
           <link rel="alternate" href="./" hreflang="en">
         
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>Guide - CustomGrid Environment</title>
+        <title>Adversarial Search - CustomGrid Environment</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -59,11 +59,11 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -88,7 +88,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#development" class="md-skip">
+        <a href="#adversarial-search-minimax-expectimax" class="md-skip">
           Skip to content
         </a>
       
@@ -106,7 +106,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../" title="CustomGrid Environment" class="md-header__button md-logo" aria-label="CustomGrid Environment" data-md-component="logo">
+    <a href="../../" title="CustomGrid Environment" class="md-header__button md-logo" aria-label="CustomGrid Environment" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -126,7 +126,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Guide
+              Adversarial Search
             
           </span>
         </div>
@@ -173,7 +173,7 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../development/" hreflang="de" class="md-select__link">
+            <a href="../../../tutorial/adversarial_search/" hreflang="de" class="md-select__link">
               Deutsch
             </a>
           </li>
@@ -265,7 +265,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../" class="md-tabs__link">
+      <a href="../../" class="md-tabs__link">
         
   
   
@@ -284,7 +284,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../getting-started/" class="md-tabs__link">
+      <a href="../../getting-started/" class="md-tabs__link">
         
   
   
@@ -303,7 +303,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../installation/" class="md-tabs__link">
+      <a href="../../installation/" class="md-tabs__link">
         
   
   
@@ -322,7 +322,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../configuration/" class="md-tabs__link">
+      <a href="../../configuration/" class="md-tabs__link">
         
   
   
@@ -343,7 +343,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../usage/environment/" class="md-tabs__link">
+        <a href="../../usage/environment/" class="md-tabs__link">
           
   
   
@@ -363,7 +363,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../api/core/" class="md-tabs__link">
+        <a href="../../api/core/" class="md-tabs__link">
           
   
   
@@ -381,7 +381,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../architecture/" class="md-tabs__link">
+      <a href="../../architecture/" class="md-tabs__link">
         
   
   
@@ -398,11 +398,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../tutorial/cnn/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../cnn/" class="md-tabs__link">
           
   
   
@@ -418,13 +420,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../development/" class="md-tabs__link">
           
   
   
@@ -442,7 +442,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../troubleshooting/" class="md-tabs__link">
+      <a href="../../troubleshooting/" class="md-tabs__link">
         
   
   
@@ -461,7 +461,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../metrics/" class="md-tabs__link">
+      <a href="../../metrics/" class="md-tabs__link">
         
   
   
@@ -496,7 +496,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../" title="CustomGrid Environment" class="md-nav__button md-logo" aria-label="CustomGrid Environment" data-md-component="logo">
+    <a href="../../" title="CustomGrid Environment" class="md-nav__button md-logo" aria-label="CustomGrid Environment" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -526,7 +526,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../../" class="md-nav__link">
         
   
   
@@ -553,7 +553,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting-started/" class="md-nav__link">
+      <a href="../../getting-started/" class="md-nav__link">
         
   
   
@@ -580,7 +580,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../installation/" class="md-nav__link">
+      <a href="../../installation/" class="md-nav__link">
         
   
   
@@ -607,7 +607,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../configuration/" class="md-nav__link">
+      <a href="../../configuration/" class="md-nav__link">
         
   
   
@@ -688,7 +688,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../usage/environment/" class="md-nav__link">
+      <a href="../../usage/environment/" class="md-nav__link">
         
   
   
@@ -716,7 +716,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../usage/gameplay/" class="md-nav__link">
+      <a href="../../usage/gameplay/" class="md-nav__link">
         
   
   
@@ -744,7 +744,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../usage/observations/" class="md-nav__link">
+      <a href="../../usage/observations/" class="md-nav__link">
         
   
   
@@ -772,7 +772,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../usage/rewards/" class="md-nav__link">
+      <a href="../../usage/rewards/" class="md-nav__link">
         
   
   
@@ -800,7 +800,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../usage/localization/" class="md-nav__link">
+      <a href="../../usage/localization/" class="md-nav__link">
         
   
   
@@ -889,7 +889,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/core/" class="md-nav__link">
+      <a href="../../api/core/" class="md-nav__link">
         
   
   
@@ -917,7 +917,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/agents/" class="md-nav__link">
+      <a href="../../api/agents/" class="md-nav__link">
         
   
   
@@ -952,7 +952,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../architecture/" class="md-nav__link">
+      <a href="../../architecture/" class="md-nav__link">
         
   
   
@@ -968,151 +968,6 @@
   
 
       </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
-        
-          
-          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Tutorials
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_8">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Tutorials
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../tutorial/cnn/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    CNN Training
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../tutorial/particle_filter/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Particle Filter
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../tutorial/adversarial_search/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Adversarial Search
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -1142,17 +997,17 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
         
           
-          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
             
   
   
   <span class="md-ellipsis">
     
   
-    Development
+    Tutorials
   
 
     
@@ -1163,16 +1018,72 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_9">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             
   
-    Development
+    Tutorials
   
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cnn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CNN Training
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../particle_filter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Particle Filter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1197,7 +1108,7 @@
   <span class="md-ellipsis">
     
   
-    Guide
+    Adversarial Search
   
 
     
@@ -1215,7 +1126,7 @@
   <span class="md-ellipsis">
     
   
-    Guide
+    Adversarial Search
   
 
     
@@ -1241,10 +1152,77 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#contributing" class="md-nav__link">
+  <a href="#minimax-algorithm" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Contributing
+        Minimax Algorithm
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Minimax Algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alpha-beta-pruning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alpha-Beta Pruning
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-customgrid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in CustomGrid
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expectimax-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expectimax Algorithm
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Expectimax Algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#probabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Probabilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison
       
     </span>
   </a>
@@ -1252,10 +1230,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#release-process" class="md-nav__link">
+  <a href="#heuristic-function" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Release Process
+        Heuristic Function
       
     </span>
   </a>
@@ -1271,6 +1249,67 @@
 
               
             
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Development
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
               
                 
   
@@ -1278,7 +1317,35 @@
   
   
     <li class="md-nav__item">
-      <a href="docstring-guide/" class="md-nav__link">
+      <a href="../../development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/docstring-guide/" class="md-nav__link">
         
   
   
@@ -1306,7 +1373,7 @@
   
   
     <li class="md-nav__item">
-      <a href="changelog/" class="md-nav__link">
+      <a href="../../development/changelog/" class="md-nav__link">
         
   
   
@@ -1334,7 +1401,7 @@
   
   
     <li class="md-nav__item">
-      <a href="versioning/" class="md-nav__link">
+      <a href="../../development/versioning/" class="md-nav__link">
         
   
   
@@ -1362,7 +1429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="style-guide/" class="md-nav__link">
+      <a href="../../development/style-guide/" class="md-nav__link">
         
   
   
@@ -1397,7 +1464,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../troubleshooting/" class="md-nav__link">
+      <a href="../../troubleshooting/" class="md-nav__link">
         
   
   
@@ -1424,7 +1491,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../metrics/" class="md-nav__link">
+      <a href="../../metrics/" class="md-nav__link">
         
   
   
@@ -1471,10 +1538,77 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#contributing" class="md-nav__link">
+  <a href="#minimax-algorithm" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Contributing
+        Minimax Algorithm
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Minimax Algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alpha-beta-pruning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alpha-Beta Pruning
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-customgrid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in CustomGrid
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expectimax-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expectimax Algorithm
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Expectimax Algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#probabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Probabilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison
       
     </span>
   </a>
@@ -1482,10 +1616,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#release-process" class="md-nav__link">
+  <a href="#heuristic-function" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Release Process
+        Heuristic Function
       
     </span>
   </a>
@@ -1509,7 +1643,7 @@
 
 
   
-    <a href="https://github.com/dgaida/adversarial2dEnvAI/edit/master/docs/en/development/index.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/dgaida/adversarial2dEnvAI/edit/master/docs/en/tutorial/adversarial_search.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -1518,27 +1652,63 @@
     
       
     
-    <a href="https://github.com/dgaida/adversarial2dEnvAI/raw/master/docs/en/development/index.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/dgaida/adversarial2dEnvAI/raw/master/docs/en/tutorial/adversarial_search.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
 
-<h1 id="development">Development<a class="headerlink" href="#development" title="Permanent link">&para;</a></h1>
-<h2 id="contributing">Contributing<a class="headerlink" href="#contributing" title="Permanent link">&para;</a></h2>
-<p>Contributions are welcome! Please follow these standards:</p>
-<ul>
-<li><strong>Docstrings</strong>: Google style is mandatory.</li>
-<li><strong>Tests</strong>: New features must be covered by tests in <code>tests/</code>.</li>
-<li><strong>API Coverage</strong>: Must remain above 95%.</li>
-</ul>
-<h2 id="release-process">Release Process<a class="headerlink" href="#release-process" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Bump version in <code>pyproject.toml</code>.</li>
-<li>Generate changelog via <code>git-cliff</code>.</li>
-<li>Deploy documentation via GitHub Actions.</li>
-</ol>
+<h1 id="adversarial-search-minimax-expectimax">Adversarial Search: Minimax &amp; Expectimax<a class="headerlink" href="#adversarial-search-minimax-expectimax" title="Permanent link">&para;</a></h1>
+<p>This tutorial explains the implementation and use of Minimax and Expectimax algorithms in the CustomGrid environment.</p>
+<h2 id="minimax-algorithm">Minimax Algorithm<a class="headerlink" href="#minimax-algorithm" title="Permanent link">&para;</a></h2>
+<p>The Minimax algorithm is used in zero-sum games to find the maximum gain (or minimum loss) for a player, assuming that the opponent also plays optimally.</p>
+<h3 id="alpha-beta-pruning">Alpha-Beta Pruning<a class="headerlink" href="#alpha-beta-pruning" title="Permanent link">&para;</a></h3>
+<p>To make the search more efficient, our implementation uses Alpha-Beta pruning. This allows ignoring branches in the search tree that cannot affect the final result.</p>
+<h3 id="usage-in-customgrid">Usage in CustomGrid<a class="headerlink" href="#usage-in-customgrid" title="Permanent link">&para;</a></h3>
+<p>The <code>MinimaxAgent</code> evaluates states based on a heuristic that minimizes the distance to the goal and maximizes the distance to the ghost.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">custom_grid_env.agents.adversarial_agents</span><span class="w"> </span><span class="kn">import</span> <span class="n">MinimaxAgent</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># Initialize the agent with a search depth of 4</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">agent</span> <span class="o">=</span> <span class="n">MinimaxAgent</span><span class="p">(</span><span class="n">interface</span><span class="o">.</span><span class="n">get_action_space</span><span class="p">(),</span> <span class="n">env</span><span class="o">=</span><span class="n">interface</span><span class="o">.</span><span class="n">env</span><span class="p">,</span> <span class="n">depth_limit</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="expectimax-algorithm">Expectimax Algorithm<a class="headerlink" href="#expectimax-algorithm" title="Permanent link">&para;</a></h2>
+<p>In stochastic environments (like CustomGrid with slip probability), Minimax is often too pessimistic. Expectimax replaces the min nodes (or opponent nodes) with expectation nodes.</p>
+<h3 id="probabilities">Probabilities<a class="headerlink" href="#probabilities" title="Permanent link">&para;</a></h3>
+<p>Expectimax calculates the weighted average of the values of all possible successor states based on the slip probability.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">custom_grid_env.agents.adversarial_agents</span><span class="w"> </span><span class="kn">import</span> <span class="n">ExpectimaxAgent</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># Initialize the Expectimax agent</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">agent</span> <span class="o">=</span> <span class="n">ExpectimaxAgent</span><span class="p">(</span><span class="n">interface</span><span class="o">.</span><span class="n">get_action_space</span><span class="p">(),</span> <span class="n">env</span><span class="o">=</span><span class="n">interface</span><span class="o">.</span><span class="n">env</span><span class="p">,</span> <span class="n">depth_limit</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="comparison">Comparison<a class="headerlink" href="#comparison" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Algorithm</th>
+<th>Best Application</th>
+<th>Considers Stochasticity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Minimax</strong></td>
+<td>Deterministic, optimal opponent</td>
+<td>No (assumes worst-case)</td>
+</tr>
+<tr>
+<td><strong>Expectimax</strong></td>
+<td>Stochastic, average opponent</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<h2 id="heuristic-function">Heuristic Function<a class="headerlink" href="#heuristic-function" title="Permanent link">&para;</a></h2>
+<p>Both agents use an internal heuristic function:
+- <strong>Goal reached</strong>: +10,000
+- <strong>Caught by ghost</strong>: -10,000
+- <strong>Distance to goal</strong>: Penalizes large distances.
+- <strong>Distance to ghost</strong>: Rewards safety buffers.</p>
 
 
 
@@ -1596,10 +1766,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit", "content.action.view", "content.tabs.link", "navigation.tracking"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit", "content.action.view", "content.tabs.link", "navigation.tracking"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

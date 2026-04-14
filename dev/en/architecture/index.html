@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="Eine Gymnasium-basierte Gitterumgebung mit einem Agenten und einem Geist." name="description"/>
+<meta content="An advanced Gymnasium-based grid environment for Reinforcement Learning and Robotics tutorials." name="description"/>
 <meta content="Jules" name="author"/>
 <link href="https://dgaida.github.io/adversarial2dEnvAI/dev/en/architecture/" rel="canonical"/>
 <link href="../api/agents/" rel="prev"/>
@@ -34,6 +34,8 @@
         </a>
 </div>
 <div data-md-component="announce">
+</div>
+<div data-md-color-scheme="default" data-md-component="outdated" hidden="">
 </div>
 <header class="md-header" data-md-component="header">
 <nav aria-label="Header" class="md-header__inner md-grid">
@@ -145,7 +147,7 @@
   
     
   
-  Overview
+  Home
 
       </a>
 </li>
@@ -282,7 +284,7 @@
 <span class="md-ellipsis">
     
   
-    Overview
+    Home
   
 
     
@@ -499,6 +501,33 @@
     </span>
 </a>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#complete-task-fulfillment-workflow">
+<span class="md-ellipsis">
+      
+        Complete Task Fulfillment Workflow
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#data-flow-step-level">
+<span class="md-ellipsis">
+      
+        Data Flow (Step Level)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#class-hierarchy">
+<span class="md-ellipsis">
+      
+        Class Hierarchy
+      
+    </span>
+</a>
+</li>
 </ul>
 </nav>
 </li>
@@ -549,6 +578,18 @@
   </span>
 </a>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorial/adversarial_search/">
+<span class="md-ellipsis">
+    
+  
+    Adversarial Search
+  
+
+    
+  </span>
+</a>
+</li>
 </ul>
 </nav>
 </li>
@@ -581,6 +622,42 @@
     
   
     Guide
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../development/docstring-guide/">
+<span class="md-ellipsis">
+    
+  
+    Docstring Standard
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../development/changelog/">
+<span class="md-ellipsis">
+    
+  
+    Changelog Workflow
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../development/versioning/">
+<span class="md-ellipsis">
+    
+  
+    Versioning Guide
   
 
     
@@ -649,6 +726,33 @@
     </span>
 </a>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#complete-task-fulfillment-workflow">
+<span class="md-ellipsis">
+      
+        Complete Task Fulfillment Workflow
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#data-flow-step-level">
+<span class="md-ellipsis">
+      
+        Data Flow (Step Level)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#class-hierarchy">
+<span class="md-ellipsis">
+      
+        Class Hierarchy
+      
+    </span>
+</a>
+</li>
 </ul>
 </nav>
 </div>
@@ -656,21 +760,126 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<a class="md-content__button md-icon" href="https://github.com/dgaida/adversarial2dEnvAI/edit/main/docs/en/architecture/index.md" rel="edit" title="Edit this page">
+<a class="md-content__button md-icon" href="https://github.com/dgaida/adversarial2dEnvAI/edit/master/docs/en/architecture/index.md" rel="edit" title="Edit this page">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
 </a>
-<a class="md-content__button md-icon" href="https://github.com/dgaida/adversarial2dEnvAI/raw/main/docs/en/architecture/index.md" title="View source of this page">
+<a class="md-content__button md-icon" href="https://github.com/dgaida/adversarial2dEnvAI/raw/master/docs/en/architecture/index.md" title="View source of this page">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"></path></svg>
 </a>
 <h1 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">¶</a></h1>
+<p>This document describes the internal architecture of the CustomGrid environment and the complete task fulfillment workflow.</p>
 <h2 id="system-overview">System Overview<a class="headerlink" href="#system-overview" title="Permanent link">¶</a></h2>
+<p>The environment is designed modularly to allow easy expansion of sensors and agents.</p>
 <div class="mermaid">graph TD
-    User[User/Script] --&gt; Interface[AgentInterface]
-    Interface --&gt; Env[CustomGridEnv]
-    Env --&gt; Renderer[PygameRenderer]
+    subgraph "CustomGrid System"
+        Interface[AgentInterface]
+        Env[CustomGridEnv]
+        PF[ParticleFilter]
+        Vision[VisionSensor]
+        Renderer[PygameRenderer]
+    end
+
+    UserAgent[User Agent] --&gt; Interface
+    Interface --&gt; Env
+    Interface --&gt; PF
+    Interface --&gt; Vision
+    Env --&gt; Renderer
+    Vision -.-&gt; PF
+    PF -.-&gt; Interface
 </div>
+<h2 id="complete-task-fulfillment-workflow">Complete Task Fulfillment Workflow<a class="headerlink" href="#complete-task-fulfillment-workflow" title="Permanent link">¶</a></h2>
+<p>The following diagram shows the complete workflow of how various modules work together to translate a user task (e.g., via speech) into agent actions. This includes planned future modules like <strong>Speech2Text</strong> and the <strong>Task Planner</strong>.</p>
+<p><div class="mermaid">graph TD
+    %% Input Modules
+    User([User]) -- "Voice Command / Text" --&gt; Input{Input Interface}
+
+    subgraph "Task Understanding &amp; Planning"
+        S2T[Speech2Text Module *] -- "Transcript" --&gt; NLP[NLP / LLM Parser *]
+        NLP -- "Target List" --&gt; Planner[Task Planner / TSP Solver *]
+    end
+
+    Input -- "Audio" --&gt; S2T
+    Input -- "Text" --&gt; NLP
+
+    subgraph "Agent Control (AgentInterface)"
+        AI[AgentInterface]
+        PF[Particle Filter]
+        Vision[Vision Sensor]
+        Audio[Audio Sensor *]
+    end
+
+    Planner -- "Next Sub-goal" --&gt; Agent[AI Agent / Controller]
+
+    Agent -- "Action" --&gt; AI
+    AI -- "Raw Data" --&gt; Vision
+    AI -- "Raw Data" --&gt; Audio
+    AI -- "Color Measurement" --&gt; PF
+
+    Vision -- "Classification" --&gt; PF
+    Audio -- "Audio ID" --&gt; PF
+
+    PF -- "Estimated Position" --&gt; Agent
+    Agent -- "State Feedback" --&gt; Planner
+
+    subgraph "Simulation Core"
+        Env[CustomGridEnv]
+        Renderer[Renderer]
+    end
+
+    AI -- "Execute Action" --&gt; Env
+    Env -- "Update" --&gt; Renderer
+    Renderer -- "Visualization" --&gt; User
+
+    classDef future fill:#f9f,stroke:#333,stroke-dasharray: 5 5;
+    class S2T,NLP,Planner,Audio future;
+
+    linkStyle default stroke:#333,stroke-width:2px;
+</div>
+<em>* These modules are part of the extended architectural concept for students.</em></p>
+<h2 id="data-flow-step-level">Data Flow (Step Level)<a class="headerlink" href="#data-flow-step-level" title="Permanent link">¶</a></h2>
+<p>The data flow during a single simulation step (<code>step</code>):</p>
+<div class="mermaid">sequenceDiagram
+    participant A as Agent
+    participant I as AgentInterface
+    participant E as CustomGridEnv
+    participant PF as Particle Filter
+    participant V as Vision Sensor
+
+    A-&gt;&gt;I: step(action)
+    I-&gt;&gt;PF: predict(action)
+    I-&gt;&gt;E: step(action)
+    E--&gt;&gt;I: obs, reward, info
+    I-&gt;&gt;V: predict(cell)
+    V--&gt;&gt;I: cnn_probs
+    I-&gt;&gt;PF: update(measurements)
+    PF-&gt;&gt;PF: resample()
+    I-&gt;&gt;A: return obs, reward, info + estimated_pos
+</div>
+<h2 id="class-hierarchy">Class Hierarchy<a class="headerlink" href="#class-hierarchy" title="Permanent link">¶</a></h2>
+<p>The agents follow a protocol-based design.</p>
+<div class="mermaid">classDiagram
+    class Agent {
+        &lt;<protocol>&gt;
+        +get_action(observation)
+    }
+    class BaseAgent {
+        +action_space
+        +env
+    }
+    class MinimaxAgent
+    class ExpectimaxAgent
+    class ChaseGhostAgent
+    class RandomGhostAgent
+
+    BaseAgent ..|&gt; Agent
+    MinimaxAgent --|&gt; BaseAgent
+    ExpectimaxAgent --|&gt; BaseAgent
+    ChaseGhostAgent --|&gt; BaseAgent
+    RandomGhostAgent --|&gt; BaseAgent
+</protocol></div>
 </article>
 </div>
+<script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
 </div>
 <button class="md-top md-icon" data-md-component="top" hidden="" type="button">
@@ -696,7 +905,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit", "content.action.view"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit", "content.action.view", "content.tabs.link", "navigation.tracking"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
 <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
 <script type="module">import mermaid from "https://unpkg.com/mermaid@10.4.0/dist/mermaid.esm.min.mjs";
 mermaid.initialize({});</script></body>
