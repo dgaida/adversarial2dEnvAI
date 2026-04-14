@@ -4,7 +4,7 @@ import os
 import numpy as np
 import pygame
 import tensorflow as tf
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List, Tuple
 from .logger import get_logger
 
 logger = get_logger(__name__)
@@ -89,7 +89,12 @@ class VisionSensor:
         }
 
     def _draw_cell_for_cnn(self, cell: Dict[str, Any], surface: pygame.Surface):
-        """Draws cell content on a 64x64 surface for CNN input."""
+        """Draws cell content on a 64x64 surface for CNN input.
+
+        Args:
+            cell (Dict[str, Any]): The cell metadata.
+            surface (pygame.Surface): The surface to draw on.
+        """
         surface.fill(self.colors["white"])
         cell_size = 64
         margin = 4
@@ -117,7 +122,19 @@ class VisionSensor:
         elif "notes" in cell["items"]:
             self._draw_note(cx, cy, surface)
 
-    def _draw_crosshatch(self, surface, rect, color):
+    def _draw_crosshatch(
+        self,
+        surface: pygame.Surface,
+        rect: Tuple[int, int, int, int],
+        color: Tuple[int, int, int],
+    ):
+        """Draws a crosshatch pattern on the surface.
+
+        Args:
+            surface (pygame.Surface): The surface to draw on.
+            rect (Tuple[int, int, int, int]): The rectangle (x, y, w, h) to fill.
+            color (Tuple[int, int, int]): The RGB color of the lines.
+        """
         x, y, w, h = rect
         for i in range(0, w + h, 8):
             pygame.draw.line(
@@ -129,6 +146,13 @@ class VisionSensor:
             )
 
     def _draw_dog(self, cx: int, cy: int, surface: pygame.Surface):
+        """Draws a dog symbol on the surface.
+
+        Args:
+            cx (int): X-coordinate of the center.
+            cy (int): Y-coordinate of the center.
+            surface (pygame.Surface): The surface to draw on.
+        """
         pygame.draw.ellipse(
             surface, self.colors["dark_gray"], (cx - 20, cy - 10, 40, 25)
         )
@@ -146,6 +170,13 @@ class VisionSensor:
         )
 
     def _draw_flower(self, cx: int, cy: int, surface: pygame.Surface):
+        """Draws a flower symbol on the surface.
+
+        Args:
+            cx (int): X-coordinate of the center.
+            cy (int): Y-coordinate of the center.
+            surface (pygame.Surface): The surface to draw on.
+        """
         petal_color = self.colors["white"]
         for angle in range(0, 360, 60):
             rad = np.radians(angle)
@@ -157,6 +188,13 @@ class VisionSensor:
         pygame.draw.circle(surface, self.colors["orange"], (cx, cy), 8, 2)
 
     def _draw_note(self, cx: int, cy: int, surface: pygame.Surface):
+        """Draws a musical note symbol on the surface.
+
+        Args:
+            cx (int): X-coordinate of the center.
+            cy (int): Y-coordinate of the center.
+            surface (pygame.Surface): The surface to draw on.
+        """
         pygame.draw.ellipse(surface, self.colors["black"], (cx - 8, cy, 12, 10))
         pygame.draw.line(
             surface, self.colors["black"], (cx + 3, cy + 5), (cx + 3, cy - 25), 3

@@ -11,13 +11,15 @@ class AdversarialAgent(BaseAgent):
     Provides shared heuristic and state-transition logic.
     """
 
-    def __init__(self, action_space: gym.spaces.Space, depth_limit: int = 4, **kwargs):
+    def __init__(
+        self, action_space: gym.spaces.Space, depth_limit: int = 4, **kwargs: Any
+    ):
         """Initializes the adversarial agent.
 
         Args:
             action_space (gym.spaces.Space): The action space.
             depth_limit (int): The depth limit for the search.
-            **kwargs: Additional arguments, should include 'env'.
+            **kwargs (Any): Additional arguments, should include 'env'.
         """
         super().__init__(action_space, **kwargs)
         self.depth_limit = depth_limit

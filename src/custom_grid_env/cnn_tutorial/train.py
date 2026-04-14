@@ -1,3 +1,5 @@
+"""CNN training script for the vision sensor."""
+
 import os
 import matplotlib.pyplot as plt
 import numpy as np
@@ -5,10 +7,18 @@ from tensorflow import keras
 from tensorflow.keras import layers
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 from sklearn.model_selection import train_test_split
+from typing import Tuple, List, Optional
 
 
-def load_data(data_dir="data"):
-    """Loads images and labels from the data directory."""
+def load_data(data_dir: str = "data") -> Tuple[np.ndarray, np.ndarray, List[str]]:
+    """Loads images and labels from the data directory.
+
+    Args:
+        data_dir (str): Path to the data directory. Defaults to "data".
+
+    Returns:
+        Tuple[np.ndarray, np.ndarray, List[str]]: Tuple containing image arrays, labels, and class names.
+    """
     images = []
     labels = []
     class_names = ["dog", "flower", "background"]
@@ -33,8 +43,16 @@ def load_data(data_dir="data"):
     return images, labels, class_names
 
 
-def train_model(epochs=10, batch_size=32):
-    """Trains a simple CNN and saves performance visualizations."""
+def train_model(epochs: int = 10, batch_size: int = 32) -> Optional[keras.Model]:
+    """Trains a simple CNN and saves performance visualizations.
+
+    Args:
+        epochs (int): Number of training epochs. Defaults to 10.
+        batch_size (int): Training batch size. Defaults to 32.
+
+    Returns:
+        Optional[keras.Model]: The trained model or None if training failed.
+    """
     print("Loading data...")
     X, y, class_names = load_data()
 

@@ -1,9 +1,9 @@
 site_name: CustomGrid Environment
-site_description: Eine Gymnasium-basierte Gitterumgebung mit einem Agenten und einem Geist.
+site_description: An advanced Gymnasium-based grid environment for Reinforcement Learning and Robotics tutorials.
 site_author: Jules
 site_url: https://dgaida.github.io/adversarial2dEnvAI/
 repo_url: https://github.com/dgaida/adversarial2dEnvAI
-edit_uri: edit/main/docs/
+edit_uri: edit/master/docs/
 
 theme:
   name: material
@@ -33,6 +33,8 @@ theme:
     - content.code.copy
     - content.action.edit
     - content.action.view
+    - content.tabs.link
+    - navigation.tracking
 
 plugins:
   - search
@@ -54,8 +56,15 @@ plugins:
             docstring_style: google
             show_root_heading: true
             show_source: true
+            merge_init_into_class: true
   - mermaid2
-  - mike
+  - mike:
+      alias_type: symlink
+
+validation:
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn
 
 markdown_extensions:
   - admonition
@@ -71,11 +80,19 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.tabbed:
       alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
   - toc:
       permalink: true
+  - attr_list
+  - md_in_html
+
+extra:
+  version:
+    provider: mike
 
 nav:
-  - Overview: index.md
+  - Home: index.md
   - Getting Started: getting-started.md
   - Installation: installation.md
   - Configuration: configuration.md
@@ -92,8 +109,12 @@ nav:
   - Tutorials:
       - CNN Training: tutorial/cnn.md
       - Particle Filter: tutorial/particle_filter.md
+      - Adversarial Search: tutorial/adversarial_search.md
   - Development:
       - Guide: development/index.md
+      - Docstring Standard: development/docstring-guide.md
+      - Changelog Workflow: development/changelog.md
+      - Versioning Guide: development/versioning.md
       - Style Guide: development/style-guide.md
   - Troubleshooting: troubleshooting.md
   - Metrics: metrics.md

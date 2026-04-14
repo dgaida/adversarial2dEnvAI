@@ -4,32 +4,41 @@
 
 The game uses an **alternating turn system**:
 
-1. **Agent's Turn**: The agent chooses and executes an action.
-2. **Ghost's Turn**: The ghost automatically moves according to its configured strategy.
+1. **Agent's Turn**: The agent selects an action and executes it.
+2. **Ghost's Turn**: The ghost moves automatically according to its configured strategy.
 
 Each call to `interface.step(action)` processes both turns and returns the resulting state.
 
-## Ghost Behavior
+## Agent Behaviors
 
-The behavior of the ghost can be customized via the `AgentInterface` or the GUI. The following implementations are available:
+You can use different types of agents to navigate the grid:
+
+- **RandomPlayerAgent**: Randomly selects one of the four possible actions in each turn.
+- **MinimaxAgent**: Uses the Minimax algorithm with Alpha-Beta pruning to find optimal moves while considering the ghost.
+- **ExpectimaxAgent**: Similar to Minimax, but accounts for the stochasticity of the environment (slipping).
+
+## Ghost Behaviors
+
+The behavior of the ghost can be adjusted via the `AgentInterface` or the GUI. The following implementations are available:
 
 - **ChaseGhostAgent (Default)**: The ghost calculates the shortest path to the agent (considering walls) and moves one step in that direction.
-- **RandomGhostAgent**: The ghost randomly chooses one of the four possible actions each turn.
+- **RandomGhostAgent**: The ghost randomly selects one of the four possible actions in each turn.
+- **MinimaxAgent (as Ghost)**: The ghost can also use Minimax to actively corner the agent.
 
 ## Actions
 
-Both the agent and ghost use the same action space:
+Both the agent and the ghost use the same action space:
 
 | Action | Direction | Effect             |
 |--------|-----------|--------------------|
-| 0      | Left      | Move to column - 1 |
-| 1      | Down      | Move to row + 1    |
-| 2      | Right     | Move to column + 1 |
-| 3      | Up        | Move to row - 1    |
+| 0      | Left      | Column - 1 |
+| 1      | Down      | Row + 1    |
+| 2      | Right     | Column + 1 |
+| 3      | Up        | Row - 1    |
 
 ## Slip Probability
 
-The environment includes stochastic slip mechanics for the agent. With a configured probability $P_{\text{slip}}$, the agent moves differently than intended:
+The environment includes a stochastic slip mechanic for the agent. With a configured probability $P_{\text{slip}}$, the agent moves differently than intended:
 
-- **Perpendicular Slipping**: The agent moves in a perpendicular direction (split equally between the two perpendicular directions).
-- **Longitudinal Slipping**: The agent moves in the same direction but either stays in place or moves twice.
+- **Perpendicular Slipping**: The agent moves in a perpendicular direction (equally distributed between the two perpendicular directions).
+- **Longitudinal Slipping**: The agent moves in the same direction but either stays in place or moves twice as far.
