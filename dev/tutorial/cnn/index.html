@@ -1751,9 +1751,9 @@
 <p>Dieses Tutorial erklärt, wie man ein einfaches Convolutional Neural Network (CNN) trainiert, um Objekte in der CustomGrid-Umgebung zu klassifizieren. Dies ist ein idealer Einstieg für Studierende, um die Grundlagen von Computer Vision und deren Integration in Software-Systeme zu erlernen.</p>
 <h2 id="uberblick">Überblick<a class="headerlink" href="#uberblick" title="Permanent link">&para;</a></h2>
 <p>In unserer Umgebung kann der Agent auf "Hunde" (dogs) und "Blumen" (flowers) treffen. Während die Umgebung intern weiß, um welches Objekt es sich handelt, nutzen wir ein CNN, um die Objekte basierend auf ihrer visuellen Darstellung zu "sehen" und zu klassifizieren.</p>
-<p>Der Prozess besteht aus drei Hauptschritten:
-1. <strong>Datengenerierung</strong>: Erstellung eines Bilddatensatzes.
-2. <strong>Training</strong>: Das neuronale Netz lehren, Muster zu erkennen.
+<p>Der Prozess besteht aus drei Hauptschritten:<br />
+1. <strong>Datengenerierung</strong>: Erstellung eines Bilddatensatzes.<br />
+2. <strong>Training</strong>: Das neuronale Netz lehren, Muster zu erkennen.<br />
 3. <strong>Integration</strong>: Nutzung des trainierten Modells in der Umgebung.</p>
 <h3 id="interaktives-lernen">Interaktives Lernen<a class="headerlink" href="#interaktives-lernen" title="Permanent link">&para;</a></h3>
 <p>Sie können dieses Tutorial interaktiv mit Google Colab verfolgen:
@@ -1762,8 +1762,8 @@
 <p>Bevor wir ein Modell trainieren können, benötigen wir Daten. Wir nutzen <code>src/custom_grid_env/cnn_tutorial/data_generation.py</code>, um prozedural Bilder mit einer Auflösung von 64x64 Pixeln zu erstellen.</p>
 <h3 id="funktionsweise">Funktionsweise:<a class="headerlink" href="#funktionsweise" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Verschiedene Hintergründe</strong>: Um das Modell robust zu machen, generieren wir die Objekte auf weißem, rot-schraffiertem und grün-schraffiertem Hintergrund.</li>
-<li><strong>Zufälligkeit</strong>: Wir fügen kleine zufällige Verschiebungen der Position des Hundes oder der Blume hinzu.</li>
+<li><strong>Verschiedene Hintergründe</strong>: Um das Modell robust zu machen, generieren wir die Objekte auf weißem, rot-schraffiertem und grün-schraffiertem Hintergrund.  </li>
+<li><strong>Zufälligkeit</strong>: Wir fügen kleine zufällige Verschiebungen der Position des Hundes oder der Blume hinzu.  </li>
 <li><strong>Ausgabe</strong>: Die Bilder werden in den Verzeichnissen <code>data/dog/</code> und <code>data/flower/</code> gespeichert.</li>
 </ul>
 <p>Um die Daten zu generieren, führen Sie folgenden Befehl aus:
@@ -1772,35 +1772,35 @@
 <h2 id="2-training-des-neuronalen-netzes">2. Training des neuronalen Netzes<a class="headerlink" href="#2-training-des-neuronalen-netzes" title="Permanent link">&para;</a></h2>
 <p>Die Trainingslogik befindet sich in <code>src/custom_grid_env/cnn_tutorial/train.py</code>. Wir verwenden <strong>TensorFlow</strong> und <strong>Keras</strong>, um unser Modell aufzubauen und zu trainieren.</p>
 <h3 id="die-cnn-architektur">Die CNN-Architektur<a class="headerlink" href="#die-cnn-architektur" title="Permanent link">&para;</a></h3>
-<p>Ein CNN ist speziell für die Verarbeitung von Pixeldaten konzipiert. Unser einfaches Modell nutzt folgende Schichten:
-- <strong>Conv2D</strong>: Diese Schicht "schiebt" Filter über das Bild, um Merkmale wie Kanten oder Formen zu erkennen.
-- <strong>MaxPooling2D</strong>: Dies reduziert die räumliche Größe der Darstellung, was das Modell schneller und robuster gegenüber kleinen Verschiebungen macht.
-- <strong>Flatten</strong>: Wandelt die 2D-Feature-Maps in einen 1D-Vektor um.
+<p>Ein CNN ist speziell für die Verarbeitung von Pixeldaten konzipiert. Unser einfaches Modell nutzt folgende Schichten:<br />
+- <strong>Conv2D</strong>: Diese Schicht "schiebt" Filter über das Bild, um Merkmale wie Kanten oder Formen zu erkennen.<br />
+- <strong>MaxPooling2D</strong>: Dies reduziert die räumliche Größe der Darstellung, was das Modell schneller und robuster gegenüber kleinen Verschiebungen macht.<br />
+- <strong>Flatten</strong>: Wandelt die 2D-Feature-Maps in einen 1D-Vektor um.<br />
 Am Ende nutzen wir eine 'softmax'-Aktivierung, um Wahrscheinlichkeiten für jede Klasse (Hund, Blume oder Hintergrund) zu erhalten.</p>
 <h3 id="wichtige-konzepte-fur-studierende">Wichtige Konzepte für Studierende:<a class="headerlink" href="#wichtige-konzepte-fur-studierende" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Normalisierung</strong>: Wir teilen die Pixelwerte (0-255) durch 255, um sie auf den Bereich [0, 1] zu skalieren. Dies hilft dem neuronalen Netz, schneller zu lernen.</li>
+<li><strong>Normalisierung</strong>: Wir teilen die Pixelwerte (0-255) durch 255, um sie auf den Bereich [0, 1] zu skalieren. Dies hilft dem neuronalen Netz, schneller zu lernen.  </li>
 <li><strong>Train/Validation Split</strong>: Wir behalten 20% der Daten zurück, um das Modell mit Bildern zu testen, die es während des Trainings nicht gesehen hat. Dies zeigt uns, ob das Modell "überfittet" (auswendig lernt) oder tatsächlich verallgemeinert.</li>
 </ul>
 <p>Um das Training zu starten, führen Sie aus:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python<span class="w"> </span>src/custom_grid_env/cnn_tutorial/train.py
 </code></pre></div></p>
 <h2 id="3-bewertung-der-ergebnisse">3. Bewertung der Ergebnisse<a class="headerlink" href="#3-bewertung-der-ergebnisse" title="Permanent link">&para;</a></h2>
-<p>Nach dem Training speichert das Skript zwei Diagramme im Verzeichnis <code>results/</code>:
-- <strong>training_metrics.png</strong>: Zeigt, wie sich Genauigkeit (Accuracy) und Fehlerwert (Loss) über die Zeit verändert haben. Idealerweise sollte die Genauigkeit steigen und der Fehler sinken.
+<p>Nach dem Training speichert das Skript zwei Diagramme im Verzeichnis <code>results/</code>:<br />
+- <strong>training_metrics.png</strong>: Zeigt, wie sich Genauigkeit (Accuracy) und Fehlerwert (Loss) über die Zeit verändert haben. Idealerweise sollte die Genauigkeit steigen und der Fehler sinken.<br />
 - <strong>confusion_matrix.png</strong>: Zeigt, wo das Modell Fehler gemacht hat (z. B. wie viele Blumen fälschlicherweise als Hunde klassifiziert wurden).</p>
 <h2 id="4-integration-in-die-umgebung">4. Integration in die Umgebung<a class="headerlink" href="#4-integration-in-die-umgebung" title="Permanent link">&para;</a></h2>
 <p>Das trainierte Modell wird als <code>model.keras</code> gespeichert. Der <code>PygameRenderer</code> in <code>src/custom_grid_env/renderer.py</code> sucht automatisch nach dieser Datei.</p>
-<p>Der Renderer führt die Vorhersage in jedem Schritt aus:
-1. Erstellt einen 64x64 Pixel "Schnappschuss" des aktuellen Feldes.
-2. Übergibt diesen an das CNN.
-3. Das CNN liefert Wahrscheinlichkeiten für alle drei Klassen (<code>dog</code>, <code>flower</code>, <code>background</code>).
+<p>Der Renderer führt die Vorhersage in jedem Schritt aus:<br />
+1. Erstellt einen 64x64 Pixel "Schnappschuss" des aktuellen Feldes.<br />
+2. Übergibt diesen an das CNN.<br />
+3. Das CNN liefert Wahrscheinlichkeiten für alle drei Klassen (<code>dog</code>, <code>flower</code>, <code>background</code>).<br />
 4. Die Klasse mit der höchsten Wahrscheinlichkeit wird als Vorhersage im Info-Panel angezeigt.</p>
 <hr />
 <h3 id="ubungen-fur-studierende">Übungen für Studierende:<a class="headerlink" href="#ubungen-fur-studierende" title="Permanent link">&para;</a></h3>
 <ol>
-<li><strong>Daten anpassen</strong>: Ändern Sie <code>line_spacing</code> in <code>data_generation.py</code> und beobachten Sie die Auswirkungen auf das Training.</li>
-<li><strong>Modell experimentieren</strong>: Füge eine weitere <code>Conv2D</code>-Schicht in <code>train.py</code> hinzu und vergleiche die Genauigkeit.</li>
+<li><strong>Daten anpassen</strong>: Ändern Sie <code>line_spacing</code> in <code>data_generation.py</code> und beobachten Sie die Auswirkungen auf das Training.  </li>
+<li><strong>Modell experimentieren</strong>: Füge eine weitere <code>Conv2D</code>-Schicht in <code>train.py</code> hinzu und vergleiche die Genauigkeit.  </li>
 <li><strong>Hyperparameter</strong>: Ändern Sie die Anzahl der <code>epochs</code> oder die <code>batch_size</code> und analysieren Sie die Trainingskurven.</li>
 </ol>
 
