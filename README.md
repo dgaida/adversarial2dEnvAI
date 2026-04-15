@@ -5,6 +5,7 @@
 [![Code Quality](https://github.com/dgaida/adversarial2dEnvAI/actions/workflows/lint.yml/badge.svg)](https://github.com/dgaida/adversarial2dEnvAI/actions/workflows/lint.yml)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/dgaida/adversarial2dEnvAI/graphs/commit-activity)
 ![Last commit](https://img.shields.io/github/last-commit/dgaida/adversarial2dEnvAI)
+[![codecov](https://codecov.io/gh/dgaida/adversarial2dEnvAI/branch/master/graph/badge.svg)](https://codecov.io/gh/dgaida/adversarial2dEnvAI)
 
 [![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://dgaida.github.io/adversarial2dEnvAI/)
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
