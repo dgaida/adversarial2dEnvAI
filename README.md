@@ -5,7 +5,7 @@
 [![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://dgaida.github.io/adversarial2dEnvAI/)
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![interrogate](docs/assets/interrogate.svg)](https://dgaida.github.io/adversarial2dEnvAI/metrics/)
+[![interrogate](docs/assets/interrogate.svg)](https://dgaida.github.io/adversarial2dEnvAI/dev/metrics/)
 [![Tests](https://github.com/dgaida/adversarial2dEnvAI/actions/workflows/tests.yml/badge.svg)](https://github.com/dgaida/adversarial2dEnvAI/actions/workflows/tests.yml)
 
 An advanced Gymnasium-based grid environment for Reinforcement Learning and Robotics tutorials, used in the **AI lecture at TH Köln**. CustomGrid features an agent navigating a stochastic environment with imperfect sensors, adversarial elements, and complex state estimation.
@@ -96,10 +96,10 @@ interface.close()
 ## 📖 Documentation
 
 Visit our [Documentation Site](https://dgaida.github.io/adversarial2dEnvAI/) for:
-*   🇩🇪 [Deutsch](https://dgaida.github.io/adversarial2dEnvAI/dev/de/)
+*   🇩🇪 [Deutsch](https://dgaida.github.io/adversarial2dEnvAI/dev/)
 *   🇺🇸 [English](https://dgaida.github.io/adversarial2dEnvAI/dev/en/)
 
-Includes tutorials on [Adversarial Search](https://dgaida.github.io/adversarial2dEnvAI/dev/de/tutorial/adversarial_search/), [Localization](https://dgaida.github.io/adversarial2dEnvAI/dev/de/usage/localization/), and more.
+Includes tutorials on [Adversarial Search](https://dgaida.github.io/adversarial2dEnvAI/dev/tutorial/adversarial_search/), [Localization](https://dgaida.github.io/adversarial2dEnvAI/dev/usage/localization/), and more.
 
 ---
 

@@ -18,5 +18,11 @@ jobs:
         uses: lycheeverse/lychee-action@v2.1.0
         with:
           # Check all markdown files in the repository
-          args: --verbose --no-progress --exclude-mail "docs/**/*.md" "README.md"
+          # Exclude the project's own website links because they might not be live yet for a new branch/PR
+          args: >
+            --verbose
+            --no-progress
+            --exclude "https://dgaida.github.io/adversarial2dEnvAI/.*"
+            "docs/**/*.md"
+            "README.md"
           fail: true
