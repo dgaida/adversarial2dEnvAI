@@ -48,6 +48,7 @@ class AgentInterface:
         pf_num_particles: int = 200,
         pf_sensor_mode: str = "both",  # 'color', 'cnn', or 'both'
         show_particles: bool = True,
+        color_sensor_quality: float = 0.8,
     ):
         """Initializes the AgentInterface.
 
@@ -58,6 +59,8 @@ class AgentInterface:
             step_delay (int): Milliseconds to wait between steps when rendering. Defaults to 100.
             slip_probability (float): Probability of slipping. Defaults to 0.2.
             ghost_agent_class (type, optional): Class for ghost agent. Defaults to ChaseGhostAgent.
+            color_sensor_quality (float): Probability of the color sensor measuring the correct color.
+                Defaults to 0.8.
         """
         if render_mode is None:
             render_mode = "rgb_array" if render else None
@@ -66,6 +69,7 @@ class AgentInterface:
             render_mode=render_mode,
             slip_probability=slip_probability,
             slip_type=slip_type,
+            color_sensor_quality=color_sensor_quality,
         )
         self.render_enabled = render
         self.step_delay = step_delay
@@ -144,6 +148,7 @@ class AgentInterface:
             self.pf_sensor_mode,
             self.env.grid,
             cnn_class_names,
+            self.env.color_sensor_quality,
         )
         self.pf.resample()
 

@@ -42,3 +42,25 @@ The environment includes a stochastic slip mechanic for the agent. With a config
 
 - **Perpendicular Slipping**: The agent moves in a perpendicular direction (equally distributed between the two perpendicular directions).
 - **Longitudinal Slipping**: The agent moves in the same direction but either stays in place or moves twice as far.
+
+### Visualizing Slip Probabilities
+
+#### 1. Perpendicular Slipping
+In this model, if a slip occurs, there is a risk that the agent deviates to the left or right (relative to the direction of movement).
+
+```mermaid
+graph TD
+    Start((Start)) -- "1 - P_slip" --> Target[Intended Cell]
+    Start -- "P_slip / 2" --> Left[Left Cell]
+    Start -- "P_slip / 2" --> Right[Right Cell]
+```
+
+#### 2. Longitudinal Slipping
+In this model (default), if a slip occurs, the agent either stays in place or "slips" one cell further than planned.
+
+```mermaid
+graph TD
+    Start((Start)) -- "1 - P_slip" --> Target[Intended Cell]
+    Start -- "P_slip / 2" --> Stay[Current Cell / Stay in Place]
+    Start -- "P_slip / 2" --> Double[Two Cells Forward]
+```

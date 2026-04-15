@@ -37,6 +37,7 @@ class CustomGridEnv(gym.Env):
         render_mode: str = "human",
         slip_probability: float = 0.2,
         slip_type: str = "longitudinal",
+        color_sensor_quality: float = 0.8,
     ):
         """Initializes the CustomGridEnv.
 
@@ -45,11 +46,14 @@ class CustomGridEnv(gym.Env):
             slip_probability (float): Chance to move perpendicular to intended direction. Defaults to 0.2.
             slip_type (str): Type of slipping ("perpendicular" or "longitudinal").
                 Defaults to "longitudinal".
+            color_sensor_quality (float): Probability of the color sensor measuring the correct color.
+                Defaults to 0.8.
         """
         super().__init__()
         self.render_mode = render_mode
         self.slip_probability = slip_probability
         self.slip_type = slip_type
+        self.color_sensor_quality = color_sensor_quality
         self.rows = 4
         self.cols = 5
         self.observation_space = gym.spaces.Dict(
@@ -458,8 +462,8 @@ class CustomGridEnv(gym.Env):
     def _get_color_sensor_measurement(self, pos: List[int]) -> int:
         """Measures the color of the ground at the given position with noise.
 
-        The sensor measures the correct color with 80% probability and a wrong
-        color with 10% probability for each of the other two colors.
+        The sensor measures the correct color with `color_sensor_quality` probability and a wrong
+        color with `(1 - color_sensor_quality) / 2` probability for each of the other two colors.
 
         Args:
             pos (list): [row, col] position to measure.
@@ -470,9 +474,11 @@ class CustomGridEnv(gym.Env):
         actual_color = self.grid[pos[0], pos[1]]["colour"]
         prob = self.np_random.random()
 
-        if prob < 0.8:
+        error_prob = (1.0 - self.color_sensor_quality) / 2.0
+
+        if prob < self.color_sensor_quality:
             return actual_color
-        elif prob < 0.9:
+        elif prob < self.color_sensor_quality + error_prob:
             # First wrong color
             return (actual_color + 1) % 3
         else:

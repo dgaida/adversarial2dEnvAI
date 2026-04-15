@@ -35,7 +35,7 @@ The particle filter uses these predictions as measurements:
 
 We assume that the sensors are conditionally independent. The total probability $P$ for a particle results from the product of the individual probabilities:
 
-$$P_{total} = P_{color} \cdot P_{cnn}$$
+$$p(z_{\text{color}}, z_{\text{cnn}} | s) = p(z_{\text{color}} | s) \cdot p(z_{\text{cnn}} | s)$$
 
 Through this combination, the agent can determine its position even if a single sensor is very noisy. For example, if the CNN is uncertain, the color sensor can often help to narrow down the position on the grid.
 

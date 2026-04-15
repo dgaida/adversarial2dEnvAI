@@ -99,6 +99,16 @@ class ColabGUI:
             value="actual",
             description="Agent Knowledge:",
         )
+        self.color_quality_dropdown = widgets.Dropdown(
+            options=[
+                ("100 %", 1.0),
+                ("90 %", 0.9),
+                ("80 %", 0.8),
+                ("70 %", 0.7),
+            ],
+            value=0.8,
+            description="Color Acc:",
+        )
         self.stats_label = widgets.Label(value="Steps: 0 | Total Reward: 0.0")
 
         # Layout
@@ -107,7 +117,8 @@ class ColabGUI:
                 widgets.HBox([self.next_button, self.reset_button]),
                 widgets.HBox([self.pf_toggle, self.sensor_dropdown]),
                 widgets.HBox([self.agent_dropdown, self.ghost_dropdown]),
-                widgets.HBox([self.slip_type_dropdown, self.knowledge_dropdown]),
+                widgets.HBox([self.slip_type_dropdown, self.color_quality_dropdown]),
+                widgets.HBox([self.knowledge_dropdown]),
                 self.stats_label,
             ]
         )
@@ -120,6 +131,9 @@ class ColabGUI:
         self.slip_type_dropdown.observe(self._on_slip_type_change, names="value")
         self.ghost_dropdown.observe(self._on_ghost_change, names="value")
         self.agent_dropdown.observe(self._on_agent_change, names="value")
+        self.color_quality_dropdown.observe(
+            self._on_color_quality_change, names="value"
+        )
 
     def _on_next_click(self, b):
         """Callback for the 'Next Step' button."""
@@ -182,6 +196,10 @@ class ColabGUI:
             self.agent = RandomPlayerAgent(
                 self.interface.get_action_space(), env=self.interface.env
             )
+
+    def _on_color_quality_change(self, change):
+        """Callback for the color quality dropdown."""
+        self.interface.env.color_sensor_quality = change["new"]
 
     def _on_ghost_change(self, change):
         """Callback for the ghost behavior dropdown."""
