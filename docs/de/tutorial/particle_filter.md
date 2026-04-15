@@ -21,14 +21,14 @@ Ein Partikelfilter arbeitet in einem Zyklus aus drei Schritten:
 Der Partikelfilter in dieser Umgebung kombiniert zwei verschiedene Sensortypen (**Sensorfusion**), um die Position zu schätzen:
 
 ### 1. Der Farbsensor
-Der Agent hat einen Sensor, der die Bodenfarbe (Weiß, Rot, Grün) misst. Dieser Sensor hat eine Genauigkeit von **80%**.
-- Wenn ein Partikel auf einer roten Zelle liegt und der Sensor "Rot" meldet, steigt die Wahrscheinlichkeit für dieses Partikel.
+Der Agent hat einen Sensor, der die Bodenfarbe (Weiß, Rot, Grün) misst. Dieser Sensor hat eine Genauigkeit von **80%**.  
+- Wenn ein Partikel auf einer roten Zelle liegt und der Sensor "Rot" meldet, steigt die Wahrscheinlichkeit für dieses Partikel.  
 - Meldet der Sensor "Grün", obwohl das Partikel auf einer roten Zelle liegt, sinkt die Wahrscheinlichkeit.
 
 ### 2. Das CNN (Visuelle Erkennung)
 Das trainierte Convolutional Neural Network liefert Wahrscheinlichkeiten für die Klassen `dog`, `flower` und `background`.
-Der Partikelfilter nutzt diese Vorhersagen als Messwerte:
-- Jedes Partikel "schaut" in die Karte: Welches Objekt befindet sich an meiner (hypothetischen) Position?
+Der Partikelfilter nutzt diese Vorhersagen als Messwerte:  
+- Jedes Partikel "schaut" in die Karte: Welches Objekt befindet sich an meiner (hypothetischen) Position?  
 - Die Likelihood eines Partikels berechnet sich aus der Wahrscheinlichkeit, die das CNN für genau dieses Objekt ausgegeben hat.
 
 ## Mathematische Kombination
