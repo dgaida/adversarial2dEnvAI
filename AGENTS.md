@@ -34,3 +34,15 @@ Welcome! This file contains specific instructions and tips for working with the 
 
 *   New ghost behaviors should be implemented as classes inheriting from `custom_grid_env.agents.base_agent.BaseAgent`.
 *   They can be swapped at runtime via `AgentInterface.set_ghost_agent(agent_class)`.
+
+## 📝 Documentation Guidelines
+
+*   **List Formatting**: In all Markdown files (`docs/`), every list item (lines starting with `-`, `*`, or `1.`) **must** end with two spaces (`  `) to ensure proper vertical list formatting and line breaks in the rendered MkDocs output.
+
+## 🚀 GitHub Actions
+
+The repository uses the following GitHub Actions for CI/CD:
+*   **Linting**: Runs `ruff` and `interrogate` (95% coverage requirement) to ensure code quality and documentation.
+*   **Tests**: Runs `pytest` and generates code coverage reports.
+*   **Documentation**: Automates the build and deployment of MkDocs to GitHub Pages using `mike` for versioning.
+*   **Link Check**: Periodically checks for broken links in the documentation using `lycheeverse/lychee-action`.

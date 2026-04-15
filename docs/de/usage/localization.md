@@ -19,8 +19,8 @@ Die Lokalisierung stützt sich auf zwei Hauptsensortypen:
 
 ### Farbsensor
 Der Farbsensor misst die Farbe des Bodens direkt unter dem Agenten.
-- **Genauigkeit**: 80% (korrekte Farbe).
-- **Rauschen**: 20% (gleichmäßig auf die anderen beiden Farben verteilt).
+- **Genauigkeit**: Über die GUI oder das Interface einstellbar (100%, 90%, 80% oder 70%). Standardmäßig beträgt sie 80%.
+- **Fehlermodell**: Bei einer Genauigkeit von z. B. 90% misst der Sensor in 90% der Fälle die korrekte Farbe. Die restlichen 10% Fehler verteilen sich symmetrisch (jeweils 5%) auf die anderen beiden Farben.
 - **Farben**: Weiß (0), Rot (1), Grün (2).
 
 ### CNN-Klassifikator
@@ -55,5 +55,5 @@ Der Filter geht von einem **stochastischen Bewegungsmodell** aus, das der Rutsch
 
 ### Messunsicherheit (Measurement Uncertainty)
 Der Filter verwendet folgende **Likelihood-Modelle**:
-- **Farbsensor**: $p(z_{\text{color}} | s) = 0,8$, wenn die gemessene Farbe $z$ mit der Kartenfarbe am Zustand $s$ übereinstimmt, andernfalls $0,1$.
+- **Farbsensor**: $p(z_{\text{color}} | s) = \text{color\_sensor\_quality}$, wenn die gemessene Farbe $z$ mit der Kartenfarbe am Zustand $s$ übereinstimmt, andernfalls $(1 - \text{color\_sensor\_quality}) / 2$.
 - **CNN**: $p(z_{\text{cnn}} | s) = \text{CNN\_prob}(\text{Klasse an Stelle } s)$. Der Filter nimmt an, dass die vom CNN ausgegebene Wahrscheinlichkeit für die wahre Klasse an einem Ort die Likelihood dieses Ortes ist.

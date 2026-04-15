@@ -35,7 +35,7 @@ Der Partikelfilter nutzt diese Vorhersagen als Messwerte:
 
 Wir nehmen an, dass die Sensoren bedingt unabhängig sind. Die Gesamtwahrscheinlichkeit $P$ für ein Partikel ergibt sich aus dem Produkt der Einzelwahrscheinlichkeiten:
 
-$$P_{total} = P_{color} \cdot P_{cnn}$$
+$$p(z_{\text{color}}, z_{\text{cnn}} | s) = p(z_{\text{color}} | s) \cdot p(z_{\text{cnn}} | s)$$
 
 Durch diese Kombination kann der Agent seine Position auch dann bestimmen, wenn ein einzelner Sensor sehr verrauscht ist. Wenn z.B. das CNN unsicher ist, kann der Farbsensor oft helfen, die Position auf dem Gitter einzugrenzen.
 
@@ -44,3 +44,8 @@ Durch diese Kombination kann der Agent seine Position auch dann bestimmen, wenn 
 1.  **Einfluss der Sensoren**: Teste in der `Colab_GUI_Demo` den Partikelfilter nur mit dem Farbsensor, nur mit dem CNN und mit beiden. Beobachte, wie schnell die Partikelwolke konvergiert.
 2.  **Rutschmodelle**: Vergleiche das "perpendicular" Rutschen mit dem "longitudinal" Rutschen. Welches Modell macht die Lokalisierung schwieriger?
 3.  **Partikelanzahl**: Reduziere die Anzahl der Partikel im `AgentInterface`. Ab welcher Anzahl wird die Schätzung instabil?
+
+### Interaktive Demo
+
+Testen Sie den Partikelfilter direkt in Google Colab:
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Colab_GUI_Demo.ipynb)

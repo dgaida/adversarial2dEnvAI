@@ -95,7 +95,10 @@ nav:
   - Home: index.md
   - Getting Started: getting-started.md
   - Installation: installation.md
-  - Configuration: configuration.md
+  - Tutorials:
+      - CNN Training: tutorial/cnn.md
+      - Particle Filter: tutorial/particle_filter.md
+      - Adversarial Search: tutorial/adversarial_search.md
   - Usage:
       - Environment: usage/environment.md
       - Gameplay: usage/gameplay.md
@@ -106,10 +109,7 @@ nav:
       - Core API: api/core.md
       - Agents: api/agents.md
   - Architecture: architecture/index.md
-  - Tutorials:
-      - CNN Training: tutorial/cnn.md
-      - Particle Filter: tutorial/particle_filter.md
-      - Adversarial Search: tutorial/adversarial_search.md
+  - Configuration: configuration.md
   - Development:
       - Guide: development/index.md
       - Docstring Standard: development/docstring-guide.md

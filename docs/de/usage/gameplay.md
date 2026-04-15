@@ -42,3 +42,25 @@ Die Umgebung enthält eine stochastische Rutschmechanik für den Agenten. Bei ei
 
 - **Senkrechtes Rutschen (Perpendicular Slipping)**: Der Agent bewegt sich in eine senkrechte Richtung (gleichmäßig auf die beiden senkrechten Richtungen verteilt).
 - **Längsrutschen (Longitudinal Slipping)**: Der Agent bewegt sich in die gleiche Richtung, bleibt aber entweder stehen oder bewegt sich doppelt so weit.
+
+### Visualisierung der Rutschwahrscheinlichkeiten
+
+#### 1. Senkrechtes Rutschen (Perpendicular)
+In diesem Modell besteht bei einem Slip die Gefahr, dass der Agent nach links oder rechts (relativ zur Gehrichtung) abweicht.
+
+```mermaid
+graph TD
+    Start((Start)) -- "1 - P_slip" --> Target[Beabsichtigtes Feld]
+    Start -- "P_slip / 2" --> Left[Linkes Feld]
+    Start -- "P_slip / 2" --> Right[Rechtes Feld]
+```
+
+#### 2. Längsrutschen (Longitudinal)
+In diesem Modell (Standard) bleibt der Agent bei einem Slip entweder stehen oder "rutscht" ein Feld weiter als geplant.
+
+```mermaid
+graph TD
+    Start((Start)) -- "1 - P_slip" --> Target[Beabsichtigtes Feld]
+    Start -- "P_slip / 2" --> Stay[Aktuelles Feld / Stehen bleiben]
+    Start -- "P_slip / 2" --> Double[Zwei Felder vorwärts]
+```
