@@ -1694,13 +1694,13 @@
 <h2 id="sensorfusion-in-customgrid">Sensorfusion in CustomGrid<a class="headerlink" href="#sensorfusion-in-customgrid" title="Permanent link">&para;</a></h2>
 <p>Der Partikelfilter in dieser Umgebung kombiniert zwei verschiedene Sensortypen (<strong>Sensorfusion</strong>), um die Position zu schätzen:</p>
 <h3 id="1-der-farbsensor">1. Der Farbsensor<a class="headerlink" href="#1-der-farbsensor" title="Permanent link">&para;</a></h3>
-<p>Der Agent hat einen Sensor, der die Bodenfarbe (Weiß, Rot, Grün) misst. Dieser Sensor hat eine Genauigkeit von <strong>80%</strong>.
-- Wenn ein Partikel auf einer roten Zelle liegt und der Sensor "Rot" meldet, steigt die Wahrscheinlichkeit für dieses Partikel.
+<p>Der Agent hat einen Sensor, der die Bodenfarbe (Weiß, Rot, Grün) misst. Dieser Sensor hat eine Genauigkeit von <strong>80%</strong>.<br />
+- Wenn ein Partikel auf einer roten Zelle liegt und der Sensor "Rot" meldet, steigt die Wahrscheinlichkeit für dieses Partikel.<br />
 - Meldet der Sensor "Grün", obwohl das Partikel auf einer roten Zelle liegt, sinkt die Wahrscheinlichkeit.</p>
 <h3 id="2-das-cnn-visuelle-erkennung">2. Das CNN (Visuelle Erkennung)<a class="headerlink" href="#2-das-cnn-visuelle-erkennung" title="Permanent link">&para;</a></h3>
 <p>Das trainierte Convolutional Neural Network liefert Wahrscheinlichkeiten für die Klassen <code>dog</code>, <code>flower</code> und <code>background</code>.
-Der Partikelfilter nutzt diese Vorhersagen als Messwerte:
-- Jedes Partikel "schaut" in die Karte: Welches Objekt befindet sich an meiner (hypothetischen) Position?
+Der Partikelfilter nutzt diese Vorhersagen als Messwerte:<br />
+- Jedes Partikel "schaut" in die Karte: Welches Objekt befindet sich an meiner (hypothetischen) Position?<br />
 - Die Likelihood eines Partikels berechnet sich aus der Wahrscheinlichkeit, die das CNN für genau dieses Objekt ausgegeben hat.</p>
 <h2 id="mathematische-kombination">Mathematische Kombination<a class="headerlink" href="#mathematische-kombination" title="Permanent link">&para;</a></h2>
 <p>Wir nehmen an, dass die Sensoren bedingt unabhängig sind. Die Gesamtwahrscheinlichkeit $P$ für ein Partikel ergibt sich aus dem Produkt der Einzelwahrscheinlichkeiten:</p>
