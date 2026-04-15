@@ -88,6 +88,7 @@ class ParticleFilter:
         sensor_mode: str,
         grid: np.ndarray,
         cnn_class_names: List[str],
+        color_sensor_quality: float = 0.8,
     ):
         """Updates particle weights based on measurements.
 
@@ -95,6 +96,7 @@ class ParticleFilter:
             measurements (dict): Contains 'color_measurement' and 'cnn_probs'.
             sensor_mode (str): 'color', 'cnn', or 'both'.
             grid (np.ndarray): The environment grid.
+            color_sensor_quality (float): Accuracy of the color sensor.
             cnn_class_names (list): List of class names for the CNN.
         """
         color_meas = measurements.get("color_measurement")
@@ -108,9 +110,9 @@ class ParticleFilter:
             if sensor_mode in ["color", "both"] and color_meas is not None:
                 actual_color = cell["colour"]
                 if color_meas == actual_color:
-                    prob *= 0.8
+                    prob *= color_sensor_quality
                 else:
-                    prob *= 0.1
+                    prob *= (1.0 - color_sensor_quality) / 2.0
 
             # CNN update
             if sensor_mode in ["cnn", "both"] and cnn_probs is not None:
