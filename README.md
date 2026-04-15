@@ -1,5 +1,7 @@
 # CustomGrid Environment 🤖👻
 
+![CustomGrid Environment](docs/Umgebung.png)
+
 [![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://dgaida.github.io/adversarial2dEnvAI/)
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -94,10 +96,10 @@ interface.close()
 ## 📖 Documentation
 
 Visit our [Documentation Site](https://dgaida.github.io/adversarial2dEnvAI/) for:
-*   🇩🇪 [Deutsch](https://dgaida.github.io/adversarial2dEnvAI/de/)
-*   🇺🇸 [English](https://dgaida.github.io/adversarial2dEnvAI/en/)
+*   🇩🇪 [Deutsch](https://dgaida.github.io/adversarial2dEnvAI/dev/de/)
+*   🇺🇸 [English](https://dgaida.github.io/adversarial2dEnvAI/dev/en/)
 
-Includes tutorials on [Adversarial Search](https://dgaida.github.io/adversarial2dEnvAI/tutorial/adversarial_search/), [Localization](https://dgaida.github.io/adversarial2dEnvAI/usage/localization/), and more.
+Includes tutorials on [Adversarial Search](https://dgaida.github.io/adversarial2dEnvAI/dev/de/tutorial/adversarial_search/), [Localization](https://dgaida.github.io/adversarial2dEnvAI/dev/de/usage/localization/), and more.
 
 ---
 

@@ -1,0 +1,22 @@
+name: Link Checker
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  schedule:
+    - cron: "0 0 * * 1" # Run weekly on Mondays
+
+jobs:
+  linkChecker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Link Checker
+        uses: lycheeverse/lychee-action@v2.1.0
+        with:
+          # Check all markdown files in the repository
+          args: --verbose --no-progress --exclude-mail "docs/**/*.md" "README.md"
+          fail: true
