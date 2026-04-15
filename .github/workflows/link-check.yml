@@ -1,0 +1,28 @@
+name: Link Checker
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  schedule:
+    - cron: "0 0 1-7 * 1" # Run monthly on the first Monday
+
+jobs:
+  linkChecker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Link Checker
+        uses: lycheeverse/lychee-action@v2.1.0
+        with:
+          # Check all markdown files in the repository
+          # Exclude the project's own website links because they might not be live yet for a new branch/PR
+          args: >
+            --verbose
+            --no-progress
+            --exclude "https://dgaida.github.io/adversarial2dEnvAI/.*"
+            "docs/**/*.md"
+            "README.md"
+          fail: true
