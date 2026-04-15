@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [master]
   schedule:
-    - cron: "0 0 * * 1" # Run weekly on Mondays
+    - cron: "0 0 1-7 * 1" # Run monthly on the first Monday
 
 jobs:
   linkChecker:

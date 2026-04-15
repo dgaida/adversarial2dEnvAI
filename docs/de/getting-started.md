@@ -13,11 +13,11 @@ Die Umgebung simuliert ein Gitter, in dem ein Agent navigieren muss. Dabei spiel
 ## Erste Experimente
 
 
-| Notebook | Link |
-| :--- | :--- |
-| **Interactive GUI** | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Colab_GUI_Demo.ipynb) |
-| **Environment Demo** | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Environment_Demo.ipynb) |
-| **CNN Training** | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/CNN_Training.ipynb) |
+| Notebook | Beschreibung | Link |
+| :--- | :--- | :--- |
+| **Interaktive GUI** | Vollständiges Dashboard mit Sensoren und PF-Visualisierung. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Colab_GUI_Demo.ipynb) |
+| **Umgebungs-Demo** | Lerne die Grundlagen der Steuerung kennen. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Environment_Demo.ipynb) |
+| **CNN-Training** | Erfahre, wie man das neuronale Netz trainiert, das der Agent zur Objekterkennung nutzt. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/CNN_Training.ipynb) |
 
 
 ## Ein einfaches Beispiel
