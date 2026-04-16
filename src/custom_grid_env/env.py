@@ -553,6 +553,8 @@ class CustomGridEnv(gym.Env):
             "actual_action",
             "slipped",
             "particles",
+            "agent_values",
+            "ghost_values",
         ]
         for key in keys_to_preserve:
             if key in info:
