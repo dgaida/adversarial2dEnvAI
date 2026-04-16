@@ -41,9 +41,9 @@ Es wird davon ausgegangen, dass die Umgebung **nicht-zyklisch** ist. Das bedeute
 ### Konsequenzen für die Strategie
 Die nicht-zyklische Natur des Gitters hat mehrere strategische Auswirkungen auf die adversarielle Suche:
 
-- **Einkesseln (Cornering)**: Da das Gitter feste Grenzen hat, kann der Geist (wenn er Minimax verwendet) den Agenten effektiv in einer Ecke oder an einer Wand festsetzen. Der Agent wiederum muss vermeiden, in eine Position zu geraten, in der seine Bewegungsoptionen eingeschränkt sind.
-- **Grenzkollisionen**: Bei der Simulation zukünftiger Züge erkennen die Agenten, dass Aktionen, die "aus dem Spielfeld" führen würden, dazu führen, dass die Einheit in ihrem aktuellen Feld bleibt. Dies ist entscheidend für eine genaue Wertschätzung in beiden Algorithmen.
-- **Vereinfachte Distanz**: Heuristiken wie die Manhattan-Distanz oder die BFS-basierte kürzeste Pfadlänge sind unkomplizierter, da sie keine modulare Arithmetik oder Wrap-around-Pfade berücksichtigen müssen.
+- **Einkesseln (Cornering)**: Da das Gitter feste Grenzen hat, kann der Geist (wenn er Minimax verwendet) den Agenten effektiv in einer Ecke oder an einer Wand festsetzen. Der Agent wiederum muss vermeiden, in eine Position zu geraten, in der seine Bewegungsoptionen eingeschränkt sind.  
+- **Grenzkollisionen**: Bei der Simulation zukünftiger Züge erkennen die Agenten, dass Aktionen, die "aus dem Spielfeld" führen würden, dazu führen, dass die Einheit in ihrem aktuellen Feld bleibt. Dies ist entscheidend für eine genaue Wertschätzung in beiden Algorithmen.  
+- **Vereinfachte Distanz**: Heuristiken wie die Manhattan-Distanz oder die BFS-basierte kürzeste Pfadlänge sind unkomplizierter, da sie keine modulare Arithmetik oder Wrap-around-Pfade berücksichtigen müssen.  
 
 ## Vergleich
 
@@ -58,14 +58,14 @@ Beide Agenten verwenden eine interne Heuristik-Funktion:
 - **Ziel erreicht**: +10.000  
 - **Vom Geist gefangen**: -10.000  
 - **Distanz zum Ziel**: Bestraft große Distanzen.  
-- **Distanz zum Geist**: Belohnt Sicherheitsabstände.
+- **Distanz zum Geist**: Belohnt Sicherheitsabstände.  
 
 ### Interaktives Ausprobieren
 
 Nutzen Sie das `Colab_GUI_Demo` Notebook, um die Agenten live zu vergleichen:
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Colab_GUI_Demo.ipynb)
 
-### Übungen für Studierende:
-1. **Vergleich**: Stellen Sie die Suchtiefe auf 3 und vergleichen Sie das Überlebensvermögen von Minimax und Expectimax gegen einen `ChaseGhostAgent`.
-2. **Geist-Verhalten**: Ändern Sie das Verhalten des Geistes auf `Minimax`. Welcher Agent (Minimax vs. Expectimax) schneidet nun besser ab?
-3. **Sichtbarkeit**: Aktivieren Sie "Estimated State" in der GUI. Wie beeinflusst die Unsicherheit der Lokalisierung (Partikelfilter) die Qualität der Spielzüge der adversarialen Agenten?
+### Übungen für Studierende:  
+1. **Vergleich**: Stellen Sie die Suchtiefe auf 3 und vergleichen Sie das Überlebensvermögen von Minimax und Expectimax gegen einen `ChaseGhostAgent`.  
+2. **Geist-Verhalten**: Ändern Sie das Verhalten des Geistes auf `Minimax`. Welcher Agent (Minimax vs. Expectimax) schneidet nun besser ab?  
+3. **Sichtbarkeit**: Aktivieren Sie "Estimated State" in der GUI. Wie beeinflusst die Unsicherheit der Lokalisierung (Partikelfilter) die Qualität der Spielzüge der adversarialen Agenten?  
