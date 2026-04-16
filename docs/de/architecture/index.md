@@ -107,10 +107,10 @@ Die Agenten folgen einem Protokoll-basierten Design.
 
 ```mermaid
 classDiagram
-    class Agent {
-        <<interface>>
-        +get_action(observation)
-    }
+    class Agent
+    <<interface>> Agent
+    Agent : +get_action(observation)
+
     class BaseAgent {
         +action_space
         +env
