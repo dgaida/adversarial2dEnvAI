@@ -3676,13 +3676,13 @@ Defaults to 0.8.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/custom_grid_env/env.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-788">788</a></span>
-<span class="normal"><a href="#__codelineno-0-789">789</a></span>
-<span class="normal"><a href="#__codelineno-0-790">790</a></span>
-<span class="normal"><a href="#__codelineno-0-791">791</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-788" name="__codelineno-0-788"></a><span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-0-789" name="__codelineno-0-789"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Cleans up resources.&quot;&quot;&quot;</span>
-<a id="__codelineno-0-790" name="__codelineno-0-790"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">renderer</span><span class="p">:</span>
-<a id="__codelineno-0-791" name="__codelineno-0-791"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-790">790</a></span>
+<span class="normal"><a href="#__codelineno-0-791">791</a></span>
+<span class="normal"><a href="#__codelineno-0-792">792</a></span>
+<span class="normal"><a href="#__codelineno-0-793">793</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-790" name="__codelineno-0-790"></a><span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-0-791" name="__codelineno-0-791"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Cleans up resources.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-792" name="__codelineno-0-792"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">renderer</span><span class="p">:</span>
+<a id="__codelineno-0-793" name="__codelineno-0-793"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -3728,19 +3728,19 @@ Defaults to 0.8.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/custom_grid_env/env.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-622">622</a></span>
-<span class="normal"><a href="#__codelineno-0-623">623</a></span>
-<span class="normal"><a href="#__codelineno-0-624">624</a></span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-624">624</a></span>
 <span class="normal"><a href="#__codelineno-0-625">625</a></span>
 <span class="normal"><a href="#__codelineno-0-626">626</a></span>
 <span class="normal"><a href="#__codelineno-0-627">627</a></span>
-<span class="normal"><a href="#__codelineno-0-628">628</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-622" name="__codelineno-0-622"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_current_turn</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<a id="__codelineno-0-623" name="__codelineno-0-623"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns whose turn it is.</span>
-<a id="__codelineno-0-624" name="__codelineno-0-624"></a>
-<a id="__codelineno-0-625" name="__codelineno-0-625"></a><span class="sd">    Returns:</span>
-<a id="__codelineno-0-626" name="__codelineno-0-626"></a><span class="sd">        str: &#39;agent&#39; or &#39;ghost&#39;.</span>
-<a id="__codelineno-0-627" name="__codelineno-0-627"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-628" name="__codelineno-0-628"></a>    <span class="k">return</span> <span class="s2">&quot;agent&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_turn</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;ghost&quot;</span>
+<span class="normal"><a href="#__codelineno-0-628">628</a></span>
+<span class="normal"><a href="#__codelineno-0-629">629</a></span>
+<span class="normal"><a href="#__codelineno-0-630">630</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-624" name="__codelineno-0-624"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_current_turn</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-0-625" name="__codelineno-0-625"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns whose turn it is.</span>
+<a id="__codelineno-0-626" name="__codelineno-0-626"></a>
+<a id="__codelineno-0-627" name="__codelineno-0-627"></a><span class="sd">    Returns:</span>
+<a id="__codelineno-0-628" name="__codelineno-0-628"></a><span class="sd">        str: &#39;agent&#39; or &#39;ghost&#39;.</span>
+<a id="__codelineno-0-629" name="__codelineno-0-629"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-630" name="__codelineno-0-630"></a>    <span class="k">return</span> <span class="s2">&quot;agent&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_turn</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;ghost&quot;</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -3922,9 +3922,7 @@ Defaults to 0.8.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>src/custom_grid_env/env.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-768">768</a></span>
-<span class="normal"><a href="#__codelineno-0-769">769</a></span>
-<span class="normal"><a href="#__codelineno-0-770">770</a></span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-770">770</a></span>
 <span class="normal"><a href="#__codelineno-0-771">771</a></span>
 <span class="normal"><a href="#__codelineno-0-772">772</a></span>
 <span class="normal"><a href="#__codelineno-0-773">773</a></span>
@@ -3940,25 +3938,27 @@ Defaults to 0.8.</p>
 <span class="normal"><a href="#__codelineno-0-783">783</a></span>
 <span class="normal"><a href="#__codelineno-0-784">784</a></span>
 <span class="normal"><a href="#__codelineno-0-785">785</a></span>
-<span class="normal"><a href="#__codelineno-0-786">786</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-768" name="__codelineno-0-768"></a><span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
-<a id="__codelineno-0-769" name="__codelineno-0-769"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renders the environment.</span>
-<a id="__codelineno-0-770" name="__codelineno-0-770"></a>
-<a id="__codelineno-0-771" name="__codelineno-0-771"></a><span class="sd">    Returns:</span>
-<a id="__codelineno-0-772" name="__codelineno-0-772"></a><span class="sd">        np.ndarray, optional: RGB array if render_mode is &quot;rgb_array&quot;.</span>
-<a id="__codelineno-0-773" name="__codelineno-0-773"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-774" name="__codelineno-0-774"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">renderer</span><span class="p">:</span>
-<a id="__codelineno-0-775" name="__codelineno-0-775"></a>        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Calling renderer.render with info: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-776" name="__codelineno-0-776"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">render</span><span class="p">(</span>
-<a id="__codelineno-0-777" name="__codelineno-0-777"></a>            <span class="n">agent_pos</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_pos</span><span class="p">,</span>
-<a id="__codelineno-0-778" name="__codelineno-0-778"></a>            <span class="n">ghost_pos</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ghost_pos</span><span class="p">,</span>
-<a id="__codelineno-0-779" name="__codelineno-0-779"></a>            <span class="n">grid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">,</span>
-<a id="__codelineno-0-780" name="__codelineno-0-780"></a>            <span class="n">walls_horizontal</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">walls_horizontal</span><span class="p">,</span>
-<a id="__codelineno-0-781" name="__codelineno-0-781"></a>            <span class="n">walls_vertical</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">walls_vertical</span><span class="p">,</span>
-<a id="__codelineno-0-782" name="__codelineno-0-782"></a>            <span class="n">step_count</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">step_count</span><span class="p">,</span>
-<a id="__codelineno-0-783" name="__codelineno-0-783"></a>            <span class="n">current_turn</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">current_turn</span><span class="p">,</span>
-<a id="__codelineno-0-784" name="__codelineno-0-784"></a>            <span class="n">info</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="p">,</span>
-<a id="__codelineno-0-785" name="__codelineno-0-785"></a>        <span class="p">)</span>
-<a id="__codelineno-0-786" name="__codelineno-0-786"></a>    <span class="k">return</span> <span class="kc">None</span>
+<span class="normal"><a href="#__codelineno-0-786">786</a></span>
+<span class="normal"><a href="#__codelineno-0-787">787</a></span>
+<span class="normal"><a href="#__codelineno-0-788">788</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-770" name="__codelineno-0-770"></a><span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<a id="__codelineno-0-771" name="__codelineno-0-771"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renders the environment.</span>
+<a id="__codelineno-0-772" name="__codelineno-0-772"></a>
+<a id="__codelineno-0-773" name="__codelineno-0-773"></a><span class="sd">    Returns:</span>
+<a id="__codelineno-0-774" name="__codelineno-0-774"></a><span class="sd">        np.ndarray, optional: RGB array if render_mode is &quot;rgb_array&quot;.</span>
+<a id="__codelineno-0-775" name="__codelineno-0-775"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-776" name="__codelineno-0-776"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">renderer</span><span class="p">:</span>
+<a id="__codelineno-0-777" name="__codelineno-0-777"></a>        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Calling renderer.render with info: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-778" name="__codelineno-0-778"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">render</span><span class="p">(</span>
+<a id="__codelineno-0-779" name="__codelineno-0-779"></a>            <span class="n">agent_pos</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_pos</span><span class="p">,</span>
+<a id="__codelineno-0-780" name="__codelineno-0-780"></a>            <span class="n">ghost_pos</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ghost_pos</span><span class="p">,</span>
+<a id="__codelineno-0-781" name="__codelineno-0-781"></a>            <span class="n">grid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">,</span>
+<a id="__codelineno-0-782" name="__codelineno-0-782"></a>            <span class="n">walls_horizontal</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">walls_horizontal</span><span class="p">,</span>
+<a id="__codelineno-0-783" name="__codelineno-0-783"></a>            <span class="n">walls_vertical</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">walls_vertical</span><span class="p">,</span>
+<a id="__codelineno-0-784" name="__codelineno-0-784"></a>            <span class="n">step_count</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">step_count</span><span class="p">,</span>
+<a id="__codelineno-0-785" name="__codelineno-0-785"></a>            <span class="n">current_turn</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">current_turn</span><span class="p">,</span>
+<a id="__codelineno-0-786" name="__codelineno-0-786"></a>            <span class="n">info</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="p">,</span>
+<a id="__codelineno-0-787" name="__codelineno-0-787"></a>        <span class="p">)</span>
+<a id="__codelineno-0-788" name="__codelineno-0-788"></a>    <span class="k">return</span> <span class="kc">None</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -4269,7 +4269,9 @@ Defaults to 0.8.</p>
 <span class="normal"><a href="#__codelineno-0-617">617</a></span>
 <span class="normal"><a href="#__codelineno-0-618">618</a></span>
 <span class="normal"><a href="#__codelineno-0-619">619</a></span>
-<span class="normal"><a href="#__codelineno-0-620">620</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-527" name="__codelineno-0-527"></a><span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span>
+<span class="normal"><a href="#__codelineno-0-620">620</a></span>
+<span class="normal"><a href="#__codelineno-0-621">621</a></span>
+<span class="normal"><a href="#__codelineno-0-622">622</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-527" name="__codelineno-0-527"></a><span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span>
 <a id="__codelineno-0-528" name="__codelineno-0-528"></a>    <span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="nb">int</span>
 <a id="__codelineno-0-529" name="__codelineno-0-529"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
 <a id="__codelineno-0-530" name="__codelineno-0-530"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Executes one step in the environment.</span>
@@ -4298,71 +4300,73 @@ Defaults to 0.8.</p>
 <a id="__codelineno-0-553" name="__codelineno-0-553"></a>        <span class="s2">&quot;actual_action&quot;</span><span class="p">,</span>
 <a id="__codelineno-0-554" name="__codelineno-0-554"></a>        <span class="s2">&quot;slipped&quot;</span><span class="p">,</span>
 <a id="__codelineno-0-555" name="__codelineno-0-555"></a>        <span class="s2">&quot;particles&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-556" name="__codelineno-0-556"></a>    <span class="p">]</span>
-<a id="__codelineno-0-557" name="__codelineno-0-557"></a>    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys_to_preserve</span><span class="p">:</span>
-<a id="__codelineno-0-558" name="__codelineno-0-558"></a>        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">info</span><span class="p">:</span>
-<a id="__codelineno-0-559" name="__codelineno-0-559"></a>            <span class="n">preserved_info</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-<a id="__codelineno-0-560" name="__codelineno-0-560"></a>
-<a id="__codelineno-0-561" name="__codelineno-0-561"></a>    <span class="n">info</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-<a id="__codelineno-0-562" name="__codelineno-0-562"></a>    <span class="n">info</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">preserved_info</span><span class="p">)</span>
-<a id="__codelineno-0-563" name="__codelineno-0-563"></a>
-<a id="__codelineno-0-564" name="__codelineno-0-564"></a>    <span class="n">reward</span> <span class="o">=</span> <span class="mf">0.0</span>
-<a id="__codelineno-0-565" name="__codelineno-0-565"></a>    <span class="n">terminated</span> <span class="o">=</span> <span class="kc">False</span>
-<a id="__codelineno-0-566" name="__codelineno-0-566"></a>    <span class="n">action_names</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;down&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s2">&quot;up&quot;</span><span class="p">}</span>
-<a id="__codelineno-0-567" name="__codelineno-0-567"></a>
-<a id="__codelineno-0-568" name="__codelineno-0-568"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_turn</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<a id="__codelineno-0-569" name="__codelineno-0-569"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">step_count</span> <span class="o">+=</span> <span class="mi">1</span>
-<a id="__codelineno-0-570" name="__codelineno-0-570"></a>        <span class="n">actual_actions</span><span class="p">,</span> <span class="n">slipped</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apply_slip</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
-<a id="__codelineno-0-571" name="__codelineno-0-571"></a>        <span class="k">for</span> <span class="n">act</span> <span class="ow">in</span> <span class="n">actual_actions</span><span class="p">:</span>
-<a id="__codelineno-0-572" name="__codelineno-0-572"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">agent_pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_move_entity</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_pos</span><span class="p">,</span> <span class="n">act</span><span class="p">)</span>
-<a id="__codelineno-0-573" name="__codelineno-0-573"></a>
-<a id="__codelineno-0-574" name="__codelineno-0-574"></a>        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;slipped&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">slipped</span>
-<a id="__codelineno-0-575" name="__codelineno-0-575"></a>        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;intended_action&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">action_names</span><span class="p">[</span><span class="n">action</span><span class="p">]</span>
-<a id="__codelineno-0-576" name="__codelineno-0-576"></a>        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;actual_action&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-<a id="__codelineno-0-577" name="__codelineno-0-577"></a>            <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">action_names</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">actual_actions</span><span class="p">])</span>
-<a id="__codelineno-0-578" name="__codelineno-0-578"></a>            <span class="k">if</span> <span class="n">actual_actions</span>
-<a id="__codelineno-0-579" name="__codelineno-0-579"></a>            <span class="k">else</span> <span class="s2">&quot;stay&quot;</span>
-<a id="__codelineno-0-580" name="__codelineno-0-580"></a>        <span class="p">)</span>
-<a id="__codelineno-0-581" name="__codelineno-0-581"></a>        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;color_measurement&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_color_sensor_measurement</span><span class="p">(</span>
-<a id="__codelineno-0-582" name="__codelineno-0-582"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">agent_pos</span>
-<a id="__codelineno-0-583" name="__codelineno-0-583"></a>        <span class="p">)</span>
-<a id="__codelineno-0-584" name="__codelineno-0-584"></a>
-<a id="__codelineno-0-585" name="__codelineno-0-585"></a>        <span class="n">current_cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
-<a id="__codelineno-0-586" name="__codelineno-0-586"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent_pos</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost_pos</span><span class="p">:</span>
-<a id="__codelineno-0-587" name="__codelineno-0-587"></a>            <span class="n">reward</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_reward_structure</span><span class="p">()[</span><span class="s2">&quot;caught_by_ghost&quot;</span><span class="p">])</span>
-<a id="__codelineno-0-588" name="__codelineno-0-588"></a>            <span class="n">terminated</span> <span class="o">=</span> <span class="kc">True</span>
-<a id="__codelineno-0-589" name="__codelineno-0-589"></a>            <span class="n">info</span><span class="p">[</span><span class="s2">&quot;caught_by_ghost&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-<a id="__codelineno-0-590" name="__codelineno-0-590"></a>        <span class="k">elif</span> <span class="n">current_cell</span><span class="p">[</span><span class="s2">&quot;is_goal&quot;</span><span class="p">]:</span>
-<a id="__codelineno-0-591" name="__codelineno-0-591"></a>            <span class="n">reward</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_reward_structure</span><span class="p">()[</span><span class="s2">&quot;reached_goal&quot;</span><span class="p">])</span>
-<a id="__codelineno-0-592" name="__codelineno-0-592"></a>            <span class="n">terminated</span> <span class="o">=</span> <span class="kc">True</span>
-<a id="__codelineno-0-593" name="__codelineno-0-593"></a>            <span class="n">info</span><span class="p">[</span><span class="s2">&quot;reached_goal&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-<a id="__codelineno-0-594" name="__codelineno-0-594"></a>        <span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-0-595" name="__codelineno-0-595"></a>            <span class="n">reward</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_reward_structure</span><span class="p">()[</span><span class="s2">&quot;step_penalty&quot;</span><span class="p">])</span>
-<a id="__codelineno-0-596" name="__codelineno-0-596"></a>
-<a id="__codelineno-0-597" name="__codelineno-0-597"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">current_turn</span> <span class="o">=</span> <span class="mi">1</span>
-<a id="__codelineno-0-598" name="__codelineno-0-598"></a>        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;current_turn&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;ghost&quot;</span>
-<a id="__codelineno-0-599" name="__codelineno-0-599"></a>        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;mover&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;agent&quot;</span>
-<a id="__codelineno-0-600" name="__codelineno-0-600"></a>        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;ghost_distance&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_shortest_path_distance</span><span class="p">(</span>
-<a id="__codelineno-0-601" name="__codelineno-0-601"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">agent_pos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost_pos</span>
-<a id="__codelineno-0-602" name="__codelineno-0-602"></a>        <span class="p">)</span>
-<a id="__codelineno-0-603" name="__codelineno-0-603"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">info</span> <span class="o">=</span> <span class="n">info</span>
-<a id="__codelineno-0-604" name="__codelineno-0-604"></a>
-<a id="__codelineno-0-605" name="__codelineno-0-605"></a>    <span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-0-606" name="__codelineno-0-606"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">move_ghost</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
-<a id="__codelineno-0-607" name="__codelineno-0-607"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent_pos</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost_pos</span><span class="p">:</span>
-<a id="__codelineno-0-608" name="__codelineno-0-608"></a>            <span class="n">reward</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_reward_structure</span><span class="p">()[</span><span class="s2">&quot;caught_by_ghost&quot;</span><span class="p">])</span>
-<a id="__codelineno-0-609" name="__codelineno-0-609"></a>            <span class="n">terminated</span> <span class="o">=</span> <span class="kc">True</span>
-<a id="__codelineno-0-610" name="__codelineno-0-610"></a>            <span class="n">info</span><span class="p">[</span><span class="s2">&quot;caught_by_ghost&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-<a id="__codelineno-0-611" name="__codelineno-0-611"></a>
-<a id="__codelineno-0-612" name="__codelineno-0-612"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">current_turn</span> <span class="o">=</span> <span class="mi">0</span>
-<a id="__codelineno-0-613" name="__codelineno-0-613"></a>        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;current_turn&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;agent&quot;</span>
-<a id="__codelineno-0-614" name="__codelineno-0-614"></a>        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;mover&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;ghost&quot;</span>
-<a id="__codelineno-0-615" name="__codelineno-0-615"></a>        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;ghost_distance&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_shortest_path_distance</span><span class="p">(</span>
-<a id="__codelineno-0-616" name="__codelineno-0-616"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">agent_pos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost_pos</span>
-<a id="__codelineno-0-617" name="__codelineno-0-617"></a>        <span class="p">)</span>
-<a id="__codelineno-0-618" name="__codelineno-0-618"></a>
-<a id="__codelineno-0-619" name="__codelineno-0-619"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">info</span> <span class="o">=</span> <span class="n">info</span>
-<a id="__codelineno-0-620" name="__codelineno-0-620"></a>    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_obs</span><span class="p">(),</span> <span class="nb">float</span><span class="p">(</span><span class="n">reward</span><span class="p">),</span> <span class="n">terminated</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">info</span>
+<a id="__codelineno-0-556" name="__codelineno-0-556"></a>        <span class="s2">&quot;agent_values&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-557" name="__codelineno-0-557"></a>        <span class="s2">&quot;ghost_values&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-558" name="__codelineno-0-558"></a>    <span class="p">]</span>
+<a id="__codelineno-0-559" name="__codelineno-0-559"></a>    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys_to_preserve</span><span class="p">:</span>
+<a id="__codelineno-0-560" name="__codelineno-0-560"></a>        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">info</span><span class="p">:</span>
+<a id="__codelineno-0-561" name="__codelineno-0-561"></a>            <span class="n">preserved_info</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+<a id="__codelineno-0-562" name="__codelineno-0-562"></a>
+<a id="__codelineno-0-563" name="__codelineno-0-563"></a>    <span class="n">info</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<a id="__codelineno-0-564" name="__codelineno-0-564"></a>    <span class="n">info</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">preserved_info</span><span class="p">)</span>
+<a id="__codelineno-0-565" name="__codelineno-0-565"></a>
+<a id="__codelineno-0-566" name="__codelineno-0-566"></a>    <span class="n">reward</span> <span class="o">=</span> <span class="mf">0.0</span>
+<a id="__codelineno-0-567" name="__codelineno-0-567"></a>    <span class="n">terminated</span> <span class="o">=</span> <span class="kc">False</span>
+<a id="__codelineno-0-568" name="__codelineno-0-568"></a>    <span class="n">action_names</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;down&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s2">&quot;up&quot;</span><span class="p">}</span>
+<a id="__codelineno-0-569" name="__codelineno-0-569"></a>
+<a id="__codelineno-0-570" name="__codelineno-0-570"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_turn</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-0-571" name="__codelineno-0-571"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">step_count</span> <span class="o">+=</span> <span class="mi">1</span>
+<a id="__codelineno-0-572" name="__codelineno-0-572"></a>        <span class="n">actual_actions</span><span class="p">,</span> <span class="n">slipped</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apply_slip</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+<a id="__codelineno-0-573" name="__codelineno-0-573"></a>        <span class="k">for</span> <span class="n">act</span> <span class="ow">in</span> <span class="n">actual_actions</span><span class="p">:</span>
+<a id="__codelineno-0-574" name="__codelineno-0-574"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">agent_pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_move_entity</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_pos</span><span class="p">,</span> <span class="n">act</span><span class="p">)</span>
+<a id="__codelineno-0-575" name="__codelineno-0-575"></a>
+<a id="__codelineno-0-576" name="__codelineno-0-576"></a>        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;slipped&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">slipped</span>
+<a id="__codelineno-0-577" name="__codelineno-0-577"></a>        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;intended_action&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">action_names</span><span class="p">[</span><span class="n">action</span><span class="p">]</span>
+<a id="__codelineno-0-578" name="__codelineno-0-578"></a>        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;actual_action&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-0-579" name="__codelineno-0-579"></a>            <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">action_names</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">actual_actions</span><span class="p">])</span>
+<a id="__codelineno-0-580" name="__codelineno-0-580"></a>            <span class="k">if</span> <span class="n">actual_actions</span>
+<a id="__codelineno-0-581" name="__codelineno-0-581"></a>            <span class="k">else</span> <span class="s2">&quot;stay&quot;</span>
+<a id="__codelineno-0-582" name="__codelineno-0-582"></a>        <span class="p">)</span>
+<a id="__codelineno-0-583" name="__codelineno-0-583"></a>        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;color_measurement&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_color_sensor_measurement</span><span class="p">(</span>
+<a id="__codelineno-0-584" name="__codelineno-0-584"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">agent_pos</span>
+<a id="__codelineno-0-585" name="__codelineno-0-585"></a>        <span class="p">)</span>
+<a id="__codelineno-0-586" name="__codelineno-0-586"></a>
+<a id="__codelineno-0-587" name="__codelineno-0-587"></a>        <span class="n">current_cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+<a id="__codelineno-0-588" name="__codelineno-0-588"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent_pos</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost_pos</span><span class="p">:</span>
+<a id="__codelineno-0-589" name="__codelineno-0-589"></a>            <span class="n">reward</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_reward_structure</span><span class="p">()[</span><span class="s2">&quot;caught_by_ghost&quot;</span><span class="p">])</span>
+<a id="__codelineno-0-590" name="__codelineno-0-590"></a>            <span class="n">terminated</span> <span class="o">=</span> <span class="kc">True</span>
+<a id="__codelineno-0-591" name="__codelineno-0-591"></a>            <span class="n">info</span><span class="p">[</span><span class="s2">&quot;caught_by_ghost&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<a id="__codelineno-0-592" name="__codelineno-0-592"></a>        <span class="k">elif</span> <span class="n">current_cell</span><span class="p">[</span><span class="s2">&quot;is_goal&quot;</span><span class="p">]:</span>
+<a id="__codelineno-0-593" name="__codelineno-0-593"></a>            <span class="n">reward</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_reward_structure</span><span class="p">()[</span><span class="s2">&quot;reached_goal&quot;</span><span class="p">])</span>
+<a id="__codelineno-0-594" name="__codelineno-0-594"></a>            <span class="n">terminated</span> <span class="o">=</span> <span class="kc">True</span>
+<a id="__codelineno-0-595" name="__codelineno-0-595"></a>            <span class="n">info</span><span class="p">[</span><span class="s2">&quot;reached_goal&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<a id="__codelineno-0-596" name="__codelineno-0-596"></a>        <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-0-597" name="__codelineno-0-597"></a>            <span class="n">reward</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_reward_structure</span><span class="p">()[</span><span class="s2">&quot;step_penalty&quot;</span><span class="p">])</span>
+<a id="__codelineno-0-598" name="__codelineno-0-598"></a>
+<a id="__codelineno-0-599" name="__codelineno-0-599"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">current_turn</span> <span class="o">=</span> <span class="mi">1</span>
+<a id="__codelineno-0-600" name="__codelineno-0-600"></a>        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;current_turn&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;ghost&quot;</span>
+<a id="__codelineno-0-601" name="__codelineno-0-601"></a>        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;mover&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;agent&quot;</span>
+<a id="__codelineno-0-602" name="__codelineno-0-602"></a>        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;ghost_distance&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_shortest_path_distance</span><span class="p">(</span>
+<a id="__codelineno-0-603" name="__codelineno-0-603"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">agent_pos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost_pos</span>
+<a id="__codelineno-0-604" name="__codelineno-0-604"></a>        <span class="p">)</span>
+<a id="__codelineno-0-605" name="__codelineno-0-605"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">info</span> <span class="o">=</span> <span class="n">info</span>
+<a id="__codelineno-0-606" name="__codelineno-0-606"></a>
+<a id="__codelineno-0-607" name="__codelineno-0-607"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-0-608" name="__codelineno-0-608"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">move_ghost</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+<a id="__codelineno-0-609" name="__codelineno-0-609"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent_pos</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost_pos</span><span class="p">:</span>
+<a id="__codelineno-0-610" name="__codelineno-0-610"></a>            <span class="n">reward</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_reward_structure</span><span class="p">()[</span><span class="s2">&quot;caught_by_ghost&quot;</span><span class="p">])</span>
+<a id="__codelineno-0-611" name="__codelineno-0-611"></a>            <span class="n">terminated</span> <span class="o">=</span> <span class="kc">True</span>
+<a id="__codelineno-0-612" name="__codelineno-0-612"></a>            <span class="n">info</span><span class="p">[</span><span class="s2">&quot;caught_by_ghost&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<a id="__codelineno-0-613" name="__codelineno-0-613"></a>
+<a id="__codelineno-0-614" name="__codelineno-0-614"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">current_turn</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-0-615" name="__codelineno-0-615"></a>        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;current_turn&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;agent&quot;</span>
+<a id="__codelineno-0-616" name="__codelineno-0-616"></a>        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;mover&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;ghost&quot;</span>
+<a id="__codelineno-0-617" name="__codelineno-0-617"></a>        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;ghost_distance&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_shortest_path_distance</span><span class="p">(</span>
+<a id="__codelineno-0-618" name="__codelineno-0-618"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">agent_pos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghost_pos</span>
+<a id="__codelineno-0-619" name="__codelineno-0-619"></a>        <span class="p">)</span>
+<a id="__codelineno-0-620" name="__codelineno-0-620"></a>
+<a id="__codelineno-0-621" name="__codelineno-0-621"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">info</span> <span class="o">=</span> <span class="n">info</span>
+<a id="__codelineno-0-622" name="__codelineno-0-622"></a>    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_obs</span><span class="p">(),</span> <span class="nb">float</span><span class="p">(</span><span class="n">reward</span><span class="p">),</span> <span class="n">terminated</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">info</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
