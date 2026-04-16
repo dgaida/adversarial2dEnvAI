@@ -44,10 +44,10 @@ agent = ExpectimaxAgent(interface.get_action_space(), env=interface.env, depth_l
 
 ## Heuristik-Funktion
 
-Beide Agenten verwenden eine interne Heuristik-Funktion:
-- **Ziel erreicht**: +10.000
-- **Vom Geist gefangen**: -10.000
-- **Distanz zum Ziel**: Bestraft große Distanzen.
+Beide Agenten verwenden eine interne Heuristik-Funktion:  
+- **Ziel erreicht**: +10.000  
+- **Vom Geist gefangen**: -10.000  
+- **Distanz zum Ziel**: Bestraft große Distanzen.  
 - **Distanz zum Geist**: Belohnt Sicherheitspuffer.
 
 ### Interaktives Ausprobieren
