@@ -107,10 +107,10 @@ The agents follow a protocol-based design.
 
 ```mermaid
 classDiagram
-    class Agent {
-        <<Protocol>>
-        +get_action(observation)
-    }
+    class Agent
+    <<interface>> Agent
+    Agent : +get_action(observation)
+
     class BaseAgent {
         +action_space
         +env
@@ -120,9 +120,9 @@ classDiagram
     class ChaseGhostAgent
     class RandomGhostAgent
 
-    BaseAgent ..|> Agent
-    MinimaxAgent --|> BaseAgent
-    ExpectimaxAgent --|> BaseAgent
-    ChaseGhostAgent --|> BaseAgent
-    RandomGhostAgent --|> BaseAgent
+    BaseAgent ..|> Agent : implements
+    MinimaxAgent --|> BaseAgent : inherits
+    ExpectimaxAgent --|> BaseAgent : inherits
+    ChaseGhostAgent --|> BaseAgent : inherits
+    RandomGhostAgent --|> BaseAgent : inherits
 ```
