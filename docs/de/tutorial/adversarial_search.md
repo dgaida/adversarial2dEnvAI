@@ -59,3 +59,13 @@ Beide Agenten verwenden eine interne Heuristik-Funktion:
 - **Vom Geist gefangen**: -10.000  
 - **Distanz zum Ziel**: Bestraft große Distanzen.  
 - **Distanz zum Geist**: Belohnt Sicherheitsabstände.
+
+### Interaktives Ausprobieren
+
+Nutzen Sie das `Colab_GUI_Demo` Notebook, um die Agenten live zu vergleichen:
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Colab_GUI_Demo.ipynb)
+
+### Übungen für Studierende:
+1. **Vergleich**: Stellen Sie die Suchtiefe auf 3 und vergleichen Sie das Überlebensvermögen von Minimax und Expectimax gegen einen `ChaseGhostAgent`.
+2. **Geist-Verhalten**: Ändern Sie das Verhalten des Geistes auf `Minimax`. Welcher Agent (Minimax vs. Expectimax) schneidet nun besser ab?
+3. **Sichtbarkeit**: Aktivieren Sie "Estimated State" in der GUI. Wie beeinflusst die Unsicherheit der Lokalisierung (Partikelfilter) die Qualität der Spielzüge der adversarialen Agenten?

@@ -59,3 +59,13 @@ Both agents use an internal heuristic function:
 - **Caught by ghost**: -10,000  
 - **Distance to goal**: Penalizes large distances.  
 - **Distance to ghost**: Rewards safety buffers.  
+
+### Interactive Demo
+
+Use the `Colab_GUI_Demo` notebook to compare the agents live:
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Colab_GUI_Demo.ipynb)
+
+### Exercises for Students:
+1. **Comparison**: Set the search depth to 3 and compare the survival rates of Minimax and Expectimax against a `ChaseGhostAgent`.
+2. **Ghost Behavior**: Change the ghost's behavior to `Minimax`. Which agent (Minimax vs. Expectimax) performs better now?
+3. **Visibility**: Enable "Estimated State" in the GUI. How does the uncertainty of localization (Particle Filter) affect the quality of the adversarial agents' moves?
