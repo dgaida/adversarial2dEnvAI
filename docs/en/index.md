@@ -17,17 +17,17 @@ A key challenge is the integration of multiple modules—such as **Speech-to-Tex
 
 ## 🌟 Key Features
 
-*   **Turn-Based Adversarial Gameplay**: Compete against a ghost in a 4x5 grid.
-*   **Adversarial Search**: Integrated **Minimax** and **Expectimax** agents for strategic planning.
-*   **Stochastic Movement**: Realistic physics with *Perpendicular* and *Longitudinal* slipping.
-*   **Imperfect Perception**:
-    *   **Noisy Color Sensor**: Ground color detection with 80% accuracy.
-    *   **CNN-Based Vision**: Real-time item classification using a trained CNN.
-*   **State Estimation**: Integrated **Particle Filter** for Bayesian localization.
-*   **Interactive Visualization**:
-    *   Rich Pygame-based renderer.
-    *   Interactive Google Colab GUI with real-time 2D probability distribution.
-*   **Customizable Ghost AI**: Switch between shortest-path chasing, random movement, and minimax.
+*   **Turn-Based Adversarial Gameplay**: Compete against a ghost in a 4x5 grid.  
+*   **Adversarial Search**: Integrated **Minimax** and **Expectimax** agents for strategic planning.  
+*   **Stochastic Movement**: Realistic physics with *Perpendicular* and *Longitudinal* slipping.  
+*   **Imperfect Perception**:  
+    *   **Noisy Color Sensor**: Ground color detection with 80% accuracy.  
+    *   **CNN-Based Vision**: Real-time item classification using a trained CNN.  
+*   **State Estimation**: Integrated **Particle Filter** for Bayesian localization.  
+*   **Interactive Visualization**:  
+    *   Rich Pygame-based renderer.  
+    *   Interactive Google Colab GUI with real-time 2D probability distribution.  
+*   **Customizable Ghost AI**: Switch between shortest-path chasing, random movement, and minimax.  
 
 ## 📓 Interactive Notebooks
 

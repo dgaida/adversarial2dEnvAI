@@ -8,13 +8,13 @@ Make sure you have Python 3.8 or newer installed. It is recommended to use a vir
 
 ## Installation from Source
 
-1. Clone the repository:
+1. Clone the repository:  
    ```bash
    git clone https://github.com/dgaida/adversarial2dEnvAI.git
    cd adversarial2dEnvAI
    ```
 
-2. Install the package in editable mode:
+2. Install the package in editable mode:  
    ```bash
    pip install -e .
    ```

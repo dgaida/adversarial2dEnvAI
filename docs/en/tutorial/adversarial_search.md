@@ -42,8 +42,8 @@ agent = ExpectimaxAgent(interface.get_action_space(), env=interface.env, depth_l
 
 ## Heuristic Function
 
-Both agents use an internal heuristic function:
-- **Goal reached**: +10,000
-- **Caught by ghost**: -10,000
-- **Distance to goal**: Penalizes large distances.
-- **Distance to ghost**: Rewards safety buffers.
+Both agents use an internal heuristic function:  
+- **Goal reached**: +10,000  
+- **Caught by ghost**: -10,000  
+- **Distance to goal**: Penalizes large distances.  
+- **Distance to ghost**: Rewards safety buffers.  

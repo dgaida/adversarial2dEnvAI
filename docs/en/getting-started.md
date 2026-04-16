@@ -6,9 +6,9 @@ Welcome to `custom_grid_env`! This page will help you get familiar with the envi
 
 The environment simulates a grid where an agent must navigate. The following components play a central role:
 
-1.  **AgentInterface**: The primary interface for your AI agents. It encapsulates the environment, the ghost, and the particle filter.
-2.  **Particle Filter**: A mechanism for estimating the agent's position if it is not exactly known (localization).
-3.  **CNN Classification**: A neural network that processes images of grid cells to recognize objects like dogs or flowers.
+1.  **AgentInterface**: The primary interface for your AI agents. It encapsulates the environment, the ghost, and the particle filter.  
+2.  **Particle Filter**: A mechanism for estimating the agent's position if it is not exactly known (localization).  
+3.  **CNN Classification**: A neural network that processes images of grid cells to recognize objects like dogs or flowers.  
 
 ## First Experiments
 
@@ -47,6 +47,6 @@ interface.close()
 
 ## Further Tutorials
 
-Check out our detailed tutorials:
-- [CNN Training Tutorial](tutorial/cnn.md)
-- [Particle Filter Tutorial](tutorial/particle_filter.md)
+Check out our detailed tutorials:  
+- [CNN Training Tutorial](tutorial/cnn.md)  
+- [Particle Filter Tutorial](tutorial/particle_filter.md)  

@@ -6,9 +6,9 @@ Willkommen bei `custom_grid_env`! Diese Seite hilft dir dabei, dich schnell in d
 
 Die Umgebung simuliert ein Gitter, in dem ein Agent navigieren muss. Dabei spielen folgende Komponenten eine zentrale Rolle:
 
-1.  **AgentInterface**: Die primäre Schnittstelle für deine KI-Agenten. Sie kapselt die Umgebung, den Geist und den Partikelfilter.
-2.  **Partikelfilter**: Ein Mechanismus zur Schätzung der Agentenposition, falls diese nicht exakt bekannt ist (Lokalisierung).
-3.  **CNN-Klassifizierung**: Ein neuronales Netz, das Bilder der Gitterzellen verarbeitet, um Objekte wie Hunde oder Blumen zu erkennen.
+1.  **AgentInterface**: Die primäre Schnittstelle für deine KI-Agenten. Sie kapselt die Umgebung, den Geist und den Partikelfilter.  
+2.  **Partikelfilter**: Ein Mechanismus zur Schätzung der Agentenposition, falls diese nicht exakt bekannt ist (Lokalisierung).  
+3.  **CNN-Klassifizierung**: Ein neuronales Netz, das Bilder der Gitterzellen verarbeitet, um Objekte wie Hunde oder Blumen zu erkennen.  
 
 ## Erste Experimente
 
@@ -47,6 +47,6 @@ interface.close()
 
 ## Weiterführende Tutorials
 
-Schau dir unsere detaillierten Tutorials an:
-- [CNN Training Tutorial](tutorial/cnn.md)
-- [Partikelfilter Tutorial](tutorial/particle_filter.md)
+Schau dir unsere detaillierten Tutorials an:  
+- [CNN Training Tutorial](tutorial/cnn.md)  
+- [Partikelfilter Tutorial](tutorial/particle_filter.md)  

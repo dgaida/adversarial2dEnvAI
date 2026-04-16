@@ -10,6 +10,6 @@
 
 ## Strategy
 
-To maximize the reward, the agent should:
-1. Find the shortest path to the goal.
-2. Avoid the ghost at all costs.
+To maximize the reward, the agent should:  
+1. Find the shortest path to the goal.  
+2. Avoid the ghost at all costs.  

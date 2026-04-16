@@ -10,9 +10,9 @@
 
 ## Strategie
 
-Um die Belohnung zu maximieren, sollte der Agent:
-1. Den kürzesten Weg zum Ziel finden.
-2. Den Geist unbedingt vermeiden.
+Um die Belohnung zu maximieren, sollte der Agent:  
+1. Den kürzesten Weg zum Ziel finden.  
+2. Den Geist unbedingt vermeiden.  
 
 ### Verwendung in Adversarial Search
 

@@ -17,17 +17,17 @@ Eine zentrale Herausforderung ist die Integration mehrerer Module – wie **Spee
 
 ## 🌟 Hauptmerkmale
 
-*   **Rundenbasiertes Adversarial Gameplay**: Ein Agent konkurriert gegen einen Geist in einem 4x5 Gitter.
-*   **Adversarial Search**: Integrierte **Minimax** und **Expectimax** Agenten für strategische Planung.
-*   **Stochastische Bewegung**: Unterstützung für *senkrechtes* und *längsgerichtetes* Rutschen.
-*   **Unvollkommene Wahrnehmung**:
-    *   **Verrauschter Farbsensor**: Erkennung der Bodenfarbe mit 80% Genauigkeit.
-    *   **CNN-basierte Vision**: Echtzeit-Klassifizierung von Objekten (Hunde, Blumen, Hintergrund) mit einem vortrainierten CNN.
-*   **Zustandsschätzung**: Integrierter **Partikelfilter** für Bayes'sche Lokalisierung.
-*   **Interaktive Visualisierung**:
-    *   Umfangreicher Pygame-basierter Renderer.
-    *   Interaktive Google Colab GUI mit Echtzeit-2D-Wahrscheinlichkeitsverteilung.
-*   **Anpassbare Geister-KI**: Wechseln Sie zwischen kürzestem Pfad (Chase), Zufallsbewegung und Minimax.
+*   **Rundenbasiertes Adversarial Gameplay**: Ein Agent konkurriert gegen einen Geist in einem 4x5 Gitter.  
+*   **Adversarial Search**: Integrierte **Minimax** und **Expectimax** Agenten für strategische Planung.  
+*   **Stochastische Bewegung**: Unterstützung für *senkrechtes* und *längsgerichtetes* Rutschen.  
+*   **Unvollkommene Wahrnehmung**:  
+    *   **Verrauschter Farbsensor**: Erkennung der Bodenfarbe mit 80% Genauigkeit.  
+    *   **CNN-basierte Vision**: Echtzeit-Klassifizierung von Objekten (Hunde, Blumen, Hintergrund) mit einem vortrainierten CNN.  
+*   **Zustandsschätzung**: Integrierter **Partikelfilter** für Bayes'sche Lokalisierung.  
+*   **Interaktive Visualisierung**:  
+    *   Umfangreicher Pygame-basierter Renderer.  
+    *   Interaktive Google Colab GUI mit Echtzeit-2D-Wahrscheinlichkeitsverteilung.  
+*   **Anpassbare Geister-KI**: Wechseln Sie zwischen kürzestem Pfad (Chase), Zufallsbewegung und Minimax.  
 
 ## 📓 Interaktive Notebooks
 
