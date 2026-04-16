@@ -36,6 +36,10 @@ Sowohl der Agent als auch der Geist nutzen denselben Aktionsraum:
 | 2      | Rechts     | Spalte + 1 |
 | 3      | Hoch        | Zeile - 1    |
 
+## Gitter-Grenzen
+
+Die Umgebung ist **nicht-zyklisch**. Das bedeutet, dass es keinen "Wrap-around"-Effekt gibt; wenn sich ein Agent oder Geist am Rand des Gitters befindet und sich in Richtung der Grenze bewegt, bleibt er in seinem aktuellen Feld. Die Grenzen des Gitters wirken effektiv wie permanente Wände.
+
 ## Rutschwahrscheinlichkeit (Slip)
 
 Die Umgebung enthält eine stochastische Rutschmechanik für den Agenten. Bei einer konfigurierten Wahrscheinlichkeit $P_{\text{slip}}$ bewegt sich der Agent anders als beabsichtigt:
