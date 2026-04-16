@@ -36,6 +36,10 @@ Both the agent and the ghost use the same action space:
 | 2      | Right     | Column + 1 |
 | 3      | Up        | Row - 1    |
 
+## Grid Boundaries
+
+The environment is **non-cycling**. This means there is no "wrap-around" effect; if an agent or ghost is at the edge of the grid and moves towards the boundary, it will remain in its current cell. The boundaries of the grid effectively act as permanent walls.
+
 ## Slip Probability
 
 The environment includes a stochastic slip mechanic for the agent. With a configured probability $P_{\text{slip}}$, the agent moves differently than intended:
