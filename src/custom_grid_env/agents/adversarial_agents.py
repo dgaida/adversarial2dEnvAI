@@ -11,6 +11,18 @@ class AdversarialAgent(BaseAgent):
     Provides shared heuristic and state-transition logic.
     """
 
+    def get_value(self, agent_pos: List[int], ghost_pos: List[int]) -> float:
+        """Calculates the state value for the given positions.
+
+        Args:
+            agent_pos (list): Agent [row, col].
+            ghost_pos (list): Ghost [row, col].
+
+        Returns:
+            float: The state value.
+        """
+        raise NotImplementedError("Subclasses must implement get_value")
+
     def __init__(
         self, action_space: gym.spaces.Space, depth_limit: int = 4, **kwargs: Any
     ):
@@ -19,30 +31,30 @@ class AdversarialAgent(BaseAgent):
         Args:
             action_space (gym.spaces.Space): The action space.
             depth_limit (int): The depth limit for the search.
-            **kwargs (Any): Additional arguments, should include 'env'.
+            **kwargs (Any): Additional keyword arguments.
         """
         super().__init__(action_space, **kwargs)
         self.depth_limit = depth_limit
 
     def _get_agent_pos(self) -> List[int]:
-        """Gets the current agent position from the environment."""
+        """Returns the agent's position."""
         if self.perceived_agent_pos is not None:
-            return list(self.perceived_agent_pos)
+            return self.perceived_agent_pos
         return list(self.env.agent_pos)
 
     def _get_ghost_pos(self) -> List[int]:
-        """Gets the current ghost position from the environment."""
+        """Returns the ghost's position."""
         if self.perceived_ghost_pos is not None:
-            return list(self.perceived_ghost_pos)
+            return self.perceived_ghost_pos
         return list(self.env.ghost_pos)
 
     def _get_goal_pos(self) -> List[int]:
-        """Finds the goal position in the grid."""
+        """Returns the goal position."""
         for r in range(self.env.rows):
             for c in range(self.env.cols):
                 if self.env.grid[r, c]["is_goal"]:
                     return [r, c]
-        return [0, 2]  # Default start pos in README
+        return [0, 0]
 
     def _heuristic(
         self,
@@ -51,13 +63,13 @@ class AdversarialAgent(BaseAgent):
         terminated: bool,
         info: Dict[str, Any],
     ) -> float:
-        """Heuristic function to evaluate a state.
+        """Heuristic evaluation function.
 
         Args:
             agent_pos (list): Agent [row, col].
             ghost_pos (list): Ghost [row, col].
-            terminated (bool): Whether the state is terminal.
-            info (dict): Additional information about the state.
+            terminated (bool): Whether the episode ended.
+            info (dict): Metadata about the termination.
 
         Returns:
             float: Heuristic value.
@@ -153,6 +165,20 @@ class AdversarialAgent(BaseAgent):
 class MinimaxAgent(AdversarialAgent):
     """Agent that uses Minimax with Alpha-Beta pruning."""
 
+    def get_value(self, agent_pos: List[int], ghost_pos: List[int]) -> float:
+        """Calculates the state value using minimax.
+
+        Args:
+            agent_pos (list): Agent [row, col].
+            ghost_pos (list): Ghost [row, col].
+
+        Returns:
+            float: The state value.
+        """
+        return self._max_value(
+            agent_pos, ghost_pos, 0, False, {}, -float("inf"), float("inf")
+        )
+
     def get_action(self, observation: Dict[str, Any]) -> int:
         """Returns the best action using minimax.
 
@@ -245,6 +271,18 @@ class MinimaxAgent(AdversarialAgent):
 
 class ExpectimaxAgent(AdversarialAgent):
     """Agent that uses Expectimax algorithm."""
+
+    def get_value(self, agent_pos: List[int], ghost_pos: List[int]) -> float:
+        """Calculates the state value using expectimax.
+
+        Args:
+            agent_pos (list): Agent [row, col].
+            ghost_pos (list): Ghost [row, col].
+
+        Returns:
+            float: The state value.
+        """
+        return self._max_value(agent_pos, ghost_pos, 0, False, {})
 
     def get_action(self, observation: Dict[str, Any]) -> int:
         """Returns the best action using expectimax.

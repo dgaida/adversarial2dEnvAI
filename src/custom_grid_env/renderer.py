@@ -99,6 +99,8 @@ class PygameRenderer:
         col: int,
         cell: Dict[str, Any],
         surface: Optional[pygame.Surface] = None,
+        agent_value: Optional[float] = None,
+        ghost_value: Optional[float] = None,
     ):
         """Draws a single cell with its contents."""
         if surface is None:
@@ -127,6 +129,23 @@ class PygameRenderer:
                 self.cell_size - 2 * margin,
             ),
         )
+
+        # Draw agent and ghost values if provided
+        if agent_value is not None:
+            val_text = self.small_font.render(
+                f"{agent_value:.0f}", True, self.colors["blue"]
+            )
+            surface.blit(val_text, (x + 8, y + self.cell_size - 22))
+
+        if ghost_value is not None:
+            val_text = self.small_font.render(
+                f"{ghost_value:.0f}", True, self.colors["purple"]
+            )
+            val_rect = val_text.get_rect()
+            surface.blit(
+                val_text,
+                (x + self.cell_size - val_rect.width - 8, y + self.cell_size - 22),
+            )
 
         if cell["colour"] == 1:
             self._draw_crosshatch(
@@ -520,11 +539,18 @@ class PygameRenderer:
                 self.close()
                 return None
 
+        agent_values = info.get("agent_values")
+        ghost_values = info.get("ghost_values")
+
         self.screen.fill(self.colors["white"])
         self._draw_grid_lines()
         for row in range(self.rows):
             for col in range(self.cols):
-                self._draw_cell(row, col, grid[row, col])
+                av = agent_values[row, col] if agent_values is not None else None
+                gv = ghost_values[row, col] if ghost_values is not None else None
+                self._draw_cell(
+                    row, col, grid[row, col], agent_value=av, ghost_value=gv
+                )
         self._draw_walls(walls_horizontal, walls_vertical)
         if agent_pos != ghost_pos:
             self._draw_ghost(ghost_pos[0], ghost_pos[1])

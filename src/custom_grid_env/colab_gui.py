@@ -12,7 +12,7 @@ from .agents.base_agent import Agent
 from .agents.random_player_agent import RandomPlayerAgent
 from .agents.chase_ghost_agent import ChaseGhostAgent
 from .agents.random_ghost_agent import RandomGhostAgent
-from .agents.adversarial_agents import MinimaxAgent, ExpectimaxAgent
+from .agents.adversarial_agents import MinimaxAgent, ExpectimaxAgent, AdversarialAgent
 
 # Set dummy video driver for headless environment (Colab)
 os.environ["SDL_VIDEODRIVER"] = "dummy"
@@ -214,6 +214,40 @@ class ColabGUI:
         """Updates the display with the latest environment state and plots."""
         with self.output:
             clear_output(wait=True)
+
+            # Precompute minimax/expectimax values if applicable
+            agent_values = None
+            ghost_values = None
+
+            if isinstance(self.agent, AdversarialAgent):
+                agent_values = np.zeros(
+                    (self.interface.env.rows, self.interface.env.cols)
+                )
+                for r in range(self.interface.env.rows):
+                    for c in range(self.interface.env.cols):
+                        agent_values[r, c] = self.agent.get_value(
+                            [r, c], self.interface.env.ghost_pos
+                        )
+
+            ghost_agent = self.interface._ghost_agent
+            if isinstance(ghost_agent, AdversarialAgent):
+                ghost_values = np.zeros(
+                    (self.interface.env.rows, self.interface.env.cols)
+                )
+                for r in range(self.interface.env.rows):
+                    for c in range(self.interface.env.cols):
+                        # Ghost values from ghost's perspective?
+                        # The request says "value of the cell for the ghost".
+                        # AdversarialAgent.get_value returns value from agent perspective by default.
+                        # MinimaxAgent.get_value calls _max_value(agent_pos, ghost_pos, ...)
+                        # If we want the ghost's value for that cell, we should vary ghost_pos.
+                        ghost_values[r, c] = ghost_agent.get_value(
+                            self.interface.env.agent_pos, [r, c]
+                        )
+
+            self.interface.env.info["agent_values"] = agent_values
+            self.interface.env.info["ghost_values"] = ghost_values
+
             img = self.interface.env.render()
 
             if img is not None:
