@@ -1549,9 +1549,9 @@
 <h2 id="struktur">Struktur<a class="headerlink" href="#struktur" title="Permanent link">&para;</a></h2>
 <p>Die Beobachtung ist ein verschachteltes Dictionary:</p>
 <ul>
-<li><code>current_cell</code>: Info über die aktuelle Zelle (Farbe, Gegenstände, Ziel-Status, Text).</li>
-<li><code>neighbors</code>: Erreichbarkeit und Farbe der 4 Nachbarzellen.</li>
-<li><code>ghost_relative_pos</code>: Relative Position des Geistes zum Agenten <code>[row_diff, col_diff]</code>.</li>
+<li><code>current_cell</code>: Info über die aktuelle Zelle (Farbe, Gegenstände, Ziel-Status, Text).  </li>
+<li><code>neighbors</code>: Erreichbarkeit und Farbe der 4 Nachbarzellen.  </li>
+<li><code>ghost_relative_pos</code>: Relative Position des Geistes zum Agenten <code>[row_diff, col_diff]</code>.  </li>
 </ul>
 <h2 id="details">Details<a class="headerlink" href="#details" title="Permanent link">&para;</a></h2>
 <table>
@@ -1583,10 +1583,10 @@
 <h2 id="info-dictionary">Info Dictionary<a class="headerlink" href="#info-dictionary" title="Permanent link">&para;</a></h2>
 <p>Zusätzlich zu den Beobachtungen gibt das Environment ein <code>info</code> Dictionary zurück, das folgende zusätzliche Informationen enthalten kann:</p>
 <ul>
-<li><code>cnn_prediction</code>: Ein Tupel <code>(Klassenname, Wahrscheinlichkeit)</code>, falls sich der Agent auf einem Feld mit einem Hund oder einer Blume befindet und ein trainiertes Modell geladen wurde.</li>
-<li><code>color_measurement</code>: Eine verrauschte Messung der Bodenfarbe (0=weiß, 1=rot, 2=grün). Der Sensor ist zu 80% korrekt.</li>
-<li><code>intended_action</code>: Die vom Agenten beabsichtigte Aktion.</li>
-<li><code>actual_action</code>: Die tatsächlich ausgeführte Aktion (kann bei Rutschen abweichen).</li>
+<li><code>cnn_prediction</code>: Ein Tupel <code>(Klassenname, Wahrscheinlichkeit)</code>, falls sich der Agent auf einem Feld mit einem Hund oder einer Blume befindet und ein trainiertes Modell geladen wurde.  </li>
+<li><code>color_measurement</code>: Eine verrauschte Messung der Bodenfarbe (0=weiß, 1=rot, 2=grün). Der Sensor ist zu 80% korrekt.  </li>
+<li><code>intended_action</code>: Die vom Agenten beabsichtigte Aktion.  </li>
+<li><code>actual_action</code>: Die tatsächlich ausgeführte Aktion (kann bei Rutschen abweichen).  </li>
 </ul>
 
 

@@ -1753,10 +1753,10 @@
 <p>This tutorial explains how to train a simple Convolutional Neural Network (CNN) to classify items within the CustomGrid environment. This is a great starting point for students to learn about computer vision and how it can be integrated into larger software systems.</p>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>In our environment, the agent can encounter "dogs" and "flowers". While the environment knows what these items are, we use a CNN to "see" and classify them based on the visual rendering.</p>
-<p>The process consists of three main steps:
-1. <strong>Data Generation</strong>: Creating a dataset of images.
-2. <strong>Training</strong>: Teaching the neural network to recognize the patterns.
-3. <strong>Integration</strong>: Using the trained model within the environment.</p>
+<p>The process consists of three main steps:<br />
+1. <strong>Data Generation</strong>: Creating a dataset of images.<br />
+2. <strong>Training</strong>: Teaching the neural network to recognize the patterns.<br />
+3. <strong>Integration</strong>: Using the trained model within the environment.  </p>
 <h3 id="interactive-learning">Interactive Learning<a class="headerlink" href="#interactive-learning" title="Permanent link">&para;</a></h3>
 <p>You can follow this tutorial interactively using Google Colab:
 <a href="https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/CNN_Training.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
@@ -1764,9 +1764,9 @@
 <p>Before we can train a model, we need data. We use <code>src/custom_grid_env/cnn_tutorial/data_generation.py</code> to procedurally generate 64x64 pixel images.</p>
 <h3 id="how-it-works">How it works:<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Diverse Backgrounds</strong>: To make the model robust, we generate items on white, red crosshatched, and green crosshatched backgrounds.</li>
-<li><strong>Randomness</strong>: We add slight random offsets to the position of the dog or flower in each image.</li>
-<li><strong>Output</strong>: Images are saved in the <code>data/dog/</code> and <code>data/flower/</code> directories.</li>
+<li><strong>Diverse Backgrounds</strong>: To make the model robust, we generate items on white, red crosshatched, and green crosshatched backgrounds.  </li>
+<li><strong>Randomness</strong>: We add slight random offsets to the position of the dog or flower in each image.  </li>
+<li><strong>Output</strong>: Images are saved in the <code>data/dog/</code> and <code>data/flower/</code> directories.  </li>
 </ul>
 <p>To generate the data, run:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python<span class="w"> </span>src/custom_grid_env/cnn_tutorial/data_generation.py
@@ -1774,36 +1774,36 @@
 <h2 id="2-training-the-neural-network">2. Training the Neural Network<a class="headerlink" href="#2-training-the-neural-network" title="Permanent link">&para;</a></h2>
 <p>The training logic is located in <code>src/custom_grid_env/cnn_tutorial/train.py</code>. We use <strong>TensorFlow</strong> and <strong>Keras</strong> to build and train our model.</p>
 <h3 id="the-cnn-architecture">The CNN Architecture<a class="headerlink" href="#the-cnn-architecture" title="Permanent link">&para;</a></h3>
-<p>A CNN is designed to process pixel data. Our simple model uses the following layers:
-- <strong>Conv2D</strong>: This layer "slides" filters over the image to detect features like edges or shapes.
-- <strong>MaxPooling2D</strong>: This reduces the spatial size of the representation, making the model faster and more robust to small translations.
-- <strong>Flatten</strong>: This turns the 2D feature maps into a 1D vector.
+<p>A CNN is designed to process pixel data. Our simple model uses the following layers:<br />
+- <strong>Conv2D</strong>: This layer "slides" filters over the image to detect features like edges or shapes.<br />
+- <strong>MaxPooling2D</strong>: This reduces the spatial size of the representation, making the model faster and more robust to small translations.<br />
+- <strong>Flatten</strong>: This turns the 2D feature maps into a 1D vector.<br />
 We use a 'softmax' activation at the end to get probabilities for each class (dog, flower, or background).</p>
 <h3 id="key-concepts-for-students">Key Concepts for Students:<a class="headerlink" href="#key-concepts-for-students" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Normalization</strong>: We divide pixel values (0-255) by 255 to scale them to the range [0, 1]. This helps the neural network learn faster.</li>
-<li><strong>Train/Validation Split</strong>: We set aside 20% of the data to test the model on images it hasn't seen during training. This tells us if the model is "overfitting" (memorizing) or actually learning.</li>
+<li><strong>Normalization</strong>: We divide pixel values (0-255) by 255 to scale them to the range [0, 1]. This helps the neural network learn faster.  </li>
+<li><strong>Train/Validation Split</strong>: We set aside 20% of the data to test the model on images it hasn't seen during training. This tells us if the model is "overfitting" (memorizing) or actually learning.  </li>
 </ul>
 <p>To start training, run:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python<span class="w"> </span>src/custom_grid_env/cnn_tutorial/train.py
 </code></pre></div></p>
 <h2 id="3-evaluating-performance">3. Evaluating Performance<a class="headerlink" href="#3-evaluating-performance" title="Permanent link">&para;</a></h2>
-<p>After training, the script saves two plots in the <code>results/</code> directory:
-- <strong>training_metrics.png</strong>: Shows how Accuracy and Loss changed over time. Ideally, Accuracy should go up and Loss should go down.
-- <strong>confusion_matrix.png</strong>: Shows where the model made mistakes (e.g., how many flowers were misclassified as dogs).</p>
+<p>After training, the script saves two plots in the <code>results/</code> directory:<br />
+- <strong>training_metrics.png</strong>: Shows how Accuracy and Loss changed over time. Ideally, Accuracy should go up and Loss should go down.<br />
+- <strong>confusion_matrix.png</strong>: Shows where the model made mistakes (e.g., how many flowers were misclassified as dogs).  </p>
 <h2 id="4-integration-in-the-environment">4. Integration in the Environment<a class="headerlink" href="#4-integration-in-the-environment" title="Permanent link">&para;</a></h2>
 <p>The trained model is saved as <code>model.keras</code>. The <code>PygameRenderer</code> in <code>src/custom_grid_env/renderer.py</code> automatically looks for this file.</p>
-<p>The renderer performs the prediction at each step:
-1. Captures a 64x64 pixel "snapshot" of the current cell.
-2. Passes it to the CNN.
-3. The CNN provides probabilities for all three classes (<code>dog</code>, <code>flower</code>, <code>background</code>).
-4. The class with the highest probability is displayed as the prediction in the info panel.</p>
+<p>The renderer performs the prediction at each step:<br />
+1. Captures a 64x64 pixel "snapshot" of the current cell.<br />
+2. Passes it to the CNN.<br />
+3. The CNN provides probabilities for all three classes (<code>dog</code>, <code>flower</code>, <code>background</code>).<br />
+4. The class with the highest probability is displayed as the prediction in the info panel.  </p>
 <hr />
 <h3 id="exercises-for-students">Exercises for Students:<a class="headerlink" href="#exercises-for-students" title="Permanent link">&para;</a></h3>
 <ol>
-<li><strong>Modify the Data</strong>: Change the <code>line_spacing</code> in <code>data_generation.py</code> and see how it affects training.</li>
-<li><strong>Experiment with the Model</strong>: Add another <code>Conv2D</code> layer in <code>train.py</code> and compare the accuracy.</li>
-<li><strong>Hyperparameters</strong>: Change the <code>epochs</code> or <code>batch_size</code> and observe the impact on the training graphs.</li>
+<li><strong>Modify the Data</strong>: Change the <code>line_spacing</code> in <code>data_generation.py</code> and see how it affects training.  </li>
+<li><strong>Experiment with the Model</strong>: Add another <code>Conv2D</code> layer in <code>train.py</code> and compare the accuracy.  </li>
+<li><strong>Hyperparameters</strong>: Change the <code>epochs</code> or <code>batch_size</code> and observe the impact on the training graphs.  </li>
 </ol>
 
 

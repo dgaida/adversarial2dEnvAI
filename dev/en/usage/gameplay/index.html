@@ -858,23 +858,23 @@
 <h2 id="turn-system">Turn System<a class="headerlink" href="#turn-system" title="Permanent link">¶</a></h2>
 <p>The game uses an <strong>alternating turn system</strong>:</p>
 <ol>
-<li><strong>Agent's Turn</strong>: The agent selects an action and executes it.</li>
-<li><strong>Ghost's Turn</strong>: The ghost moves automatically according to its configured strategy.</li>
+<li><strong>Agent's Turn</strong>: The agent selects an action and executes it.  </li>
+<li><strong>Ghost's Turn</strong>: The ghost moves automatically according to its configured strategy.  </li>
 </ol>
 <p>Each call to <code>interface.step(action)</code> processes both turns and returns the resulting state.</p>
 <h2 id="agent-behaviors">Agent Behaviors<a class="headerlink" href="#agent-behaviors" title="Permanent link">¶</a></h2>
 <p>You can use different types of agents to navigate the grid:</p>
 <ul>
-<li><strong>RandomPlayerAgent</strong>: Randomly selects one of the four possible actions in each turn.</li>
-<li><strong>MinimaxAgent</strong>: Uses the Minimax algorithm with Alpha-Beta pruning to find optimal moves while considering the ghost.</li>
-<li><strong>ExpectimaxAgent</strong>: Similar to Minimax, but accounts for the stochasticity of the environment (slipping).</li>
+<li><strong>RandomPlayerAgent</strong>: Randomly selects one of the four possible actions in each turn.  </li>
+<li><strong>MinimaxAgent</strong>: Uses the Minimax algorithm with Alpha-Beta pruning to find optimal moves while considering the ghost.  </li>
+<li><strong>ExpectimaxAgent</strong>: Similar to Minimax, but accounts for the stochasticity of the environment (slipping).  </li>
 </ul>
 <h2 id="ghost-behaviors">Ghost Behaviors<a class="headerlink" href="#ghost-behaviors" title="Permanent link">¶</a></h2>
 <p>The behavior of the ghost can be adjusted via the <code>AgentInterface</code> or the GUI. The following implementations are available:</p>
 <ul>
-<li><strong>ChaseGhostAgent (Default)</strong>: The ghost calculates the shortest path to the agent (considering walls) and moves one step in that direction.</li>
-<li><strong>RandomGhostAgent</strong>: The ghost randomly selects one of the four possible actions in each turn.</li>
-<li><strong>MinimaxAgent (as Ghost)</strong>: The ghost can also use Minimax to actively corner the agent.</li>
+<li><strong>ChaseGhostAgent (Default)</strong>: The ghost calculates the shortest path to the agent (considering walls) and moves one step in that direction.  </li>
+<li><strong>RandomGhostAgent</strong>: The ghost randomly selects one of the four possible actions in each turn.  </li>
+<li><strong>MinimaxAgent (as Ghost)</strong>: The ghost can also use Minimax to actively corner the agent.  </li>
 </ul>
 <h2 id="actions">Actions<a class="headerlink" href="#actions" title="Permanent link">¶</a></h2>
 <p>Both the agent and the ghost use the same action space:</p>
@@ -912,8 +912,8 @@
 <h2 id="slip-probability">Slip Probability<a class="headerlink" href="#slip-probability" title="Permanent link">¶</a></h2>
 <p>The environment includes a stochastic slip mechanic for the agent. With a configured probability $P_{\text{slip}}$, the agent moves differently than intended:</p>
 <ul>
-<li><strong>Perpendicular Slipping</strong>: The agent moves in a perpendicular direction (equally distributed between the two perpendicular directions).</li>
-<li><strong>Longitudinal Slipping</strong>: The agent moves in the same direction but either stays in place or moves twice as far.</li>
+<li><strong>Perpendicular Slipping</strong>: The agent moves in a perpendicular direction (equally distributed between the two perpendicular directions).  </li>
+<li><strong>Longitudinal Slipping</strong>: The agent moves in the same direction but either stays in place or moves twice as far.  </li>
 </ul>
 <h3 id="visualizing-slip-probabilities">Visualizing Slip Probabilities<a class="headerlink" href="#visualizing-slip-probabilities" title="Permanent link">¶</a></h3>
 <h4 id="1-perpendicular-slipping">1. Perpendicular Slipping<a class="headerlink" href="#1-perpendicular-slipping" title="Permanent link">¶</a></h4>

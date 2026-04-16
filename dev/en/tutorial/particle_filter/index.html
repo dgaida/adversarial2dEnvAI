@@ -1655,30 +1655,30 @@
 <h2 id="how-the-particle-filter-works">How the Particle Filter Works<a class="headerlink" href="#how-the-particle-filter-works" title="Permanent link">&para;</a></h2>
 <p>A particle filter works in a cycle of three steps:</p>
 <ol>
-<li><strong>Prediction</strong>: Each particle is moved according to the agent's action. The motion model (including slip probability) is simulated.</li>
-<li><strong>Correction (Update)</strong>: Based on the sensor measurements, each particle is evaluated. Particles whose position matches the measurements well receive a higher weight.</li>
-<li><strong>Resampling</strong>: Particles with low weight are removed, while particles with high weight are multiplied. This way, the "cloud" concentrates on the most likely locations.</li>
+<li><strong>Prediction</strong>: Each particle is moved according to the agent's action. The motion model (including slip probability) is simulated.  </li>
+<li><strong>Correction (Update)</strong>: Based on the sensor measurements, each particle is evaluated. Particles whose position matches the measurements well receive a higher weight.  </li>
+<li><strong>Resampling</strong>: Particles with low weight are removed, while particles with high weight are multiplied. This way, the "cloud" concentrates on the most likely locations.  </li>
 </ol>
 <h2 id="sensor-fusion-in-customgrid">Sensor Fusion in CustomGrid<a class="headerlink" href="#sensor-fusion-in-customgrid" title="Permanent link">&para;</a></h2>
 <p>The particle filter in this environment combines two different sensor types (<strong>sensor fusion</strong>) to estimate the position:</p>
 <h3 id="1-the-color-sensor">1. The Color Sensor<a class="headerlink" href="#1-the-color-sensor" title="Permanent link">&para;</a></h3>
-<p>The agent has a sensor that measures the ground color (white, red, green). This sensor has an accuracy of <strong>80%</strong>.
-- If a particle is on a red cell and the sensor reports "red", the probability for this particle increases.
-- If the sensor reports "green" even though the particle is on a red cell, the probability decreases.</p>
+<p>The agent has a sensor that measures the ground color (white, red, green). This sensor has an accuracy of <strong>80%</strong>.<br />
+- If a particle is on a red cell and the sensor reports "red", the probability for this particle increases.<br />
+- If the sensor reports "green" even though the particle is on a red cell, the probability decreases.  </p>
 <h3 id="2-the-cnn-visual-recognition">2. The CNN (Visual Recognition)<a class="headerlink" href="#2-the-cnn-visual-recognition" title="Permanent link">&para;</a></h3>
 <p>The trained Convolutional Neural Network provides probabilities for the classes <code>dog</code>, <code>flower</code>, and <code>background</code>.
-The particle filter uses these predictions as measurements:
-- Each particle "looks" at the map: Which object is at my (hypothetical) position?
-- The likelihood of a particle is calculated from the probability that the CNN outputted for exactly this object.</p>
+The particle filter uses these predictions as measurements:<br />
+- Each particle "looks" at the map: Which object is at my (hypothetical) position?<br />
+- The likelihood of a particle is calculated from the probability that the CNN outputted for exactly this object.  </p>
 <h2 id="mathematical-combination">Mathematical Combination<a class="headerlink" href="#mathematical-combination" title="Permanent link">&para;</a></h2>
 <p>We assume that the sensors are conditionally independent. The total probability $P$ for a particle results from the product of the individual probabilities:</p>
 <p>$$p(z_{\text{color}}, z_{\text{cnn}} | s) = p(z_{\text{color}} | s) \cdot p(z_{\text{cnn}} | s)$$</p>
 <p>Through this combination, the agent can determine its position even if a single sensor is very noisy. For example, if the CNN is uncertain, the color sensor can often help to narrow down the position on the grid.</p>
 <h2 id="exercise-for-students">Exercise for Students<a class="headerlink" href="#exercise-for-students" title="Permanent link">&para;</a></h2>
 <ol>
-<li><strong>Influence of Sensors</strong>: Test the particle filter in the <code>Colab_GUI_Demo</code> with only the color sensor, only the CNN, and with both. Observe how quickly the particle cloud converges.</li>
-<li><strong>Slip Models</strong>: Compare "perpendicular" slipping with "longitudinal" slipping. Which model makes localization more difficult?</li>
-<li><strong>Number of Particles</strong>: Reduce the number of particles in the <code>AgentInterface</code>. At what number does the estimate become unstable?</li>
+<li><strong>Influence of Sensors</strong>: Test the particle filter in the <code>Colab_GUI_Demo</code> with only the color sensor, only the CNN, and with both. Observe how quickly the particle cloud converges.  </li>
+<li><strong>Slip Models</strong>: Compare "perpendicular" slipping with "longitudinal" slipping. Which model makes localization more difficult?  </li>
+<li><strong>Number of Particles</strong>: Reduce the number of particles in the <code>AgentInterface</code>. At what number does the estimate become unstable?  </li>
 </ol>
 
 

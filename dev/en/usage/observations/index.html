@@ -1551,9 +1551,9 @@
 <h2 id="structure">Structure<a class="headerlink" href="#structure" title="Permanent link">&para;</a></h2>
 <p>The observation is a nested dictionary:</p>
 <ul>
-<li><code>current_cell</code>: Info about the current cell (colour, items, goal status, text).</li>
-<li><code>neighbors</code>: Accessibility and colour of the 4 neighboring cells.</li>
-<li><code>ghost_relative_pos</code>: Relative position of the ghost to the agent <code>[row_diff, col_diff]</code>.</li>
+<li><code>current_cell</code>: Info about the current cell (colour, items, goal status, text).  </li>
+<li><code>neighbors</code>: Accessibility and colour of the 4 neighboring cells.  </li>
+<li><code>ghost_relative_pos</code>: Relative position of the ghost to the agent <code>[row_diff, col_diff]</code>.  </li>
 </ul>
 <h2 id="details">Details<a class="headerlink" href="#details" title="Permanent link">&para;</a></h2>
 <table>
@@ -1585,10 +1585,10 @@
 <h2 id="info-dictionary">Info Dictionary<a class="headerlink" href="#info-dictionary" title="Permanent link">&para;</a></h2>
 <p>In addition to the observations, the environment returns an <code>info</code> dictionary that may contain the following additional information:</p>
 <ul>
-<li><code>cnn_prediction</code>: A tuple <code>(class_name, probability)</code> if the agent is on a cell with a dog or flower and a trained model is loaded.</li>
-<li><code>color_measurement</code>: A noisy measurement of the ground color (0=white, 1=red, 2=green). The sensor is 80% accurate.</li>
-<li><code>intended_action</code>: The action intended by the agent.</li>
-<li><code>actual_action</code>: The action actually performed (may differ if slipping occurs).</li>
+<li><code>cnn_prediction</code>: A tuple <code>(class_name, probability)</code> if the agent is on a cell with a dog or flower and a trained model is loaded.  </li>
+<li><code>color_measurement</code>: A noisy measurement of the ground color (0=white, 1=red, 2=green). The sensor is 80% accurate.  </li>
+<li><code>intended_action</code>: The action intended by the agent.  </li>
+<li><code>actual_action</code>: The action actually performed (may differ if slipping occurs).  </li>
 </ul>
 
 

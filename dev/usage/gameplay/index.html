@@ -857,23 +857,23 @@
 <h2 id="turn-system">Turn System<a class="headerlink" href="#turn-system" title="Permanent link">¶</a></h2>
 <p>Das Spiel verwendet ein <strong>abwechselndes Rundensystem</strong>:</p>
 <ol>
-<li><strong>Agentenzug</strong>: Der Agent wählt eine Aktion aus und führt sie aus.</li>
-<li><strong>Geisterzug</strong>: Der Geist bewegt sich automatisch gemäß seiner konfigurierten Strategie.</li>
+<li><strong>Agentenzug</strong>: Der Agent wählt eine Aktion aus und führt sie aus.  </li>
+<li><strong>Geisterzug</strong>: Der Geist bewegt sich automatisch gemäß seiner konfigurierten Strategie.  </li>
 </ol>
 <p>Jeder Aufruf von <code>interface.step(action)</code> verarbeitet beide Züge und gibt den resultierenden Zustand zurück.</p>
 <h2 id="agenten-verhalten">Agenten-Verhalten<a class="headerlink" href="#agenten-verhalten" title="Permanent link">¶</a></h2>
 <p>Sie können verschiedene Agenten-Typen verwenden, um das Gitter zu navigieren:</p>
 <ul>
-<li><strong>RandomPlayerAgent</strong>: Wählt in jedem Zug zufällig eine der vier möglichen Aktionen aus.</li>
-<li><strong>MinimaxAgent</strong>: Nutzt den Minimax-Algorithmus mit Alpha-Beta-Pruning, um optimale Züge unter Berücksichtigung des Geistes zu finden.</li>
-<li><strong>ExpectimaxAgent</strong>: Ähnlich wie Minimax, berücksichtigt aber die Stochastik der Umgebung (Rutschen).</li>
+<li><strong>RandomPlayerAgent</strong>: Wählt in jedem Zug zufällig eine der vier möglichen Aktionen aus.  </li>
+<li><strong>MinimaxAgent</strong>: Nutzt den Minimax-Algorithmus mit Alpha-Beta-Pruning, um optimale Züge unter Berücksichtigung des Geistes zu finden.  </li>
+<li><strong>ExpectimaxAgent</strong>: Ähnlich wie Minimax, berücksichtigt aber die Stochastik der Umgebung (Rutschen).  </li>
 </ul>
 <h2 id="geister-verhalten">Geister-Verhalten<a class="headerlink" href="#geister-verhalten" title="Permanent link">¶</a></h2>
 <p>Das Verhalten des Gespensts kann über den <code>AgentInterface</code> oder die GUI angepasst werden. Folgende Implementierungen stehen zur Verfügung:</p>
 <ul>
-<li><strong>ChaseGhostAgent (Standard)</strong>: Der Geist berechnet den kürzesten Pfad zum Agenten (unter Berücksichtigung von Wänden) und bewegt sich einen Schritt in diese Richtung.</li>
-<li><strong>RandomGhostAgent</strong>: Der Geist wählt in jedem Zug zufällig eine der vier möglichen Aktionen aus.</li>
-<li><strong>MinimaxAgent (als Geist)</strong>: Der Geist kann ebenfalls Minimax verwenden, um den Agenten aktiv in die Enge zu treiben.</li>
+<li><strong>ChaseGhostAgent (Standard)</strong>: Der Geist berechnet den kürzesten Pfad zum Agenten (unter Berücksichtigung von Wänden) und bewegt sich einen Schritt in diese Richtung.  </li>
+<li><strong>RandomGhostAgent</strong>: Der Geist wählt in jedem Zug zufällig eine der vier möglichen Aktionen aus.  </li>
+<li><strong>MinimaxAgent (als Geist)</strong>: Der Geist kann ebenfalls Minimax verwenden, um den Agenten aktiv in die Enge zu treiben.  </li>
 </ul>
 <h2 id="aktionen">Aktionen<a class="headerlink" href="#aktionen" title="Permanent link">¶</a></h2>
 <p>Sowohl der Agent als auch der Geist nutzen denselben Aktionsraum:</p>
@@ -911,8 +911,8 @@
 <h2 id="rutschwahrscheinlichkeit-slip">Rutschwahrscheinlichkeit (Slip)<a class="headerlink" href="#rutschwahrscheinlichkeit-slip" title="Permanent link">¶</a></h2>
 <p>Die Umgebung enthält eine stochastische Rutschmechanik für den Agenten. Bei einer konfigurierten Wahrscheinlichkeit $P_{\text{slip}}$ bewegt sich der Agent anders als beabsichtigt:</p>
 <ul>
-<li><strong>Senkrechtes Rutschen (Perpendicular Slipping)</strong>: Der Agent bewegt sich in eine senkrechte Richtung (gleichmäßig auf die beiden senkrechten Richtungen verteilt).</li>
-<li><strong>Längsrutschen (Longitudinal Slipping)</strong>: Der Agent bewegt sich in die gleiche Richtung, bleibt aber entweder stehen oder bewegt sich doppelt so weit.</li>
+<li><strong>Senkrechtes Rutschen (Perpendicular Slipping)</strong>: Der Agent bewegt sich in eine senkrechte Richtung (gleichmäßig auf die beiden senkrechten Richtungen verteilt).  </li>
+<li><strong>Längsrutschen (Longitudinal Slipping)</strong>: Der Agent bewegt sich in die gleiche Richtung, bleibt aber entweder stehen oder bewegt sich doppelt so weit.  </li>
 </ul>
 <h3 id="visualisierung-der-rutschwahrscheinlichkeiten">Visualisierung der Rutschwahrscheinlichkeiten<a class="headerlink" href="#visualisierung-der-rutschwahrscheinlichkeiten" title="Permanent link">¶</a></h3>
 <h4 id="1-senkrechtes-rutschen-perpendicular">1. Senkrechtes Rutschen (Perpendicular)<a class="headerlink" href="#1-senkrechtes-rutschen-perpendicular" title="Permanent link">¶</a></h4>

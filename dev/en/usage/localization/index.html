@@ -1743,45 +1743,45 @@
 <p>A Particle Filter (PF) is a Monte Carlo algorithm for estimating the state of a system. In this environment, it is used for <strong>self-localization</strong> of the agent on the grid.</p>
 <h3 id="mechanics">Mechanics<a class="headerlink" href="#mechanics" title="Permanent link">&para;</a></h3>
 <ol>
-<li><strong>Initialization</strong>: Particles are distributed randomly across the entire grid.</li>
-<li><strong>Prediction</strong>: When the agent moves, each particle is moved according to the intended action, taking into account the movement uncertainty (slipping).</li>
-<li><strong>Update</strong>: Each particle's weight is updated based on how well the hypothetical observations at that particle's position match the actual sensor measurements.</li>
-<li><strong>Resampling</strong>: Particles with low weights are replaced by copies of particles with high weights.</li>
+<li><strong>Initialization</strong>: Particles are distributed randomly across the entire grid.  </li>
+<li><strong>Prediction</strong>: When the agent moves, each particle is moved according to the intended action, taking into account the movement uncertainty (slipping).  </li>
+<li><strong>Update</strong>: Each particle's weight is updated based on how well the hypothetical observations at that particle's position match the actual sensor measurements.  </li>
+<li><strong>Resampling</strong>: Particles with low weights are replaced by copies of particles with high weights.  </li>
 </ol>
 <h2 id="sensors">Sensors<a class="headerlink" href="#sensors" title="Permanent link">&para;</a></h2>
 <p>The localization relies on two main sensor types:</p>
 <h3 id="color-sensor">Color Sensor<a class="headerlink" href="#color-sensor" title="Permanent link">&para;</a></h3>
-<p>The color sensor measures the color of the ground directly beneath the agent.
-- <strong>Accuracy</strong>: 80% (correct color).
-- <strong>Noise</strong>: 20% (distributed equally among the other two colors).
-- <strong>Colors</strong>: White (0), Red (1), Green (2).</p>
+<p>The color sensor measures the color of the ground directly beneath the agent.<br />
+- <strong>Accuracy</strong>: 80% (correct color).<br />
+- <strong>Noise</strong>: 20% (distributed equally among the other two colors).<br />
+- <strong>Colors</strong>: White (0), Red (1), Green (2).  </p>
 <h3 id="cnn-classifier">CNN Classifier<a class="headerlink" href="#cnn-classifier" title="Permanent link">&para;</a></h3>
-<p>The CNN classifier runs at every step, regardless of whether an item is present. If no item is present, it predicts the "background" class.
-- <strong>Classes</strong>: Dog, Flower, Background.
-- <strong>Usage</strong>: The probability assigned by the CNN to the class actually present in a particle's cell is used as the likelihood for that particle.</p>
+<p>The CNN classifier runs at every step, regardless of whether an item is present. If no item is present, it predicts the "background" class.<br />
+- <strong>Classes</strong>: Dog, Flower, Background.<br />
+- <strong>Usage</strong>: The probability assigned by the CNN to the class actually present in a particle's cell is used as the likelihood for that particle.  </p>
 <h2 id="sensor-fusion">Sensor Fusion<a class="headerlink" href="#sensor-fusion" title="Permanent link">&para;</a></h2>
 <p>When using both sensors (<code>sensor_mode='both'</code>), the filter combines the measurements by assuming they are conditionally independent given the state. The joint likelihood is the product of the individual likelihoods:</p>
 <p>$$p(z_{\text{color}}, z_{\text{cnn}} | s) = p(z_{\text{color}} | s) \cdot p(z_{\text{cnn}} | s)$$</p>
 <h2 id="assumptions">Assumptions<a class="headerlink" href="#assumptions" title="Permanent link">&para;</a></h2>
 <p>The Particle Filter makes the following assumptions about the environment:</p>
 <h3 id="map-assumption">Map Assumption<a class="headerlink" href="#map-assumption" title="Permanent link">&para;</a></h3>
-<p>The filter has <strong>perfect knowledge of the map</strong>. It knows:
-- The dimensions of the grid.
-- The exact location of all walls.
-- The ground color of every cell.
-- The locations of all items (Dogs and Flowers).</p>
+<p>The filter has <strong>perfect knowledge of the map</strong>. It knows:<br />
+- The dimensions of the grid.<br />
+- The exact location of all walls.<br />
+- The ground color of every cell.<br />
+- The locations of all items (Dogs and Flowers).  </p>
 <h3 id="movement-uncertainty">Movement Uncertainty<a class="headerlink" href="#movement-uncertainty" title="Permanent link">&para;</a></h3>
 <p>The filter assumes a <strong>stochastic motion model</strong> matching the environment's slip probability. There are two types of slipping:</p>
 <ul>
-<li><strong>Perpendicular Slipping</strong>: The agent moves in a perpendicular direction with probability $P_{\text{slip}}$ (split equally between the two perpendicular directions).</li>
-<li><strong>Longitudinal Slipping</strong>: The agent moves in the same direction but either stays in place (moves 0 steps) or moves twice (moves 2 steps), each with probability $P_{\text{slip}} / 2$.</li>
-<li><strong>Intended Movement</strong>: The agent moves exactly one step in the intended direction with probability $1 - P_{\text{slip}}$.</li>
-<li><strong>Walls</strong>: If a move would lead into a wall or out of bounds, the agent (and thus the particles) remains in the current cell.</li>
+<li><strong>Perpendicular Slipping</strong>: The agent moves in a perpendicular direction with probability $P_{\text{slip}}$ (split equally between the two perpendicular directions).  </li>
+<li><strong>Longitudinal Slipping</strong>: The agent moves in the same direction but either stays in place (moves 0 steps) or moves twice (moves 2 steps), each with probability $P_{\text{slip}} / 2$.  </li>
+<li><strong>Intended Movement</strong>: The agent moves exactly one step in the intended direction with probability $1 - P_{\text{slip}}$.  </li>
+<li><strong>Walls</strong>: If a move would lead into a wall or out of bounds, the agent (and thus the particles) remains in the current cell.  </li>
 </ul>
 <h3 id="measurement-uncertainty">Measurement Uncertainty<a class="headerlink" href="#measurement-uncertainty" title="Permanent link">&para;</a></h3>
-<p>The filter assumes the following <strong>likelihood models</strong>:
-- <strong>Color Sensor</strong>: $p(z_{\text{color}} | s) = 0.8$ if the measured color $z$ matches the map color at state $s$, and $0.1$ otherwise.
-- <strong>CNN</strong>: $p(z_{\text{cnn}} | s) = \text{CNN_prob}(\text{class at } s)$. The filter assumes that the probability output by the CNN for the true class at a location is the likelihood of that location.</p>
+<p>The filter assumes the following <strong>likelihood models</strong>:<br />
+- <strong>Color Sensor</strong>: $p(z_{\text{color}} | s) = 0.8$ if the measured color $z$ matches the map color at state $s$, and $0.1$ otherwise.<br />
+- <strong>CNN</strong>: $p(z_{\text{cnn}} | s) = \text{CNN_prob}(\text{class at } s)$. The filter assumes that the probability output by the CNN for the true class at a location is the likelihood of that location.  </p>
 
 
 

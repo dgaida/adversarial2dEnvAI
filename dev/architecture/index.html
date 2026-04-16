@@ -857,10 +857,10 @@
 <h2 id="klassen-hierarchie">Klassen-Hierarchie<a class="headerlink" href="#klassen-hierarchie" title="Permanent link">¶</a></h2>
 <p>Die Agenten folgen einem Protokoll-basierten Design.</p>
 <div class="mermaid">classDiagram
-    class Agent {
-        &lt;<interface>&gt;
-        +get_action(observation)
-    }
+    class Agent
+    &lt;<interface>&gt; Agent
+    Agent : +get_action(observation)
+
     class BaseAgent {
         +action_space
         +env

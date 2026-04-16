@@ -1687,30 +1687,30 @@
 <h2 id="funktionsweise-des-partikelfilters">Funktionsweise des Partikelfilters<a class="headerlink" href="#funktionsweise-des-partikelfilters" title="Permanent link">&para;</a></h2>
 <p>Ein Partikelfilter arbeitet in einem Zyklus aus drei Schritten:</p>
 <ol>
-<li><strong>Vorhersage (Prediction)</strong>: Jedes Partikel wird entsprechend der Aktion des Agenten bewegt. Dabei wird das Bewegungsmodell (inklusive Rutschwahrscheinlichkeit) simuliert.</li>
-<li><strong>Korrektur (Update/Correction)</strong>: Basierend auf den Sensormessungen wird jedes Partikel bewertet. Partikel, deren Position gut zu den Messungen passt, erhalten ein höheres Gewicht.</li>
-<li><strong>Resampling</strong>: Partikel mit geringem Gewicht werden entfernt, während Partikel mit hohem Gewicht vervielfältigt werden. So konzentriert sich die "Cloud" auf die wahrscheinlichsten Orte.</li>
+<li><strong>Vorhersage (Prediction)</strong>: Jedes Partikel wird entsprechend der Aktion des Agenten bewegt. Dabei wird das Bewegungsmodell (inklusive Rutschwahrscheinlichkeit) simuliert.  </li>
+<li><strong>Korrektur (Update/Correction)</strong>: Basierend auf den Sensormessungen wird jedes Partikel bewertet. Partikel, deren Position gut zu den Messungen passt, erhalten ein höheres Gewicht.  </li>
+<li><strong>Resampling</strong>: Partikel mit geringem Gewicht werden entfernt, während Partikel mit hohem Gewicht vervielfältigt werden. So konzentriert sich die "Cloud" auf die wahrscheinlichsten Orte.  </li>
 </ol>
 <h2 id="sensorfusion-in-customgrid">Sensorfusion in CustomGrid<a class="headerlink" href="#sensorfusion-in-customgrid" title="Permanent link">&para;</a></h2>
 <p>Der Partikelfilter in dieser Umgebung kombiniert zwei verschiedene Sensortypen (<strong>Sensorfusion</strong>), um die Position zu schätzen:</p>
 <h3 id="1-der-farbsensor">1. Der Farbsensor<a class="headerlink" href="#1-der-farbsensor" title="Permanent link">&para;</a></h3>
 <p>Der Agent hat einen Sensor, der die Bodenfarbe (Weiß, Rot, Grün) misst. Dieser Sensor hat eine Genauigkeit von <strong>80%</strong>.<br />
 - Wenn ein Partikel auf einer roten Zelle liegt und der Sensor "Rot" meldet, steigt die Wahrscheinlichkeit für dieses Partikel.<br />
-- Meldet der Sensor "Grün", obwohl das Partikel auf einer roten Zelle liegt, sinkt die Wahrscheinlichkeit.</p>
+- Meldet der Sensor "Grün", obwohl das Partikel auf einer roten Zelle liegt, sinkt die Wahrscheinlichkeit.  </p>
 <h3 id="2-das-cnn-visuelle-erkennung">2. Das CNN (Visuelle Erkennung)<a class="headerlink" href="#2-das-cnn-visuelle-erkennung" title="Permanent link">&para;</a></h3>
 <p>Das trainierte Convolutional Neural Network liefert Wahrscheinlichkeiten für die Klassen <code>dog</code>, <code>flower</code> und <code>background</code>.
 Der Partikelfilter nutzt diese Vorhersagen als Messwerte:<br />
 - Jedes Partikel "schaut" in die Karte: Welches Objekt befindet sich an meiner (hypothetischen) Position?<br />
-- Die Likelihood eines Partikels berechnet sich aus der Wahrscheinlichkeit, die das CNN für genau dieses Objekt ausgegeben hat.</p>
+- Die Likelihood eines Partikels berechnet sich aus der Wahrscheinlichkeit, die das CNN für genau dieses Objekt ausgegeben hat.  </p>
 <h2 id="mathematische-kombination">Mathematische Kombination<a class="headerlink" href="#mathematische-kombination" title="Permanent link">&para;</a></h2>
 <p>Wir nehmen an, dass die Sensoren bedingt unabhängig sind. Die Gesamtwahrscheinlichkeit $P$ für ein Partikel ergibt sich aus dem Produkt der Einzelwahrscheinlichkeiten:</p>
 <p>$$p(z_{\text{color}}, z_{\text{cnn}} | s) = p(z_{\text{color}} | s) \cdot p(z_{\text{cnn}} | s)$$</p>
 <p>Durch diese Kombination kann der Agent seine Position auch dann bestimmen, wenn ein einzelner Sensor sehr verrauscht ist. Wenn z.B. das CNN unsicher ist, kann der Farbsensor oft helfen, die Position auf dem Gitter einzugrenzen.</p>
 <h2 id="ubung-fur-studierende">Übung für Studierende<a class="headerlink" href="#ubung-fur-studierende" title="Permanent link">&para;</a></h2>
 <ol>
-<li><strong>Einfluss der Sensoren</strong>: Teste in der <code>Colab_GUI_Demo</code> den Partikelfilter nur mit dem Farbsensor, nur mit dem CNN und mit beiden. Beobachte, wie schnell die Partikelwolke konvergiert.</li>
-<li><strong>Rutschmodelle</strong>: Vergleiche das "perpendicular" Rutschen mit dem "longitudinal" Rutschen. Welches Modell macht die Lokalisierung schwieriger?</li>
-<li><strong>Partikelanzahl</strong>: Reduziere die Anzahl der Partikel im <code>AgentInterface</code>. Ab welcher Anzahl wird die Schätzung instabil?</li>
+<li><strong>Einfluss der Sensoren</strong>: Teste in der <code>Colab_GUI_Demo</code> den Partikelfilter nur mit dem Farbsensor, nur mit dem CNN und mit beiden. Beobachte, wie schnell die Partikelwolke konvergiert.  </li>
+<li><strong>Rutschmodelle</strong>: Vergleiche das "perpendicular" Rutschen mit dem "longitudinal" Rutschen. Welches Modell macht die Lokalisierung schwieriger?  </li>
+<li><strong>Partikelanzahl</strong>: Reduziere die Anzahl der Partikel im <code>AgentInterface</code>. Ab welcher Anzahl wird die Schätzung instabil?  </li>
 </ol>
 <h3 id="interaktive-demo">Interaktive Demo<a class="headerlink" href="#interaktive-demo" title="Permanent link">&para;</a></h3>
 <p>Testen Sie den Partikelfilter direkt in Google Colab:

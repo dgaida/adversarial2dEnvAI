@@ -1741,45 +1741,45 @@
 <p>Ein Partikelfilter (PF) ist ein Monte-Carlo-Algorithmus zur Schätzung des Zustands eines Systems. In dieser Umgebung wird er zur <strong>Selbstlokalisierung</strong> des Agenten auf dem Gitter verwendet.</p>
 <h3 id="funktionsweise">Funktionsweise<a class="headerlink" href="#funktionsweise" title="Permanent link">&para;</a></h3>
 <ol>
-<li><strong>Initialisierung</strong>: Partikel werden zufällig über das gesamte Gitter verteilt.</li>
-<li><strong>Prädiktion (Prediction)</strong>: Wenn sich der Agent bewegt, wird jedes Partikel entsprechend der beabsichtigten Aktion bewegt, wobei die Bewegungsunsicherheit (Rutschen) berücksichtigt wird.</li>
-<li><strong>Update</strong>: Das Gewicht jedes Partikels wird basierend darauf aktualisiert, wie gut die hypothetischen Beobachtungen an der Position dieses Partikels mit den tatsächlichen Sensormessungen übereinstimmen.</li>
-<li><strong>Resampling</strong>: Partikel mit geringen Gewichten werden durch Kopien von Partikeln mit hohen Gewichten ersetzt.</li>
+<li><strong>Initialisierung</strong>: Partikel werden zufällig über das gesamte Gitter verteilt.  </li>
+<li><strong>Prädiktion (Prediction)</strong>: Wenn sich der Agent bewegt, wird jedes Partikel entsprechend der beabsichtigten Aktion bewegt, wobei die Bewegungsunsicherheit (Rutschen) berücksichtigt wird.  </li>
+<li><strong>Update</strong>: Das Gewicht jedes Partikels wird basierend darauf aktualisiert, wie gut die hypothetischen Beobachtungen an der Position dieses Partikels mit den tatsächlichen Sensormessungen übereinstimmen.  </li>
+<li><strong>Resampling</strong>: Partikel mit geringen Gewichten werden durch Kopien von Partikeln mit hohen Gewichten ersetzt.  </li>
 </ol>
 <h2 id="sensoren">Sensoren<a class="headerlink" href="#sensoren" title="Permanent link">&para;</a></h2>
 <p>Die Lokalisierung stützt sich auf zwei Hauptsensortypen:</p>
 <h3 id="farbsensor">Farbsensor<a class="headerlink" href="#farbsensor" title="Permanent link">&para;</a></h3>
-<p>Der Farbsensor misst die Farbe des Bodens direkt unter dem Agenten.
-- <strong>Genauigkeit</strong>: Über die GUI oder das Interface einstellbar (100%, 90%, 80% oder 70%). Standardmäßig beträgt sie 80% (korrekte Farbe).
-- <strong>Rauschen</strong>: 20% (gleichmäßig auf die anderen beiden Farben verteilt).
-- <strong>Farben</strong>: Weiß (0), Rot (1), Grün (2).</p>
+<p>Der Farbsensor misst die Farbe des Bodens direkt unter dem Agenten.<br />
+- <strong>Genauigkeit</strong>: Über die GUI oder das Interface einstellbar (100%, 90%, 80% oder 70%). Standardmäßig beträgt sie 80% (korrekte Farbe).<br />
+- <strong>Rauschen</strong>: 20% (gleichmäßig auf die anderen beiden Farben verteilt).<br />
+- <strong>Farben</strong>: Weiß (0), Rot (1), Grün (2).  </p>
 <h3 id="cnn-klassifikator">CNN-Klassifikator<a class="headerlink" href="#cnn-klassifikator" title="Permanent link">&para;</a></h3>
-<p>Der CNN-Klassifikator wird bei jedem Schritt ausgeführt, unabhängig davon, ob ein Objekt vorhanden ist. Wenn kein Objekt vorhanden ist, wird die Klasse "Hintergrund" vorhergesagt.
-- <strong>Klassen</strong>: Hund, Blume, Hintergrund.
-- <strong>Verwendung</strong>: Die vom CNN zugewiesene Wahrscheinlichkeit für die Klasse, die sich tatsächlich in der Zelle eines Partikels befindet, wird als Likelihood für dieses Partikel verwendet.</p>
+<p>Der CNN-Klassifikator wird bei jedem Schritt ausgeführt, unabhängig davon, ob ein Objekt vorhanden ist. Wenn kein Objekt vorhanden ist, wird die Klasse "Hintergrund" vorhergesagt.<br />
+- <strong>Klassen</strong>: Hund, Blume, Hintergrund.<br />
+- <strong>Verwendung</strong>: Die vom CNN zugewiesene Wahrscheinlichkeit für die Klasse, die sich tatsächlich in der Zelle eines Partikels befindet, wird als Likelihood für dieses Partikel verwendet.  </p>
 <h2 id="sensor-fusion">Sensor-Fusion<a class="headerlink" href="#sensor-fusion" title="Permanent link">&para;</a></h2>
 <p>Bei Verwendung beider Sensoren (<code>sensor_mode='both'</code>) kombiniert der Filter die Messungen unter der Annahme, dass sie bei gegebenem Zustand bedingt unabhängig sind. Die Verbundwahrscheinlichkeit (Joint Likelihood) ist das Produkt der einzelnen Likelihoods:</p>
 <p>$$p(z_{\text{color}}, z_{\text{cnn}} | s) = p(z_{\text{color}} | s) \cdot p(z_{\text{cnn}} | s)$$</p>
 <h2 id="annahmen">Annahmen<a class="headerlink" href="#annahmen" title="Permanent link">&para;</a></h2>
 <p>Der Partikelfilter trifft folgende Annahmen über die Umgebung:</p>
 <h3 id="kartenannahme-map-assumption">Kartenannahme (Map Assumption)<a class="headerlink" href="#kartenannahme-map-assumption" title="Permanent link">&para;</a></h3>
-<p>Der Filter verfügt über <strong>perfektes Wissen über die Karte</strong>. Er kennt:
-- Die Dimensionen des Gitters.
-- Die genaue Position aller Wände.
-- Die Bodenfarbe jeder Zelle.
-- Die Standorte aller Objekte (Hunde und Blumen).</p>
+<p>Der Filter verfügt über <strong>perfektes Wissen über die Karte</strong>. Er kennt:<br />
+- Die Dimensionen des Gitters.<br />
+- Die genaue Position aller Wände.<br />
+- Die Bodenfarbe jeder Zelle.<br />
+- Die Standorte aller Objekte (Hunde und Blumen).  </p>
 <h3 id="bewegungsunsicherheit-movement-uncertainty">Bewegungsunsicherheit (Movement Uncertainty)<a class="headerlink" href="#bewegungsunsicherheit-movement-uncertainty" title="Permanent link">&para;</a></h3>
 <p>Der Filter geht von einem <strong>stochastischen Bewegungsmodell</strong> aus, das der Rutschwahrscheinlichkeit der Umgebung entspricht. Es gibt zwei Arten des Rutschens:</p>
 <ul>
-<li><strong>Senkrechtes Rutschen (Perpendicular Slipping)</strong>: Der Agent bewegt sich mit einer Wahrscheinlichkeit von $P_{\text{slip}}$ in eine senkrechte Richtung (gleichmäßig auf die beiden senkrechten Richtungen verteilt).</li>
-<li><strong>Längsrutschen (Longitudinal Slipping)</strong>: Der Agent bewegt sich in die gleiche Richtung, bleibt aber entweder stehen (0 Schritte) oder bewegt sich doppelt so weit (2 Schritte), jeweils mit einer Wahrscheinlichkeit von $P_{\text{slip}} / 2$.</li>
-<li><strong>Beabsichtigte Bewegung</strong>: Der Agent bewegt sich mit einer Wahrscheinlichkeit von $1 - P_{\text{slip}}$ genau einen Schritt in die beabsichtigte Richtung.</li>
-<li><strong>Wände</strong>: Wenn eine Bewegung gegen eine Wand oder aus dem Gitter heraus führen würde, bleibt der Agent (und damit auch die Partikel) in der aktuellen Zelle.</li>
+<li><strong>Senkrechtes Rutschen (Perpendicular Slipping)</strong>: Der Agent bewegt sich mit einer Wahrscheinlichkeit von $P_{\text{slip}}$ in eine senkrechte Richtung (gleichmäßig auf die beiden senkrechten Richtungen verteilt).  </li>
+<li><strong>Längsrutschen (Longitudinal Slipping)</strong>: Der Agent bewegt sich in die gleiche Richtung, bleibt aber entweder stehen (0 Schritte) oder bewegt sich doppelt so weit (2 Schritte), jeweils mit einer Wahrscheinlichkeit von $P_{\text{slip}} / 2$.  </li>
+<li><strong>Beabsichtigte Bewegung</strong>: Der Agent bewegt sich mit einer Wahrscheinlichkeit von $1 - P_{\text{slip}}$ genau einen Schritt in die beabsichtigte Richtung.  </li>
+<li><strong>Wände</strong>: Wenn eine Bewegung gegen eine Wand oder aus dem Gitter heraus führen würde, bleibt der Agent (und damit auch die Partikel) in der aktuellen Zelle.  </li>
 </ul>
 <h3 id="messunsicherheit-measurement-uncertainty">Messunsicherheit (Measurement Uncertainty)<a class="headerlink" href="#messunsicherheit-measurement-uncertainty" title="Permanent link">&para;</a></h3>
-<p>Der Filter verwendet folgende <strong>Likelihood-Modelle</strong>:
-- <strong>Farbsensor</strong>: $p(z_{\text{color}} | s) = \text{color_sensor_quality}$, wenn die gemessene Farbe $z$ mit der Kartenfarbe am Zustand $s$ übereinstimmt, andernfalls $(1 - \text{color_sensor_quality}) / 2$.
-- <strong>CNN</strong>: $p(z_{\text{cnn}} | s) = \text{CNN_prob}(\text{Klasse an Stelle } s)$. Der Filter nimmt an, dass die vom CNN ausgegebene Wahrscheinlichkeit für die wahre Klasse an einem Ort die Likelihood dieses Ortes ist.</p>
+<p>Der Filter verwendet folgende <strong>Likelihood-Modelle</strong>:<br />
+- <strong>Farbsensor</strong>: $p(z_{\text{color}} | s) = \text{color_sensor_quality}$, wenn die gemessene Farbe $z$ mit der Kartenfarbe am Zustand $s$ übereinstimmt, andernfalls $(1 - \text{color_sensor_quality}) / 2$.<br />
+- <strong>CNN</strong>: $p(z_{\text{cnn}} | s) = \text{CNN_prob}(\text{Klasse an Stelle } s)$. Der Filter nimmt an, dass die vom CNN ausgegebene Wahrscheinlichkeit für die wahre Klasse an einem Ort die Likelihood dieses Ortes ist.  </p>
 
 
 
