@@ -1819,9 +1819,9 @@
 <h3 id="konsequenzen-fur-die-strategie">Konsequenzen für die Strategie<a class="headerlink" href="#konsequenzen-fur-die-strategie" title="Permanent link">&para;</a></h3>
 <p>Die nicht-zyklische Natur des Gitters hat mehrere strategische Auswirkungen auf die adversarielle Suche:</p>
 <ul>
-<li><strong>Einkesseln (Cornering)</strong>: Da das Gitter feste Grenzen hat, kann der Geist (wenn er Minimax verwendet) den Agenten effektiv in einer Ecke oder an einer Wand festsetzen. Der Agent wiederum muss vermeiden, in eine Position zu geraten, in der seine Bewegungsoptionen eingeschränkt sind.</li>
-<li><strong>Grenzkollisionen</strong>: Bei der Simulation zukünftiger Züge erkennen die Agenten, dass Aktionen, die "aus dem Spielfeld" führen würden, dazu führen, dass die Einheit in ihrem aktuellen Feld bleibt. Dies ist entscheidend für eine genaue Wertschätzung in beiden Algorithmen.</li>
-<li><strong>Vereinfachte Distanz</strong>: Heuristiken wie die Manhattan-Distanz oder die BFS-basierte kürzeste Pfadlänge sind unkomplizierter, da sie keine modulare Arithmetik oder Wrap-around-Pfade berücksichtigen müssen.</li>
+<li><strong>Einkesseln (Cornering)</strong>: Da das Gitter feste Grenzen hat, kann der Geist (wenn er Minimax verwendet) den Agenten effektiv in einer Ecke oder an einer Wand festsetzen. Der Agent wiederum muss vermeiden, in eine Position zu geraten, in der seine Bewegungsoptionen eingeschränkt sind.  </li>
+<li><strong>Grenzkollisionen</strong>: Bei der Simulation zukünftiger Züge erkennen die Agenten, dass Aktionen, die "aus dem Spielfeld" führen würden, dazu führen, dass die Einheit in ihrem aktuellen Feld bleibt. Dies ist entscheidend für eine genaue Wertschätzung in beiden Algorithmen.  </li>
+<li><strong>Vereinfachte Distanz</strong>: Heuristiken wie die Manhattan-Distanz oder die BFS-basierte kürzeste Pfadlänge sind unkomplizierter, da sie keine modulare Arithmetik oder Wrap-around-Pfade berücksichtigen müssen.  </li>
 </ul>
 <h2 id="vergleich">Vergleich<a class="headerlink" href="#vergleich" title="Permanent link">&para;</a></h2>
 <table>
@@ -1850,15 +1850,15 @@
 - <strong>Ziel erreicht</strong>: +10.000<br />
 - <strong>Vom Geist gefangen</strong>: -10.000<br />
 - <strong>Distanz zum Ziel</strong>: Bestraft große Distanzen.<br />
-- <strong>Distanz zum Geist</strong>: Belohnt Sicherheitsabstände.</p>
+- <strong>Distanz zum Geist</strong>: Belohnt Sicherheitsabstände.  </p>
 <h3 id="interaktives-ausprobieren">Interaktives Ausprobieren<a class="headerlink" href="#interaktives-ausprobieren" title="Permanent link">&para;</a></h3>
 <p>Nutzen Sie das <code>Colab_GUI_Demo</code> Notebook, um die Agenten live zu vergleichen:
 <a href="https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Colab_GUI_Demo.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
 <h3 id="ubungen-fur-studierende">Übungen für Studierende:<a class="headerlink" href="#ubungen-fur-studierende" title="Permanent link">&para;</a></h3>
 <ol>
-<li><strong>Vergleich</strong>: Stellen Sie die Suchtiefe auf 3 und vergleichen Sie das Überlebensvermögen von Minimax und Expectimax gegen einen <code>ChaseGhostAgent</code>.</li>
-<li><strong>Geist-Verhalten</strong>: Ändern Sie das Verhalten des Geistes auf <code>Minimax</code>. Welcher Agent (Minimax vs. Expectimax) schneidet nun besser ab?</li>
-<li><strong>Sichtbarkeit</strong>: Aktivieren Sie "Estimated State" in der GUI. Wie beeinflusst die Unsicherheit der Lokalisierung (Partikelfilter) die Qualität der Spielzüge der adversarialen Agenten?</li>
+<li><strong>Vergleich</strong>: Stellen Sie die Suchtiefe auf 3 und vergleichen Sie das Überlebensvermögen von Minimax und Expectimax gegen einen <code>ChaseGhostAgent</code>.  </li>
+<li><strong>Geist-Verhalten</strong>: Ändern Sie das Verhalten des Geistes auf <code>Minimax</code>. Welcher Agent (Minimax vs. Expectimax) schneidet nun besser ab?  </li>
+<li><strong>Sichtbarkeit</strong>: Aktivieren Sie "Estimated State" in der GUI. Wie beeinflusst die Unsicherheit der Lokalisierung (Partikelfilter) die Qualität der Spielzüge der adversarialen Agenten?  </li>
 </ol>
 
 

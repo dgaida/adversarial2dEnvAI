@@ -1821,9 +1821,9 @@
 <h3 id="consequences-for-strategy">Consequences for Strategy<a class="headerlink" href="#consequences-for-strategy" title="Permanent link">&para;</a></h3>
 <p>The non-cycling nature of the grid has several strategic implications for adversarial search:</p>
 <ul>
-<li><strong>Cornering</strong>: Since the grid has fixed boundaries, the ghost (if using Minimax) can effectively trap the agent in a corner or against a wall. The agent, in turn, must avoid being pinned where its movement options are limited.</li>
-<li><strong>Boundary Collisions</strong>: When simulating future moves, the agents recognize that actions leading "out of bounds" will result in the entity remaining in its current cell. This is crucial for accurate value estimation in both algorithms.</li>
-<li><strong>Simplified Distance</strong>: Heuristics like Manhattan distance or BFS-based shortest path are more straightforward as they don't need to account for modular arithmetic or wrap-around paths.</li>
+<li><strong>Cornering</strong>: Since the grid has fixed boundaries, the ghost (if using Minimax) can effectively trap the agent in a corner or against a wall. The agent, in turn, must avoid being pinned where its movement options are limited.  </li>
+<li><strong>Boundary Collisions</strong>: When simulating future moves, the agents recognize that actions leading "out of bounds" will result in the entity remaining in its current cell. This is crucial for accurate value estimation in both algorithms.  </li>
+<li><strong>Simplified Distance</strong>: Heuristics like Manhattan distance or BFS-based shortest path are more straightforward as they don't need to account for modular arithmetic or wrap-around paths.  </li>
 </ul>
 <h2 id="comparison">Comparison<a class="headerlink" href="#comparison" title="Permanent link">&para;</a></h2>
 <table>
@@ -1858,9 +1858,9 @@
 <a href="https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Colab_GUI_Demo.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
 <h3 id="exercises-for-students">Exercises for Students:<a class="headerlink" href="#exercises-for-students" title="Permanent link">&para;</a></h3>
 <ol>
-<li><strong>Comparison</strong>: Set the search depth to 3 and compare the survival rates of Minimax and Expectimax against a <code>ChaseGhostAgent</code>.</li>
-<li><strong>Ghost Behavior</strong>: Change the ghost's behavior to <code>Minimax</code>. Which agent (Minimax vs. Expectimax) performs better now?</li>
-<li><strong>Visibility</strong>: Enable "Estimated State" in the GUI. How does the uncertainty of localization (Particle Filter) affect the quality of the adversarial agents' moves?</li>
+<li><strong>Comparison</strong>: Set the search depth to 3 and compare the survival rates of Minimax and Expectimax against a <code>ChaseGhostAgent</code>.  </li>
+<li><strong>Ghost Behavior</strong>: Change the ghost's behavior to <code>Minimax</code>. Which agent (Minimax vs. Expectimax) performs better now?  </li>
+<li><strong>Visibility</strong>: Enable "Estimated State" in the GUI. How does the uncertainty of localization (Particle Filter) affect the quality of the adversarial agents' moves?  </li>
 </ol>
 
 
