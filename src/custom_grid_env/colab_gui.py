@@ -172,8 +172,12 @@ class ColabGUI:
 
         # Layout Grouping
         ghost_box = widgets.VBox(
-            [widgets.HTML("<b>Ghost Settings</b>"), self.use_ghost_toggle, self.ghost_dropdown],
-            layout=widgets.Layout(border="1px solid lightgray", padding="5px")
+            [
+                widgets.HTML("<b>Ghost Settings</b>"),
+                self.use_ghost_toggle,
+                self.ghost_dropdown,
+            ],
+            layout=widgets.Layout(border="1px solid lightgray", padding="5px"),
         )
         pf_uncertainty_box = widgets.VBox(
             [
@@ -184,25 +188,34 @@ class ColabGUI:
                 self.sensor_dropdown,
                 self.color_quality_dropdown,
             ],
-            layout=widgets.Layout(border="1px solid lightgray", padding="5px")
+            layout=widgets.Layout(border="1px solid lightgray", padding="5px"),
         )
         agent_box = widgets.VBox(
-            [widgets.HTML("<b>Agent Settings</b>"), self.agent_dropdown, self.knowledge_dropdown],
-            layout=widgets.Layout(border="1px solid lightgray", padding="5px")
+            [
+                widgets.HTML("<b>Agent Settings</b>"),
+                self.agent_dropdown,
+                self.knowledge_dropdown,
+            ],
+            layout=widgets.Layout(border="1px solid lightgray", padding="5px"),
         )
 
         self.controls = widgets.VBox(
             [
                 widgets.HBox([self.next_button, self.reset_button, self.stats_label]),
                 widgets.HBox([agent_box, ghost_box, pf_uncertainty_box]),
-                widgets.VBox([
-                    widgets.HTML("<b>Task Planning</b>"),
-                    self.task_input,
-                    widgets.HBox([self.plan_button, self.execute_button, self.pause_button]),
-                    self.llm_output_area,
-                    widgets.HTML("<b>Planned Targets</b>"),
-                    self.target_status_area
-                ], layout=widgets.Layout(border="1px solid lightgray", padding="5px"))
+                widgets.VBox(
+                    [
+                        widgets.HTML("<b>Task Planning</b>"),
+                        self.task_input,
+                        widgets.HBox(
+                            [self.plan_button, self.execute_button, self.pause_button]
+                        ),
+                        self.llm_output_area,
+                        widgets.HTML("<b>Planned Targets</b>"),
+                        self.target_status_area,
+                    ],
+                    layout=widgets.Layout(border="1px solid lightgray", padding="5px"),
+                ),
             ]
         )
 
