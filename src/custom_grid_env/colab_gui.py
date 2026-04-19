@@ -199,6 +199,7 @@ class ColabGUI:
 
             for target in full_targets:
                 print(f"Moving to target: {target}")
+                self.interface.env.set_goal(target)
                 current_pos = tuple(self.interface.env.agent_pos)
                 path = self.planner.get_path(current_pos, target)
                 for action in path:

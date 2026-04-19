@@ -800,6 +800,21 @@ class CustomGridEnv(gym.Env):
         if self.renderer:
             self.renderer.close()
 
+    def set_goal(self, pos: Tuple[int, int]):
+        """Dynamically updates the goal position.
+
+        Args:
+            pos (Tuple[int, int]): The new goal position [row, col].
+        """
+        # Clear previous goals
+        for r in range(self.rows):
+            for c in range(self.cols):
+                self.grid[r, c]["is_goal"] = False
+
+        # Set new goal
+        self.grid[pos[0], pos[1]]["is_goal"] = True
+        logger.info(f"Goal set to: {pos}")
+
     def get_grid_description(self) -> str:
         """Returns a natural language description of the grid and its contents.
 
@@ -808,16 +823,27 @@ class CustomGridEnv(gym.Env):
         """
         description = "Der Grid hat 4 Zeilen (0-3) und 5 Spalten (0-4).\n"
         color_map = {0: "weiß", 1: "rot", 2: "grün"}
+        item_mapping = {
+            "one_note": "klassische Musik und Klaviermusik",
+            "two_notes": "Rockmusik",
+        }
+
         for r in range(self.rows):
             for c in range(self.cols):
                 cell = self.grid[r, c]
-                items_str = ", ".join(cell["items"]) if cell["items"] else "keine"
+
+                # Map items to natural language descriptions
+                mapped_items = []
+                for item in cell["items"]:
+                    if item in item_mapping:
+                        mapped_items.append(item_mapping[item])
+                    else:
+                        mapped_items.append(item)
+
+                items_str = ", ".join(mapped_items) if mapped_items else "keine"
                 desc = f"Feld ({r}, {c}): Farbe {color_map[cell['colour']]}, Gegenstände: {items_str}"
                 if cell["text"]:
                     desc += f", Text: '{cell['text']}'"
-                if cell["is_start"]:
-                    desc += ", Startpunkt"
-                if cell["is_goal"]:
-                    desc += ", Zielpunkt"
+
                 description += desc + "\n"
         return description
