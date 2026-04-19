@@ -49,9 +49,9 @@ The repository uses the following GitHub Actions for CI/CD:
 
 ## 🛠 Skills
 
-Nutze bei Bedarf die Skills aus [dgaida/auto-version-action](https://github.com/dgaida/auto-version-action/tree/main/skills):
-*   **`SKILL_coding.md`**: Nutze diesen Skill für tiefe Code-Reviews, Audits, Analysen oder Refactoring-Pläne. Er hilft dabei, die Wartbarkeit, Klarheit und Korrektheit des Codes zu verbessern.
-*   **`SKILL_docs.md`**: Nutze diesen Skill für alle Aufgaben rund um die Dokumentation (MkDocs, API-Extraktion, Docstrings, Versionierung). Er unterstützt bei der Erstellung eines vollständigen, zweisprachigen Dokumentations-Ökosystems.
+Nutze bei Bedarf die Skills aus [dgaida/auto-version-action](https://github.com/dgaida/auto-version-action/tree/main/skills):  
+*   **`SKILL_coding.md`**: Nutze diesen Skill für tiefe Code-Reviews, Audits, Analysen oder Refactoring-Pläne. Er hilft dabei, die Wartbarkeit, Klarheit und Korrektheit des Codes zu verbessern.  
+*   **`SKILL_docs.md`**: Nutze diesen Skill für alle Aufgaben rund um die Dokumentation (MkDocs, API-Extraktion, Docstrings, Versionierung). Er unterstützt bei der Erstellung eines vollständigen, zweisprachigen Dokumentations-Ökosystems.  
 
 ## 🧹 PR Preparation
 
