@@ -188,13 +188,28 @@ class PygameRenderer:
                         surface=surface,
                     )
                     item_y_offset += 20
-                elif "flower" in item:
+
+                elif item == "flower":
                     self._draw_flower(
                         x + self.cell_size // 2,
                         y + self.cell_size // 2 + item_y_offset,
                         surface=surface,
                     )
                     item_y_offset += 20
+                elif item == "two_flowers":
+                    # Draw first flower
+                    self._draw_flower(
+                        x + self.cell_size // 2 - 10,
+                        y + self.cell_size // 2 + item_y_offset - 10,
+                        surface=surface,
+                    )
+                    # Draw second flower slightly offset
+                    self._draw_flower(
+                        x + self.cell_size // 2 + 10,
+                        y + self.cell_size // 2 + item_y_offset + 10,
+                        surface=surface,
+                    )
+                    item_y_offset += 30
                 elif "one_note" in item:
                     self._draw_note(
                         x + self.cell_size - 20,

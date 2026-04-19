@@ -259,9 +259,10 @@ class CustomGridEnv(gym.Env):
             "is_start": False,
             "text": "",
         }
+
         self.grid[3, 3] = {
             "colour": 0,
-            "items": ["flower"],
+            "items": ["two_flowers"],
             "is_goal": False,
             "is_start": False,
             "text": "",
@@ -271,7 +272,7 @@ class CustomGridEnv(gym.Env):
             "items": [],
             "is_goal": True,
             "is_start": False,
-            "text": "Ziel",
+            "text": "Stopp",
         }
 
     def _setup_walls(self):
@@ -364,8 +365,8 @@ class CustomGridEnv(gym.Env):
             "colour": current_cell["colour"],
             "has_item": np.array(
                 [
-                    1 if "dog" in current_cell["items"] else 0,
-                    1 if "flower" in current_cell["items"] else 0,
+                    1 if any("dog" in i for i in current_cell["items"]) else 0,
+                    1 if any("flower" in i for i in current_cell["items"]) else 0,
                     (
                         1
                         if any(
@@ -691,8 +692,8 @@ class CustomGridEnv(gym.Env):
             "colour": current_cell["colour"],
             "has_item": np.array(
                 [
-                    1 if "dog" in current_cell["items"] else 0,
-                    1 if "flower" in current_cell["items"] else 0,
+                    1 if any("dog" in i for i in current_cell["items"]) else 0,
+                    1 if any("flower" in i for i in current_cell["items"]) else 0,
                     (
                         1
                         if any(
@@ -827,6 +828,9 @@ class CustomGridEnv(gym.Env):
         item_mapping = {
             "one_note": "klassische Musik und Klaviermusik",
             "two_notes": "Rockmusik",
+            "flower": "eine Blume",
+            "two_flowers": "zwei Blumen",
+            "dog": "ein Bild eines Hundes",
         }
 
         for r in range(self.rows):
