@@ -230,7 +230,9 @@ class AgentInterface:
             ghost_obs = self.env._get_ghost_obs()
             ghost_action = self._ghost_agent.get_action(ghost_obs)
 
-            obs, reward, self.terminated, self.truncated, info = self.env.step(ghost_action)
+            obs, reward, self.terminated, self.truncated, info = self.env.step(
+                ghost_action
+            )
 
             if self.render_enabled:
                 logger.debug("Rendering after ghost's turn.")

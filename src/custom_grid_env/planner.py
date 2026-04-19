@@ -1,11 +1,12 @@
 import numpy as np
-from typing import List, Tuple, Dict, Any, Optional
+from typing import List, Tuple
 import json
 from llm_client import LLMClient
 from .env import CustomGridEnv
 from .logger import get_logger
 
 logger = get_logger(__name__)
+
 
 class TaskPlanner:
     """Handles task interpretation using LLM and optimal path planning."""
@@ -34,13 +35,14 @@ class TaskPlanner:
             "Du bist ein hilfreicher Assistent, der Navigationsaufgaben in einem 4x5 Grid interpretiert. "
             "Hier ist die Beschreibung des Grids:\n"
             f"{grid_desc}\n"
-            "Gib die Koordinaten der zu besuchenden Felder in der Reihenfolge zurück, in der sie im Text genannt werden. "
+            "Gib die Koordinaten der zu besuchenden Felder in der Reihenfolge zurück, "
+            "in der sie im Text genannt werden. "
             "Gib NUR ein JSON-Array von Listen zurück, z.B. [[0, 1], [2, 3]]."
         )
 
         messages = [
             {"role": "system", "content": system_prompt},
-            {"role": "user", "content": task_description}
+            {"role": "user", "content": task_description},
         ]
 
         try:
@@ -58,7 +60,9 @@ class TaskPlanner:
             logger.error(f"Error identifying targets: {e}")
             return []
 
-    def value_iteration(self, goal_pos: Tuple[int, int], theta: float = 0.0001) -> np.ndarray:
+    def value_iteration(
+        self, goal_pos: Tuple[int, int], theta: float = 0.0001
+    ) -> np.ndarray:
         """Computes optimal values for each cell using value iteration.
 
         Args:
@@ -84,8 +88,10 @@ class TaskPlanner:
                     action_values = []
                     for action in range(4):
                         next_pos = self.env._move_entity([r, c], action)
-                        reward = -1.0 # Step penalty
-                        action_values.append(reward + gamma * V[next_pos[0], next_pos[1]])
+                        reward = -1.0  # Step penalty
+                        action_values.append(
+                            reward + gamma * V[next_pos[0], next_pos[1]]
+                        )
 
                     V[r, c] = max(action_values)
                     delta = max(delta, abs(v - V[r, c]))
@@ -116,7 +122,9 @@ class TaskPlanner:
         best_action = int(np.argmax(action_values))
         return best_action
 
-    def solve_tsp(self, start_pos: Tuple[int, int], targets: List[Tuple[int, int]]) -> List[Tuple[int, int]]:
+    def solve_tsp(
+        self, start_pos: Tuple[int, int], targets: List[Tuple[int, int]]
+    ) -> List[Tuple[int, int]]:
         """Solves a simple TSP to find the optimal visiting order.
 
         Args:
@@ -136,10 +144,12 @@ class TaskPlanner:
         dist_matrix = {}
         for p1 in all_points:
             for p2 in all_points:
-                dist_matrix[(p1, p2)] = self.env._calculate_shortest_path_distance(list(p1), list(p2))
+                dist_matrix[(p1, p2)] = self.env._calculate_shortest_path_distance(
+                    list(p1), list(p2)
+                )
 
         best_perm = None
-        min_dist = float('inf')
+        min_dist = float("inf")
 
         for perm in itertools.permutations(targets):
             current_dist = 0
@@ -147,7 +157,7 @@ class TaskPlanner:
             for target in perm:
                 current_dist += dist_matrix[(curr, target)]
                 curr = target
-            current_dist += dist_matrix[(curr, start_pos)] # Return to start
+            current_dist += dist_matrix[(curr, start_pos)]  # Return to start
 
             if current_dist < min_dist:
                 min_dist = current_dist
@@ -155,7 +165,9 @@ class TaskPlanner:
 
         return list(best_perm) if best_perm else []
 
-    def get_path(self, start_pos: Tuple[int, int], goal_pos: Tuple[int, int]) -> List[int]:
+    def get_path(
+        self, start_pos: Tuple[int, int], goal_pos: Tuple[int, int]
+    ) -> List[int]:
         """Gets the list of actions for the optimal path from start to goal.
 
         Args:
@@ -171,7 +183,7 @@ class TaskPlanner:
         V = self.value_iteration(goal_pos)
         path = []
         curr = start_pos
-        max_steps = self.env.rows * self.env.cols * 2 # Safety margin
+        max_steps = self.env.rows * self.env.cols * 2  # Safety margin
         steps = 0
         while tuple(curr) != goal_pos and steps < max_steps:
             action = self.get_optimal_action(tuple(curr), V)

@@ -53,7 +53,9 @@ class ColabGUI:
             description="Reset Episode", button_style="warning"
         )
         self.pf_toggle = widgets.Checkbox(value=True, description="Show Particles")
-        self.deterministic_toggle = widgets.Checkbox(value=False, description="Deterministic")
+        self.deterministic_toggle = widgets.Checkbox(
+            value=False, description="Deterministic"
+        )
         self.use_ghost_toggle = widgets.Checkbox(value=True, description="Use Ghost")
 
         self.sensor_dropdown = widgets.Dropdown(
@@ -116,10 +118,15 @@ class ColabGUI:
         self.stats_label = widgets.Label(value="Steps: 0 | Total Reward: 0.0")
 
         self.task_input = widgets.Text(
-            value="Besuche in optimaler Reihenfolge die folgenden drei Felder und kehre zum Ausgangsort zurück:- das Feld in dem man Klaviermusik hört, - das Feld wo man das Bild des Hundes sieht und Rockmusik hört - das Feld mit dem Schriftzug 'Ziel'",
+            value=(
+                "Besuche in optimaler Reihenfolge die folgenden drei Felder und kehre zum Ausgangsort zurück:"
+                "- das Feld in dem man Klaviermusik hört, "
+                "- das Feld wo man das Bild des Hundes sieht und Rockmusik hört "
+                "- das Feld mit dem Schriftzug 'Ziel'"
+            ),
             placeholder="Task description",
             description="Task:",
-            layout=widgets.Layout(width='80%')
+            layout=widgets.Layout(width="80%"),
         )
         self.plan_button = widgets.Button(
             description="Plan & Execute", button_style="success"
@@ -131,9 +138,17 @@ class ColabGUI:
         self.controls = widgets.VBox(
             [
                 widgets.HBox([self.next_button, self.reset_button]),
-                widgets.HBox([self.pf_toggle, self.deterministic_toggle, self.use_ghost_toggle]),
+                widgets.HBox(
+                    [self.pf_toggle, self.deterministic_toggle, self.use_ghost_toggle]
+                ),
                 widgets.HBox([self.sensor_dropdown, self.slip_type_dropdown]),
-                widgets.HBox([self.agent_dropdown, self.ghost_dropdown, self.color_quality_dropdown]),
+                widgets.HBox(
+                    [
+                        self.agent_dropdown,
+                        self.ghost_dropdown,
+                        self.color_quality_dropdown,
+                    ]
+                ),
                 widgets.HBox([self.knowledge_dropdown]),
                 widgets.HBox([self.task_input, self.plan_button]),
                 self.stats_label,
@@ -174,7 +189,9 @@ class ColabGUI:
                 return
 
             print(f"Identified targets: {targets}")
-            ordered_targets = self.planner.solve_tsp(tuple(self.interface.env.agent_pos), targets)
+            ordered_targets = self.planner.solve_tsp(
+                tuple(self.interface.env.agent_pos), targets
+            )
             print(f"Optimal order: {ordered_targets}")
 
             # Execute task (full path including return to start)

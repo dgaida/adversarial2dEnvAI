@@ -4,7 +4,7 @@ import os
 import pygame
 import numpy as np
 from pathlib import Path
-from typing import Tuple, Callable, Optional
+from typing import Tuple
 
 # Set dummy video driver for headless environments
 os.environ["SDL_VIDEODRIVER"] = "dummy"
