@@ -49,6 +49,8 @@ class AgentInterface:
         pf_sensor_mode: str = "both",  # 'color', 'cnn', or 'both'
         show_particles: bool = True,
         color_sensor_quality: float = 0.8,
+        deterministic: bool = False,
+        use_ghost: bool = True,
     ):
         """Initializes the AgentInterface.
 
@@ -70,6 +72,8 @@ class AgentInterface:
             slip_probability=slip_probability,
             slip_type=slip_type,
             color_sensor_quality=color_sensor_quality,
+            deterministic=deterministic,
+            use_ghost=use_ghost,
         )
         self.render_enabled = render
         self.step_delay = step_delay
@@ -220,22 +224,23 @@ class AgentInterface:
             self.last_info = combined_info
             return obs, float(total_step_reward), True, combined_info
 
-        # Ghost's turn
-        logger.debug("Ghost's turn.")
-        ghost_obs = self.env._get_ghost_obs()
-        ghost_action = self._ghost_agent.get_action(ghost_obs)
+        if self.env.use_ghost:
+            # Ghost's turn
+            logger.debug("Ghost's turn.")
+            ghost_obs = self.env._get_ghost_obs()
+            ghost_action = self._ghost_agent.get_action(ghost_obs)
 
-        obs, reward, self.terminated, self.truncated, info = self.env.step(ghost_action)
+            obs, reward, self.terminated, self.truncated, info = self.env.step(ghost_action)
 
-        if self.render_enabled:
-            logger.debug("Rendering after ghost's turn.")
-            self._render_with_pf()
-            pygame.time.wait(self.step_delay)
+            if self.render_enabled:
+                logger.debug("Rendering after ghost's turn.")
+                self._render_with_pf()
+                pygame.time.wait(self.step_delay)
 
-        logger.debug(
-            f"env.info after ghost's turn and potential render: {self.env.info}"
-        )
-        combined_info.update(self.env.info)
+            logger.debug(
+                f"env.info after ghost's turn and potential render: {self.env.info}"
+            )
+            combined_info.update(self.env.info)
 
         if info.get("caught_by_ghost"):
             total_step_reward += reward

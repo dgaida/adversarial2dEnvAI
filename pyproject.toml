@@ -23,6 +23,7 @@ dependencies = [
     "tensorflow",
     "matplotlib",
     "scikit-learn",
+    "llm_client @ git+https://github.com/dgaida/llm_client.git",
 ]
 
 [project.optional-dependencies]

@@ -13,6 +13,7 @@ from .agents.random_player_agent import RandomPlayerAgent
 from .agents.chase_ghost_agent import ChaseGhostAgent
 from .agents.random_ghost_agent import RandomGhostAgent
 from .agents.adversarial_agents import MinimaxAgent, ExpectimaxAgent, AdversarialAgent
+from .planner import TaskPlanner
 
 # Set dummy video driver for headless environment (Colab)
 os.environ["SDL_VIDEODRIVER"] = "dummy"
@@ -52,6 +53,9 @@ class ColabGUI:
             description="Reset Episode", button_style="warning"
         )
         self.pf_toggle = widgets.Checkbox(value=True, description="Show Particles")
+        self.deterministic_toggle = widgets.Checkbox(value=False, description="Deterministic")
+        self.use_ghost_toggle = widgets.Checkbox(value=True, description="Use Ghost")
+
         self.sensor_dropdown = widgets.Dropdown(
             options=[
                 ("Neural Net", "cnn"),
@@ -101,24 +105,37 @@ class ColabGUI:
         )
         self.color_quality_dropdown = widgets.Dropdown(
             options=[
-                ("100 %", 1.0),
-                ("90 %", 0.9),
-                ("80 %", 0.8),
-                ("70 %", 0.7),
+                ("100%", 1.0),
+                ("90%", 0.9),
+                ("80%", 0.8),
+                ("70%", 0.7),
             ],
             value=0.8,
             description="Color Acc:",
         )
         self.stats_label = widgets.Label(value="Steps: 0 | Total Reward: 0.0")
 
+        self.task_input = widgets.Text(
+            value="Besuche in optimaler Reihenfolge die folgenden drei Felder und kehre zum Ausgangsort zurück:- das Feld in dem man Klaviermusik hört, - das Feld wo man das Bild des Hundes sieht und Rockmusik hört - das Feld mit dem Schriftzug 'Ziel'",
+            placeholder="Task description",
+            description="Task:",
+            layout=widgets.Layout(width='80%')
+        )
+        self.plan_button = widgets.Button(
+            description="Plan & Execute", button_style="success"
+        )
+
+        self.planner = TaskPlanner(self.interface.env)
+
         # Layout
         self.controls = widgets.VBox(
             [
                 widgets.HBox([self.next_button, self.reset_button]),
-                widgets.HBox([self.pf_toggle, self.sensor_dropdown]),
-                widgets.HBox([self.agent_dropdown, self.ghost_dropdown]),
-                widgets.HBox([self.slip_type_dropdown, self.color_quality_dropdown]),
+                widgets.HBox([self.pf_toggle, self.deterministic_toggle, self.use_ghost_toggle]),
+                widgets.HBox([self.sensor_dropdown, self.slip_type_dropdown]),
+                widgets.HBox([self.agent_dropdown, self.ghost_dropdown, self.color_quality_dropdown]),
                 widgets.HBox([self.knowledge_dropdown]),
+                widgets.HBox([self.task_input, self.plan_button]),
                 self.stats_label,
             ]
         )
@@ -134,6 +151,46 @@ class ColabGUI:
         self.color_quality_dropdown.observe(
             self._on_color_quality_change, names="value"
         )
+        self.deterministic_toggle.observe(self._on_deterministic_change, names="value")
+        self.use_ghost_toggle.observe(self._on_use_ghost_change, names="value")
+        self.plan_button.on_click(self._on_plan_click)
+
+    def _on_deterministic_change(self, change):
+        """Callback for the deterministic toggle."""
+        self.interface.env.deterministic = change["new"]
+
+    def _on_use_ghost_change(self, change):
+        """Callback for the use ghost toggle."""
+        self.interface.env.use_ghost = change["new"]
+
+    def _on_plan_click(self, b):
+        """Callback for the 'Plan & Execute' button."""
+        task = self.task_input.value
+        with self.output:
+            print(f"Planning for task: {task}")
+            targets = self.planner.identify_targets(task)
+            if not targets:
+                print("Could not identify targets.")
+                return
+
+            print(f"Identified targets: {targets}")
+            ordered_targets = self.planner.solve_tsp(tuple(self.interface.env.agent_pos), targets)
+            print(f"Optimal order: {ordered_targets}")
+
+            # Execute task (full path including return to start)
+            full_targets = ordered_targets + [tuple(self.interface.env.start_pos)]
+
+            for target in full_targets:
+                print(f"Moving to target: {target}")
+                current_pos = tuple(self.interface.env.agent_pos)
+                path = self.planner.get_path(current_pos, target)
+                for action in path:
+                    if self.interface.is_terminated():
+                        break
+                    self.obs, reward, done, info = self.interface.step(action)
+                    self._update_display()
+                if self.interface.is_terminated():
+                    break
 
     def _on_next_click(self, b):
         """Callback for the 'Next Step' button."""

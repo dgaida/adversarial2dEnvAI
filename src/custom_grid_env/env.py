@@ -38,6 +38,8 @@ class CustomGridEnv(gym.Env):
         slip_probability: float = 0.2,
         slip_type: str = "longitudinal",
         color_sensor_quality: float = 0.8,
+        deterministic: bool = False,
+        use_ghost: bool = True,
     ):
         """Initializes the CustomGridEnv.
 
@@ -54,6 +56,8 @@ class CustomGridEnv(gym.Env):
         self.slip_probability = slip_probability
         self.slip_type = slip_type
         self.color_sensor_quality = color_sensor_quality
+        self.deterministic = deterministic
+        self.use_ghost = use_ghost
         self.rows = 4
         self.cols = 5
         self.observation_space = gym.spaces.Dict(
@@ -156,7 +160,7 @@ class CustomGridEnv(gym.Env):
         }
         self.grid[0, 4] = {
             "colour": 0,
-            "items": ["dog", "one_note"],
+            "items": ["dog", "two_notes"],
             "is_goal": False,
             "is_start": False,
             "text": "",
@@ -217,7 +221,7 @@ class CustomGridEnv(gym.Env):
             "items": ["one_note"],
             "is_goal": False,
             "is_start": False,
-            "text": "",
+            "text": "Hier hört man Klaviermusik",
         }
         self.grid[2, 3] = {
             "colour": 1,
@@ -246,7 +250,7 @@ class CustomGridEnv(gym.Env):
             "items": [],
             "is_goal": True,
             "is_start": False,
-            "text": "Goal",
+            "text": "Ziel",
         }
         self.grid[3, 2] = {
             "colour": 2,
@@ -267,7 +271,7 @@ class CustomGridEnv(gym.Env):
             "items": [],
             "is_goal": True,
             "is_start": False,
-            "text": "Goal",
+            "text": "Ziel",
         }
 
     def _setup_walls(self):
@@ -494,7 +498,7 @@ class CustomGridEnv(gym.Env):
         Returns:
             tuple: (list of actual_actions, slipped)
         """
-        if self.slip_probability <= 0:
+        if self.deterministic or self.slip_probability <= 0:
             return [intended_action], False
 
         if self.slip_type == "longitudinal":
@@ -596,8 +600,12 @@ class CustomGridEnv(gym.Env):
             else:
                 reward = float(self.get_reward_structure()["step_penalty"])
 
-            self.current_turn = 1
-            info["current_turn"] = "ghost"
+            if self.use_ghost:
+                self.current_turn = 1
+                info["current_turn"] = "ghost"
+            else:
+                self.current_turn = 0
+                info["current_turn"] = "agent"
             info["mover"] = "agent"
             info["ghost_distance"] = self._calculate_shortest_path_distance(
                 self.agent_pos, self.ghost_pos
@@ -791,3 +799,25 @@ class CustomGridEnv(gym.Env):
         """Cleans up resources."""
         if self.renderer:
             self.renderer.close()
+
+    def get_grid_description(self) -> str:
+        """Returns a natural language description of the grid and its contents.
+
+        Returns:
+            str: Description of the grid.
+        """
+        description = "Der Grid hat 4 Zeilen (0-3) und 5 Spalten (0-4).\n"
+        color_map = {0: "weiß", 1: "rot", 2: "grün"}
+        for r in range(self.rows):
+            for c in range(self.cols):
+                cell = self.grid[r, c]
+                items_str = ", ".join(cell["items"]) if cell["items"] else "keine"
+                desc = f"Feld ({r}, {c}): Farbe {color_map[cell['colour']]}, Gegenstände: {items_str}"
+                if cell["text"]:
+                    desc += f", Text: '{cell['text']}'"
+                if cell["is_start"]:
+                    desc += ", Startpunkt"
+                if cell["is_goal"]:
+                    desc += ", Zielpunkt"
+                description += desc + "\n"
+        return description
