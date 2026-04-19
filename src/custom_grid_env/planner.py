@@ -92,18 +92,24 @@ class TaskPlanner:
                 # Fallback to markdown blocks if regex for array fails
                 clean_response = clean_response.strip()
                 if "```json" in clean_response:
-                    json_match = re.search(r"```json\s*(.*?)\s*```", clean_response, re.DOTALL)
+                    json_match = re.search(
+                        r"```json\s*(.*?)\s*```", clean_response, re.DOTALL
+                    )
                     if json_match:
                         clean_response = json_match.group(1)
                 elif "```" in clean_response:
-                    code_match = re.search(r"```\s*(.*?)\s*```", clean_response, re.DOTALL)
+                    code_match = re.search(
+                        r"```\s*(.*?)\s*```", clean_response, re.DOTALL
+                    )
                     if code_match:
                         clean_response = code_match.group(1)
 
             # If after all cleaning it still doesn't look like a JSON array,
             # don't even try to parse it to avoid noisy error logs
             if not clean_response.strip().startswith("["):
-                logger.warning(f"No JSON array found in LLM response: {clean_response[:100]}...")
+                logger.warning(
+                    f"No JSON array found in LLM response: {clean_response[:100]}..."
+                )
                 return []
 
             targets = json.loads(clean_response)
