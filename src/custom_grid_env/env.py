@@ -221,7 +221,7 @@ class CustomGridEnv(gym.Env):
             "items": ["one_note"],
             "is_goal": False,
             "is_start": False,
-            "text": "Hier hört man Klaviermusik",
+            "text": "",
         }
         self.grid[2, 3] = {
             "colour": 1,
@@ -792,6 +792,7 @@ class CustomGridEnv(gym.Env):
                 step_count=self.step_count,
                 current_turn=self.current_turn,
                 info=self.info,
+                use_ghost=self.use_ghost,
             )
         return None
 

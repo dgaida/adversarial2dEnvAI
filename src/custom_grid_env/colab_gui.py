@@ -13,6 +13,7 @@ from .agents.random_player_agent import RandomPlayerAgent
 from .agents.chase_ghost_agent import ChaseGhostAgent
 from .agents.random_ghost_agent import RandomGhostAgent
 from .agents.adversarial_agents import MinimaxAgent, ExpectimaxAgent, AdversarialAgent
+from .agents.value_iteration_agent import ValueIterationAgent
 from .planner import TaskPlanner
 
 # Set dummy video driver for headless environment (Colab)
@@ -79,12 +80,21 @@ class ColabGUI:
             options=[
                 ("Minimax", "minimax"),
                 ("Expectimax", "expectimax"),
+                ("Value Iteration", "value_iteration"),
                 ("Random", "random"),
             ],
             value=(
                 "random"
                 if agent_class == RandomPlayerAgent
-                else ("minimax" if agent_class == MinimaxAgent else "expectimax")
+                else (
+                    "minimax"
+                    if agent_class == MinimaxAgent
+                    else (
+                        "expectimax"
+                        if agent_class == ExpectimaxAgent
+                        else "value_iteration"
+                    )
+                )
             ),
             description="Agent Type:",
         )
@@ -149,26 +159,30 @@ class ColabGUI:
                         self.color_quality_dropdown,
                     ]
                 ),
-                widgets.HBox([self.knowledge_dropdown]),
+                widgets.HBox([self.knowledge_dropdown, self.stats_label]),
                 widgets.HBox([self.task_input, self.plan_button]),
-                self.stats_label,
             ]
         )
 
-        # Callbacks
+        # Event handlers
         self.next_button.on_click(self._on_next_click)
         self.reset_button.on_click(self._on_reset_click)
+        self.plan_button.on_click(self._on_plan_click)
         self.pf_toggle.observe(self._on_pf_toggle_change, names="value")
+        self.deterministic_toggle.observe(self._on_deterministic_change, names="value")
+        self.use_ghost_toggle.observe(self._on_use_ghost_change, names="value")
         self.sensor_dropdown.observe(self._on_sensor_change, names="value")
         self.slip_type_dropdown.observe(self._on_slip_type_change, names="value")
-        self.ghost_dropdown.observe(self._on_ghost_change, names="value")
         self.agent_dropdown.observe(self._on_agent_change, names="value")
+        self.ghost_dropdown.observe(self._on_ghost_change, names="value")
         self.color_quality_dropdown.observe(
             self._on_color_quality_change, names="value"
         )
-        self.deterministic_toggle.observe(self._on_deterministic_change, names="value")
-        self.use_ghost_toggle.observe(self._on_use_ghost_change, names="value")
-        self.plan_button.on_click(self._on_plan_click)
+        self.knowledge_dropdown.observe(self._on_knowledge_change, names="value")
+
+    def _on_knowledge_change(self, change):
+        """Callback for the agent knowledge dropdown."""
+        pass
 
     def _on_deterministic_change(self, change):
         """Callback for the deterministic toggle."""
@@ -177,11 +191,12 @@ class ColabGUI:
     def _on_use_ghost_change(self, change):
         """Callback for the use ghost toggle."""
         self.interface.env.use_ghost = change["new"]
+        self._update_display()
 
     def _on_plan_click(self, b):
         """Callback for the 'Plan & Execute' button."""
-        task = self.task_input.value
         with self.output:
+            task = self.task_input.value
             print(f"Planning for task: {task}")
             targets = self.planner.identify_targets(task)
             if not targets:
@@ -265,6 +280,10 @@ class ColabGUI:
             )
         elif change["new"] == "expectimax":
             self.agent = ExpectimaxAgent(
+                self.interface.get_action_space(), env=self.interface.env
+            )
+        elif change["new"] == "value_iteration":
+            self.agent = ValueIterationAgent(
                 self.interface.get_action_space(), env=self.interface.env
             )
         else:
