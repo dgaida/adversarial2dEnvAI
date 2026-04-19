@@ -352,6 +352,9 @@ class ColabGUI:
         if self.knowledge_dropdown.value == "estimated" and self.interface.pf:
             est_pos = self.interface.pf.get_estimated_position()["cell_pos"]
             self.agent.perceived_agent_pos = est_pos
+            # Ghost position is also relative to estimated agent position in observation
+            # but for adversarial agents we need the absolute ghost position.
+            # We assume the agent knows where the ghost is relative to its estimate.
             actual_agent_pos = self.interface.env.agent_pos
             actual_ghost_pos = self.interface.env.ghost_pos
             rel_ghost = [
@@ -450,6 +453,11 @@ class ColabGUI:
                 )
                 for r in range(self.interface.env.rows):
                     for c in range(self.interface.env.cols):
+                        # Ghost values from ghost's perspective?
+                        # The request says "value of the cell for the ghost".
+                        # AdversarialAgent.get_value returns value from agent perspective by default.
+                        # MinimaxAgent.get_value calls _max_value(agent_pos, ghost_pos, ...)
+                        # If we want the ghost's value for that cell, we should vary ghost_pos.
                         ghost_values[r, c] = ghost_agent.get_value(
                             self.interface.env.agent_pos, [r, c]
                         )
@@ -460,40 +468,52 @@ class ColabGUI:
             img = self.interface.env.render()
 
             if img is not None:
+                # Create a figure with two subplots: Grid and Probability Distribution
                 fig, (ax1, ax2) = plt.subplots(
                     1, 2, figsize=(15, 8), gridspec_kw={"width_ratios": [1.2, 1]}
                 )
 
+                # Plot 1: Environment Grid
                 ax1.imshow(img)
                 ax1.axis("off")
                 ax1.set_title("Environment Grid")
 
+                # Plot 2: Multimodal Probability Distribution (KDE)
                 if self.interface.pf:
                     rows, cols = self.interface.env.rows, self.interface.env.cols
                     particles = np.array(self.interface.pf.get_particles())
                     weights = self.interface.pf.weights
 
+                    # Fit KDE to particles
+                    # Use a small bandwidth for localized distribution
                     kde = KernelDensity(kernel="gaussian", bandwidth=0.3).fit(
                         particles, sample_weight=weights
                     )
 
+                    # Create a fine grid for KDE evaluation
                     res = 100
                     x_lin = np.linspace(0, rows, res)
                     y_lin = np.linspace(0, cols, res)
                     Y_grid, X_grid = np.meshgrid(y_lin, x_lin)
                     grid_coords = np.vstack([X_grid.ravel(), Y_grid.ravel()]).T
 
+                    # Evaluate log-density
                     log_dens = kde.score_samples(grid_coords)
                     dens = np.exp(log_dens).reshape(X_grid.shape)
 
+                    # Plotting the contour plot
                     im = ax2.contourf(Y_grid, X_grid, dens, levels=20, cmap="viridis")
+                    # Add contour lines for better visualization of the "elevation"
                     ax2.contour(
                         Y_grid, X_grid, dens, levels=10, colors="white", alpha=0.3
                     )
                     ax2.set_aspect("equal")
                     ax2.set_xlim(0, cols)
-                    ax2.set_ylim(rows, 0)
+                    ax2.set_ylim(
+                        rows, 0
+                    )  # Inverted for grid coordinates (row 0 at top)
 
+                    # Set explicit ticks for rows and columns
                     ax2.set_xticks(np.arange(0, cols))
                     ax2.set_yticks(np.arange(0, rows))
 
@@ -503,8 +523,9 @@ class ColabGUI:
                     ax2.grid(True, linestyle="--", alpha=0.5)
                     fig.colorbar(im, ax2, label="Probability Density")
 
+                    # Draw estimated position as a small filled circle
                     est_pos = self.interface.pf.get_estimated_position()
-                    float_pos = est_pos["float_pos"]
+                    float_pos = est_pos["float_pos"]  # [row, col]
                     ax2.scatter(
                         float_pos[1],
                         float_pos[0],

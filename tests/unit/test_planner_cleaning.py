@@ -28,11 +28,15 @@ def test_identify_targets_markdown_json(planner):
 
 
 def test_identify_targets_with_think_block(planner):
+    # This currently fails based on user report
     raw_response = (
         "<think>\nI should go to (2,2) and then (0,4)\n</think>\n[[2, 2], [0, 4]]"
     )
     planner.llm_client.chat_completion.return_value = raw_response
     targets, response = planner.identify_targets("Visit piano and dog")
+    # If the current regex is r"\[\s*\[.*\]\s*\]" with re.DOTALL, it MIGHT pick it up if there's no other brackets.
+    # But the user says it fails with "Expecting value: line 1 column 1 (char 0)".
+    # This happens if json.loads() is called on something that isn't valid JSON.
     assert targets == [(2, 2), (0, 4)]
     assert response == raw_response
 
@@ -52,6 +56,7 @@ def test_identify_targets_mixed_text(planner):
 
 
 def test_identify_targets_think_with_brackets(planner):
+    # This should fail with current implementation
     raw_response = (
         "<think>\nVisiting [[2, 2]] might be good.\n</think>\n[[2, 2], [0, 4]]"
     )

@@ -86,10 +86,12 @@ class TaskPlanner:
                 clean_response = clean_response.split("<think>")[-1]
 
             # Extract JSON array using regex for robustness
+            # Look for [[x, y], [a, b]] pattern
             match = re.search(r"\[\s*\[.*\]\s*\]", clean_response, re.DOTALL)
             if match:
                 clean_response = match.group(0)
             else:
+                # Fallback to markdown blocks if regex for array fails
                 clean_response = clean_response.strip()
                 if "```json" in clean_response:
                     json_match = re.search(
@@ -104,6 +106,8 @@ class TaskPlanner:
                     if code_match:
                         clean_response = code_match.group(1)
 
+            # If after all cleaning it still doesn't look like a JSON array,
+            # don't even try to parse it to avoid noisy error logs
             if not clean_response.strip().startswith("["):
                 logger.warning(
                     f"No JSON array found in LLM response: {clean_response[:100]}..."
@@ -114,6 +118,11 @@ class TaskPlanner:
             return [tuple(t) for t in targets], response
         except Exception as e:
             logger.error(f"Error identifying targets: {e}")
+            logger.error(
+                f"Response that failed: {response if 'response' in locals() else 'N/A'}"
+            )
+            if "clean_response" in locals():
+                logger.error(f"Cleaned response that failed: {clean_response}")
             return [], response if "response" in locals() else str(e)
 
     def value_iteration(
@@ -169,8 +178,12 @@ class TaskPlanner:
         action_values = []
         for action in range(4):
             next_pos = self.env._move_entity(list(current_pos), action)
+            # If we are already at the goal, any action might be returned.
+            # But the goal itself should have the highest value.
             action_values.append(V[next_pos[0], next_pos[1]])
 
+        # Prefer actions that actually change position if possible,
+        # but here we just take the max value.
         best_action = int(np.argmax(action_values))
         return best_action
 
@@ -241,6 +254,8 @@ class TaskPlanner:
             action = self.get_optimal_action(tuple(curr), V)
             new_pos = self.env._move_entity(list(curr), action)
             if tuple(new_pos) == tuple(curr):
+                # We are stuck? This should not happen with value iteration on this grid
+                # unless there is no path.
                 break
             path.append(action)
             curr = new_pos
