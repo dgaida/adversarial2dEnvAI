@@ -1,6 +1,9 @@
+"""Task planning and interpretation using Large Language Models (LLMs)."""
+
 import numpy as np
 from typing import List, Tuple
 import json
+import re
 from llm_client import LLMClient
 from .env import CustomGridEnv
 from .logger import get_logger
@@ -62,19 +65,34 @@ class TaskPlanner:
             {"role": "user", "content": task_description},
         ]
 
+        logger.debug(f"System prompt: {system_prompt}")
+        logger.debug(f"Task description: {task_description}")
+
         try:
             response = self.llm_client.chat_completion(messages)
-            # Basic cleaning if LLM adds markdown
-            clean_response = response.strip()
-            if clean_response.startswith("```json"):
-                clean_response = clean_response[7:-3].strip()
-            elif clean_response.startswith("```"):
-                clean_response = clean_response[3:-3].strip()
+            logger.debug(f"Raw LLM response: {response}")
+
+            # Extract JSON array using regex for robustness
+            match = re.search(r"\[\s*\[.*\]\s*\]", response, re.DOTALL)
+            if match:
+                clean_response = match.group(0)
+            else:
+                # Fallback to existing cleaning if regex fails
+                clean_response = response.strip()
+                if clean_response.startswith("```json"):
+                    clean_response = clean_response[7:-3].strip()
+                elif clean_response.startswith("```"):
+                    clean_response = clean_response[3:-3].strip()
 
             targets = json.loads(clean_response)
             return [tuple(t) for t in targets]
         except Exception as e:
             logger.error(f"Error identifying targets: {e}")
+            logger.error(
+                f"Response that failed: {response if 'response' in locals() else 'N/A'}"
+            )
+            if "clean_response" in locals():
+                logger.error(f"Cleaned response that failed: {clean_response}")
             return []
 
     def value_iteration(
