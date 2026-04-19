@@ -52,12 +52,12 @@ class TaskPlanner:
         grid_desc = self.env.get_grid_description()
 
         system_prompt = (
-            "Du bist ein hilfreicher Assistent, der Navigationsaufgaben in einem 4x5 Grid interpretiert. "
+            "Du bist ein hilfreicher Assistent, der Navigationsaufgaben in einem 4x5 Grid interpretiert. Deine einzige Aufgabe ist es, die Koordinaten der im Text genannten Felder zu identifizieren. Plane KEINE optimale Tour und ändere NICHT die Reihenfolge der Felder. Gib die Koordinaten genau in der Reihenfolge zurück, in der sie in der Aufgabenstellung erscheinen. Versuche NICHT, den Pfad zu optimieren oder den Ausgangsort einzubeziehen, sofern er nicht explizit als zu besuchendes Feld genannt wurde. "
             "Hier ist die Beschreibung des Grids:\n"
             f"{grid_desc}\n"
             "Gib die Koordinaten der zu besuchenden Felder in der Reihenfolge zurück, "
             "in der sie im Text genannt werden. "
-            "Antworte AUSSCHLIESSLICH mit einem JSON-Array von Listen, z.B. [[0, 1], [2, 3]]. Erkläre nichts und nutze keine <think> Tags."
+            "Antworte AUSSCHLIESSLICH mit einem JSON-Array von Listen, z.B. [[0, 1], [2, 3]]. Erkläre nichts, schreibe keinen Text vor oder nach dem JSON und nutze absolut keine <think> Tags."
         )
 
         messages = [
@@ -84,16 +84,27 @@ class TaskPlanner:
                 clean_response = clean_response.split("<think>")[-1]
 
             # Extract JSON array using regex for robustness
+            # Look for [[x, y], [a, b]] pattern
             match = re.search(r"\[\s*\[.*\]\s*\]", clean_response, re.DOTALL)
             if match:
                 clean_response = match.group(0)
             else:
-                # Fallback to existing cleaning if regex fails
+                # Fallback to markdown blocks if regex for array fails
                 clean_response = clean_response.strip()
-                if clean_response.startswith("```json"):
-                    clean_response = clean_response[7:-3].strip()
-                elif clean_response.startswith("```"):
-                    clean_response = clean_response[3:-3].strip()
+                if "```json" in clean_response:
+                    json_match = re.search(r"```json\s*(.*?)\s*```", clean_response, re.DOTALL)
+                    if json_match:
+                        clean_response = json_match.group(1)
+                elif "```" in clean_response:
+                    code_match = re.search(r"```\s*(.*?)\s*```", clean_response, re.DOTALL)
+                    if code_match:
+                        clean_response = code_match.group(1)
+
+            # If after all cleaning it still doesn't look like a JSON array,
+            # don't even try to parse it to avoid noisy error logs
+            if not clean_response.strip().startswith("["):
+                logger.warning(f"No JSON array found in LLM response: {clean_response[:100]}...")
+                return []
 
             targets = json.loads(clean_response)
             return [tuple(t) for t in targets]
