@@ -392,6 +392,7 @@ class PygameRenderer:
         current_turn: int,
         grid: np.ndarray,
         info: Dict[str, Any],
+        use_ghost: bool = True,
     ):
         """Draws the information panel at the bottom."""
         panel_y = self.rows * self.cell_size
@@ -531,6 +532,7 @@ class PygameRenderer:
         step_count: int,
         current_turn: int,
         info: Dict[str, Any],
+        use_ghost: bool = True,
     ) -> Optional[np.ndarray]:
         """Renders the environment state."""
         self._init_pygame()
@@ -552,10 +554,10 @@ class PygameRenderer:
                     row, col, grid[row, col], agent_value=av, ghost_value=gv
                 )
         self._draw_walls(walls_horizontal, walls_vertical)
-        if agent_pos != ghost_pos:
+        if use_ghost and agent_pos != ghost_pos:
             self._draw_ghost(ghost_pos[0], ghost_pos[1])
         self._draw_agent(agent_pos[0], agent_pos[1])
-        if agent_pos == ghost_pos:
+        if use_ghost and agent_pos == ghost_pos:
             x = agent_pos[1] * self.cell_size + self.cell_size // 2
             y = agent_pos[0] * self.cell_size + self.cell_size // 2
             pygame.draw.circle(self.screen, self.colors["red"], (x, y), 45, 5)

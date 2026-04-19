@@ -11,14 +11,27 @@ logger = get_logger(__name__)
 class TaskPlanner:
     """Handles task interpretation using LLM and optimal path planning."""
 
-    def __init__(self, env: CustomGridEnv):
+    def __init__(self, env: CustomGridEnv, **kwargs):
         """Initializes the TaskPlanner.
 
         Args:
             env (CustomGridEnv): The environment instance.
+            **kwargs: Additional arguments for LLMClient.
         """
         self.env = env
-        self.llm_client = LLMClient()
+        # Default settings if not provided in kwargs
+        llm = kwargs.get("llm", "qwen/qwen3-32b")
+        api_choice = kwargs.get("api_choice", "groq")
+
+        # In tests, we might not have API keys, so we might want to skip LLM initialization
+        # or use a mock. But for now, we try to initialize it.
+        try:
+            self.llm_client = LLMClient(llm=llm, api_choice=api_choice, **kwargs)
+        except Exception as e:
+            logger.warning(
+                f"Could not initialize LLMClient: {e}. Some features may not work."
+            )
+            self.llm_client = None
 
     def identify_targets(self, task_description: str) -> List[Tuple[int, int]]:
         """Identifies target coordinates from a natural language task description.
@@ -29,6 +42,10 @@ class TaskPlanner:
         Returns:
             List[Tuple[int, int]]: List of (row, col) coordinates to visit.
         """
+        if self.llm_client is None:
+            logger.error("LLMClient not initialized. Cannot identify targets.")
+            return []
+
         grid_desc = self.env.get_grid_description()
 
         system_prompt = (
