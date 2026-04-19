@@ -291,6 +291,7 @@ class PygameRenderer:
         current_turn: int,
         grid: np.ndarray,
         info: Dict[str, Any],
+        use_ghost: bool = True,
     ):
         """Draws the information panel at the bottom."""
         panel_y = self.rows * self.cell_size
