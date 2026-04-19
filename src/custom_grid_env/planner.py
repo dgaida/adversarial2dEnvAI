@@ -57,7 +57,7 @@ class TaskPlanner:
             f"{grid_desc}\n"
             "Gib die Koordinaten der zu besuchenden Felder in der Reihenfolge zurück, "
             "in der sie im Text genannt werden. "
-            "Gib NUR ein JSON-Array von Listen zurück, z.B. [[0, 1], [2, 3]]."
+            "Antworte AUSSCHLIESSLICH mit einem JSON-Array von Listen, z.B. [[0, 1], [2, 3]]. Erkläre nichts und nutze keine <think> Tags."
         )
 
         messages = [
@@ -72,13 +72,24 @@ class TaskPlanner:
             response = self.llm_client.chat_completion(messages)
             logger.debug(f"Raw LLM response: {response}")
 
+            # Remove <think>...</think> blocks
+            clean_response = re.sub(
+                r"<think>.*?</think>", "", response, flags=re.DOTALL
+            )
+            # Remove anything before the last </think> tag if it still exists (e.g. truncated response)
+            if "</think>" in clean_response:
+                clean_response = clean_response.split("</think>")[-1]
+            # Remove any unclosed <think> tag at the beginning
+            if "<think>" in clean_response:
+                clean_response = clean_response.split("<think>")[-1]
+
             # Extract JSON array using regex for robustness
-            match = re.search(r"\[\s*\[.*\]\s*\]", response, re.DOTALL)
+            match = re.search(r"\[\s*\[.*\]\s*\]", clean_response, re.DOTALL)
             if match:
                 clean_response = match.group(0)
             else:
                 # Fallback to existing cleaning if regex fails
-                clean_response = response.strip()
+                clean_response = clean_response.strip()
                 if clean_response.startswith("```json"):
                     clean_response = clean_response[7:-3].strip()
                 elif clean_response.startswith("```"):
