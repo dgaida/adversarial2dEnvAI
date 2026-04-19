@@ -46,3 +46,13 @@ The repository uses the following GitHub Actions for CI/CD:
 *   **Tests**: Runs `pytest` and generates code coverage reports.  
 *   **Documentation**: Automates the build and deployment of MkDocs to GitHub Pages using `mike` for versioning.  
 *   **Link Check**: Periodically checks for broken links in the documentation using `lycheeverse/lychee-action`.  
+
+## 🛠 Skills
+
+Nutze bei Bedarf die Skills aus [dgaida/auto-version-action](https://github.com/dgaida/auto-version-action/tree/main/skills):
+*   **`SKILL_coding.md`**: Nutze diesen Skill für tiefe Code-Reviews, Audits, Analysen oder Refactoring-Pläne. Er hilft dabei, die Wartbarkeit, Klarheit und Korrektheit des Codes zu verbessern.
+*   **`SKILL_docs.md`**: Nutze diesen Skill für alle Aufgaben rund um die Dokumentation (MkDocs, API-Extraktion, Docstrings, Versionierung). Er unterstützt bei der Erstellung eines vollständigen, zweisprachigen Dokumentations-Ökosystems.
+
+## 🧹 PR Preparation
+
+Lösche alle temporären Dateien (z. B. `.patch` Dateien), bevor du einen Pull Request erstellst. Das hält das Repository sauber.

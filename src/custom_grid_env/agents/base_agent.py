@@ -1,6 +1,6 @@
 """Base agent class and protocol definition."""
 
-from typing import Protocol, runtime_checkable, Any, Dict, Optional, List
+from typing import Protocol, runtime_checkable, Any, Dict
 import gymnasium as gym
 
 
