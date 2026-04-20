@@ -592,11 +592,12 @@ class PygameRenderer:
             3,
         )
         pygame.display.flip()
+        logger.debug("Pygame display flipped.")
         self.clock.tick(self.render_fps)
 
         if self.render_mode == "rgb_array":
             return np.transpose(
-                np.array(pygame.surfarray.pixels3d(self.screen)), axes=(1, 0, 2)
+                np.array(pygame.surfarray.pixels3d(self.screen)).copy(), axes=(1, 0, 2)
             )
         return None
 

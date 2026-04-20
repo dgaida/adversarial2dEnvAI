@@ -1,6 +1,7 @@
 """Agent that uses Value Iteration to find the optimal path to the goal."""
 
 from typing import Dict, Any
+import gymnasium as gym
 from .base_agent import BaseAgent
 
 
@@ -9,6 +10,10 @@ class ValueIterationAgent(BaseAgent):
 
     This agent assumes it has full knowledge of the environment and the current goal.
     """
+
+    def __init__(self, action_space: gym.spaces.Space, **kwargs: Any):
+        super().__init__(action_space, **kwargs)
+        self.planner = None
 
     def get_action(self, observation: Dict[str, Any]) -> int:
         """Returns the best action based on Value Iteration.
@@ -44,8 +49,9 @@ class ValueIterationAgent(BaseAgent):
         # Use TaskPlanner's value iteration logic or similar
         from ..planner import TaskPlanner
 
-        planner = TaskPlanner(self.env)
-        V = planner.value_iteration(goal_pos)
-        action = planner.get_optimal_action(current_pos, V)
+        if self.planner is None or self.planner.env != self.env:
+            self.planner = TaskPlanner(self.env)
+        V = self.planner.value_iteration(goal_pos)
+        action = self.planner.get_optimal_action(current_pos, V)
 
         return action

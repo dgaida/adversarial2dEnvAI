@@ -560,6 +560,8 @@ class CustomGridEnv(gym.Env):
             "particles",
             "agent_values",
             "ghost_values",
+            "reached_goal",
+            "caught_by_ghost",
         ]
         for key in keys_to_preserve:
             if key in info:
@@ -785,7 +787,9 @@ class CustomGridEnv(gym.Env):
             np.ndarray, optional: RGB array if render_mode is "rgb_array".
         """
         if self.renderer:
-            logger.debug(f"Calling renderer.render with info: {self.info}")
+            logger.info(
+                f"Rendering: Agent at {self.agent_pos}, Ghost at {self.ghost_pos}, Turn {self.current_turn}"
+            )
             return self.renderer.render(
                 agent_pos=self.agent_pos,
                 ghost_pos=self.ghost_pos,
@@ -817,6 +821,8 @@ class CustomGridEnv(gym.Env):
 
         # Set new goal
         self.grid[pos[0], pos[1]]["is_goal"] = True
+        if "reached_goal" in self.info:
+            del self.info["reached_goal"]
         logger.info(f"Goal set to: {pos}")
 
     def get_grid_description(self) -> str:
