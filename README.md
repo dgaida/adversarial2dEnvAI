@@ -29,6 +29,7 @@ A key challenge is the integration of multiple modules—such as **Speech-to-Tex
 
 *   **Turn-Based Adversarial Gameplay**: Compete against a ghost in a 4x5 grid.  
 *   **Adversarial Search**: Integrated **Minimax** and **Expectimax** agents for strategic planning.  
+*   **Task Planning**: LLM-based target identification and TSP route optimization.
 *   **Stochastic Movement**: Realistic physics with *Perpendicular* and *Longitudinal* slipping.  
 *   **Imperfect Perception**:  
     *   **Noisy Color Sensor**: Ground color detection with 80% accuracy.  
@@ -104,7 +105,7 @@ Visit our [Documentation Site](https://dgaida.github.io/adversarial2dEnvAI/) for
 *   🇩🇪 [Deutsch](https://dgaida.github.io/adversarial2dEnvAI/dev/)  
 *   🇺🇸 [English](https://dgaida.github.io/adversarial2dEnvAI/dev/en/)  
 
-Includes tutorials on [Adversarial Search](https://dgaida.github.io/adversarial2dEnvAI/dev/tutorial/adversarial_search/), [Localization](https://dgaida.github.io/adversarial2dEnvAI/dev/usage/localization/), and more.
+Includes tutorials on [Adversarial Search](https://dgaida.github.io/adversarial2dEnvAI/dev/tutorial/adversarial_search/), [Task Planning](https://dgaida.github.io/adversarial2dEnvAI/dev/tutorial/task_planning/), [Localization](https://dgaida.github.io/adversarial2dEnvAI/dev/usage/localization/), and more.
 
 ---
 
