@@ -162,7 +162,7 @@ class AgentInterface:
         # Get and log estimated position AFTER update and resample
         est_pos = self.pf.get_estimated_position()
         cell_pos = est_pos["cell_pos"]
-        logger.info(
+        logger.debug(
             f"Estimated Agent Position (row, col): ({cell_pos[0]}, {cell_pos[1]})"
         )
         info["estimated_pos"] = est_pos
