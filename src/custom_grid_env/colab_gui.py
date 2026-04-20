@@ -357,7 +357,7 @@ class ColabGUI:
                     else:
                         curr_pos = tuple(self.interface.env.agent_pos)
 
-                    logger.info(f"Target: {target}, Current Pos: {curr_pos}")
+                    logger.debug(f"Target: {target}, Current Pos: {curr_pos}")
                     if curr_pos == target:
                         break
 
@@ -510,7 +510,7 @@ class ColabGUI:
             self.interface.env.info["show_particles"] = True
 
         img = self.interface.env.render()
-        logger.info(
+        logger.debug(
             f"ColabGUI: Display updated. Agent at {self.interface.env.agent_pos}"
         )
 

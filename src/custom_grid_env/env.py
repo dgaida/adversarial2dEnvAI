@@ -787,7 +787,7 @@ class CustomGridEnv(gym.Env):
             np.ndarray, optional: RGB array if render_mode is "rgb_array".
         """
         if self.renderer:
-            logger.info(
+            logger.debug(
                 f"Rendering: Agent at {self.agent_pos}, Ghost at {self.ghost_pos}, Turn {self.current_turn}"
             )
             return self.renderer.render(
@@ -823,7 +823,7 @@ class CustomGridEnv(gym.Env):
         self.grid[pos[0], pos[1]]["is_goal"] = True
         if "reached_goal" in self.info:
             del self.info["reached_goal"]
-        logger.info(f"Goal set to: {pos}")
+        logger.debug(f"Goal set to: {pos}")
 
     def get_grid_description(self) -> str:
         """Returns a natural language description of the grid and its contents.
