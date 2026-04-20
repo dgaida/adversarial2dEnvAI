@@ -59,4 +59,4 @@ Lösche alle temporären Dateien (z. B. `.patch` Dateien), bevor du einen Pull R
 
 ## ⚠️ Multithreading Warning
 
-*   **Matplotlib and Multithreading**: Avoid using multithreading for visualizations that involve Matplotlib (e.g., in `ColabGUI`), as it frequently causes display issues and instability in Jupyter/Colab environments. Use synchronous execution for rendering loops instead.  
+*   **Matplotlib and Multithreading**: Avoid using multithreading for visualizations that involve Matplotlib (e.g., in `ColabGUI`), as it frequently causes display issues and instability in Jupyter/Colab environments. Use synchronous execution for rendering loops instead.

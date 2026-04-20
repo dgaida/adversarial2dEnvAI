@@ -55,6 +55,7 @@ class ColabGUI:
         self.planner = TaskPlanner(self.interface.env)
 
         # Planning & Execution State
+        self.lock = threading.RLock()
         self.planned_targets: List[Tuple[int, int]] = []
         self.visited_mask: List[bool] = []
         self.executing = False
@@ -243,7 +244,6 @@ class ColabGUI:
 
     def _on_knowledge_change(self, change):
         """Callback for the agent knowledge dropdown."""
-        pass
         self._update_display()
 
     def _on_deterministic_change(self, change):
@@ -320,6 +320,23 @@ class ColabGUI:
         # To keep UI responsive in Colab, we should use a thread, but the user
         # specifically requested synchronous mode due to matplotlib issues.
         self._run_execution()
+
+    def _on_execute_click(self, b):
+        """Callback for the 'Execute' button."""
+        if not self.planned_targets:
+            return
+
+        if self.executing:
+            return
+
+        self.executing = True
+        self.paused = False
+        self.pause_button.description = "Pause"
+
+        # Synchronous execution to avoid Matplotlib threading issues
+        # To keep UI responsive in Colab, we should use a thread, but the user
+        # specifically requested synchronous mode due to matplotlib issues.
+        self._run_execution()
     def _on_pause_click(self, b):
         """Callback for the 'Pause' button."""
         self.paused = not self.paused
@@ -364,10 +381,12 @@ class ColabGUI:
                     time.sleep(0.5)  # Delay for visualization in Colab
 
                     if self.interface.is_terminated():
-                        logger.info(
-                            "Execution loop interrupted: environment terminated (caught by ghost?)."
-                        )
-                        return
+                        stats = self.interface.get_episode_stats()
+                        if stats.get("caught_by_ghost"):
+                            logger.info("Execution loop interrupted: caught by ghost.")
+                            return
+                        # If goal reached but not the final target, keep going
+                        break
 
                 self.visited_mask[i] = True
                 logger.info(f"Target {i+1} reached: {target}")
@@ -475,6 +494,7 @@ class ColabGUI:
             self.interface.env.info["show_particles"] = True
         else:
             self.interface.env.info.pop("show_particles", None)
+
         with self.output:
             clear_output(wait=True)
 
@@ -515,6 +535,7 @@ class ColabGUI:
             if self.interface.pf and self.interface.show_particles:
                 self.interface.env.info["particles"] = self.interface.pf.get_particles()
                 self.interface.env.info["show_particles"] = True
+
             img = self.interface.env.render()
             logger.info(
                 f"ColabGUI: Display updated. Agent at {self.interface.env.agent_pos}"
