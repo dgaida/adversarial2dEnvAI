@@ -19,7 +19,7 @@ A key challenge is the integration of multiple modules—such as **Speech-to-Tex
 
 *   **Turn-Based Adversarial Gameplay**: Compete against a ghost in a 4x5 grid.  
 *   **Adversarial Search**: Integrated **Minimax** and **Expectimax** agents for strategic planning.  
-*   **Task Planning**: LLM-based target identification and TSP route optimization.
+*   **Task Planning**: LLM-based target identification and TSP route optimization.  
 *   **Stochastic Movement**: Realistic physics with *Perpendicular* and *Longitudinal* slipping.  
 *   **Imperfect Perception**:  
     *   **Noisy Color Sensor**: Ground color detection with 80% accuracy.  

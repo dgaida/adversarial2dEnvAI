@@ -28,9 +28,9 @@ Wände blockieren die Bewegung zwischen Zellen.
 
 ## Aufgabenplanung (Task Planning)
 
-Die Umgebung ist eng mit dem `TaskPlanner` verzahnt, um komplexe Missionen zu ermöglichen. Der `TaskPlanner` nutzt:
-- **Grid-Beschreibungen**: Automatisch generierte Texte über den Zustand der Welt.
-- **LLM-Integration**: Extraktion von Zielen aus natürlicher Sprache.
-- **Optimierung**: TSP-Solver für effiziente Routen und Value Iteration für die Pfadfindung.
+Die Umgebung ist eng mit dem `TaskPlanner` verzahnt, um komplexe Missionen zu ermöglichen. Der `TaskPlanner` nutzt:  
+- **Grid-Beschreibungen**: Automatisch generierte Texte über den Zustand der Welt.  
+- **LLM-Integration**: Extraktion von Zielen aus natürlicher Sprache.  
+- **Optimierung**: TSP-Solver für effiziente Routen und Value Iteration für die Pfadfindung.  
 
 Weitere Details finden Sie im [Task Planning Tutorial](../tutorial/task_planning.md).

@@ -28,9 +28,9 @@ Walls block movement between cells.
 
 ## Task Planning
 
-The environment is tightly integrated with the `TaskPlanner` to enable complex missions. The `TaskPlanner` utilizes:
-- **Grid Descriptions**: Automatically generated texts about the world state.
-- **LLM Integration**: Extraction of targets from natural language.
-- **Optimization**: TSP solver for efficient routes and Value Iteration for pathfinding.
+The environment is tightly integrated with the `TaskPlanner` to enable complex missions. The `TaskPlanner` utilizes:  
+- **Grid Descriptions**: Automatically generated texts about the world state.  
+- **LLM Integration**: Extraction of targets from natural language.  
+- **Optimization**: TSP solver for efficient routes and Value Iteration for pathfinding.  
 
 For more details, see the [Task Planning Tutorial](../tutorial/task_planning.md).

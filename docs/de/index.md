@@ -19,7 +19,7 @@ Eine zentrale Herausforderung ist die Integration mehrerer Module – wie **Spee
 
 *   **Rundenbasiertes Adversarial Gameplay**: Ein Agent konkurriert gegen einen Geist in einem 4x5 Gitter.  
 *   **Adversarial Search**: Integrierte **Minimax** und **Expectimax** Agenten für strategische Planung.  
-*   **Task Planning**: LLM-gestützte Zielidentifikation und TSP-Routenoptimierung.
+*   **Task Planning**: LLM-gestützte Zielidentifikation und TSP-Routenoptimierung.  
 *   **Stochastische Bewegung**: Unterstützung für *senkrechtes* und *längsgerichtetes* Rutschen.  
 *   **Unvollkommene Wahrnehmung**:  
     *   **Verrauschter Farbsensor**: Erkennung der Bodenfarbe mit 80% Genauigkeit.  
