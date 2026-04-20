@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://dgaida.github.io/adversarial2dEnvAI/dev/en/usage/environment/">
       
       
-        <link rel="prev" href="../../tutorial/adversarial_search/">
+        <link rel="prev" href="../../tutorial/task_planning/">
       
       
         <link rel="next" href="../gameplay/">
@@ -738,6 +738,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/task_planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Task Planning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -906,6 +934,17 @@
     <span class="md-ellipsis">
       
         Walls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#task-planning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task Planning
       
     </span>
   </a>
@@ -1536,6 +1575,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#task-planning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task Planning
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1587,6 +1637,12 @@
 <p>Walls block movement between cells.<br />
 - <strong>Horizontal Walls</strong>: Block Up/Down movements.<br />
 - <strong>Vertical Walls</strong>: Block Left/Right movements.  </p>
+<h2 id="task-planning">Task Planning<a class="headerlink" href="#task-planning" title="Permanent link">&para;</a></h2>
+<p>The environment is tightly integrated with the <code>TaskPlanner</code> to enable complex missions. The <code>TaskPlanner</code> utilizes:
+- <strong>Grid Descriptions</strong>: Automatically generated texts about the world state.
+- <strong>LLM Integration</strong>: Extraction of targets from natural language.
+- <strong>Optimization</strong>: TSP solver for efficient routes and Value Iteration for pathfinding.</p>
+<p>For more details, see the <a href="../../tutorial/task_planning/">Task Planning Tutorial</a>.</p>
 
 
 

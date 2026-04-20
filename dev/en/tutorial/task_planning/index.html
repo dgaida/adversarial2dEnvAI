@@ -1,6 +1,6 @@
 
 <!doctype html>
-<html lang="de" class="no-js">
+<html lang="en" class="no-js">
   <head>
     
       <meta charset="utf-8">
@@ -12,35 +12,35 @@
         <meta name="author" content="Jules">
       
       
-        <link rel="canonical" href="https://dgaida.github.io/adversarial2dEnvAI/dev/usage/localization/">
+        <link rel="canonical" href="https://dgaida.github.io/adversarial2dEnvAI/dev/en/tutorial/task_planning/">
       
       
-        <link rel="prev" href="../rewards/">
+        <link rel="prev" href="../adversarial_search/">
       
       
-        <link rel="next" href="../../api/core/">
+        <link rel="next" href="../../usage/environment/">
       
       
         
-          <link rel="alternate" href="./" hreflang="de">
+          <link rel="alternate" href="../../../tutorial/task_planning/" hreflang="de">
         
-          <link rel="alternate" href="../../en/usage/localization/" hreflang="en">
+          <link rel="alternate" href="./" hreflang="en">
         
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>Localization - CustomGrid Environment</title>
+        <title>Task Planning - CustomGrid Environment</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -59,9 +59,11 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -86,8 +88,8 @@
     <div data-md-component="skip">
       
         
-        <a href="#lokalisierung" class="md-skip">
-          Zum Inhalt
+        <a href="#task-planning-llm-integration" class="md-skip">
+          Skip to content
         </a>
       
     </div>
@@ -103,8 +105,8 @@
       
 
 <header class="md-header" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Kopfzeile">
-    <a href="../.." title="CustomGrid Environment" class="md-header__button md-logo" aria-label="CustomGrid Environment" data-md-component="logo">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../" title="CustomGrid Environment" class="md-header__button md-logo" aria-label="CustomGrid Environment" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -124,7 +126,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Localization
+              Task Planning
             
           </span>
         </div>
@@ -164,20 +166,20 @@
       <div class="md-header__option">
   <div class="md-select">
     
-    <button class="md-header__button md-icon" aria-label="Sprache wechseln">
+    <button class="md-header__button md-icon" aria-label="Select language">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
     </button>
     <div class="md-select__inner">
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="./" hreflang="de" class="md-select__link">
+            <a href="../../../tutorial/task_planning/" hreflang="de" class="md-select__link">
               Deutsch
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../en/usage/localization/" hreflang="en" class="md-select__link">
+            <a href="./" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
@@ -198,16 +200,16 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Suche" placeholder="Suche" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
-      <nav class="md-search__options" aria-label="Suche">
+      <nav class="md-search__options" aria-label="Search">
         
-        <button type="reset" class="md-search__icon md-icon" title="Zurücksetzen" aria-label="Zurücksetzen" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
@@ -220,7 +222,7 @@
       <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
-            Suche wird initialisiert
+            Initializing search
           </div>
           <ol class="md-search-result__list" role="presentation"></ol>
         </div>
@@ -232,7 +234,7 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/dgaida/adversarial2dEnvAI" title="Zum Repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/dgaida/adversarial2dEnvAI" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
@@ -253,7 +255,7 @@
         
           
             
-<nav class="md-tabs" aria-label="Hauptnavigation" data-md-component="tabs">
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
       
@@ -263,7 +265,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+      <a href="../../" class="md-tabs__link">
         
   
   
@@ -318,11 +320,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../tutorial/cnn/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../cnn/" class="md-tabs__link">
           
   
   
@@ -338,13 +342,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../environment/" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../usage/environment/" class="md-tabs__link">
           
   
   
@@ -494,7 +496,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="CustomGrid Environment" class="md-nav__button md-logo" aria-label="CustomGrid Environment" data-md-component="logo">
+    <a href="../../" title="CustomGrid Environment" class="md-nav__button md-logo" aria-label="CustomGrid Environment" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -504,7 +506,7 @@
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/dgaida/adversarial2dEnvAI" title="Zum Repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/dgaida/adversarial2dEnvAI" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
@@ -524,7 +526,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../" class="md-nav__link">
         
   
   
@@ -602,28 +604,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   
@@ -641,7 +646,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -659,7 +664,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorial/cnn/" class="md-nav__link">
+      <a href="../cnn/" class="md-nav__link">
         
   
   
@@ -687,7 +692,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorial/particle_filter/" class="md-nav__link">
+      <a href="../particle_filter/" class="md-nav__link">
         
   
   
@@ -715,7 +720,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorial/adversarial_search/" class="md-nav__link">
+      <a href="../adversarial_search/" class="md-nav__link">
         
   
   
@@ -723,210 +728,6 @@
     
   
     Adversarial Search
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tutorial/task_planning/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Task Planning
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-    
-  
-  
-  
-    
-    
-    
-    
-      
-        
-        
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Usage
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_5">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Usage
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../environment/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Environment
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../gameplay/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Gameplay
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../observations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Observations
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../rewards/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Rewards
   
 
     
@@ -963,7 +764,7 @@
   <span class="md-ellipsis">
     
   
-    Localization
+    Task Planning
   
 
     
@@ -981,7 +782,7 @@
   <span class="md-ellipsis">
     
   
-    Localization
+    Task Planning
   
 
     
@@ -993,7 +794,7 @@
       
         
 
-<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
   
@@ -1002,27 +803,49 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Inhaltsverzeichnis
+      Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#partikelfilter" class="md-nav__link">
+  <a href="#workflow-overview" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Partikelfilter
+        Workflow Overview
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Partikelfilter">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-target-identification-with-llms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Target Identification with LLMs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Target Identification with LLMs">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#funktionsweise" class="md-nav__link">
+  <a href="#grid-description" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Funktionsweise
+        Grid Description
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prompting-extraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prompting &amp; Extraction
       
     </span>
   </a>
@@ -1035,22 +858,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#sensoren" class="md-nav__link">
+  <a href="#2-route-optimization-tsp" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Sensoren
+        2. Route Optimization (TSP)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Sensoren">
+    <nav class="md-nav" aria-label="2. Route Optimization (TSP)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#farbsensor" class="md-nav__link">
+  <a href="#distance-matrix" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Farbsensor
+        Distance Matrix
       
     </span>
   </a>
@@ -1058,10 +881,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#cnn-klassifikator" class="md-nav__link">
+  <a href="#tsp-solver" class="md-nav__link">
     <span class="md-ellipsis">
       
-        CNN-Klassifikator
+        TSP Solver
       
     </span>
   </a>
@@ -1074,10 +897,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#sensor-fusion" class="md-nav__link">
+  <a href="#3-path-planning-via-value-iteration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Sensor-Fusion
+        3. Path Planning via Value Iteration
       
     </span>
   </a>
@@ -1085,44 +908,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#annahmen" class="md-nav__link">
+  <a href="#integration-in-colab-gui" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Annahmen
+        Integration in Colab GUI
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Annahmen">
+    <nav class="md-nav" aria-label="Integration in Colab GUI">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#kartenannahme-map-assumption" class="md-nav__link">
+  <a href="#exercise-for-students" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Kartenannahme (Map Assumption)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#bewegungsunsicherheit-movement-uncertainty" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Bewegungsunsicherheit (Movement Uncertainty)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#messunsicherheit-measurement-uncertainty" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Messunsicherheit (Measurement Uncertainty)
+        Exercise for Students
       
     </span>
   </a>
@@ -1138,6 +939,207 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Usage
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Usage
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/gameplay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gameplay
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/observations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/rewards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rewards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/localization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Localization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1589,7 +1591,7 @@
                   <div class="md-sidebar__inner">
                     
 
-<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
   
@@ -1598,27 +1600,49 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Inhaltsverzeichnis
+      Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#partikelfilter" class="md-nav__link">
+  <a href="#workflow-overview" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Partikelfilter
+        Workflow Overview
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Partikelfilter">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-target-identification-with-llms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Target Identification with LLMs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Target Identification with LLMs">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#funktionsweise" class="md-nav__link">
+  <a href="#grid-description" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Funktionsweise
+        Grid Description
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prompting-extraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prompting &amp; Extraction
       
     </span>
   </a>
@@ -1631,22 +1655,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#sensoren" class="md-nav__link">
+  <a href="#2-route-optimization-tsp" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Sensoren
+        2. Route Optimization (TSP)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Sensoren">
+    <nav class="md-nav" aria-label="2. Route Optimization (TSP)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#farbsensor" class="md-nav__link">
+  <a href="#distance-matrix" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Farbsensor
+        Distance Matrix
       
     </span>
   </a>
@@ -1654,10 +1678,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#cnn-klassifikator" class="md-nav__link">
+  <a href="#tsp-solver" class="md-nav__link">
     <span class="md-ellipsis">
       
-        CNN-Klassifikator
+        TSP Solver
       
     </span>
   </a>
@@ -1670,10 +1694,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#sensor-fusion" class="md-nav__link">
+  <a href="#3-path-planning-via-value-iteration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Sensor-Fusion
+        3. Path Planning via Value Iteration
       
     </span>
   </a>
@@ -1681,44 +1705,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#annahmen" class="md-nav__link">
+  <a href="#integration-in-colab-gui" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Annahmen
+        Integration in Colab GUI
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Annahmen">
+    <nav class="md-nav" aria-label="Integration in Colab GUI">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#kartenannahme-map-assumption" class="md-nav__link">
+  <a href="#exercise-for-students" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Kartenannahme (Map Assumption)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#bewegungsunsicherheit-movement-uncertainty" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Bewegungsunsicherheit (Movement Uncertainty)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#messunsicherheit-measurement-uncertainty" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Messunsicherheit (Measurement Uncertainty)
+        Exercise for Students
       
     </span>
   </a>
@@ -1747,7 +1749,7 @@
 
 
   
-    <a href="https://github.com/dgaida/adversarial2dEnvAI/edit/master/docs/de/usage/localization.md" title="Seite editieren" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/dgaida/adversarial2dEnvAI/edit/master/docs/en/tutorial/task_planning.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -1756,58 +1758,57 @@
     
       
     
-    <a href="https://github.com/dgaida/adversarial2dEnvAI/raw/master/docs/de/usage/localization.md" title="Quellcode der Seite anzeigen" class="md-content__button md-icon">
+    <a href="https://github.com/dgaida/adversarial2dEnvAI/raw/master/docs/en/tutorial/task_planning.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
 
-<h1 id="lokalisierung">Lokalisierung<a class="headerlink" href="#lokalisierung" title="Permanent link">&para;</a></h1>
-<p>Die Umgebung bietet einen <strong>Partikelfilter</strong>, um die Position des Agenten zu schätzen, wenn dessen genauer Standort unbekannt ist oder wenn mit verrauschten Sensoren navigiert wird.</p>
-<h2 id="partikelfilter">Partikelfilter<a class="headerlink" href="#partikelfilter" title="Permanent link">&para;</a></h2>
-<p>Ein Partikelfilter (PF) ist ein Monte-Carlo-Algorithmus zur Schätzung des Zustands eines Systems. In dieser Umgebung wird er zur <strong>Selbstlokalisierung</strong> des Agenten auf dem Gitter verwendet.</p>
-<h3 id="funktionsweise">Funktionsweise<a class="headerlink" href="#funktionsweise" title="Permanent link">&para;</a></h3>
-<ol>
-<li><strong>Initialisierung</strong>: Partikel werden zufällig über das gesamte Gitter verteilt.  </li>
-<li><strong>Prädiktion (Prediction)</strong>: Wenn sich der Agent bewegt, wird jedes Partikel entsprechend der beabsichtigten Aktion bewegt, wobei die Bewegungsunsicherheit (Rutschen) berücksichtigt wird.  </li>
-<li><strong>Update</strong>: Das Gewicht jedes Partikels wird basierend darauf aktualisiert, wie gut die hypothetischen Beobachtungen an der Position dieses Partikels mit den tatsächlichen Sensormessungen übereinstimmen.  </li>
-<li><strong>Resampling</strong>: Partikel mit geringen Gewichten werden durch Kopien von Partikeln mit hohen Gewichten ersetzt.  </li>
-</ol>
-<h2 id="sensoren">Sensoren<a class="headerlink" href="#sensoren" title="Permanent link">&para;</a></h2>
-<p>Die Lokalisierung stützt sich auf zwei Hauptsensortypen:</p>
-<h3 id="farbsensor">Farbsensor<a class="headerlink" href="#farbsensor" title="Permanent link">&para;</a></h3>
-<p>Der Farbsensor misst die Farbe des Bodens direkt unter dem Agenten.<br />
-- <strong>Genauigkeit</strong>: Über die GUI oder das Interface einstellbar (100%, 90%, 80% oder 70%). Standardmäßig beträgt sie 80% (korrekte Farbe).<br />
-- <strong>Rauschen</strong>: 20% (gleichmäßig auf die anderen beiden Farben verteilt).<br />
-- <strong>Farben</strong>: Weiß (0), Rot (1), Grün (2).  </p>
-<h3 id="cnn-klassifikator">CNN-Klassifikator<a class="headerlink" href="#cnn-klassifikator" title="Permanent link">&para;</a></h3>
-<p>Der CNN-Klassifikator wird bei jedem Schritt ausgeführt, unabhängig davon, ob ein Objekt vorhanden ist. Wenn kein Objekt vorhanden ist, wird die Klasse "Hintergrund" vorhergesagt.<br />
-- <strong>Klassen</strong>: Hund, Blume, Hintergrund.<br />
-- <strong>Verwendung</strong>: Die vom CNN zugewiesene Wahrscheinlichkeit für die Klasse, die sich tatsächlich in der Zelle eines Partikels befindet, wird als Likelihood für dieses Partikel verwendet.  </p>
-<h2 id="sensor-fusion">Sensor-Fusion<a class="headerlink" href="#sensor-fusion" title="Permanent link">&para;</a></h2>
-<p>Bei Verwendung beider Sensoren (<code>sensor_mode='both'</code>) kombiniert der Filter die Messungen unter der Annahme, dass sie bei gegebenem Zustand bedingt unabhängig sind. Die Verbundwahrscheinlichkeit (Joint Likelihood) ist das Produkt der einzelnen Likelihoods:</p>
-<p>$$p(z_{\text{color}}, z_{\text{cnn}} | s) = p(z_{\text{color}} | s) \cdot p(z_{\text{cnn}} | s)$$</p>
-<h2 id="annahmen">Annahmen<a class="headerlink" href="#annahmen" title="Permanent link">&para;</a></h2>
-<p>Der Partikelfilter trifft folgende Annahmen über die Umgebung:</p>
-<h3 id="kartenannahme-map-assumption">Kartenannahme (Map Assumption)<a class="headerlink" href="#kartenannahme-map-assumption" title="Permanent link">&para;</a></h3>
-<p>Der Filter verfügt über <strong>perfektes Wissen über die Karte</strong>. Er kennt:<br />
-- Die Dimensionen des Gitters.<br />
-- Die genaue Position aller Wände.<br />
-- Die Bodenfarbe jeder Zelle.<br />
-- Die Standorte aller Objekte (Hunde und Blumen).  </p>
-<h3 id="bewegungsunsicherheit-movement-uncertainty">Bewegungsunsicherheit (Movement Uncertainty)<a class="headerlink" href="#bewegungsunsicherheit-movement-uncertainty" title="Permanent link">&para;</a></h3>
-<p>Der Filter geht von einem <strong>stochastischen Bewegungsmodell</strong> aus, das der Rutschwahrscheinlichkeit der Umgebung entspricht. Es gibt zwei Arten des Rutschens:</p>
+<h1 id="task-planning-llm-integration">Task Planning &amp; LLM Integration<a class="headerlink" href="#task-planning-llm-integration" title="Permanent link">&para;</a></h1>
+<p>This tutorial describes how the CustomGrid environment uses natural language to understand complex tasks, identify targets, and navigate to them efficiently.</p>
+<h2 id="workflow-overview">Workflow Overview<a class="headerlink" href="#workflow-overview" title="Permanent link">&para;</a></h2>
+<p>The task planning process consists of three main steps:
+1. <strong>Target Identification</strong>  : An LLM (Large Language Model) extracts coordinates from a natural language description.
+2. <strong>Sequence Optimization</strong>  : A TSP (Traveling Salesperson Problem) solver determines the shortest route to visit all targets.
+3. <strong>Path Planning</strong>  : Value Iteration calculates the optimal moves to reach each target sequentially.</p>
+<h2 id="1-target-identification-with-llms">1. Target Identification with LLMs<a class="headerlink" href="#1-target-identification-with-llms" title="Permanent link">&para;</a></h2>
+<p>The <code>TaskPlanner</code> class uses an LLM (defaulting via Groq) to interpret user instructions such as <em>"Visit the dog first, then the flowers"</em>.</p>
+<h3 id="grid-description">Grid Description<a class="headerlink" href="#grid-description" title="Permanent link">&para;</a></h3>
+<p>To let the LLM know where objects are located, the environment generates a text description of the current grid (<code>get_grid_description()</code>). Items are mapped as follows:
+- <strong>dog</strong>: "ein Bild eines Hundes" (an image of a dog)
+- <strong>flower</strong>: "eine Blume" (a flower)
+- <strong>two_flowers</strong>: "zwei Blumen" (two flowers)</p>
+<h3 id="prompting-extraction">Prompting &amp; Extraction<a class="headerlink" href="#prompting-extraction" title="Permanent link">&para;</a></h3>
+<p>The LLM receives a system prompt instructing it to return <strong>only</strong> a JSON array of coordinates (e.g., <code>[[0, 1], [2, 3]]</code>).</p>
+<p>Since modern models often output "reasoning" in <code>&lt;think&gt;</code> tags, the <code>TaskPlanner</code> includes robust cleaning logic:
+- Removing <code>&lt;think&gt;</code> blocks using regex.
+- Extracting the JSON array from the remaining text.
+- Validating the format to avoid parsing errors.</p>
+<h2 id="2-route-optimization-tsp">2. Route Optimization (TSP)<a class="headerlink" href="#2-route-optimization-tsp" title="Permanent link">&para;</a></h2>
+<p>Once the target coordinates are identified, the most efficient visiting order must be found.</p>
+<h3 id="distance-matrix">Distance Matrix<a class="headerlink" href="#distance-matrix" title="Permanent link">&para;</a></h3>
+<p>The <code>TaskPlanner</code> first computes a distance matrix between the starting point and all targets. Since the environment contains walls, a Breadth-First Search (BFS) is used to determine the actual shortest path distance.</p>
+<h3 id="tsp-solver">TSP Solver<a class="headerlink" href="#tsp-solver" title="Permanent link">&para;</a></h3>
+<p>The solver tries all permutations of the target sequence and selects the one with the lowest total distance (including returning to the starting point). Given the small number of targets in this scenario, this brute-force approach is extremely fast and guarantees global optimality.</p>
+<h2 id="3-path-planning-via-value-iteration">3. Path Planning via Value Iteration<a class="headerlink" href="#3-path-planning-via-value-iteration" title="Permanent link">&para;</a></h2>
+<p>To reach a specific target in the grid, <strong>Value Iteration</strong> is employed.</p>
 <ul>
-<li><strong>Senkrechtes Rutschen (Perpendicular Slipping)</strong>: Der Agent bewegt sich mit einer Wahrscheinlichkeit von $P_{\text{slip}}$ in eine senkrechte Richtung (gleichmäßig auf die beiden senkrechten Richtungen verteilt).  </li>
-<li><strong>Längsrutschen (Longitudinal Slipping)</strong>: Der Agent bewegt sich in die gleiche Richtung, bleibt aber entweder stehen (0 Schritte) oder bewegt sich doppelt so weit (2 Schritte), jeweils mit einer Wahrscheinlichkeit von $P_{\text{slip}} / 2$.  </li>
-<li><strong>Beabsichtigte Bewegung</strong>: Der Agent bewegt sich mit einer Wahrscheinlichkeit von $1 - P_{\text{slip}}$ genau einen Schritt in die beabsichtigte Richtung.  </li>
-<li><strong>Wände</strong>: Wenn eine Bewegung gegen eine Wand oder aus dem Gitter heraus führen würde, bleibt der Agent (und damit auch die Partikel) in der aktuellen Zelle.  </li>
+<li><strong>State Values</strong>: Each cell receives a value based on its distance to the target. The target itself has the highest value (+100).</li>
+<li><strong>Iterative Updates</strong>: Values are updated until they converge (<code>theta &lt; 0.0001</code>).</li>
+<li><strong>Action Selection</strong>: In each step, the agent chooses the action leading to the adjacent cell with the highest value.</li>
 </ul>
-<h3 id="messunsicherheit-measurement-uncertainty">Messunsicherheit (Measurement Uncertainty)<a class="headerlink" href="#messunsicherheit-measurement-uncertainty" title="Permanent link">&para;</a></h3>
-<p>Der Filter verwendet folgende <strong>Likelihood-Modelle</strong>:<br />
-- <strong>Farbsensor</strong>: $p(z_{\text{color}} | s) = \text{color_sensor_quality}$, wenn die gemessene Farbe $z$ mit der Kartenfarbe am Zustand $s$ übereinstimmt, andernfalls $(1 - \text{color_sensor_quality}) / 2$.<br />
-- <strong>CNN</strong>: $p(z_{\text{cnn}} | s) = \text{CNN_prob}(\text{Klasse an Stelle } s)$. Der Filter nimmt an, dass die vom CNN ausgegebene Wahrscheinlichkeit für die wahre Klasse an einem Ort die Likelihood dieses Ortes ist.  </p>
+<p>This approach is robust to the environment's walls and guarantees the shortest path to the target.</p>
+<h2 id="integration-in-colab-gui">Integration in Colab GUI<a class="headerlink" href="#integration-in-colab-gui" title="Permanent link">&para;</a></h2>
+<p>In the <code>ColabGUI</code>, this process is split into two steps:
+1. <strong>Plan</strong>  : The LLM is called, targets are visualized, and the optimal tour is displayed as a checklist.
+2. <strong>Execute</strong>  : The agent works through the list of targets one by one, with progress marked in real-time in the GUI.</p>
+<h3 id="exercise-for-students">Exercise for Students<a class="headerlink" href="#exercise-for-students" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Ambiguity</strong>  : Enter an unclear instruction (e.g., "Go to something beautiful"). How does the LLM react based on the grid description?</li>
+<li><strong>Complexity</strong>  : Create a task with 4-5 targets. Observe how the TSP solver changes the sequence compared to the order of mention in the text.</li>
+<li><strong>Obstacles</strong>  : Place walls so that a direct path is blocked. Verify that Value Iteration still finds the optimal detour.</li>
+</ol>
 
 
 
@@ -1833,7 +1834,7 @@
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  Zurück zum Seitenanfang
+  Back to top
 </button>
         
       </main>
@@ -1865,10 +1866,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit", "content.action.view", "content.tabs.link", "navigation.tracking"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "In Zwischenablage kopiert", "clipboard.copy": "In Zwischenablage kopieren", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.placeholder": "Suchbegriff eingeben", "search.result.term.missing": "Es fehlt", "select.version": "Version ausw\u00e4hlen"}, "version": {"provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit", "content.action.view", "content.tabs.link", "navigation.tracking"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>
