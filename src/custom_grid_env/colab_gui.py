@@ -244,10 +244,12 @@ class ColabGUI:
     def _on_knowledge_change(self, change):
         """Callback for the agent knowledge dropdown."""
         pass
+        self._update_display()
 
     def _on_deterministic_change(self, change):
         """Callback for the deterministic toggle."""
         self.interface.env.deterministic = change["new"]
+        self._update_display()
 
     def _on_use_ghost_change(self, change):
         """Callback for the use ghost toggle."""
@@ -287,6 +289,21 @@ class ColabGUI:
             labels.append(widgets.Label(value=f"{status} {name}: {target}"))
         self.target_status_area.children = labels
 
+    def _on_execute_click_threaded(self, b):
+        """Callback for the 'Execute' button (threaded version)."""
+        if not self.planned_targets:
+            return
+
+        if self.executing:
+            return
+
+        self.executing = True
+        self.paused = False
+        self.pause_button.description = "Pause"
+
+        # Run execution loop in a separate thread
+        threading.Thread(target=self._run_execution, daemon=True).start()
+
     def _on_execute_click(self, b):
         """Callback for the 'Execute' button."""
         if not self.planned_targets:
@@ -299,9 +316,10 @@ class ColabGUI:
         self.paused = False
         self.pause_button.description = "Pause"
 
-        # Run execution loop in a separate thread to keep UI responsive
-        threading.Thread(target=self._run_execution, daemon=True).start()
-
+        # Synchronous execution to avoid Matplotlib threading issues
+        # To keep UI responsive in Colab, we should use a thread, but the user
+        # specifically requested synchronous mode due to matplotlib issues.
+        self._run_execution()
     def _on_pause_click(self, b):
         """Callback for the 'Pause' button."""
         self.paused = not self.paused
@@ -309,54 +327,53 @@ class ColabGUI:
 
     def _run_execution(self):
         """Runs the execution loop."""
-        for i, target in enumerate(self.planned_targets):
-            if self.visited_mask[i]:
-                continue
+        try:
+            for i, target in enumerate(self.planned_targets):
+                if self.visited_mask[i]:
+                    continue
 
-            # Use current agent for execution
-            self.interface.env.set_goal(target)
-            self.interface.terminated = False
-            self.interface.truncated = False
+                # Use current agent for execution
+                self.interface.env.set_goal(target)
+                self.interface.terminated = False
+                self.interface.truncated = False
 
-            # While the agent is not at the target, keep taking steps
-            while True:
-                if not self.executing:
-                    return
-
-                while self.paused:
-                    time.sleep(0.1)
+                # While the agent is not at the target, keep taking steps
+                while True:
                     if not self.executing:
                         return
 
-                # Check if current position (estimated or actual) reached target
-                if self.knowledge_dropdown.value == "estimated" and self.interface.pf:
-                    curr_pos = tuple(
-                        self.interface.pf.get_estimated_position()["cell_pos"]
-                    )
-                else:
-                    curr_pos = tuple(self.interface.env.agent_pos)
+                    while self.paused:
+                        time.sleep(0.1)
+                        if not self.executing:
+                            return
 
-                logger.info(f"Target: {target}, Current Pos: {curr_pos}")
-                if curr_pos == target:
-                    break
+                    # Check if current position (estimated or actual) reached target
+                    if self.knowledge_dropdown.value == "estimated" and self.interface.pf:
+                        curr_pos = tuple(
+                            self.interface.pf.get_estimated_position()["cell_pos"]
+                        )
+                    else:
+                        curr_pos = tuple(self.interface.env.agent_pos)
 
-                # Perform one step using current agent settings
-                self._on_next_click(None)
-                time.sleep(0.5)  # Delay for visualization in Colab
+                    logger.info(f"Target: {target}, Current Pos: {curr_pos}")
+                    if curr_pos == target:
+                        break
 
-                if self.interface.is_terminated():
-                    logger.info(
-                        "Execution loop interrupted: environment terminated (caught by ghost?)."
-                    )
-                if self.interface.is_terminated():
-                    self.executing = False
-                    return
+                    # Perform one step using current agent settings
+                    self._on_next_click(None)
+                    time.sleep(0.5)  # Delay for visualization in Colab
 
-            self.visited_mask[i] = True
-            logger.info(f"Target {i+1} reached: {target}")
-            self._update_target_status()
+                    if self.interface.is_terminated():
+                        logger.info(
+                            "Execution loop interrupted: environment terminated (caught by ghost?)."
+                        )
+                        return
 
-        self.executing = False
+                self.visited_mask[i] = True
+                logger.info(f"Target {i+1} reached: {target}")
+                self._update_target_status()
+        finally:
+            self.executing = False
 
     def _on_next_click(self, b):
         """Callback for the 'Next Step' button."""
@@ -408,10 +425,12 @@ class ColabGUI:
     def _on_sensor_change(self, change):
         """Callback for the sensor selection dropdown."""
         self.interface.pf_sensor_mode = change["new"]
+        self._update_display()
 
     def _on_slip_type_change(self, change):
         """Callback for the slip type dropdown."""
         self.interface.env.slip_type = change["new"]
+        self._update_display()
 
     def _on_agent_change(self, change):
         """Callback for the agent behavior dropdown."""
@@ -431,10 +450,12 @@ class ColabGUI:
             self.agent = RandomPlayerAgent(
                 self.interface.get_action_space(), env=self.interface.env
             )
+        self._update_display()
 
     def _on_color_quality_change(self, change):
         """Callback for the color quality dropdown."""
         self.interface.env.color_sensor_quality = change["new"]
+        self._update_display()
 
     def _on_ghost_change(self, change):
         """Callback for the ghost behavior dropdown."""
@@ -444,9 +465,16 @@ class ColabGUI:
             self.interface.set_ghost_agent(MinimaxAgent)
         else:
             self.interface.set_ghost_agent(RandomGhostAgent)
+        self._update_display()
 
     def _update_display(self):
         """Updates the display with the latest environment state and plots."""
+        # Explicitly set particles in environment info for renderer
+        if self.interface.pf and self.interface.show_particles:
+            self.interface.env.info["particles"] = self.interface.pf.get_particles()
+            self.interface.env.info["show_particles"] = True
+        else:
+            self.interface.env.info.pop("show_particles", None)
         with self.output:
             clear_output(wait=True)
 
@@ -483,6 +511,10 @@ class ColabGUI:
             self.interface.env.info["agent_values"] = agent_values
             self.interface.env.info["ghost_values"] = ghost_values
 
+            # Ensure particles are set again right before rendering to be sure
+            if self.interface.pf and self.interface.show_particles:
+                self.interface.env.info["particles"] = self.interface.pf.get_particles()
+                self.interface.env.info["show_particles"] = True
             img = self.interface.env.render()
             logger.info(
                 f"ColabGUI: Display updated. Agent at {self.interface.env.agent_pos}"
@@ -561,7 +593,8 @@ class ColabGUI:
                     ax2.legend()
 
                 plt.tight_layout()
-                plt.show()
+                display(fig)
+                plt.close(fig)
 
             stats = self.interface.get_episode_stats()
             self.stats_label.value = (

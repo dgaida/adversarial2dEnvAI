@@ -56,3 +56,7 @@ Nutze bei Bedarf die Skills aus [dgaida/auto-version-action](https://github.com/
 ## 🧹 PR Preparation
 
 Lösche alle temporären Dateien (z. B. `.patch` Dateien), bevor du einen Pull Request erstellst. Das hält das Repository sauber.
+
+## ⚠️ Multithreading Warning
+
+*   **Matplotlib and Multithreading**: Avoid using multithreading for visualizations that involve Matplotlib (e.g., in `ColabGUI`), as it frequently causes display issues and instability in Jupyter/Colab environments. Use synchronous execution for rendering loops instead.
