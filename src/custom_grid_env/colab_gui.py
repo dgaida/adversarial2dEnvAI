@@ -47,6 +47,7 @@ class ColabGUI:
             slip_probability=slip_probability,
             use_particle_filter=True,
         )
+        self.interface.render_enabled = False
         self.agent = agent_class(
             self.interface.get_action_space(), env=self.interface.env
         )
@@ -314,6 +315,8 @@ class ColabGUI:
 
             # Use current agent for execution
             self.interface.env.set_goal(target)
+            self.interface.terminated = False
+            self.interface.truncated = False
 
             # While the agent is not at the target, keep taking steps
             while True:
@@ -342,16 +345,25 @@ class ColabGUI:
                 time.sleep(0.5)  # Delay for visualization in Colab
 
                 if self.interface.is_terminated():
+                    logger.info(
+                        "Execution loop interrupted: environment terminated (caught by ghost?)."
+                    )
+                if self.interface.is_terminated():
                     self.executing = False
                     return
 
             self.visited_mask[i] = True
+            logger.info(f"Target {i+1} reached: {target}")
             self._update_target_status()
 
         self.executing = False
 
     def _on_next_click(self, b):
         """Callback for the 'Next Step' button."""
+        if self.interface.is_terminated():
+            logger.info(
+                "Execution loop interrupted: environment terminated (caught by ghost?)."
+            )
         if self.interface.is_terminated():
             return
 
@@ -472,6 +484,9 @@ class ColabGUI:
             self.interface.env.info["ghost_values"] = ghost_values
 
             img = self.interface.env.render()
+            logger.info(
+                f"ColabGUI: Display updated. Agent at {self.interface.env.agent_pos}"
+            )
 
             if img is not None:
                 # Create a figure with two subplots: Grid and Probability Distribution
