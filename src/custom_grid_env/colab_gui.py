@@ -321,6 +321,22 @@ class ColabGUI:
         # specifically requested synchronous mode due to matplotlib issues.
         self._run_execution()
 
+    def _on_execute_click(self, b):
+        """Callback for the 'Execute' button."""
+        if not self.planned_targets:
+            return
+
+        if self.executing:
+            return
+
+        self.executing = True
+        self.paused = False
+        self.pause_button.description = "Pause"
+
+        # Synchronous execution to avoid Matplotlib threading issues
+        # To keep UI responsive in Colab, we should use a thread, but the user
+        # specifically requested synchronous mode due to matplotlib issues.
+        self._run_execution()
     def _on_pause_click(self, b):
         """Callback for the 'Pause' button."""
         self.paused = not self.paused
@@ -598,7 +614,8 @@ class ColabGUI:
                     ax2.legend()
 
                 plt.tight_layout()
-                plt.show()
+                display(fig)
+                plt.close(fig)
 
             stats = self.interface.get_episode_stats()
             self.stats_label.value = (
