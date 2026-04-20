@@ -1,12 +1,16 @@
 """GUI for the CustomGrid environment in Google Colab."""
 
 import os
+import time
+import re
+import json
+import threading
 import numpy as np
 import matplotlib.pyplot as plt
 import ipywidgets as widgets
 from IPython.display import display, clear_output
 from sklearn.neighbors import KernelDensity
-from typing import Type
+from typing import Type, List, Tuple, Dict, Any
 from .interface import AgentInterface
 from .agents.base_agent import Agent
 from .agents.random_player_agent import RandomPlayerAgent
@@ -44,18 +48,45 @@ class ColabGUI:
             self.interface.get_action_space(), env=self.interface.env
         )
         self.obs = self.interface.reset()
+        self.planner = TaskPlanner(self.interface.env)
 
-        # Widgets
+        # Planning & Execution State
+        self.planned_targets: List[Tuple[int, int]] = []
+        self.visited_mask: List[bool] = []
+        self.executing = False
+        self.paused = False
+
+        # Output Widgets
         self.output = widgets.Output()
+        self.llm_output_area = widgets.Textarea(
+            value="",
+            placeholder="LLM Response will appear here...",
+            description="LLM Answer:",
+            disabled=True,
+            layout=widgets.Layout(width="100%", height="100px"),
+        )
+        self.target_status_area = widgets.VBox(
+            [widgets.Label(value="No plan yet.")],
+            layout=widgets.Layout(border="1px solid gray", padding="5px", width="100%"),
+        )
+
+        # Action Buttons
         self.next_button = widgets.Button(
             description="Next Step", button_style="primary"
         )
         self.reset_button = widgets.Button(
             description="Reset Episode", button_style="warning"
         )
+        self.plan_button = widgets.Button(description="Plan", button_style="info")
+        self.execute_button = widgets.Button(
+            description="Execute", button_style="success"
+        )
+        self.pause_button = widgets.Button(description="Pause", button_style="danger")
+
+        # Configuration Widgets
         self.pf_toggle = widgets.Checkbox(value=True, description="Show Particles")
         self.deterministic_toggle = widgets.Checkbox(
-            value=False, description="Deterministic"
+            value=False, description="Deterministic (Movement only)"
         )
         self.use_ghost_toggle = widgets.Checkbox(value=True, description="Use Ghost")
 
@@ -127,40 +158,64 @@ class ColabGUI:
         )
         self.stats_label = widgets.Label(value="Steps: 0 | Total Reward: 0.0")
 
-        self.task_input = widgets.Text(
+        self.task_input = widgets.Textarea(
             value=(
-                "Besuche in optimaler Reihenfolge die folgenden drei Felder und kehre zum Ausgangsort zurück:"
-                "- das Feld in dem man Klaviermusik hört, "
-                "- das Feld wo man das Bild des Hundes sieht und Rockmusik hört "
+                "Besuche in optimaler Reihenfolge die folgenden drei Felder und kehre zum Ausgangsort zurück:\n"
+                "- das Feld in dem man Klaviermusik hört, \n"
+                "- das Feld wo man das Bild des Hundes sieht und Rockmusik hört \n"
                 "- das Feld mit dem Schriftzug 'Ziel'"
             ),
             placeholder="Task description",
             description="Task:",
-            layout=widgets.Layout(width="80%"),
-        )
-        self.plan_button = widgets.Button(
-            description="Plan & Execute", button_style="success"
+            layout=widgets.Layout(width="100%", height="100px"),
         )
 
-        self.planner = TaskPlanner(self.interface.env)
+        # Layout Grouping
+        ghost_box = widgets.VBox(
+            [
+                widgets.HTML("<b>Ghost Settings</b>"),
+                self.use_ghost_toggle,
+                self.ghost_dropdown,
+            ],
+            layout=widgets.Layout(border="1px solid lightgray", padding="5px"),
+        )
+        pf_uncertainty_box = widgets.VBox(
+            [
+                widgets.HTML("<b>Uncertainty & PF</b>"),
+                self.deterministic_toggle,
+                self.slip_type_dropdown,
+                self.pf_toggle,
+                self.sensor_dropdown,
+                self.color_quality_dropdown,
+            ],
+            layout=widgets.Layout(border="1px solid lightgray", padding="5px"),
+        )
+        agent_box = widgets.VBox(
+            [
+                widgets.HTML("<b>Agent Settings</b>"),
+                self.agent_dropdown,
+                self.knowledge_dropdown,
+            ],
+            layout=widgets.Layout(border="1px solid lightgray", padding="5px"),
+        )
 
-        # Layout
         self.controls = widgets.VBox(
             [
-                widgets.HBox([self.next_button, self.reset_button]),
-                widgets.HBox(
-                    [self.pf_toggle, self.deterministic_toggle, self.use_ghost_toggle]
-                ),
-                widgets.HBox([self.sensor_dropdown, self.slip_type_dropdown]),
-                widgets.HBox(
+                widgets.HBox([self.next_button, self.reset_button, self.stats_label]),
+                widgets.HBox([agent_box, ghost_box, pf_uncertainty_box]),
+                widgets.VBox(
                     [
-                        self.agent_dropdown,
-                        self.ghost_dropdown,
-                        self.color_quality_dropdown,
-                    ]
+                        widgets.HTML("<b>Task Planning</b>"),
+                        self.task_input,
+                        widgets.HBox(
+                            [self.plan_button, self.execute_button, self.pause_button]
+                        ),
+                        self.llm_output_area,
+                        widgets.HTML("<b>Planned Targets</b>"),
+                        self.target_status_area,
+                    ],
+                    layout=widgets.Layout(border="1px solid lightgray", padding="5px"),
                 ),
-                widgets.HBox([self.knowledge_dropdown, self.stats_label]),
-                widgets.HBox([self.task_input, self.plan_button]),
             ]
         )
 
@@ -168,6 +223,8 @@ class ColabGUI:
         self.next_button.on_click(self._on_next_click)
         self.reset_button.on_click(self._on_reset_click)
         self.plan_button.on_click(self._on_plan_click)
+        self.execute_button.on_click(self._on_execute_click)
+        self.pause_button.on_click(self._on_pause_click)
         self.pf_toggle.observe(self._on_pf_toggle_change, names="value")
         self.deterministic_toggle.observe(self._on_deterministic_change, names="value")
         self.use_ghost_toggle.observe(self._on_use_ghost_change, names="value")
@@ -194,36 +251,98 @@ class ColabGUI:
         self._update_display()
 
     def _on_plan_click(self, b):
-        """Callback for the 'Plan & Execute' button."""
-        with self.output:
-            task = self.task_input.value
-            print(f"Planning for task: {task}")
-            targets = self.planner.identify_targets(task)
-            if not targets:
-                print("Could not identify targets.")
-                return
+        """Callback for the 'Plan' button."""
+        task = self.task_input.value
+        self.llm_output_area.value = "Planning... please wait."
 
-            print(f"Identified targets: {targets}")
-            ordered_targets = self.planner.solve_tsp(
-                tuple(self.interface.env.agent_pos), targets
-            )
-            print(f"Optimal order: {ordered_targets}")
+        # Identify targets using LLM
+        targets, response = self.planner.identify_targets(task)
+        self.llm_output_area.value = response
 
-            # Execute task (full path including return to start)
-            full_targets = ordered_targets + [tuple(self.interface.env.start_pos)]
+        if not targets:
+            return
 
-            for target in full_targets:
-                print(f"Moving to target: {target}")
-                self.interface.env.set_goal(target)
-                current_pos = tuple(self.interface.env.agent_pos)
-                path = self.planner.get_path(current_pos, target)
-                for action in path:
-                    if self.interface.is_terminated():
-                        break
-                    self.obs, reward, done, info = self.interface.step(action)
-                    self._update_display()
-                if self.interface.is_terminated():
+        # Solve TSP
+        ordered_targets = self.planner.solve_tsp(
+            tuple(self.interface.env.agent_pos), targets
+        )
+
+        # Full targets: ordered targets + return to start
+        self.planned_targets = ordered_targets + [tuple(self.interface.env.start_pos)]
+        self.visited_mask = [False] * len(self.planned_targets)
+
+        self._update_target_status()
+        self._update_display()
+
+    def _update_target_status(self):
+        """Updates the target status visualization."""
+        labels = []
+        for i, target in enumerate(self.planned_targets):
+            status = "✅" if self.visited_mask[i] else "⭕"
+            name = "Start" if i == len(self.planned_targets) - 1 else f"Target {i+1}"
+            labels.append(widgets.Label(value=f"{status} {name}: {target}"))
+        self.target_status_area.children = labels
+
+    def _on_execute_click(self, b):
+        """Callback for the 'Execute' button."""
+        if not self.planned_targets:
+            return
+
+        if self.executing:
+            return
+
+        self.executing = True
+        self.paused = False
+        self.pause_button.description = "Pause"
+
+        # Run execution loop in a separate thread to keep UI responsive
+        threading.Thread(target=self._run_execution, daemon=True).start()
+
+    def _on_pause_click(self, b):
+        """Callback for the 'Pause' button."""
+        self.paused = not self.paused
+        self.pause_button.description = "Resume" if self.paused else "Pause"
+
+    def _run_execution(self):
+        """Runs the execution loop."""
+        for i, target in enumerate(self.planned_targets):
+            if self.visited_mask[i]:
+                continue
+
+            # Use current agent for execution
+            self.interface.env.set_goal(target)
+
+            # While the agent is not at the target, keep taking steps
+            while True:
+                if not self.executing:
+                    return
+
+                while self.paused:
+                    time.sleep(0.1)
+                    if not self.executing:
+                        return
+
+                # Check if current position (estimated or actual) reached target
+                if self.knowledge_dropdown.value == "estimated" and self.interface.pf:
+                    curr_pos = self.interface.pf.get_estimated_position()["cell_pos"]
+                else:
+                    curr_pos = tuple(self.interface.env.agent_pos)
+
+                if curr_pos == target:
                     break
+
+                # Perform one step using current agent settings
+                self._on_next_click(None)
+                time.sleep(0.5)  # Delay for visualization in Colab
+
+                if self.interface.is_terminated():
+                    self.executing = False
+                    return
+
+            self.visited_mask[i] = True
+            self._update_target_status()
+
+        self.executing = False
 
     def _on_next_click(self, b):
         """Callback for the 'Next Step' button."""
@@ -256,7 +375,11 @@ class ColabGUI:
 
     def _on_reset_click(self, b):
         """Callback for the 'Reset Episode' button."""
+        self.executing = False
         self.obs = self.interface.reset()
+        self.planned_targets = []
+        self.visited_mask = []
+        self.target_status_area.children = [widgets.Label(value="No plan yet.")]
         self._update_display()
 
     def _on_pf_toggle_change(self, change):

@@ -16,50 +16,52 @@ def planner():
 
 def test_identify_targets_standard_json(planner):
     planner.llm_client.chat_completion.return_value = "[[2, 2], [0, 4]]"
-    targets = planner.identify_targets("Visit piano and dog")
+    targets, response = planner.identify_targets("Visit piano and dog")
     assert targets == [(2, 2), (0, 4)]
+    assert response == "[[2, 2], [0, 4]]"
 
 
 def test_identify_targets_markdown_json(planner):
     planner.llm_client.chat_completion.return_value = "```json\n[[1, 1], [3, 3]]\n```"
-    targets = planner.identify_targets("test")
+    targets, response = planner.identify_targets("test")
     assert targets == [(1, 1), (3, 3)]
 
 
 def test_identify_targets_with_think_block(planner):
     # This currently fails based on user report
-    planner.llm_client.chat_completion.return_value = (
+    raw_response = (
         "<think>\nI should go to (2,2) and then (0,4)\n</think>\n[[2, 2], [0, 4]]"
     )
-    targets = planner.identify_targets("Visit piano and dog")
+    planner.llm_client.chat_completion.return_value = raw_response
+    targets, response = planner.identify_targets("Visit piano and dog")
     # If the current regex is r"\[\s*\[.*\]\s*\]" with re.DOTALL, it MIGHT pick it up if there's no other brackets.
     # But the user says it fails with "Expecting value: line 1 column 1 (char 0)".
     # This happens if json.loads() is called on something that isn't valid JSON.
     assert targets == [(2, 2), (0, 4)]
+    assert response == raw_response
 
 
 def test_identify_targets_with_unclosed_think(planner):
-    planner.llm_client.chat_completion.return_value = (
-        "<think>\nI am thinking...\n[[1, 1]]"
-    )
-    targets = planner.identify_targets("test")
+    raw_response = "<think>\nI am thinking...\n[[1, 1]]"
+    planner.llm_client.chat_completion.return_value = raw_response
+    targets, response = planner.identify_targets("test")
     assert targets == [(1, 1)]
 
 
 def test_identify_targets_mixed_text(planner):
-    planner.llm_client.chat_completion.return_value = (
-        "Here are the coordinates: [[0, 0], [1, 1]] Hope this helps!"
-    )
-    targets = planner.identify_targets("test")
+    raw_response = "Here are the coordinates: [[0, 0], [1, 1]] Hope this helps!"
+    planner.llm_client.chat_completion.return_value = raw_response
+    targets, response = planner.identify_targets("test")
     assert targets == [(0, 0), (1, 1)]
 
 
 def test_identify_targets_think_with_brackets(planner):
     # This should fail with current implementation
-    planner.llm_client.chat_completion.return_value = (
+    raw_response = (
         "<think>\nVisiting [[2, 2]] might be good.\n</think>\n[[2, 2], [0, 4]]"
     )
-    targets = planner.identify_targets("Visit piano and dog")
+    planner.llm_client.chat_completion.return_value = raw_response
+    targets, response = planner.identify_targets("Visit piano and dog")
     assert targets == [(2, 2), (0, 4)]
 
 
@@ -83,6 +85,6 @@ def test_identify_targets_user_truncated_response(planner):
         "Alternatively, visiting (2,2) first. From (0,2) to (2,2) is 2 steps. Then from (2,2) to (0,4): Up 2 rows and right 2 columns. Steps: 4. Then from (0,4) to (3,1): Down 3 rows and left 3 columns. Steps: 6. Then return to (0"
     )
     planner.llm_client.chat_completion.return_value = failed_response
-    targets = planner.identify_targets("some task")
+    targets, response = planner.identify_targets("some task")
     # It should return an empty list because no JSON array [[...]] was found
     assert targets == []
