@@ -593,7 +593,7 @@ class CustomGridEnv(gym.Env):
             )
 
             current_cell = self.grid[self.agent_pos[0], self.agent_pos[1]]
-            if self.agent_pos == self.ghost_pos:
+            if self.use_ghost and self.agent_pos == self.ghost_pos:
                 reward = float(self.get_reward_structure()["caught_by_ghost"])
                 terminated = True
                 info["caught_by_ghost"] = True
@@ -619,7 +619,7 @@ class CustomGridEnv(gym.Env):
         else:
             self.move_ghost(action)
             logger.debug(f"Ghost moved to {self.ghost_pos} via action {action}")
-            if self.agent_pos == self.ghost_pos:
+            if self.use_ghost and self.agent_pos == self.ghost_pos:
                 reward = float(self.get_reward_structure()["caught_by_ghost"])
                 terminated = True
                 info["caught_by_ghost"] = True
