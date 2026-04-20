@@ -577,6 +577,7 @@ class CustomGridEnv(gym.Env):
             actual_actions, slipped = self._apply_slip(action)
             for act in actual_actions:
                 self.agent_pos = self._move_entity(self.agent_pos, act)
+                logger.debug(f"Agent moved to {self.agent_pos} via action {act}")
 
             info["slipped"] = slipped
             info["intended_action"] = action_names[action]
@@ -615,6 +616,7 @@ class CustomGridEnv(gym.Env):
 
         else:
             self.move_ghost(action)
+            logger.debug(f"Ghost moved to {self.ghost_pos} via action {action}")
             if self.agent_pos == self.ghost_pos:
                 reward = float(self.get_reward_structure()["caught_by_ghost"])
                 terminated = True
