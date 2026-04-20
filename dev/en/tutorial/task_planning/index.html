@@ -1768,23 +1768,23 @@
 <h1 id="task-planning-llm-integration">Task Planning &amp; LLM Integration<a class="headerlink" href="#task-planning-llm-integration" title="Permanent link">&para;</a></h1>
 <p>This tutorial describes how the CustomGrid environment uses natural language to understand complex tasks, identify targets, and navigate to them efficiently.</p>
 <h2 id="workflow-overview">Workflow Overview<a class="headerlink" href="#workflow-overview" title="Permanent link">&para;</a></h2>
-<p>The task planning process consists of three main steps:
-1. <strong>Target Identification</strong>  : An LLM (Large Language Model) extracts coordinates from a natural language description.
-2. <strong>Sequence Optimization</strong>  : A TSP (Traveling Salesperson Problem) solver determines the shortest route to visit all targets.
-3. <strong>Path Planning</strong>  : Value Iteration calculates the optimal moves to reach each target sequentially.</p>
+<p>The task planning process consists of three main steps:<br />
+1. <strong>Target Identification</strong>  : An LLM (Large Language Model) extracts coordinates from a natural language description.<br />
+2. <strong>Sequence Optimization</strong>  : A TSP (Traveling Salesperson Problem) solver determines the shortest route to visit all targets.<br />
+3. <strong>Path Planning</strong>  : Value Iteration calculates the optimal moves to reach each target sequentially.  </p>
 <h2 id="1-target-identification-with-llms">1. Target Identification with LLMs<a class="headerlink" href="#1-target-identification-with-llms" title="Permanent link">&para;</a></h2>
 <p>The <code>TaskPlanner</code> class uses an LLM (defaulting via Groq) to interpret user instructions such as <em>"Visit the dog first, then the flowers"</em>.</p>
 <h3 id="grid-description">Grid Description<a class="headerlink" href="#grid-description" title="Permanent link">&para;</a></h3>
-<p>To let the LLM know where objects are located, the environment generates a text description of the current grid (<code>get_grid_description()</code>). Items are mapped as follows:
-- <strong>dog</strong>: "ein Bild eines Hundes" (an image of a dog)
-- <strong>flower</strong>: "eine Blume" (a flower)
-- <strong>two_flowers</strong>: "zwei Blumen" (two flowers)</p>
+<p>To let the LLM know where objects are located, the environment generates a text description of the current grid (<code>get_grid_description()</code>). Items are mapped as follows:<br />
+- <strong>dog</strong>: "ein Bild eines Hundes" (an image of a dog)<br />
+- <strong>flower</strong>: "eine Blume" (a flower)<br />
+- <strong>two_flowers</strong>: "zwei Blumen" (two flowers)  </p>
 <h3 id="prompting-extraction">Prompting &amp; Extraction<a class="headerlink" href="#prompting-extraction" title="Permanent link">&para;</a></h3>
 <p>The LLM receives a system prompt instructing it to return <strong>only</strong> a JSON array of coordinates (e.g., <code>[[0, 1], [2, 3]]</code>).</p>
-<p>Since modern models often output "reasoning" in <code>&lt;think&gt;</code> tags, the <code>TaskPlanner</code> includes robust cleaning logic:
-- Removing <code>&lt;think&gt;</code> blocks using regex.
-- Extracting the JSON array from the remaining text.
-- Validating the format to avoid parsing errors.</p>
+<p>Since modern models often output "reasoning" in <code>&lt;think&gt;</code> tags, the <code>TaskPlanner</code> includes robust cleaning logic:<br />
+- Removing <code>&lt;think&gt;</code> blocks using regex.<br />
+- Extracting the JSON array from the remaining text.<br />
+- Validating the format to avoid parsing errors.  </p>
 <h2 id="2-route-optimization-tsp">2. Route Optimization (TSP)<a class="headerlink" href="#2-route-optimization-tsp" title="Permanent link">&para;</a></h2>
 <p>Once the target coordinates are identified, the most efficient visiting order must be found.</p>
 <h3 id="distance-matrix">Distance Matrix<a class="headerlink" href="#distance-matrix" title="Permanent link">&para;</a></h3>
@@ -1794,20 +1794,20 @@
 <h2 id="3-path-planning-via-value-iteration">3. Path Planning via Value Iteration<a class="headerlink" href="#3-path-planning-via-value-iteration" title="Permanent link">&para;</a></h2>
 <p>To reach a specific target in the grid, <strong>Value Iteration</strong> is employed.</p>
 <ul>
-<li><strong>State Values</strong>: Each cell receives a value based on its distance to the target. The target itself has the highest value (+100).</li>
-<li><strong>Iterative Updates</strong>: Values are updated until they converge (<code>theta &lt; 0.0001</code>).</li>
-<li><strong>Action Selection</strong>: In each step, the agent chooses the action leading to the adjacent cell with the highest value.</li>
+<li><strong>State Values</strong>: Each cell receives a value based on its distance to the target. The target itself has the highest value (+100).  </li>
+<li><strong>Iterative Updates</strong>: Values are updated until they converge (<code>theta &lt; 0.0001</code>).  </li>
+<li><strong>Action Selection</strong>: In each step, the agent chooses the action leading to the adjacent cell with the highest value.  </li>
 </ul>
 <p>This approach is robust to the environment's walls and guarantees the shortest path to the target.</p>
 <h2 id="integration-in-colab-gui">Integration in Colab GUI<a class="headerlink" href="#integration-in-colab-gui" title="Permanent link">&para;</a></h2>
-<p>In the <code>ColabGUI</code>, this process is split into two steps:
-1. <strong>Plan</strong>  : The LLM is called, targets are visualized, and the optimal tour is displayed as a checklist.
-2. <strong>Execute</strong>  : The agent works through the list of targets one by one, with progress marked in real-time in the GUI.</p>
+<p>In the <code>ColabGUI</code>, this process is split into two steps:<br />
+1. <strong>Plan</strong>  : The LLM is called, targets are visualized, and the optimal tour is displayed as a checklist.<br />
+2. <strong>Execute</strong>  : The agent works through the list of targets one by one, with progress marked in real-time in the GUI.  </p>
 <h3 id="exercise-for-students">Exercise for Students<a class="headerlink" href="#exercise-for-students" title="Permanent link">&para;</a></h3>
 <ol>
-<li><strong>Ambiguity</strong>  : Enter an unclear instruction (e.g., "Go to something beautiful"). How does the LLM react based on the grid description?</li>
-<li><strong>Complexity</strong>  : Create a task with 4-5 targets. Observe how the TSP solver changes the sequence compared to the order of mention in the text.</li>
-<li><strong>Obstacles</strong>  : Place walls so that a direct path is blocked. Verify that Value Iteration still finds the optimal detour.</li>
+<li><strong>Ambiguity</strong>  : Enter an unclear instruction (e.g., "Go to something beautiful"). How does the LLM react based on the grid description?  </li>
+<li><strong>Complexity</strong>  : Create a task with 4-5 targets. Observe how the TSP solver changes the sequence compared to the order of mention in the text.  </li>
+<li><strong>Obstacles</strong>  : Place walls so that a direct path is blocked. Verify that Value Iteration still finds the optimal detour.  </li>
 </ol>
 
 
