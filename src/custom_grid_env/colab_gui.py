@@ -287,6 +287,21 @@ class ColabGUI:
             labels.append(widgets.Label(value=f"{status} {name}: {target}"))
         self.target_status_area.children = labels
 
+    def _on_execute_click_threaded(self, b):
+        """Callback for the 'Execute' button (threaded version)."""
+        if not self.planned_targets:
+            return
+
+        if self.executing:
+            return
+
+        self.executing = True
+        self.paused = False
+        self.pause_button.description = "Pause"
+
+        # Run execution loop in a separate thread
+        threading.Thread(target=self._run_execution, daemon=True).start()
+
     def _on_execute_click(self, b):
         """Callback for the 'Execute' button."""
         if not self.planned_targets:
