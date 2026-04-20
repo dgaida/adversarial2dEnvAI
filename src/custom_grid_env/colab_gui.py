@@ -13,6 +13,7 @@ from sklearn.neighbors import KernelDensity
 from typing import Type, List, Tuple, Dict, Any
 from .interface import AgentInterface
 from .logger import get_logger
+
 logger = get_logger(__name__)
 from .agents.base_agent import Agent
 from .agents.random_player_agent import RandomPlayerAgent
@@ -326,7 +327,9 @@ class ColabGUI:
 
                 # Check if current position (estimated or actual) reached target
                 if self.knowledge_dropdown.value == "estimated" and self.interface.pf:
-                    curr_pos = tuple(self.interface.pf.get_estimated_position()["cell_pos"])
+                    curr_pos = tuple(
+                        self.interface.pf.get_estimated_position()["cell_pos"]
+                    )
                 else:
                     curr_pos = tuple(self.interface.env.agent_pos)
 
