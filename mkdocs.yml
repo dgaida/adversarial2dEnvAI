@@ -99,6 +99,7 @@ nav:
       - CNN Training: tutorial/cnn.md
       - Particle Filter: tutorial/particle_filter.md
       - Adversarial Search: tutorial/adversarial_search.md
+      - Task Planning: tutorial/task_planning.md
   - Usage:
       - Environment: usage/environment.md
       - Gameplay: usage/gameplay.md
