@@ -54,7 +54,7 @@ class TaskPlanner:
         grid_desc = self.env.get_grid_description()
 
         system_prompt = (
-            "Du bist ein hilfreicher Assistent, der Navigationsaufgaben in einem 4x5 Grid interpretiert. Deine einzige Aufgabe ist es, die Koordinaten der im Text genannten Felder zu identifizieren. Plane KEINE optimale Tour und ändere NICHT die Reihenfolge der Felder. Gib die Koordinaten genau in der Reihenfolge zurück, in der sie in der Aufgabenstellung erscheinen. Versuche NICHT, den Pfad zu optimieren oder den Ausgangsort einzubeziehen, sofern er nicht explizit als zu besuchendes Feld genannt wurde. "
+            "Du bist ein hilfreicher Assistent, der Navigationsaufgaben in einem 4x5 Grid interpretiert. Deine einzige Aufgabe ist es, die Koordinaten der im Text genannten Felder zu identifizieren. Ein nachgelagerter TSP-Solver wird die optimale Reihenfolge berechnen, daher musst du die Felder lediglich in der Reihenfolge ihrer Nennung auflisten. Plane KEINE optimale Tour und ändere NICHT die Reihenfolge der Felder. Gib die Koordinaten genau in der Reihenfolge zurück, in der sie in der Aufgabenstellung erscheinen. Versuche NICHT, den Pfad zu optimieren oder den Ausgangsort einzubeziehen, sofern er nicht explizit als zu besuchendes Feld genannt wurde. "
             "Hier ist die Beschreibung des Grids:\n"
             f"{grid_desc}\n"
             "Gib die Koordinaten der zu besuchenden Felder in der Reihenfolge zurück, "
