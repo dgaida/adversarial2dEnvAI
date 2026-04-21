@@ -1,5 +1,6 @@
 """GUI for the CustomGrid environment in Google Colab."""
 
+import asyncio
 import os
 import time
 import threading
@@ -314,17 +315,15 @@ class ColabGUI:
         self.paused = False
         self.pause_button.description = "Pause"
 
-        # Synchronous execution to avoid Matplotlib threading issues
-        # To keep UI responsive in Colab, we should use a thread, but the user
-        # specifically requested synchronous mode due to matplotlib issues.
-        self._run_execution()
+        # Use asyncio to avoid blocking the kernel while remaining on the main thread
+        asyncio.create_task(self._run_execution())
 
     def _on_pause_click(self, b):
         """Callback for the 'Pause' button."""
         self.paused = not self.paused
         self.pause_button.description = "Resume" if self.paused else "Pause"
 
-    def _run_execution(self):
+    async def _run_execution(self):
         """Runs the execution loop."""
         try:
             for i, target in enumerate(self.planned_targets):
@@ -342,7 +341,7 @@ class ColabGUI:
                         return
 
                     while self.paused:
-                        time.sleep(0.1)
+                        await asyncio.sleep(0.1)
                         if not self.executing:
                             return
 
@@ -363,7 +362,7 @@ class ColabGUI:
 
                     # Perform one step using current agent settings
                     self._on_next_click(None)
-                    time.sleep(0.5)  # Delay for visualization in Colab
+                    await asyncio.sleep(0.5)  # Delay for visualization in Colab
 
                     if self.interface.is_terminated():
                         stats = self.interface.get_episode_stats()
@@ -484,14 +483,16 @@ class ColabGUI:
         agent_values = None
         ghost_values = None
 
-        if isinstance(self.agent, AdversarialAgent):
+        if isinstance(self.agent, (AdversarialAgent, ValueIterationAgent)):
             agent_values = np.zeros((self.interface.env.rows, self.interface.env.cols))
             for r in range(self.interface.env.rows):
                 for c in range(self.interface.env.cols):
-                    agent_values[r, c] = self.agent.get_value(
-                        [r, c], self.interface.env.ghost_pos
-                    )
-
+                    if isinstance(self.agent, AdversarialAgent):
+                        agent_values[r, c] = self.agent.get_value(
+                            [r, c], self.interface.env.ghost_pos
+                        )
+                    else:
+                        agent_values[r, c] = self.agent.get_value((r, c))
         ghost_agent = self.interface._ghost_agent
         if isinstance(ghost_agent, AdversarialAgent):
             ghost_values = np.zeros((self.interface.env.rows, self.interface.env.cols))
