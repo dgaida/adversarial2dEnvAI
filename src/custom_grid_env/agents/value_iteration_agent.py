@@ -1,6 +1,7 @@
 """Agent that uses Value Iteration to find the optimal path to the goal."""
 
-from typing import Dict, Any
+from typing import Dict, Any, Tuple, Optional
+import numpy as np
 import gymnasium as gym
 from .base_agent import BaseAgent
 
@@ -14,6 +15,20 @@ class ValueIterationAgent(BaseAgent):
     def __init__(self, action_space: gym.spaces.Space, **kwargs: Any):
         super().__init__(action_space, **kwargs)
         self.planner = None
+        self.V: Optional[np.ndarray] = None
+
+    def get_value(self, state: Tuple[int, int]) -> float:
+        """Returns the value of a state.
+
+        Args:
+            state (tuple): (row, col) coordinates.
+
+        Returns:
+            float: The value of the state.
+        """
+        if self.V is not None:
+            return float(self.V[state[0], state[1]])
+        return 0.0
 
     def get_action(self, observation: Dict[str, Any]) -> int:
         """Returns the best action based on Value Iteration.
@@ -51,7 +66,8 @@ class ValueIterationAgent(BaseAgent):
 
         if self.planner is None or self.planner.env != self.env:
             self.planner = TaskPlanner(self.env)
-        V = self.planner.value_iteration(goal_pos)
-        action = self.planner.get_optimal_action(current_pos, V)
+
+        self.V = self.planner.value_iteration(goal_pos)
+        action = self.planner.get_optimal_action(current_pos, self.V)
 
         return action
