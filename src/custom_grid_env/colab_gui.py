@@ -1,6 +1,5 @@
 """GUI for the CustomGrid environment in Google Colab."""
 
-import asyncio
 import os
 import time
 import threading
@@ -315,15 +314,15 @@ class ColabGUI:
         self.paused = False
         self.pause_button.description = "Pause"
 
-        # Use asyncio to avoid blocking the kernel while remaining on the main thread
-        asyncio.create_task(self._run_execution())
+        # Synchronous execution to avoid Matplotlib threading issues
+        self._run_execution()
 
     def _on_pause_click(self, b):
         """Callback for the 'Pause' button."""
         self.paused = not self.paused
         self.pause_button.description = "Resume" if self.paused else "Pause"
 
-    async def _run_execution(self):
+    def _run_execution(self):
         """Runs the execution loop."""
         try:
             for i, target in enumerate(self.planned_targets):
@@ -341,7 +340,7 @@ class ColabGUI:
                         return
 
                     while self.paused:
-                        await asyncio.sleep(0.1)
+                        time.sleep(0.1)
                         if not self.executing:
                             return
 
@@ -362,7 +361,7 @@ class ColabGUI:
 
                     # Perform one step using current agent settings
                     self._on_next_click(None)
-                    await asyncio.sleep(0.5)  # Delay for visualization in Colab
+                    time.sleep(0.5)  # Delay for visualization in Colab
 
                     if self.interface.is_terminated():
                         stats = self.interface.get_episode_stats()

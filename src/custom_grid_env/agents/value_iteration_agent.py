@@ -16,6 +16,17 @@ class ValueIterationAgent(BaseAgent):
         super().__init__(action_space, **kwargs)
         self.planner = None
         self.V: Optional[np.ndarray] = None
+        self._last_goal: Optional[Tuple[int, int]] = None
+
+    def _find_goal(self) -> Optional[Tuple[int, int]]:
+        """Finds the goal position in the environment."""
+        if self.env is None:
+            return None
+        for r in range(self.env.rows):
+            for c in range(self.env.cols):
+                if self.env.grid[r, c]["is_goal"]:
+                    return (r, c)
+        return None
 
     def get_value(self, state: Tuple[int, int]) -> float:
         """Returns the value of a state.
@@ -26,6 +37,14 @@ class ValueIterationAgent(BaseAgent):
         Returns:
             float: The value of the state.
         """
+        goal_pos = self._find_goal()
+        if goal_pos != self._last_goal and goal_pos is not None:
+            from ..planner import TaskPlanner
+            if self.planner is None or self.planner.env != self.env:
+                self.planner = TaskPlanner(self.env)
+            self.V = self.planner.value_iteration(goal_pos)
+            self._last_goal = goal_pos
+
         if self.V is not None:
             return float(self.V[state[0], state[1]])
         return 0.0
@@ -48,26 +67,17 @@ class ValueIterationAgent(BaseAgent):
         else:
             current_pos = tuple(self.env.agent_pos)
 
-        # Find the goal position
-        goal_pos = None
-        for r in range(self.env.rows):
-            for c in range(self.env.cols):
-                if self.env.grid[r, c]["is_goal"]:
-                    goal_pos = (r, c)
-                    break
-            if goal_pos:
-                break
-
+        goal_pos = self._find_goal()
         if goal_pos is None or current_pos == goal_pos:
             return 0  # Stay or default action
 
-        # Use TaskPlanner's value iteration logic or similar
-        from ..planner import TaskPlanner
+        if goal_pos != self._last_goal:
+            from ..planner import TaskPlanner
+            if self.planner is None or self.planner.env != self.env:
+                self.planner = TaskPlanner(self.env)
+            self.V = self.planner.value_iteration(goal_pos)
+            self._last_goal = goal_pos
 
-        if self.planner is None or self.planner.env != self.env:
-            self.planner = TaskPlanner(self.env)
-
-        self.V = self.planner.value_iteration(goal_pos)
         action = self.planner.get_optimal_action(current_pos, self.V)
 
         return action
