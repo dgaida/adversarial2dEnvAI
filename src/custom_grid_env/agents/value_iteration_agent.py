@@ -40,6 +40,7 @@ class ValueIterationAgent(BaseAgent):
         goal_pos = self._find_goal()
         if goal_pos != self._last_goal and goal_pos is not None:
             from ..planner import TaskPlanner
+
             if self.planner is None or self.planner.env != self.env:
                 self.planner = TaskPlanner(self.env)
             self.V = self.planner.value_iteration(goal_pos)
@@ -73,6 +74,7 @@ class ValueIterationAgent(BaseAgent):
 
         if goal_pos != self._last_goal:
             from ..planner import TaskPlanner
+
             if self.planner is None or self.planner.env != self.env:
                 self.planner = TaskPlanner(self.env)
             self.V = self.planner.value_iteration(goal_pos)
