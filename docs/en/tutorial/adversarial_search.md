@@ -63,7 +63,7 @@ Both agents use an internal heuristic function:
 ### Interactive Demo
 
 Use the `Colab_GUI_Demo` notebook to compare the agents live:
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Colab_GUI_Demo.ipynb)
+[![Open In Colab](../../assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Colab_GUI_Demo.ipynb)
 
 ### Exercises for Students:  
 1. **Comparison**: Set the search depth to 3 and compare the survival rates of Minimax and Expectimax against a `ChaseGhostAgent`.  

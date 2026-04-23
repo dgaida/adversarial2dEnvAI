@@ -36,9 +36,9 @@ Erleben Sie die Umgebung direkt in Ihrem Browser:
 
 | Notebook | Beschreibung | Link |
 | :--- | :--- | :--- |
-| **Interaktive GUI** | Vollständiges Dashboard mit Sensoren und PF-Visualisierung. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Colab_GUI_Demo.ipynb) |
-| **Umgebungs-Demo** | Grundlegende programmatische Interaktion und API-Durchgang. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Environment_Demo.ipynb) |
-| **CNN-Training** | Tutorial zum Trainieren des Vision-Modells. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/CNN_Training.ipynb) |
+| **Interaktive GUI** | Vollständiges Dashboard mit Sensoren und PF-Visualisierung. | [![Open In Colab](../assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Colab_GUI_Demo.ipynb) |
+| **Umgebungs-Demo** | Grundlegende programmatische Interaktion und API-Durchgang. | [![Open In Colab](../assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Environment_Demo.ipynb) |
+| **CNN-Training** | Tutorial zum Trainieren des Vision-Modells. | [![Open In Colab](../assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/CNN_Training.ipynb) |
 
 ## 🚀 Schnellstart
 

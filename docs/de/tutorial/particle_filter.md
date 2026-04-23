@@ -48,4 +48,4 @@ Durch diese Kombination kann der Agent seine Position auch dann bestimmen, wenn 
 ### Interaktive Demo
 
 Testen Sie den Partikelfilter direkt in Google Colab:
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Colab_GUI_Demo.ipynb)
+[![Open In Colab](../../assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Colab_GUI_Demo.ipynb)
