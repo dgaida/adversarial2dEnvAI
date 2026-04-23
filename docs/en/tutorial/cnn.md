@@ -14,7 +14,7 @@ The process consists of three main steps:
 ### Interactive Learning
 
 You can follow this tutorial interactively using Google Colab:
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/CNN_Training.ipynb)
+[![Open In Colab](../../assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/CNN_Training.ipynb)
 
 ## 1. Data Generation
 

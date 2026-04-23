@@ -63,7 +63,7 @@ Beide Agenten verwenden eine interne Heuristik-Funktion:
 ### Interaktives Ausprobieren
 
 Nutzen Sie das `Colab_GUI_Demo` Notebook, um die Agenten live zu vergleichen:
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Colab_GUI_Demo.ipynb)
+[![Open In Colab](../../assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Colab_GUI_Demo.ipynb)
 
 ### Übungen für Studierende:  
 1. **Vergleich**: Stellen Sie die Suchtiefe auf 3 und vergleichen Sie das Überlebensvermögen von Minimax und Expectimax gegen einen `ChaseGhostAgent`.  
