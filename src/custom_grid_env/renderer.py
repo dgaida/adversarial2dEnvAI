@@ -177,7 +177,7 @@ class PygameRenderer:
             )
             surface.blit(text, text_rect)
 
-        if cell["items"] and not cell["is_goal"] and not cell["is_start"]:
+        if cell["items"]:
             item_y_offset = 0
             note_offset = 0
             for item in cell["items"]:
@@ -579,7 +579,7 @@ class PygameRenderer:
             bang_text = self.font.render("!", True, self.colors["red"])
             self.screen.blit(bang_text, (x - 5, y - 15))
         # Draw particles if available
-        if "particles" in info and info.get("show_particles", True):
+        if "particles" in info and info.get("show_particles", False):
             self._draw_particles(info["particles"])
 
         self._draw_info_panel(
