@@ -385,6 +385,30 @@
   </span>
 </a>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorial/value_iteration/">
+<span class="md-ellipsis">
+    
+  
+    Value Iteration
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorial/q_learning/">
+<span class="md-ellipsis">
+    
+  
+    Q-Learning
+  
+
+    
+  </span>
+</a>
+</li>
 </ul>
 </nav>
 </li>
@@ -799,14 +823,14 @@
     PF -.-&gt; Interface
 </div>
 <h2 id="vollstandiger-workflow-zur-aufgabenerfullung">Vollständiger Workflow zur Aufgabenerfüllung<a class="headerlink" href="#vollstandiger-workflow-zur-aufgabenerfullung" title="Permanent link">¶</a></h2>
-<p>Das folgende Diagramm zeigt den kompletten Workflow, wie verschiedene Module zusammenarbeiten, um eine Benutzeraufgabe (z. B. per Sprache) in Aktionen des Agenten umzusetzen. Dies beinhaltet auch geplante zukünftige Module wie <strong>Speech2Text</strong> und den <strong>Task Planner</strong>.</p>
+<p>Das folgende Diagramm zeigt den kompletten Workflow, wie verschiedene Module zusammenarbeiten, um eine Benutzeraufgabe (z. B. per Sprache) in Aktionen des Agenten umzusetzen.</p>
 <p><div class="mermaid">graph TD
     %% Input Module
     User([Benutzer]) -- "Sprachbefehl / Text" --&gt; Input{Eingabe-Schnittstelle}
 
     subgraph "Aufgabenverständnis &amp; Planung"
-        S2T[Speech2Text Modul *] -- "Transkript" --&gt; NLP[NLP / LLM Parser *]
-        NLP -- "Gelistete Ziele" --&gt; Planner[Task Planner / TSP Solver *]
+        S2T[Speech2Text Modul *] -- "Transkript" --&gt; NLP[NLP / LLM Parser]
+        NLP -- "Gelistete Ziele" --&gt; Planner[Task Planner / TSP Solver]
     end
 
     Input -- "Audio" --&gt; S2T
@@ -842,7 +866,7 @@
     Renderer -- "Visualisierung" --&gt; User
 
     classDef future fill:#f9f,stroke:#333,stroke-dasharray: 5 5;
-    class S2T,NLP,Planner,Audio future;
+    class S2T,Audio future;
 
     linkStyle default stroke:#333,stroke-width:2px;
 </div>
@@ -881,12 +905,16 @@
     class ExpectimaxAgent
     class ChaseGhostAgent
     class RandomGhostAgent
+    class ValueIterationAgent
+    class QLearningAgent
 
     BaseAgent ..|&gt; Agent : implements
     MinimaxAgent --|&gt; BaseAgent : inherits
     ExpectimaxAgent --|&gt; BaseAgent : inherits
     ChaseGhostAgent --|&gt; BaseAgent : inherits
     RandomGhostAgent --|&gt; BaseAgent : inherits
+    ValueIterationAgent --|&gt; BaseAgent : inherits
+    QLearningAgent --|&gt; BaseAgent : inherits
 </interface></div>
 </article>
 </div>

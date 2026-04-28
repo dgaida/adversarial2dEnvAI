@@ -762,6 +762,62 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/value_iteration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Value Iteration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/q_learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Q-Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1436,10 +1492,21 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#qualitatssicherung" class="md-nav__link">
+  <a href="#api-abdeckung-docstrings" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Qualitätssicherung
+        API-Abdeckung (Docstrings)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#status-ubersicht" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Status-Übersicht
       
     </span>
   </a>
@@ -1481,10 +1548,21 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#qualitatssicherung" class="md-nav__link">
+  <a href="#api-abdeckung-docstrings" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Qualitätssicherung
+        API-Abdeckung (Docstrings)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#status-ubersicht" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Status-Übersicht
       
     </span>
   </a>
@@ -1525,34 +1603,29 @@
 
 
 <h1 id="dokumentations-metriken">Dokumentations-Metriken<a class="headerlink" href="#dokumentations-metriken" title="Permanent link">&para;</a></h1>
-<p>Diese Seite visualisiert die Qualität und den Status unserer Dokumentation.</p>
-<table>
-<thead>
-<tr>
-<th>Metrik</th>
-<th>Status</th>
-<th>Quelle</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>API Doc Abdeckung</td>
-<td><img alt="interrogate" src="../assets/interrogate.svg" /></td>
-<td><code>interrogate</code></td>
-</tr>
-<tr>
-<td>Build Status</td>
-<td><img alt="Tests" src="https://github.com/dgaida/adversarial2dEnvAI/actions/workflows/tests.yml/badge.svg" /></td>
-<td>GitHub Actions</td>
-</tr>
-</tbody>
-</table>
-<h2 id="qualitatssicherung">Qualitätssicherung<a class="headerlink" href="#qualitatssicherung" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>Docstring Abdeckung</strong>: Muss über 95% liegen.  </li>
-<li><strong>Link Check</strong>: Alle internen und externen Links werden bei jedem PR geprüft.  </li>
-<li><strong>Linting</strong>: Markdown-Dateien werden auf Formatierungsfehler geprüft.  </li>
-</ul>
+<p>Diese Seite zeigt Qualitätsmetriken für die Dokumentation und den Code.</p>
+<h2 id="api-abdeckung-docstrings">API-Abdeckung (Docstrings)<a class="headerlink" href="#api-abdeckung-docstrings" title="Permanent link">&para;</a></h2>
+<p><img alt="interrogate" src="../assets/interrogate.svg" /></p>
+<h2 id="status-ubersicht">Status-Übersicht<a class="headerlink" href="#status-ubersicht" title="Permanent link">&para;</a></h2>
+<div id="metrics-dashboard">
+  Lade Metriken...
+</div>
+
+<script>
+fetch('../assets/metrics.json')
+  .then(response => response.json())
+  .then(data => {
+    const dashboard = document.getElementById('metrics-dashboard');
+    dashboard.innerHTML = `
+      <table>
+        <tr><td>Letzter CI-Lauf</td><td>${new Date(data.last_run).toLocaleString()}</td></tr>
+      </table>
+    `;
+  })
+  .catch(err => {
+    document.getElementById('metrics-dashboard').innerText = 'Metriken aktuell nicht verfügbar.';
+  });
+</script>
 
 
 

@@ -86,7 +86,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#docstring-standard" class="md-skip">
+        <a href="#docstring-style-guide" class="md-skip">
           Zum Inhalt
         </a>
       
@@ -764,6 +764,62 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/value_iteration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Value Iteration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/q_learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Q-Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1306,10 +1362,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#abdeckung" class="md-nav__link">
+  <a href="#regeln" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Abdeckung
+        Regeln
       
     </span>
   </a>
@@ -1508,10 +1564,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#abdeckung" class="md-nav__link">
+  <a href="#regeln" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Abdeckung
+        Regeln
       
     </span>
   </a>
@@ -1551,8 +1607,8 @@
   
 
 
-<h1 id="docstring-standard">Docstring Standard<a class="headerlink" href="#docstring-standard" title="Permanent link">&para;</a></h1>
-<p>Wir verwenden den <strong>Google Style Guide</strong> für alle Docstrings im Projekt. Dies gewährleistet eine konsistente API-Dokumentation.</p>
+<h1 id="docstring-style-guide">Docstring Style Guide<a class="headerlink" href="#docstring-style-guide" title="Permanent link">&para;</a></h1>
+<p>In diesem Projekt verwenden wir den <strong>Google Style</strong> für Docstrings. Dies ermöglicht eine automatische Generierung der Dokumentation mit <code>mkdocstrings</code>.</p>
 <h2 id="beispiel">Beispiel<a class="headerlink" href="#beispiel" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">example_function</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Kurze Einzeilen-Beschreibung.</span>
@@ -1569,15 +1625,15 @@
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="sd">    Raises:</span>
 <a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="sd">        ValueError: Wann dieser Fehler auftritt.</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="sd">    Example:</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="sd">        &gt;&gt;&gt; example_function(42)</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="sd">        True</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="k">return</span> <span class="kc">True</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="k">return</span> <span class="kc">True</span>
 </code></pre></div>
-<h2 id="abdeckung">Abdeckung<a class="headerlink" href="#abdeckung" title="Permanent link">&para;</a></h2>
-<p>Die Einhaltung wird automatisch mit <code>interrogate</code> geprüft. Eine Abdeckung von mindestens 95% ist erforderlich.</p>
+<h2 id="regeln">Regeln<a class="headerlink" href="#regeln" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Jede öffentliche Klasse und Methode <strong>muss</strong> einen Docstring haben.</li>
+<li>Verwende <code>interrogate</code>, um die Abdeckung zu prüfen.</li>
+<li>Dokumentiere alle Parameter und Rückgabewerte mit Typen.</li>
+</ul>
 
 
 

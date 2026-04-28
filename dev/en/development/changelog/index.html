@@ -766,6 +766,62 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/value_iteration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Value Iteration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/q_learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Q-Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1333,30 +1389,13 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Commit Message Format">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#types" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Types
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
-  <a href="#generation" class="md-nav__link">
+  <a href="#automation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Generation
+        Automation
       
     </span>
   </a>
@@ -1524,30 +1563,13 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Commit Message Format">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#types" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Types
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
-  <a href="#generation" class="md-nav__link">
+  <a href="#automation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Generation
+        Automation
       
     </span>
   </a>
@@ -1588,22 +1610,16 @@
 
 
 <h1 id="changelog-workflow">Changelog Workflow<a class="headerlink" href="#changelog-workflow" title="Permanent link">&para;</a></h1>
-<p>We use <strong>Conventional Commits</strong> and <strong>git-cliff</strong> to automatically generate our changelog.</p>
+<p>We use <strong>Conventional Commits</strong> and <strong>git-cliff</strong> to automatically maintain our changelog.</p>
 <h2 id="commit-message-format">Commit Message Format<a class="headerlink" href="#commit-message-format" title="Permanent link">&para;</a></h2>
-<p>Messages should follow this format:
+<p>Messages should follow the scheme:
 <code>&lt;type&gt;(&lt;scope&gt;): &lt;description&gt;</code></p>
-<h3 id="types">Types<a class="headerlink" href="#types" title="Permanent link">&para;</a></h3>
-<ul>
-<li><code>feat</code>: A new feature  </li>
-<li><code>fix</code>: A bugfix  </li>
-<li><code>docs</code>: Documentation changes  </li>
-<li><code>style</code>: Formatting, missing semicolons, etc.  </li>
-<li><code>refactor</code>: Code refactoring without functional changes  </li>
-<li><code>test</code>: Adding or changing tests  </li>
-<li><code>chore</code>: Updates to build processes or auxiliary tools  </li>
-</ul>
-<h2 id="generation">Generation<a class="headerlink" href="#generation" title="Permanent link">&para;</a></h2>
-<p>The changelog is automatically updated with each release.</p>
+<p>Examples:
+- <code>feat(agent): add Q-learning implementation</code>
+- <code>fix(gui): resolve rendering flicker</code>
+- <code>docs(tutorial): add value iteration guide</code></p>
+<h2 id="automation">Automation<a class="headerlink" href="#automation" title="Permanent link">&para;</a></h2>
+<p>With every release (tag push), our GitHub Action workflow automatically generates the <code>CHANGELOG.md</code>.</p>
 
 
 
