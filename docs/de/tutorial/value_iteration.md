@@ -1,13 +1,13 @@
 # Value Iteration Tutorial
 
-Value Iteration ist ein klassischer Dynamic Programming Algorithmus, der verwendet wird, um die optimale Value Function ^*$ zu finden. In diesem Projekt nutzen wir ihn zur präzisen Pfadplanung.
+Value Iteration ist ein klassischer Dynamic Programming Algorithmus, der verwendet wird, um die optimale Value Function $v^*$ zu finden. In diesem Projekt nutzen wir ihn zur präzisen Pfadplanung.
 
 ## Konzept
 
 Bei der Value Iteration berechnen wir iterativ den Wert jedes Zustands (Zelle), basierend auf den Belohnungen der benachbarten Zustände und deren eigenen Werten.
 
 Die Bellman-Gleichung ist das Herzstück:
-3237V(s) \leftarrow \max_a \sum_{s', r} p(s', r | s, a) [r + \gamma V(s')]3237
+$$V(s) \leftarrow \max_a \sum_{s', r} p(s', r | s, a) [r + \gamma V(s')]$$
 
 In unserem Grid bedeutet das:  
 - **Ziel**: Hoher positiver Wert (100).  
