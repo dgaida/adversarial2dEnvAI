@@ -4,7 +4,7 @@ Diese Seite zeigt Qualitätsmetriken für die Dokumentation und den Code.
 
 ## API-Abdeckung (Docstrings)
 
-![interrogate](assets/interrogate.svg)
+![interrogate](../assets/interrogate.svg)
 
 ## Status-Übersicht
 
@@ -13,7 +13,7 @@ Diese Seite zeigt Qualitätsmetriken für die Dokumentation und den Code.
 </div>
 
 <script>
-fetch('assets/metrics.json')
+fetch('../assets/metrics.json')
   .then(response => response.json())
   .then(data => {
     const dashboard = document.getElementById('metrics-dashboard');
