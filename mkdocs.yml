@@ -100,6 +100,8 @@ nav:
       - Particle Filter: tutorial/particle_filter.md
       - Adversarial Search: tutorial/adversarial_search.md
       - Task Planning: tutorial/task_planning.md
+      - Value Iteration: tutorial/value_iteration.md
+      - Q-Learning: tutorial/q_learning.md
   - Usage:
       - Environment: usage/environment.md
       - Gameplay: usage/gameplay.md

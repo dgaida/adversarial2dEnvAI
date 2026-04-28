@@ -99,6 +99,8 @@ interface.close()
 
 ---
 
+| **Value Iteration** | Step-by-step DP tutorial and training. | [![Open In Colab](docs/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Value_Iteration.ipynb) |
+| **Q-Learning** | Model-free RL training and visualization. | [![Open In Colab](docs/assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Q_Learning.ipynb) |
 ## 📖 Documentation
 
 Visit our [Documentation Site](https://dgaida.github.io/adversarial2dEnvAI/) for:  

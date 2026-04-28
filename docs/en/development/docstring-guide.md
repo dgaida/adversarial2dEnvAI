@@ -1,6 +1,6 @@
-# Docstring Standard
+# Docstring Style Guide
 
-We use the **Google Style Guide** for all docstrings in the project. This ensures consistent API documentation.
+In this project, we use the **Google Style** for docstrings. This allows for automatic documentation generation with `mkdocstrings`.
 
 ## Example
 
@@ -8,8 +8,7 @@ We use the **Google Style Guide** for all docstrings in the project. This ensure
 def example_function(x: int, y: str = "default") -> bool:
     """Short one-line description.
 
-    Longer description if necessary. Can include multiple
-    paragraphs.
+    Longer description if necessary. Can span multiple paragraphs.
 
     Args:
         x (int): Description of the parameter.
@@ -20,14 +19,12 @@ def example_function(x: int, y: str = "default") -> bool:
 
     Raises:
         ValueError: When this error occurs.
-
-    Example:
-        >>> example_function(42)
-        True
     """
     return True
 ```
 
-## Coverage
+## Rules
 
-Compliance is automatically checked with `interrogate`. A coverage of at least 95% is required.
+- Every public class and method **must** have a docstring.
+- Use `interrogate` to check coverage.
+- Document all parameters and return values with types.

@@ -1,20 +1,17 @@
 # Changelog Workflow
 
-Wir verwenden **Conventional Commits** und **git-cliff**, um unseren Changelog automatisch zu generieren.
+Wir nutzen **Conventional Commits** und **git-cliff**, um unseren Changelog automatisch zu pflegen.
 
 ## Commit-Nachrichten Format
 
-Nachrichten sollten folgendem Format folgen:
-`<typ>(<bereich>): <beschreibung>`
+Nachrichten sollten dem Schema folgen:
+`<type>(<scope>): <description>`
 
-### Typen  
-- `feat`: Ein neues Feature  
-- `fix`: Ein Bugfix  
-- `docs`: Änderungen an der Dokumentation  
-- `style`: Formatierung, fehlende Semikolons, etc.  
-- `refactor`: Code-Refactoring ohne funktionale Änderungen  
-- `test`: Hinzufügen oder Ändern von Tests  
-- `chore`: Updates an Build-Prozessen oder Hilfswerkzeugen  
+Beispiele:
+- `feat(agent): add Q-learning implementation`
+- `fix(gui): resolve rendering flicker`
+- `docs(tutorial): add value iteration guide`
 
-## Generierung
-Der Changelog wird bei jedem Release automatisch aktualisiert.
+## Automatisierung
+
+Bei jedem Release (Push eines Tags) generiert unser GitHub Action Workflow automatisch den `CHANGELOG.md`.

@@ -13,3 +13,7 @@
 ::: custom_grid_env.agents.random_ghost_agent.RandomGhostAgent
 
 ::: custom_grid_env.agents.random_player_agent.RandomPlayerAgent
+
+::: custom_grid_env.agents.value_iteration_agent.ValueIterationAgent
+
+::: custom_grid_env.agents.q_learning_agent.QLearningAgent
