@@ -335,6 +335,10 @@ class ColabGUI:
                 if self.visited_mask[i]:
                     continue
 
+                # Auto-train Q-learning if agent has no knowledge of the target
+                if isinstance(self.agent, QLearningAgent):
+                    self._train_q_learning(target)
+
                 # Use current agent for execution
                 self.interface.env.set_goal(target)
                 self.interface.terminated = False
@@ -430,6 +434,57 @@ class ColabGUI:
             self.agent.update(state, action, reward, next_state, done)
 
         self._update_display()
+
+    def _train_q_learning(self, target: Tuple[int, int], episodes: int = 200):
+        """Trains the Q-Learning agent for a specific target."""
+        if not isinstance(self.agent, QLearningAgent):
+            return
+
+        with self.output:
+            print(f"Training Q-Learning agent for target {target}...")
+            progress = widgets.IntProgress(
+                value=0,
+                min=0,
+                max=episodes,
+                description="Training:",
+                layout=widgets.Layout(width="100%"),
+            )
+            display(progress)
+
+            # Backup current env state
+            original_goal = None
+            for r in range(self.interface.env.rows):
+                for c in range(self.interface.env.cols):
+                    if self.interface.env.grid[r, c]["is_goal"]:
+                        original_goal = (r, c)
+                        break
+
+            # Set training goal
+            self.interface.env.set_goal(target)
+
+            # Training loop
+            for ep in range(episodes):
+                self.interface.reset()
+                state = tuple(self.interface.env.agent_pos)
+                done = False
+                while not done:
+                    # Use epsilon-greedy from agent
+                    action = self.agent.get_action({"agent_pos": state})
+                    obs, reward, done, info = self.interface.step(action)
+                    next_state = tuple(self.interface.env.agent_pos)
+                    self.agent.update(state, action, reward, next_state, done)
+                    state = next_state
+
+                progress.value = ep + 1
+
+            # Restore goal
+            if original_goal:
+                self.interface.env.set_goal(original_goal)
+
+            clear_output(wait=True)
+            print(f"Training for target {target} complete!")
+            time.sleep(1)
+            self._update_display()
 
     def _on_reset_click(self, b):
         """Callback for the 'Reset Episode' button."""

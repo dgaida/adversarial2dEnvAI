@@ -7,7 +7,7 @@ Value Iteration is a classic dynamic programming algorithm used to find the opti
 In Value Iteration, we iteratively calculate the value of each state (cell) based on the rewards of neighboring states and their own values.
 
 The Bellman equation is at its core:
-3237V(s) \leftarrow \max_a \sum_{s', r} p(s', r | s, a) [r + \gamma V(s')]3237
+$$V(s) \leftarrow \max_a \sum_{s', r} p(s', r | s, a) [r + \gamma V(s')]$$
 
 In our grid, this means:  
 - **Goal**: High positive value (100).  
