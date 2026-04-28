@@ -1633,7 +1633,7 @@
 <p>Q-Learning ist ein modell-freier Reinforcement Learning Algorithmus. Der Agent lernt hierbei die "Qualität" (Q-Wert) von Aktionen in bestimmten Zuständen direkt aus der Interaktion mit der Umgebung.</p>
 <h2 id="konzept">Konzept<a class="headerlink" href="#konzept" title="Permanent link">&para;</a></h2>
 <p>Im Gegensatz zur Value Iteration benötigt Q-Learning kein Wissen über die Regeln der Umgebung (Transitionswahrscheinlichkeiten). Der Agent probiert Aktionen aus und aktualisiert seine Schätzung:</p>
-<p>3237Q(s, a) \leftarrow Q(s, a) + \alpha [r + \gamma \max_{a'} Q(s', a') - Q(s, a)]3237</p>
+<p>$$Q(s, a) \leftarrow Q(s, a) + \alpha [r + \gamma \max_{a'} Q(s', a') - Q(s, a)]$$</p>
 <ul>
 <li><strong>Exploration vs. Exploitation</strong>: Mit der Epsilon-Greedy-Strategie wählt der Agent manchmal zufällige Aktionen ($\epsilon$), um Neues zu entdecken, und meistens die beste bekannte Aktion (-\epsilon$).  </li>
 </ul>
