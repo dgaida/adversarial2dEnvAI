@@ -9,10 +9,10 @@ Bei der Value Iteration berechnen wir iterativ den Wert jedes Zustands (Zelle), 
 Die Bellman-Gleichung ist das Herzstück:
 3237V(s) \leftarrow \max_a \sum_{s', r} p(s', r | s, a) [r + \gamma V(s')]3237
 
-In unserem Grid bedeutet das:
-- **Ziel**: Hoher positiver Wert (100).
-- **Normaler Schritt**: Kleiner negativer Wert (-1).
-- **Hindernisse/Wände**: Verhindern Bewegung (Zustandswert bleibt niedrig).
+In unserem Grid bedeutet das:  
+- **Ziel**: Hoher positiver Wert (100).  
+- **Normaler Schritt**: Kleiner negativer Wert (-1).  
+- **Hindernisse/Wände**: Verhindern Bewegung (Zustandswert bleibt niedrig).  
 
 ## Interaktives Notebook
 
@@ -22,6 +22,6 @@ Du kannst den Algorithmus Schritt für Schritt in unserem interaktiven Jupyter N
 
 ## Implementierung im Projekt
 
-Im Code findest du die Implementierung in:
-- `src/custom_grid_env/planner.py`: Hier liegt die Logik für `value_iteration()`.
-- `src/custom_grid_env/agents/value_iteration_agent.py`: Der Agent, der diese Werte nutzt, um die beste Aktion zu wählen.
+Im Code findest du die Implementierung in:  
+- `src/custom_grid_env/planner.py`: Hier liegt die Logik für `value_iteration()`.  
+- `src/custom_grid_env/agents/value_iteration_agent.py`: Der Agent, der diese Werte nutzt, um die beste Aktion zu wählen.  

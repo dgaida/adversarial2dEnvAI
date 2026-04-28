@@ -8,7 +8,7 @@ Im Gegensatz zur Value Iteration benötigt Q-Learning kein Wissen über die Rege
 
 3237Q(s, a) \leftarrow Q(s, a) + \alpha [r + \gamma \max_{a'} Q(s', a') - Q(s, a)]3237
 
-- **Exploration vs. Exploitation**: Mit der Epsilon-Greedy-Strategie wählt der Agent manchmal zufällige Aktionen ($\epsilon$), um Neues zu entdecken, und meistens die beste bekannte Aktion (-\epsilon$).
+- **Exploration vs. Exploitation**: Mit der Epsilon-Greedy-Strategie wählt der Agent manchmal zufällige Aktionen ($\epsilon$), um Neues zu entdecken, und meistens die beste bekannte Aktion (-\epsilon$).  
 
 ## Interaktives Notebook
 
@@ -18,6 +18,6 @@ Lerne Q-Learning praxisnah kennen und trainiere deinen eigenen Agenten:
 
 ## Visualisierung in der GUI
 
-In der `ColabGUI` kannst du den Q-Learning Agenten auswählen. Die GUI visualisiert die gelernten Q-Werte direkt im Grid:
-- Der höchste Q-Wert einer Zelle wird angezeigt.
-- Die Position des Wertes im Feld (oben, unten, links, rechts) zeigt die aktuell bevorzugte Richtung an.
+In der `ColabGUI` kannst du den Q-Learning Agenten auswählen. Die GUI visualisiert die gelernten Q-Werte direkt im Grid:  
+- Der höchste Q-Wert einer Zelle wird angezeigt.  
+- Die Position des Wertes im Feld (oben, unten, links, rechts) zeigt die aktuell bevorzugte Richtung an.  

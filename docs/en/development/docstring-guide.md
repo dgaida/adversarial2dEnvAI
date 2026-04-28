@@ -25,6 +25,6 @@ def example_function(x: int, y: str = "default") -> bool:
 
 ## Rules
 
-- Every public class and method **must** have a docstring.
-- Use `interrogate` to check coverage.
-- Document all parameters and return values with types.
+- Every public class and method **must** have a docstring.  
+- Use `interrogate` to check coverage.  
+- Document all parameters and return values with types.  

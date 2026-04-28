@@ -7,10 +7,10 @@ Wir nutzen **Conventional Commits** und **git-cliff**, um unseren Changelog auto
 Nachrichten sollten dem Schema folgen:
 `<type>(<scope>): <description>`
 
-Beispiele:
-- `feat(agent): add Q-learning implementation`
-- `fix(gui): resolve rendering flicker`
-- `docs(tutorial): add value iteration guide`
+Beispiele:  
+- `feat(agent): add Q-learning implementation`  
+- `fix(gui): resolve rendering flicker`  
+- `docs(tutorial): add value iteration guide`  
 
 ## Automatisierung
 

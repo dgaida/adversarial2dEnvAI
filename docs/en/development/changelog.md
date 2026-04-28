@@ -7,10 +7,10 @@ We use **Conventional Commits** and **git-cliff** to automatically maintain our 
 Messages should follow the scheme:
 `<type>(<scope>): <description>`
 
-Examples:
-- `feat(agent): add Q-learning implementation`
-- `fix(gui): resolve rendering flicker`
-- `docs(tutorial): add value iteration guide`
+Examples:  
+- `feat(agent): add Q-learning implementation`  
+- `fix(gui): resolve rendering flicker`  
+- `docs(tutorial): add value iteration guide`  
 
 ## Automation
 

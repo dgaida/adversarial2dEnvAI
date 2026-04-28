@@ -26,6 +26,6 @@ def example_function(x: int, y: str = "default") -> bool:
 
 ## Regeln
 
-- Jede öffentliche Klasse und Methode **muss** einen Docstring haben.
-- Verwende `interrogate`, um die Abdeckung zu prüfen.
-- Dokumentiere alle Parameter und Rückgabewerte mit Typen.
+- Jede öffentliche Klasse und Methode **muss** einen Docstring haben.  
+- Verwende `interrogate`, um die Abdeckung zu prüfen.  
+- Dokumentiere alle Parameter und Rückgabewerte mit Typen.  
