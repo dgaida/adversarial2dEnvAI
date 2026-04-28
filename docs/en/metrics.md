@@ -1,13 +1,29 @@
 # Documentation Metrics
 
-This page visualizes the quality and status of our documentation.
+This page shows quality metrics for the documentation and code.
 
-| Metric | Status | Source |
-|---|---|---|
-| API Doc Coverage | ![interrogate](../assets/interrogate.svg) | `interrogate` |
-| Build Status | ![Tests](https://github.com/dgaida/adversarial2dEnvAI/actions/workflows/tests.yml/badge.svg) | GitHub Actions |
+## API Coverage (Docstrings)
 
-## Quality Assurance  
-- **Docstring Coverage**: Must be above 95%.  
-- **Link Check**: All internal and external links are checked on every PR.  
-- **Linting**: Markdown files are checked for formatting errors.  
+![interrogate](../assets/interrogate.svg)
+
+## Status Overview
+
+<div id="metrics-dashboard">
+  Loading metrics...
+</div>
+
+<script>
+fetch('../assets/metrics.json')
+  .then(response => response.json())
+  .then(data => {
+    const dashboard = document.getElementById('metrics-dashboard');
+    dashboard.innerHTML = `
+      <table>
+        <tr><td>Last CI Run</td><td>${new Date(data.last_run).toLocaleString()}</td></tr>
+      </table>
+    `;
+  })
+  .catch(err => {
+    document.getElementById('metrics-dashboard').innerText = 'Metrics currently unavailable.';
+  });
+</script>

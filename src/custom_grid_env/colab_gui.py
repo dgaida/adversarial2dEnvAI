@@ -19,6 +19,7 @@ from .agents.chase_ghost_agent import ChaseGhostAgent
 from .agents.random_ghost_agent import RandomGhostAgent
 from .agents.adversarial_agents import MinimaxAgent, ExpectimaxAgent, AdversarialAgent
 from .agents.value_iteration_agent import ValueIterationAgent
+from .agents.q_learning_agent import QLearningAgent
 from .planner import TaskPlanner
 
 # Set dummy video driver for headless environment (Colab)
@@ -115,6 +116,7 @@ class ColabGUI:
                 ("Minimax", "minimax"),
                 ("Expectimax", "expectimax"),
                 ("Value Iteration", "value_iteration"),
+                ("Q-Learning", "q_learning"),
                 ("Random", "random"),
             ],
             value=(
@@ -126,7 +128,11 @@ class ColabGUI:
                     else (
                         "expectimax"
                         if agent_class == ExpectimaxAgent
-                        else "value_iteration"
+                        else (
+                            "value_iteration"
+                            if agent_class == ValueIterationAgent
+                            else "q_learning"
+                        )
                     )
                 )
             ),
@@ -406,8 +412,23 @@ class ColabGUI:
             self.agent.perceived_agent_pos = None
             self.agent.perceived_ghost_pos = None
 
+        # Store old state for Q-learning update
+        if self.agent.perceived_agent_pos is not None:
+            state = tuple(self.agent.perceived_agent_pos)
+        else:
+            state = tuple(self.interface.env.agent_pos)
+
         action = self.agent.get_action(self.obs)
         self.obs, reward, done, info = self.interface.step(action)
+
+        # Update Q-learning agent if applicable
+        if isinstance(self.agent, QLearningAgent):
+            if self.agent.perceived_agent_pos is not None:
+                next_state = tuple(self.agent.perceived_agent_pos)
+            else:
+                next_state = tuple(self.interface.env.agent_pos)
+            self.agent.update(state, action, reward, next_state, done)
+
         self._update_display()
 
     def _on_reset_click(self, b):
@@ -448,6 +469,10 @@ class ColabGUI:
             self.agent = ValueIterationAgent(
                 self.interface.get_action_space(), env=self.interface.env
             )
+        elif change["new"] == "q_learning":
+            self.agent = QLearningAgent(
+                self.interface.get_action_space(), env=self.interface.env
+            )
         else:
             self.agent = RandomPlayerAgent(
                 self.interface.get_action_space(), env=self.interface.env
@@ -478,20 +503,37 @@ class ColabGUI:
         else:
             self.interface.env.info.pop("show_particles", None)
 
-        # Precompute minimax/expectimax values if applicable
+        # Precompute minimax/expectimax/Q-values if applicable
         agent_values = None
         ghost_values = None
+        q_values = None
 
-        if isinstance(self.agent, (AdversarialAgent, ValueIterationAgent)):
-            agent_values = np.zeros((self.interface.env.rows, self.interface.env.cols))
-            for r in range(self.interface.env.rows):
-                for c in range(self.interface.env.cols):
-                    if isinstance(self.agent, AdversarialAgent):
-                        agent_values[r, c] = self.agent.get_value(
-                            [r, c], self.interface.env.ghost_pos
-                        )
-                    else:
-                        agent_values[r, c] = self.agent.get_value((r, c))
+        if isinstance(
+            self.agent, (AdversarialAgent, ValueIterationAgent, QLearningAgent)
+        ):
+            if isinstance(self.agent, QLearningAgent):
+                q_values = np.zeros(
+                    (
+                        self.interface.env.rows,
+                        self.interface.env.cols,
+                        self.interface.env.action_space.n,
+                    )
+                )
+                for r in range(self.interface.env.rows):
+                    for c in range(self.interface.env.cols):
+                        q_values[r, c] = self.agent._get_q_values((r, c))
+            else:
+                agent_values = np.zeros(
+                    (self.interface.env.rows, self.interface.env.cols)
+                )
+                for r in range(self.interface.env.rows):
+                    for c in range(self.interface.env.cols):
+                        if isinstance(self.agent, AdversarialAgent):
+                            agent_values[r, c] = self.agent.get_value(
+                                [r, c], self.interface.env.ghost_pos
+                            )
+                        else:
+                            agent_values[r, c] = self.agent.get_value((r, c))
         ghost_agent = self.interface._ghost_agent
         if isinstance(ghost_agent, AdversarialAgent):
             ghost_values = np.zeros((self.interface.env.rows, self.interface.env.cols))
@@ -503,6 +545,7 @@ class ColabGUI:
 
         self.interface.env.info["agent_values"] = agent_values
         self.interface.env.info["ghost_values"] = ghost_values
+        self.interface.env.info["q_values"] = q_values
 
         # Ensure particles are set again right before rendering to be sure
         if self.interface.pf and self.interface.show_particles:

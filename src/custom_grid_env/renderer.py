@@ -101,6 +101,7 @@ class PygameRenderer:
         surface: Optional[pygame.Surface] = None,
         agent_value: Optional[float] = None,
         ghost_value: Optional[float] = None,
+        q_values: Optional[np.ndarray] = None,
     ):
         """Draws a single cell with its contents."""
         if surface is None:
@@ -146,6 +147,29 @@ class PygameRenderer:
                 val_text,
                 (x + self.cell_size - val_rect.width - 8, y + self.cell_size - 22),
             )
+
+        if q_values is not None:
+            best_action = int(np.argmax(q_values))
+            max_q = float(q_values[best_action])
+            val_text = self.small_font.render(f"{max_q:.0f}", True, self.colors["blue"])
+            val_rect = val_text.get_rect()
+
+            if best_action == 0:  # Left
+                pos = (x + 8, y + self.cell_size // 2 - val_rect.height // 2)
+            elif best_action == 1:  # Down
+                pos = (
+                    x + self.cell_size // 2 - val_rect.width // 2,
+                    y + self.cell_size - val_rect.height - 8,
+                )
+            elif best_action == 2:  # Right
+                pos = (
+                    x + self.cell_size - val_rect.width - 8,
+                    y + self.cell_size // 2 - val_rect.height // 2,
+                )
+            else:  # Up
+                pos = (x + self.cell_size // 2 - val_rect.width // 2, y + 8)
+
+            surface.blit(val_text, pos)
 
         if cell["colour"] == 1:
             self._draw_crosshatch(
@@ -558,6 +582,7 @@ class PygameRenderer:
 
         agent_values = info.get("agent_values")
         ghost_values = info.get("ghost_values")
+        q_values = info.get("q_values")
 
         self.screen.fill(self.colors["white"])
         self._draw_grid_lines()
@@ -565,8 +590,14 @@ class PygameRenderer:
             for col in range(self.cols):
                 av = agent_values[row, col] if agent_values is not None else None
                 gv = ghost_values[row, col] if ghost_values is not None else None
+                qv = q_values[row, col] if q_values is not None else None
                 self._draw_cell(
-                    row, col, grid[row, col], agent_value=av, ghost_value=gv
+                    row,
+                    col,
+                    grid[row, col],
+                    agent_value=av,
+                    ghost_value=gv,
+                    q_values=qv,
                 )
         self._draw_walls(walls_horizontal, walls_vertical)
         if use_ghost and agent_pos != ghost_pos:

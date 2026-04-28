@@ -27,7 +27,7 @@ graph TD
 
 ## Vollständiger Workflow zur Aufgabenerfüllung
 
-Das folgende Diagramm zeigt den kompletten Workflow, wie verschiedene Module zusammenarbeiten, um eine Benutzeraufgabe (z. B. per Sprache) in Aktionen des Agenten umzusetzen. Dies beinhaltet auch geplante zukünftige Module wie **Speech2Text** und den **Task Planner**.
+Das folgende Diagramm zeigt den kompletten Workflow, wie verschiedene Module zusammenarbeiten, um eine Benutzeraufgabe (z. B. per Sprache) in Aktionen des Agenten umzusetzen.
 
 ```mermaid
 graph TD
@@ -35,8 +35,8 @@ graph TD
     User([Benutzer]) -- "Sprachbefehl / Text" --> Input{Eingabe-Schnittstelle}
 
     subgraph "Aufgabenverständnis & Planung"
-        S2T[Speech2Text Modul *] -- "Transkript" --> NLP[NLP / LLM Parser *]
-        NLP -- "Gelistete Ziele" --> Planner[Task Planner / TSP Solver *]
+        S2T[Speech2Text Modul *] -- "Transkript" --> NLP[NLP / LLM Parser]
+        NLP -- "Gelistete Ziele" --> Planner[Task Planner / TSP Solver]
     end
 
     Input -- "Audio" --> S2T
@@ -72,7 +72,7 @@ graph TD
     Renderer -- "Visualisierung" --> User
 
     classDef future fill:#f9f,stroke:#333,stroke-dasharray: 5 5;
-    class S2T,NLP,Planner,Audio future;
+    class S2T,Audio future;
 
     linkStyle default stroke:#333,stroke-width:2px;
 ```
@@ -119,10 +119,14 @@ classDiagram
     class ExpectimaxAgent
     class ChaseGhostAgent
     class RandomGhostAgent
+    class ValueIterationAgent
+    class QLearningAgent
 
     BaseAgent ..|> Agent : implements
     MinimaxAgent --|> BaseAgent : inherits
     ExpectimaxAgent --|> BaseAgent : inherits
     ChaseGhostAgent --|> BaseAgent : inherits
     RandomGhostAgent --|> BaseAgent : inherits
+    ValueIterationAgent --|> BaseAgent : inherits
+    QLearningAgent --|> BaseAgent : inherits
 ```
