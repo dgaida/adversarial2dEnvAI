@@ -1636,7 +1636,7 @@
 <h2 id="concept">Concept<a class="headerlink" href="#concept" title="Permanent link">&para;</a></h2>
 <p>In Value Iteration, we iteratively calculate the value of each state (cell) based on the rewards of neighboring states and their own values.</p>
 <p>The Bellman equation is at its core:
-3237V(s) \leftarrow \max_a \sum_{s', r} p(s', r | s, a) [r + \gamma V(s')]3237</p>
+$$V(s) \leftarrow \max_a \sum_{s', r} p(s', r | s, a) [r + \gamma V(s')]$$</p>
 <p>In our grid, this means:<br />
 - <strong>Goal</strong>: High positive value (100).<br />
 - <strong>Normal Step</strong>: Small negative value (-1).<br />
