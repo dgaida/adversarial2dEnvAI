@@ -1630,22 +1630,22 @@
 
 
 <h1 id="value-iteration-tutorial">Value Iteration Tutorial<a class="headerlink" href="#value-iteration-tutorial" title="Permanent link">&para;</a></h1>
-<p>Value Iteration ist ein klassischer Dynamic Programming Algorithmus, der verwendet wird, um die optimale Value Function ^*$ zu finden. In diesem Projekt nutzen wir ihn zur präzisen Pfadplanung.</p>
+<p>Value Iteration ist ein klassischer Dynamic Programming Algorithmus, der verwendet wird, um die optimale Value Function $v^*$ zu finden. In diesem Projekt nutzen wir ihn zur präzisen Pfadplanung.</p>
 <h2 id="konzept">Konzept<a class="headerlink" href="#konzept" title="Permanent link">&para;</a></h2>
 <p>Bei der Value Iteration berechnen wir iterativ den Wert jedes Zustands (Zelle), basierend auf den Belohnungen der benachbarten Zustände und deren eigenen Werten.</p>
 <p>Die Bellman-Gleichung ist das Herzstück:
-3237V(s) \leftarrow \max_a \sum_{s', r} p(s', r | s, a) [r + \gamma V(s')]3237</p>
-<p>In unserem Grid bedeutet das:
-- <strong>Ziel</strong>: Hoher positiver Wert (100).
-- <strong>Normaler Schritt</strong>: Kleiner negativer Wert (-1).
-- <strong>Hindernisse/Wände</strong>: Verhindern Bewegung (Zustandswert bleibt niedrig).</p>
+$$V(s) \leftarrow \max_a \sum_{s', r} p(s', r | s, a) [r + \gamma V(s')]$$</p>
+<p>In unserem Grid bedeutet das:<br />
+- <strong>Ziel</strong>: Hoher positiver Wert (100).<br />
+- <strong>Normaler Schritt</strong>: Kleiner negativer Wert (-1).<br />
+- <strong>Hindernisse/Wände</strong>: Verhindern Bewegung (Zustandswert bleibt niedrig).  </p>
 <h2 id="interaktives-notebook">Interaktives Notebook<a class="headerlink" href="#interaktives-notebook" title="Permanent link">&para;</a></h2>
 <p>Du kannst den Algorithmus Schritt für Schritt in unserem interaktiven Jupyter Notebook nachvollziehen und trainieren:</p>
 <p><a href="https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Value_Iteration.ipynb"><img alt="Open In Colab" src="../../assets/colab-badge.svg" /></a></p>
 <h2 id="implementierung-im-projekt">Implementierung im Projekt<a class="headerlink" href="#implementierung-im-projekt" title="Permanent link">&para;</a></h2>
-<p>Im Code findest du die Implementierung in:
-- <code>src/custom_grid_env/planner.py</code>: Hier liegt die Logik für <code>value_iteration()</code>.
-- <code>src/custom_grid_env/agents/value_iteration_agent.py</code>: Der Agent, der diese Werte nutzt, um die beste Aktion zu wählen.</p>
+<p>Im Code findest du die Implementierung in:<br />
+- <code>src/custom_grid_env/planner.py</code>: Hier liegt die Logik für <code>value_iteration()</code>.<br />
+- <code>src/custom_grid_env/agents/value_iteration_agent.py</code>: Der Agent, der diese Werte nutzt, um die beste Aktion zu wählen.  </p>
 
 
 

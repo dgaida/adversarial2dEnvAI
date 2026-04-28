@@ -1635,15 +1635,15 @@
 <p>Im Gegensatz zur Value Iteration benötigt Q-Learning kein Wissen über die Regeln der Umgebung (Transitionswahrscheinlichkeiten). Der Agent probiert Aktionen aus und aktualisiert seine Schätzung:</p>
 <p>3237Q(s, a) \leftarrow Q(s, a) + \alpha [r + \gamma \max_{a'} Q(s', a') - Q(s, a)]3237</p>
 <ul>
-<li><strong>Exploration vs. Exploitation</strong>: Mit der Epsilon-Greedy-Strategie wählt der Agent manchmal zufällige Aktionen ($\epsilon$), um Neues zu entdecken, und meistens die beste bekannte Aktion (-\epsilon$).</li>
+<li><strong>Exploration vs. Exploitation</strong>: Mit der Epsilon-Greedy-Strategie wählt der Agent manchmal zufällige Aktionen ($\epsilon$), um Neues zu entdecken, und meistens die beste bekannte Aktion (-\epsilon$).  </li>
 </ul>
 <h2 id="interaktives-notebook">Interaktives Notebook<a class="headerlink" href="#interaktives-notebook" title="Permanent link">&para;</a></h2>
 <p>Lerne Q-Learning praxisnah kennen und trainiere deinen eigenen Agenten:</p>
 <p><a href="https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Q_Learning.ipynb"><img alt="Open In Colab" src="../../assets/colab-badge.svg" /></a></p>
 <h2 id="visualisierung-in-der-gui">Visualisierung in der GUI<a class="headerlink" href="#visualisierung-in-der-gui" title="Permanent link">&para;</a></h2>
-<p>In der <code>ColabGUI</code> kannst du den Q-Learning Agenten auswählen. Die GUI visualisiert die gelernten Q-Werte direkt im Grid:
-- Der höchste Q-Wert einer Zelle wird angezeigt.
-- Die Position des Wertes im Feld (oben, unten, links, rechts) zeigt die aktuell bevorzugte Richtung an.</p>
+<p>In der <code>ColabGUI</code> kannst du den Q-Learning Agenten auswählen. Die GUI visualisiert die gelernten Q-Werte direkt im Grid:<br />
+- Der höchste Q-Wert einer Zelle wird angezeigt.<br />
+- Die Position des Wertes im Feld (oben, unten, links, rechts) zeigt die aktuell bevorzugte Richtung an.  </p>
 
 
 

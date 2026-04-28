@@ -1637,17 +1637,17 @@
 <p>In Value Iteration, we iteratively calculate the value of each state (cell) based on the rewards of neighboring states and their own values.</p>
 <p>The Bellman equation is at its core:
 3237V(s) \leftarrow \max_a \sum_{s', r} p(s', r | s, a) [r + \gamma V(s')]3237</p>
-<p>In our grid, this means:
-- <strong>Goal</strong>: High positive value (100).
-- <strong>Normal Step</strong>: Small negative value (-1).
-- <strong>Obstacles/Walls</strong>: Prevent movement (state value remains low).</p>
+<p>In our grid, this means:<br />
+- <strong>Goal</strong>: High positive value (100).<br />
+- <strong>Normal Step</strong>: Small negative value (-1).<br />
+- <strong>Obstacles/Walls</strong>: Prevent movement (state value remains low).  </p>
 <h2 id="interactive-notebook">Interactive Notebook<a class="headerlink" href="#interactive-notebook" title="Permanent link">&para;</a></h2>
 <p>You can follow and train the algorithm step-by-step in our interactive Jupyter notebook:</p>
 <p><a href="https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Value_Iteration.ipynb"><img alt="Open In Colab" src="../../../assets/colab-badge.svg" /></a></p>
 <h2 id="implementation-in-the-project">Implementation in the Project<a class="headerlink" href="#implementation-in-the-project" title="Permanent link">&para;</a></h2>
-<p>In the code, you can find the implementation in:
-- <code>src/custom_grid_env/planner.py</code>: Contains the logic for <code>value_iteration()</code>.
-- <code>src/custom_grid_env/agents/value_iteration_agent.py</code>: The agent that uses these values to select the best action.</p>
+<p>In the code, you can find the implementation in:<br />
+- <code>src/custom_grid_env/planner.py</code>: Contains the logic for <code>value_iteration()</code>.<br />
+- <code>src/custom_grid_env/agents/value_iteration_agent.py</code>: The agent that uses these values to select the best action.  </p>
 
 
 
