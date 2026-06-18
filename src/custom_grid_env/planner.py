@@ -22,23 +22,28 @@ class TaskPlanner:
             **kwargs: Additional arguments for LLMClient.
         """
         self.env = env
-        # Default settings if not provided in kwargs
-        llm = kwargs.pop("llm", "qwen/qwen3-32b")
-        api_choice = kwargs.pop("api_choice", "groq")
-        # Increase max_tokens by 100 from default (512 -> 612)
-        max_tokens = kwargs.pop("max_tokens", 612)
+        self.llm_client = None
 
-        # In tests, we might not have API keys, so we might want to skip LLM initialization
-        # or use a mock. But for now, we try to initialize it.
-        try:
-            self.llm_client = LLMClient(
-                llm=llm, api_choice=api_choice, max_tokens=max_tokens, **kwargs
-            )
-        except Exception as e:
-            logger.warning(
-                f"Could not initialize LLMClient: {e}. Some features may not work."
-            )
-            self.llm_client = None
+        # Default settings if not provided in kwargs
+        use_llm = kwargs.pop("use_llm", True)
+
+        if use_llm:
+            llm = kwargs.pop("llm", "qwen/qwen3-32b")
+            api_choice = kwargs.pop("api_choice", "groq")
+            # Increase max_tokens by 100 from default (512 -> 612)
+            max_tokens = kwargs.pop("max_tokens", 612)
+
+            # In tests, we might not have API keys, so we might want to skip LLM initialization
+            # or use a mock. But for now, we try to initialize it.
+            try:
+                self.llm_client = LLMClient(
+                    llm=llm, api_choice=api_choice, max_tokens=max_tokens, **kwargs
+                )
+            except Exception as e:
+                logger.warning(
+                    f"Could not initialize LLMClient: {e}. Some features may not work."
+                )
+                self.llm_client = None
 
     def identify_targets(
         self, task_description: str
