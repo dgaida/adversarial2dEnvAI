@@ -44,3 +44,7 @@ Through this combination, the agent can determine its position even if a single 
 1.  **Influence of Sensors**: Test the particle filter in the `Colab_GUI_Demo` with only the color sensor, only the CNN, and with both. Observe how quickly the particle cloud converges.  
 2.  **Slip Models**: Compare "perpendicular" slipping with "longitudinal" slipping. Which model makes localization more difficult?  
 3.  **Number of Particles**: Reduce the number of particles in the `AgentInterface`. At what number does the estimate become unstable?  
+
+### Specialized Particle Filter Demo
+For a simplified demo focusing exclusively on the particle filter (no ghost, manual goal selection), use this notebook:
+[![Open In Colab](../../assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Particle_Filter_Demo.ipynb)

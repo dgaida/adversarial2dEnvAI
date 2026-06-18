@@ -49,3 +49,7 @@ Durch diese Kombination kann der Agent seine Position auch dann bestimmen, wenn 
 
 Testen Sie den Partikelfilter direkt in Google Colab:
 [![Open In Colab](../../assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Colab_GUI_Demo.ipynb)
+
+### Spezialisierte Partikelfilter Demo
+Für eine vereinfachte Demo, die sich ausschließlich auf den Partikelfilter konzentriert (ohne Ghost, mit manueller Zielwahl), nutzen Sie dieses Notebook:
+[![Open In Colab](../../assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Particle_Filter_Demo.ipynb)

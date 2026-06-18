@@ -12,15 +12,16 @@ from typing import Type, List, Tuple
 from .interface import AgentInterface
 from .logger import get_logger
 
-logger = get_logger(__name__)
+from .agents.adversarial_agents import AdversarialAgent, ExpectimaxAgent, MinimaxAgent
 from .agents.base_agent import Agent
-from .agents.random_player_agent import RandomPlayerAgent
 from .agents.chase_ghost_agent import ChaseGhostAgent
-from .agents.random_ghost_agent import RandomGhostAgent
-from .agents.adversarial_agents import MinimaxAgent, ExpectimaxAgent, AdversarialAgent
-from .agents.value_iteration_agent import ValueIterationAgent
 from .agents.q_learning_agent import QLearningAgent
+from .agents.random_ghost_agent import RandomGhostAgent
+from .agents.random_player_agent import RandomPlayerAgent
+from .agents.value_iteration_agent import ValueIterationAgent
 from .planner import TaskPlanner
+
+logger = get_logger(__name__)
 
 # Set dummy video driver for headless environment (Colab)
 os.environ["SDL_VIDEODRIVER"] = "dummy"
@@ -310,7 +311,12 @@ class ColabGUI:
 
     def _on_execute_click(self, b):
         """Callback for the 'Execute' button."""
-        if not self.planned_targets:
+        if not hasattr(self, "planned_targets") or not self.planned_targets:
+            # For PFColabGUI, we might not have planned_targets
+            self.executing = True
+            self.paused = False
+            self.pause_button.description = "Pause"
+            self._run_execution()
             return
 
         if self.executing:
@@ -490,9 +496,10 @@ class ColabGUI:
         """Callback for the 'Reset Episode' button."""
         self.executing = False
         self.obs = self.interface.reset()
-        self.planned_targets = []
-        self.visited_mask = []
-        self.target_status_area.children = [widgets.Label(value="No plan yet.")]
+        if hasattr(self, "planned_targets"):
+            self.planned_targets = []
+            self.visited_mask = []
+            self.target_status_area.children = [widgets.Label(value="No plan yet.")]
         self._update_display()
 
     def _on_pf_toggle_change(self, change):
@@ -708,3 +715,231 @@ class ColabGUI:
         """Displays the GUI and performs initial render."""
         display(self.controls, self.output)
         self._update_display()
+
+
+class PFColabGUI(ColabGUI):
+    """A simplified GUI for the CustomGrid environment focusing on the Particle Filter."""
+
+    def __init__(
+        self,
+        agent_class: Type[Agent] = ValueIterationAgent,
+        slip_probability: float = 0.1,
+    ):
+        """Initializes the PFColabGUI.
+
+        Args:
+            agent_class (Type[Agent]): The agent class to use for the agent.
+            slip_probability (float): Probability of slipping.
+        """
+        # Initialize AgentInterface with use_ghost=False
+        self.interface = AgentInterface(
+            render=True,
+            render_mode="rgb_array",
+            slip_probability=slip_probability,
+            use_particle_filter=True,
+            use_ghost=False,
+        )
+        self.interface.render_enabled = False
+        self.agent = agent_class(
+            self.interface.get_action_space(), env=self.interface.env
+        )
+        self.obs = self.interface.reset()
+
+        # State
+        self.executing = False
+        self.paused = False
+
+        # Output Widgets
+        self.output = widgets.Output()
+
+        # Action Buttons
+        self.next_button = widgets.Button(
+            description="Next Step", button_style="primary"
+        )
+        self.reset_button = widgets.Button(
+            description="Reset Episode", button_style="warning"
+        )
+        self.execute_button = widgets.Button(
+            description="Execute", button_style="success"
+        )
+        self.pause_button = widgets.Button(description="Pause", button_style="danger")
+
+        # PF & Uncertainty Widgets
+        self.pf_toggle = widgets.Checkbox(value=True, description="Show Particles")
+        self.deterministic_toggle = widgets.Checkbox(
+            value=False, description="Deterministic (Movement only)"
+        )
+        self.sensor_dropdown = widgets.Dropdown(
+            options=[
+                ("Neural Net", "cnn"),
+                ("Color Sensor", "color"),
+                ("Both", "both"),
+            ],
+            value="both",
+            description="PF Sensors:",
+        )
+        self.slip_type_dropdown = widgets.Dropdown(
+            options=[
+                ("Perpendicular", "perpendicular"),
+                ("Longitudinal", "longitudinal"),
+            ],
+            value="longitudinal",
+            description="Slip Type:",
+        )
+        self.color_quality_dropdown = widgets.Dropdown(
+            options=[
+                ("100%", 1.0),
+                ("90%", 0.9),
+                ("80%", 0.8),
+                ("70%", 0.7),
+            ],
+            value=0.8,
+            description="Color Acc:",
+        )
+        self.particle_count_dropdown = widgets.Dropdown(
+            options=[20, 40, 100, 200],
+            value=200,
+            description="Particles:",
+        )
+        self.knowledge_dropdown = widgets.Dropdown(
+            options=[
+                ("Actual State", "actual"),
+                ("Estimated State", "estimated"),
+            ],
+            value="actual",
+            description="Agent Knowledge:",
+        )
+
+        # Manual Goal Widgets
+        self.goal_row_input = widgets.BoundedIntText(
+            value=3,
+            min=0,
+            max=3,
+            step=1,
+            description="Goal Row:",
+            layout=widgets.Layout(width="150px"),
+        )
+        self.goal_col_input = widgets.BoundedIntText(
+            value=1,
+            min=0,
+            max=4,
+            step=1,
+            description="Goal Col:",
+            layout=widgets.Layout(width="150px"),
+        )
+        self.set_goal_button = widgets.Button(
+            description="Set Goal", button_style="info"
+        )
+
+        self.stats_label = widgets.Label(value="Steps: 0 | Total Reward: 0.0")
+
+        # Layout Grouping
+        pf_uncertainty_box = widgets.VBox(
+            [
+                widgets.HTML("<b>Uncertainty & PF</b>"),
+                self.deterministic_toggle,
+                self.slip_type_dropdown,
+                self.pf_toggle,
+                self.sensor_dropdown,
+                self.color_quality_dropdown,
+                self.particle_count_dropdown,
+            ],
+            layout=widgets.Layout(border="1px solid lightgray", padding="5px"),
+        )
+
+        goal_box = widgets.VBox(
+            [
+                widgets.HTML("<b>Manual Goal</b>"),
+                self.goal_row_input,
+                self.goal_col_input,
+                self.set_goal_button,
+                self.knowledge_dropdown,
+            ],
+            layout=widgets.Layout(border="1px solid lightgray", padding="5px"),
+        )
+
+        self.controls = widgets.VBox(
+            [
+                widgets.HBox([self.next_button, self.reset_button, self.stats_label]),
+                widgets.HBox([goal_box, pf_uncertainty_box]),
+                widgets.HBox([self.execute_button, self.pause_button]),
+            ]
+        )
+
+        # Event handlers
+        self.next_button.on_click(self._on_next_click)
+        self.reset_button.on_click(self._on_reset_click)
+        self.execute_button.on_click(self._on_execute_click)
+        self.pause_button.on_click(self._on_pause_click)
+        self.set_goal_button.on_click(self._on_set_goal_click)
+        self.pf_toggle.observe(self._on_pf_toggle_change, names="value")
+        self.deterministic_toggle.observe(self._on_deterministic_change, names="value")
+        self.sensor_dropdown.observe(self._on_sensor_change, names="value")
+        self.slip_type_dropdown.observe(self._on_slip_type_change, names="value")
+        self.color_quality_dropdown.observe(
+            self._on_color_quality_change, names="value"
+        )
+        self.particle_count_dropdown.observe(
+            self._on_particle_count_change, names="value"
+        )
+        self.knowledge_dropdown.observe(self._on_knowledge_change, names="value")
+
+        # Initialize environment goal
+        self._on_set_goal_click(None)
+
+    def _on_set_goal_click(self, b):
+        """Callback for the 'Set Goal' button."""
+        goal = (self.goal_row_input.value, self.goal_col_input.value)
+        self.interface.env.set_goal(goal)
+        # Reset ValueIterationAgent if it's being used
+        if isinstance(self.agent, ValueIterationAgent):
+            self.agent._last_goal = None
+        self._update_display()
+
+    def _on_particle_count_change(self, change):
+        """Callback for the particle count dropdown."""
+        new_count = change["new"]
+        if self.interface.pf:
+            from .particle_filter import ParticleFilter
+
+            self.interface.pf = ParticleFilter(
+                rows=self.interface.env.rows,
+                cols=self.interface.env.cols,
+                num_particles=new_count,
+            )
+        self._update_display()
+
+    def _run_execution(self):
+        """Runs the execution loop."""
+        try:
+            target = (self.goal_row_input.value, self.goal_col_input.value)
+            self.interface.env.set_goal(target)
+            self.interface.terminated = False
+            self.interface.truncated = False
+
+            while True:
+                if not self.executing:
+                    return
+
+                while self.paused:
+                    time.sleep(0.1)
+                    if not self.executing:
+                        return
+
+                if self.knowledge_dropdown.value == "estimated" and self.interface.pf:
+                    curr_pos = tuple(
+                        self.interface.pf.get_estimated_position()["cell_pos"]
+                    )
+                else:
+                    curr_pos = tuple(self.interface.env.agent_pos)
+
+                if curr_pos == target:
+                    break
+
+                self._on_next_click(None)
+                time.sleep(0.5)
+
+                if self.interface.is_terminated():
+                    break
+        finally:
+            self.executing = False
