@@ -943,3 +943,88 @@ class PFColabGUI(ColabGUI):
                     break
         finally:
             self.executing = False
+
+class AdversarialColabGUI(PFColabGUI):
+    """A GUI for the CustomGrid environment focusing on Adversarial Search and the Particle Filter."""
+
+    def __init__(
+        self,
+        agent_class: Type[Agent] = MinimaxAgent,
+        slip_probability: float = 0.1,
+    ):
+        """Initializes the AdversarialColabGUI.
+
+        Args:
+            agent_class (Type[Agent]): The agent class to use for the agent.
+            slip_probability (float): Probability of slipping.
+        """
+        super().__init__(agent_class=agent_class, slip_probability=slip_probability)
+
+        # Override interface to use ghost
+        self.interface.env.use_ghost = True
+
+        # Add Adversarial Widgets
+        self.agent_dropdown = widgets.Dropdown(
+            options=[
+                ("Minimax", "minimax"),
+                ("Expectimax", "expectimax"),
+                ("Value Iteration", "value_iteration"),
+                ("Q-Learning", "q_learning"),
+                ("Random", "random"),
+            ],
+            value="minimax" if agent_class == MinimaxAgent else "expectimax" if agent_class == ExpectimaxAgent else "random",
+            description="Agent Type:",
+        )
+        self.ghost_dropdown = widgets.Dropdown(
+            options=[
+                ("Chase Agent", "chase"),
+                ("Random", "random"),
+                ("Minimax", "minimax"),
+            ],
+            value="chase",
+            description="Ghost Type:",
+        )
+        self.use_ghost_toggle = widgets.Checkbox(value=True, description="Use Ghost")
+
+        # Re-group Layout
+        ghost_box = widgets.VBox(
+            [
+                widgets.HTML("<b>Ghost Settings</b>"),
+                self.use_ghost_toggle,
+                self.ghost_dropdown,
+            ],
+            layout=widgets.Layout(border="1px solid lightgray", padding="5px"),
+        )
+
+        # We need to reconstruct the boxes to include the new widgets
+        pf_uncertainty_box = self.controls.children[1].children[1]
+        goal_box = self.controls.children[1].children[0]
+
+        # Add agent_dropdown to goal_box or pf_uncertainty_box?
+        # In ColabGUI it's in its own box or grouped differently.
+        # Let's put it in a new box for Agent Settings.
+        agent_box = widgets.VBox(
+            [
+                widgets.HTML("<b>Agent Settings</b>"),
+                self.agent_dropdown,
+                self.knowledge_dropdown,
+            ],
+            layout=widgets.Layout(border="1px solid lightgray", padding="5px"),
+        )
+
+        # Remove knowledge_dropdown from goal_box as it's now in agent_box
+        goal_box.children = [c for c in goal_box.children if c != self.knowledge_dropdown]
+
+        self.controls = widgets.VBox(
+            [
+                widgets.HBox([self.next_button, self.reset_button, self.stats_label]),
+                widgets.HBox([goal_box, agent_box]),
+                widgets.HBox([ghost_box, pf_uncertainty_box]),
+                widgets.HBox([self.execute_button, self.pause_button]),
+            ]
+        )
+
+        # Event handlers
+        self.agent_dropdown.observe(self._on_agent_change, names="value")
+        self.ghost_dropdown.observe(self._on_ghost_change, names="value")
+        self.use_ghost_toggle.observe(self._on_use_ghost_change, names="value")
