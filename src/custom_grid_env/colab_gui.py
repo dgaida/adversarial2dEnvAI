@@ -944,6 +944,7 @@ class PFColabGUI(ColabGUI):
         finally:
             self.executing = False
 
+
 class AdversarialColabGUI(PFColabGUI):
     """A GUI for the CustomGrid environment focusing on Adversarial Search and the Particle Filter."""
 
@@ -972,7 +973,11 @@ class AdversarialColabGUI(PFColabGUI):
                 ("Q-Learning", "q_learning"),
                 ("Random", "random"),
             ],
-            value="minimax" if agent_class == MinimaxAgent else "expectimax" if agent_class == ExpectimaxAgent else "random",
+            value=(
+                "minimax"
+                if agent_class == MinimaxAgent
+                else "expectimax" if agent_class == ExpectimaxAgent else "random"
+            ),
             description="Agent Type:",
         )
         self.ghost_dropdown = widgets.Dropdown(
@@ -1013,7 +1018,9 @@ class AdversarialColabGUI(PFColabGUI):
         )
 
         # Remove knowledge_dropdown from goal_box as it's now in agent_box
-        goal_box.children = [c for c in goal_box.children if c != self.knowledge_dropdown]
+        goal_box.children = [
+            c for c in goal_box.children if c != self.knowledge_dropdown
+        ]
 
         self.controls = widgets.VBox(
             [
