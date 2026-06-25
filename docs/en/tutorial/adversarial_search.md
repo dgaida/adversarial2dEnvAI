@@ -41,9 +41,9 @@ The environment is assumed to be **non-cycling**. This means there are no wrap-a
 ### Consequences for Strategy
 The non-cycling nature of the grid has several strategic implications for adversarial search:
 
-- **Cornering**: Since the grid has fixed boundaries, the ghost (if using Minimax) can effectively trap the agent in a corner or against a wall. The agent, in turn, must avoid being pinned where its movement options are limited.
-- **Boundary Collisions**: When simulating future moves, the agents recognize that actions leading "out of bounds" will result in the entity remaining in its current cell. This is crucial for accurate value estimation in both algorithms.
-- **Simplified Distance**: Heuristics like Manhattan distance or BFS-based shortest path are more straightforward as they don't need to account for modular arithmetic or wrap-around paths.
+- **Cornering**: Since the grid has fixed boundaries, the ghost (if using Minimax) can effectively trap the agent in a corner or against a wall. The agent, in turn, must avoid being pinned where its movement options are limited.  
+- **Boundary Collisions**: When simulating future moves, the agents recognize that actions leading "out of bounds" will result in the entity remaining in its current cell. This is crucial for accurate value estimation in both algorithms.  
+- **Simplified Distance**: Heuristics like Manhattan distance or BFS-based shortest path are more straightforward as they don't need to account for modular arithmetic or wrap-around paths.  
 
 ## Comparison
 
@@ -54,11 +54,11 @@ The non-cycling nature of the grid has several strategic implications for advers
 
 ## Heuristic Function
 
-Both agents use an internal heuristic function:
-- **Goal reached**: +10,000
-- **Caught by ghost**: -10,000
-- **Distance to goal**: Penalizes large distances.
-- **Distance to ghost**: Rewards safety buffers.
+Both agents use an internal heuristic function:  
+- **Goal reached**: +10,000  
+- **Caught by ghost**: -10,000  
+- **Distance to goal**: Penalizes large distances.  
+- **Distance to ghost**: Rewards safety buffers.  
 
 ### Interactive Demo
 
@@ -68,7 +68,7 @@ Use the `Colab_GUI_Demo` notebook to compare the agents live:
 Explore the impact of localization uncertainty on adversarial search with the specialized notebook:
 [![Open In Colab](../../assets/colab-badge.svg)](https://colab.research.google.com/github/dgaida/adversarial2dEnvAI/blob/master/notebooks/Adversarial_Search_Demo.ipynb)
 
-### Exercises for Students:
-1. **Comparison**: Set the search depth to 3 and compare the survival rates of Minimax and Expectimax against a `ChaseGhostAgent`.
-2. **Ghost Behavior**: Change the ghost's behavior to `Minimax`. Which agent (Minimax vs. Expectimax) performs better now?
-3. **Visibility**: Enable "Estimated State" in the GUI. How does the uncertainty of localization (Particle Filter) affect the quality of the adversarial agents' moves?
+### Exercises for Students:  
+1. **Comparison**: Set the search depth to 3 and compare the survival rates of Minimax and Expectimax against a `ChaseGhostAgent`.  
+2. **Ghost Behavior**: Change the ghost's behavior to `Minimax`. Which agent (Minimax vs. Expectimax) performs better now?  
+3. **Visibility**: Enable "Estimated State" in the GUI. How does the uncertainty of localization (Particle Filter) affect the quality of the adversarial agents' moves?  
