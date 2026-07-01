@@ -441,7 +441,6 @@ class ColabGUI:
             else:
                 next_state = tuple(self.interface.env.agent_pos)
             self.agent.update(state, action, reward, next_state, done)
-            self.agent.update(state, action, reward, next_state, done)
         self._update_display()
 
     async def _train_q_learning(self, target: Tuple[int, int], episodes: int = 200):
